@@ -1,4 +1,4 @@
-package vn.mrlongg71.bookcarfpoly;
+package vn.fpoly.fpolybookcarclient;
 
 import org.junit.Test;
 
