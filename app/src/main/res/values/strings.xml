@@ -3,4 +3,22 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_signup">Sign up</string>
+    <string name="btn_login">Log in</string>
+    <string name="edtpass">Password</string>
+    <string name="edtuser">User name</string>
+    <string name="edtphone">Phone number</string>
+    <string name="edtemail">Email</string>
+    <string name="prvacy">By clicking ‘Create account’ or signing up, you agree to the Terms of Use and Privacy Policy. </string>
+    <string name="forgot">Forgot password</string>
+    <string name="choose">Or connect using social account</string>
+    <string name="titleotp">Verify phone number</string>
+    <string name="messotp">Check your phone SMS messenger. We have sent you the PIN at 069854745</string>
+    <string name="problemcode">Did not recevie SMS?  </string>
+    <string name="resendcode">Resend Code</string>
+    <string name="verify">Verify</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
