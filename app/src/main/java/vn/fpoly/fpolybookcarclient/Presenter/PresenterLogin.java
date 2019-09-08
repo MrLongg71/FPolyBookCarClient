@@ -1,7 +1,6 @@
 package vn.fpoly.fpolybookcarclient.Presenter;
 
 import android.app.Activity;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -15,8 +14,8 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
+import vn.fpoly.fpolybookcarclient.Model.ModelClient;
 import vn.fpoly.fpolybookcarclient.Model.ObjectClass.Client;
-import vn.fpoly.fpolybookcarclient.View.Fragment.SignInFragment;
 import vn.fpoly.fpolybookcarclient.View.Interface.ViewLogin;
 
 public class PresenterLogin implements IPPresenterLogin {
@@ -38,6 +37,7 @@ public class PresenterLogin implements IPPresenterLogin {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     viewLogin.onSuccess();
+
                 }else {
                     viewLogin.onFailed();
                 }
@@ -58,6 +58,13 @@ public class PresenterLogin implements IPPresenterLogin {
             signInWithPhoneAuthCredential(phoneAuthCredential,activity);
         }
     }
+
+    @Override
+    public void doRegisterEmail(Client client) {
+        ModelClient modelClient = new ModelClient();
+        modelClient.addClientDatabase(client);
+    }
+
     private void sentCodeSMS(String phone, final Activity activity) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 "+84" + phone,

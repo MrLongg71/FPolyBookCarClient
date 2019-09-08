@@ -3,7 +3,7 @@
     <!--xmlns:tools="http://schemas.android.com/tools"-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent"-->
-    <!--tools:context=".View.Fragment.SignInFragment">-->
+    <!--tools:context=".View.Fragment.RegisterFragment">-->
 
     <!--<LinearLayout-->
         <!--android:orientation="vertical"-->
@@ -45,7 +45,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".View.Fragment.SignInFragment"
+    tools:context=".View.Fragment.RegisterFragment"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:id="@+id/edtusernamesignup"
+            android:id="@+id/edtNameRegister"
             android:hint="@string/edtuser"
             android:inputType="text"
             android:textColor="#000222"
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
-            android:id="@+id/edtemaisignup"
+            android:id="@+id/edtEmailRegister"
             android:layout_marginRight="20dp"
             android:hint="@string/edtemail"
             android:inputType="textEmailAddress"
@@ -139,7 +139,7 @@
                 android:layout_width="match_parent"
                 android:maxLength="11"
                 android:layout_height="wrap_content"
-                android:id="@+id/edtphone"
+                android:id="@+id/edtPhoneRegister"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:hint="@string/edtphone"
@@ -163,7 +163,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginRight="20dp"
             android:hint="@string/edtpass"
-            android:id="@+id/edtpasssignup"
+            android:id="@+id/edtPasswordRegister"
             android:inputType="textPassword"
             android:textColorHint="#9CA3B5" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -184,7 +184,7 @@
         android:layout_marginRight="20dp">
 
         <Button
-            android:id="@+id/btnSigup"
+            android:id="@+id/btnRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
