@@ -24,6 +24,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edtusername"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:errorEnabled="true">
@@ -32,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:id="@+id/edtemaillogin"
             android:layout_marginRight="20dp"
             android:hint="@string/titleedt"
             android:inputType="text"
@@ -44,6 +46,7 @@
         android:id="@+id/edtemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -51,9 +54,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
+            android:id="@+id/edtpasslogin"
             android:layout_marginRight="20dp"
             android:hint="@string/edtpass"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:textColor="#FA8A04"
             android:textColorHint="#9CA3B5" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -64,6 +68,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:fontFamily="serif"
+        android:id="@+id/txtforgot"
         android:text="@string/forgot"
         android:textColor="#FA8A04"
         android:textStyle="bold" />
@@ -101,6 +106,7 @@
 
         <com.google.android.gms.common.SignInButton
             android:layout_marginTop="20dp"
+            android:id="@+id/btngoogle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtchoose"></com.google.android.gms.common.SignInButton>
