@@ -2,12 +2,14 @@ package vn.fpoly.fpolybookcarclient.View.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,11 +23,13 @@ import com.developer.kalert.KAlertDialog;
 import es.dmoral.toasty.Toasty;
 import vn.fpoly.fpolybookcarclient.Presenter.PresenterLogin;
 import vn.fpoly.fpolybookcarclient.R;
+import vn.fpoly.fpolybookcarclient.View.Activity.HomeActivity;
 import vn.fpoly.fpolybookcarclient.View.Interface.ViewLogin;
 
-public class VerifyPhoneFragment extends Fragment implements ViewLogin {
-    EditText edtphone1,edtphone2,edtphone3,edtphone4;
-    Button btnvery;
+public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnClickListener {
+    EditText edtphone1,edtphone2,edtphone3,edtphone4,edtphone5,edtphone6;
+    Button btnVery;
+    TextView txtPhone,txtResend;
     String phone = "";
     PresenterLogin presenterLogin;
     @Nullable
@@ -34,12 +38,8 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_verifyphone, container, false);
         initView(view);
-        btnvery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkvalid();
-            }
-        });
+        btnVery.setOnClickListener(this);
+        txtResend.setOnClickListener(this);
         return view;
     }
     private void initView(View view){
@@ -48,9 +48,15 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin {
         edtphone2       = view.findViewById(R.id.edtnumber2);
         edtphone3       = view.findViewById(R.id.edtnumber3);
         edtphone4       = view.findViewById(R.id.edtnumber4);
-        btnvery         = view.findViewById(R.id.btnvery);
+        edtphone5       = view.findViewById(R.id.edtnumber5);
+        edtphone6       = view.findViewById(R.id.edtnumber6);
+        txtPhone        = view.findViewById(R.id.txtPhone);
+        txtResend       = view.findViewById(R.id.txtresendcode);
+        btnVery         = view.findViewById(R.id.btnvery);
         phone           = getArguments().getString("phone");
-        presenterLogin.doSendSMS(phone,getActivity());
+        txtPhone.setText(getString(R.string.messotp) +" "+ phone);
+        presenterLogin.doSendSMS(phone,txtResend,getActivity());
+
     }
 
     private boolean checkvalid(){
@@ -59,25 +65,14 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin {
         String code2 = edtphone2.getText().toString().trim();
         String code3 = edtphone3.getText().toString().trim();
         String code4 = edtphone4.getText().toString().trim();
+        String code5 = edtphone5.getText().toString().trim();
+        String code6 = edtphone6.getText().toString().trim();
         if(code1.length() ==0 || code2.length() == 0 || code3 .length() == 0 || code4.length()==0){
             Toasty.error(getActivity(),getString(R.string.checkedtcodevery),Toasty.LENGTH_SHORT).show();
             return false;
         }else {
-            String sverify = "123456";
+            String sverify = code1+code2+code3+code4+code5+code6;
             checkVerify(phone,sverify);
-
-            KAlertDialog pDialog = new KAlertDialog(getActivity(), KAlertDialog.SUCCESS_TYPE);
-            pDialog .setTitleText(getString(R.string.success));
-            pDialog .setContentText(getString(R.string.activateaccout));
-            pDialog .show();
-
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            LoginFragment loginFragment = new LoginFragment();
-            fragmentTransaction.replace(R.id.frame_client,loginFragment);
-            getActivity().getSupportFragmentManager().popBackStack();
-            fragmentTransaction.commit();
-
         }
 
         return true;
@@ -90,22 +85,41 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin {
 
     @Override
     public void onSuccess() {
-        Toast.makeText(getActivity(), "ok", Toast.LENGTH_SHORT).show();
-//        KAlertDialog pDialog = new KAlertDialog(getActivity(), KAlertDialog.SUCCESS_TYPE);
-//        pDialog .setTitleText(getString(R.string.success));
-//        pDialog .setContentText(getString(R.string.activateaccout));
-//        pDialog .show();
 
-//        FragmentManager fragmentManager = getFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        LoginFragment loginFragment = new LoginFragment();
-//        fragmentTransaction.replace(R.id.frame_client,loginFragment);
-//        getActivity().getSupportFragmentManager().popBackStack();
-//        fragmentTransaction.commit();
+        KAlertDialog pDialog = new KAlertDialog(getActivity(), KAlertDialog.SUCCESS_TYPE);
+        pDialog .setTitleText(getString(R.string.success));
+        pDialog .setContentText(getString(R.string.activateaccout));
+        pDialog .show();
+
+
+
+        startActivity(new Intent(getActivity(), HomeActivity.class));
+        getActivity().finish();
+
     }
 
     @Override
     public void onFailed() {
+        Toast.makeText(getActivity(), "sai mã", Toast.LENGTH_SHORT).show();
 
+    }
+
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.txtresendcode:
+                if(txtResend.getText().equals(getString(R.string.resendcode)) && phone !=null){
+                    presenterLogin.doSendSMS(phone,txtResend,getActivity());
+                }else {
+                    Toasty.error(getActivity(), "Có lỗi xảy ra");
+                    getActivity().finish();
+                }
+                break;
+            case R.id.btnvery:
+                checkvalid();
+                break;
+        }
     }
 }

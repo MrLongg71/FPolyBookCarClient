@@ -1,12 +1,17 @@
 package vn.fpoly.fpolybookcarclient.Presenter;
 
 import android.app.Activity;
+import android.os.CountDownTimer;
+import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -16,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 import vn.fpoly.fpolybookcarclient.Model.ModelClient;
 import vn.fpoly.fpolybookcarclient.Model.ObjectClass.Client;
+import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.View.Interface.ViewLogin;
 
 public class PresenterLogin implements IPPresenterLogin {
@@ -47,8 +53,8 @@ public class PresenterLogin implements IPPresenterLogin {
     }
 
     @Override
-    public void doSendSMS(String phone,Activity activity) {
-        sentCodeSMS(phone,activity);
+    public void doSendSMS(String phone,TextView txtResend,Activity activity) {
+        sentCodeSMS(phone,txtResend,activity);
     }
 
     @Override
@@ -65,7 +71,7 @@ public class PresenterLogin implements IPPresenterLogin {
         modelClient.addClientDatabase(client);
     }
 
-    private void sentCodeSMS(String phone, final Activity activity) {
+    private void sentCodeSMS(String phone,final TextView txtResend, final Activity activity) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 "+84" + phone,
                 60,
@@ -80,7 +86,10 @@ public class PresenterLogin implements IPPresenterLogin {
 
                     @Override
                     public void onVerificationFailed(@NonNull FirebaseException e) {
-
+                        REQUES_CODE_SMS = false;
+                        if (e instanceof FirebaseTooManyRequestsException) {
+                            Toast.makeText(activity, "Bạn đã xác nhận quá số lần cho phép. Vui lòng thử lại sau", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -88,7 +97,8 @@ public class PresenterLogin implements IPPresenterLogin {
                                            PhoneAuthProvider.ForceResendingToken token) {
                         REQUES_CODE_SMS = true;
                         mVerificationId = verificationId;
-//                        mResendCode();
+                        Log.d("test" , verificationId+"");
+                        mResendCode(txtResend, activity);
                     }
                 }
         );
@@ -100,9 +110,27 @@ public class PresenterLogin implements IPPresenterLogin {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             viewLogin.onSuccess();
+                            String key = task.getResult().getUser().getUid();
+                            Client client = new Client(key,"", task.getResult().getUser().getPhoneNumber(),"" );
+                            ModelClient modelClient = new ModelClient();
+                            modelClient.addClientDatabase(client);
+                        }else {
+                            viewLogin.onFailed();
                         }
                     }
                 });
+    }
+    public void mResendCode(final TextView txtResend, final Activity activity){
+        new CountDownTimer(30000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                txtResend.setText(String.valueOf(millisUntilFinished/1000));
+            }
+            @Override
+            public void onFinish() {
+                txtResend.setText(activity.getString(R.string.resendcode));
+            }
+        }.start();
     }
 
 

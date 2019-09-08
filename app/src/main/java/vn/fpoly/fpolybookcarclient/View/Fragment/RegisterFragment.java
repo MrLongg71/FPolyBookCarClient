@@ -38,8 +38,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     TextInputEditText edtPhone, edtName, edtPassword, edtEmail;
     EditText edtcoutry;
     Button btnRegister;
-    boolean REQUES_CODE_SMS = false;
-    String mVerificationId;
     FirebaseAuth mAuth;
     PresenterLogin presenterLogin;
 
@@ -57,7 +55,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         edtcoutry.setFocusable(false);
         mAuth = FirebaseAuth.getInstance();
         btnRegister.setOnClickListener(this);
-//        btnCodeSMS.setOnClickListener(this);
         return view;
     }
 
@@ -100,22 +97,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
         }
     }
-
-    //    private void mResendCode(){
-//        new CountDownTimer(30000,1000) {
-//            @Override
-//            public void onTick(long millisUntilFinished) {
-//                txtCount.setText(String.valueOf(millisUntilFinished/1000));
-//            }
-//            @Override
-//            public void onFinish() {
-//                txtCount.setText("Gửi lại");
-//            }
-//        }.start();
-//    }
-
-
-
 
     private boolean checkValid() {
         String user = edtName.getText().toString().trim();

@@ -13,7 +13,7 @@
     <string name="forgot">Forgot password?</string>
     <string name="choose">Or connect using social account</string>
     <string name="titleotp">Verify phone number</string>
-    <string name="messotp">Check your phone SMS messenger. We have sent you the PIN at 069854745</string>
+    <string name="messotp">Check your phone SMS messenger. We have sent you the PIN at </string>
     <string name="problemcode">Did not recevie SMS?  </string>
     <string name="resendcode">Resend Code?</string>
     <string name="verify">Verify</string>
