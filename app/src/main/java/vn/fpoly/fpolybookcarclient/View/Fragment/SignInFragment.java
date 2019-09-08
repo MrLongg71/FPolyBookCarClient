@@ -192,6 +192,10 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
             edtPhone.setError(getString(R.string.checkvalidphone));
             edtPhone.requestFocus();
             return false;
+        } else if (phone.length() < 10) {
+            edtPhone.setError(getString(R.string.checklengphone));
+            edtPhone.requestFocus();
+            return false;
         } else if (pass.length() < 6) {
             edtpass.setError(getString(R.string.checklenghpass));
             edtpass.requestFocus();

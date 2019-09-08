@@ -9,7 +9,7 @@
     <string name="edtuser">User name</string>
     <string name="edtphone">Phone number</string>
     <string name="edtemail">Email</string>
-    <string name="prvacy">By clicking ‘Create account’ or signing up, you agree to the Terms of Use and Privacy Policy. </string>
+    <string name="prvacy">By clicking "Register", you agree to the Terms of Use and Privacy Policy. </string>
     <string name="forgot">Forgot password?</string>
     <string name="choose">Or connect using social account</string>
     <string name="titleotp">Verify phone number</string>
@@ -21,7 +21,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="titleedt">Email,PhoneNumber</string>
+    <string name="titleedt">Email,Phone Number</string>
     <string name="activity">Activity</string>
     <string name="pay">Pay</string>
     <string name="mailbox">Mail</string>
@@ -29,9 +29,12 @@
     <string name="checkedituser">Please enter a username,phone</string>
     <string name="checkeditpass">Please enter a password</string>
     <string name="checklenghpass">Password must have at least 6 special character</string>
+    <string name="checklengphone">Phone must have at least 10 number</string>
     <string name="checkvalidemail">Please enter a valid email address</string>
     <string name="checkvalidphone">Please enter a valid phone number</string>
     <string name="loginfail">Login failed with Google</string>
     <string name="checkeditemailsigin">Please enter a email</string>
-
+    <string name="checkedtcodevery">Please enter verification code</string>
+    <string name="success">Success!</string>
+    <string name="activateaccout">Your account has successfully created</string>
 </resources>
