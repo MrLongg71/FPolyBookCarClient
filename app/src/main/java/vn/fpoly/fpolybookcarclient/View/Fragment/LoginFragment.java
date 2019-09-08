@@ -30,16 +30,21 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import es.dmoral.toasty.Toasty;
+import vn.fpoly.fpolybookcarclient.Presenter.IPPresenterLogin;
+import vn.fpoly.fpolybookcarclient.Presenter.PresenterLogin;
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.View.Activity.HomeActivity;
+import vn.fpoly.fpolybookcarclient.View.Activity.LoginSMSActivity;
+import vn.fpoly.fpolybookcarclient.View.Interface.ViewLogin;
 
-public class LoginFragment extends Fragment implements View.OnClickListener {
-    Button btnlogin;
+public class LoginFragment extends Fragment implements View.OnClickListener, ViewLogin {
+    Button btnloginHome, btnLoginPhone;
     SignInButton btngoogle;
     TextInputEditText edtuser, edtpass;
     TextView txtforgot;
     private FirebaseAuth firebaseAuth;
     GoogleSignInClient signInClient;
+    PresenterLogin presenterLogin;
     private int REQUEST_CODE_SIGNIN_GOOGLE = 123;
 
     @Nullable
@@ -48,9 +53,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         initView(view);
         firebaseAuth = FirebaseAuth.getInstance();
-
-        btnlogin.setOnClickListener(this);
+        presenterLogin = new PresenterLogin(this);
+        btnloginHome.setOnClickListener(this);
         btngoogle.setOnClickListener(this);
+        btnLoginPhone.setOnClickListener(this);
         btngoogle.setSize(SignInButton.SIZE_STANDARD);
 
         createClientWithGoogle();
@@ -58,22 +64,39 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initView(View view) {
-        btnlogin = view.findViewById(R.id.btnloginhome);
+        btnLoginPhone = view.findViewById(R.id.btnLoginWithPhone);
+        btnloginHome = view.findViewById(R.id.btnLoginHome);
         btngoogle = view.findViewById(R.id.btngoogle);
-        edtuser = view.findViewById(R.id.edtemaillogin);
-        edtpass = view.findViewById(R.id.edtpasslogin);
+        edtuser = view.findViewById(R.id.edtEmailLogin);
+        edtpass = view.findViewById(R.id.edtPassLogin);
         txtforgot = view.findViewById(R.id.txtforgot);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnloginhome:
-                checkValid();
+            case R.id.btnLoginHome:
+                loginClientWithEmail();
                 break;
             case R.id.btngoogle:
                 logInWithGoogle();
                 break;
+            case R.id.btnLoginWithPhone:
+                loginClientWithPhone();
+                break;
+        }
+    }
+
+    private void loginClientWithPhone() {
+        startActivity(new Intent(getActivity(), LoginSMSActivity.class));
+
+    }
+
+    private void loginClientWithEmail() {
+        if(checkValid()) {
+            String user = edtuser.getText().toString().trim();
+            String pass = edtpass.getText().toString().trim();
+            presenterLogin.doLoginEmail(user, pass);
         }
     }
 
@@ -98,7 +121,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             return false;
         }
         else {
-
             return true;
         }
     }
@@ -133,4 +155,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         signInClient = GoogleSignIn.getClient(getActivity(),signInOptions);
     }
 
+    @Override
+    public void onSuccess() {
+        Toast.makeText(getActivity(), "ok", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onFailed() {
+
+    }
 }

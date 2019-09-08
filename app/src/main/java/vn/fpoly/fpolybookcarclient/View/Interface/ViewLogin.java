@@ -1,6 +1,6 @@
 package vn.fpoly.fpolybookcarclient.View.Interface;
 
-public interface ViewClient {
+public interface ViewLogin {
     void onSuccess();
-    void onFail();
+    void onFailed();
 }
