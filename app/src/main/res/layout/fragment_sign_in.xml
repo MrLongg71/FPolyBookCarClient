@@ -131,12 +131,13 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:counterMaxLength="12"
+            app:counterMaxLength="11"
             app:counterEnabled="true"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
+                android:maxLength="11"
                 android:layout_height="wrap_content"
                 android:id="@+id/edtphone"
                 android:layout_marginLeft="20dp"

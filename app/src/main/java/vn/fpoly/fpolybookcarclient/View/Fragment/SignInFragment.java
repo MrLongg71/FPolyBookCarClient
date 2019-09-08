@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,15 +38,16 @@ import vn.fpoly.fpolybookcarclient.View.Activity.ClientActivity;
 import vn.fpoly.fpolybookcarclient.View.Interface.ViewClient;
 
 
-public class SignInFragment extends Fragment implements View.OnClickListener  {
+public class SignInFragment extends Fragment implements View.OnClickListener {
 
 
-    TextInputEditText edtPhone,edtuser,edtpass,edtemail;
+    TextInputEditText edtPhone, edtuser, edtpass, edtemail;
     EditText edtcoutry;
     Button btnsignup;
     boolean REQUES_CODE_SMS = false;
     String mVerificationId;
     FirebaseAuth mAuth;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,32 +60,26 @@ public class SignInFragment extends Fragment implements View.OnClickListener  {
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
         initView(view);
         edtcoutry.setFocusable(false);
-        mAuth =  FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         btnsignup.setOnClickListener(this);
 //        btnCodeSMS.setOnClickListener(this);
         return view;
     }
 
     private void initView(View view) {
-        edtPhone    = view.findViewById(R.id.edtphone);
-        edtcoutry   = view.findViewById(R.id.edtcode);
-        edtuser     = view.findViewById(R.id.edtusernamesignup);
-        edtpass     = view.findViewById(R.id.edtpasssignup);
-        edtemail    = view.findViewById(R.id.edtemaisignup);
-        btnsignup   = view.findViewById(R.id.btnSigup);
+        edtPhone = view.findViewById(R.id.edtphone);
+        edtcoutry = view.findViewById(R.id.edtcode);
+        edtuser = view.findViewById(R.id.edtusernamesignup);
+        edtpass = view.findViewById(R.id.edtpasssignup);
+        edtemail = view.findViewById(R.id.edtemaisignup);
+        btnsignup = view.findViewById(R.id.btnSigup);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnSigup:
-                initEventPhone();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                VerifyPhoneFragment verifyPhoneFragment = new VerifyPhoneFragment();
-                fragmentTransaction.replace(R.id.frame_client,verifyPhoneFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                checkValid();
                 break;
 //            case R.id.btnCodeSMS:
 //                eventCodeSMS();
@@ -99,7 +95,8 @@ public class SignInFragment extends Fragment implements View.OnClickListener  {
 
         }
     }
-//    private void mResendCode(){
+
+    //    private void mResendCode(){
 //        new CountDownTimer(30000,1000) {
 //            @Override
 //            public void onTick(long millisUntilFinished) {
@@ -111,12 +108,12 @@ public class SignInFragment extends Fragment implements View.OnClickListener  {
 //            }
 //        }.start();
 //    }
-    private void sentCodeSMS(String phone){
+    private void sentCodeSMS(String phone) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                "+84"+phone,
+                "+84" + phone,
                 60,
                 TimeUnit.SECONDS,
-                 getActivity(),
+                getActivity(),
                 new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
                     public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
@@ -139,6 +136,7 @@ public class SignInFragment extends Fragment implements View.OnClickListener  {
                 }
         );
     }
+
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
@@ -150,7 +148,8 @@ public class SignInFragment extends Fragment implements View.OnClickListener  {
                     }
                 });
     }
-    private void initEventPhone(){
+
+    private void initEventPhone() {
         sentCodeSMS(edtPhone.getText().toString());
 
 //        edtCodeOTP.setVisibility(View.VISIBLE);
@@ -163,5 +162,51 @@ public class SignInFragment extends Fragment implements View.OnClickListener  {
 //            signInWithPhoneAuthCredential(phoneAuthCredential);
 //        }
 //    }
+
+    private boolean checkValid() {
+        String user = edtuser.getText().toString().trim();
+        String email = edtemail.getText().toString().trim();
+        String pass = edtpass.getText().toString().trim();
+        String phone = edtPhone.getText().toString().trim();
+        if (user.length() == 0) {
+            edtuser.setError(getString(R.string.checkedituser));
+            edtuser.requestFocus();
+            return false;
+        } else if (email.length() == 0) {
+            edtemail.setError(getString(R.string.checkeditemailsigin));
+            edtemail.requestFocus();
+            return false;
+        } else if (phone.length() == 0) {
+            edtPhone.setError(getString(R.string.checkvalidphone));
+            edtPhone.requestFocus();
+            return false;
+        } else if (pass.length() == 0) {
+            edtpass.setError(getString(R.string.checkeditpass));
+            edtpass.requestFocus();
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            edtemail.setError(getString(R.string.checkvalidemail));
+            edtemail.requestFocus();
+            return false;
+        } else if (!Patterns.PHONE.matcher(phone).matches()) {
+            edtPhone.setError(getString(R.string.checkvalidphone));
+            edtPhone.requestFocus();
+            return false;
+        } else if (pass.length() < 6) {
+            edtpass.setError(getString(R.string.checklenghpass));
+            edtpass.requestFocus();
+            return false;
+        } else {
+            initEventPhone();
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            VerifyPhoneFragment verifyPhoneFragment = new VerifyPhoneFragment();
+            fragmentTransaction.replace(R.id.frame_client, verifyPhoneFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
+        return true;
+    }
 
 }

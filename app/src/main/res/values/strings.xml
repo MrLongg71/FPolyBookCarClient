@@ -32,5 +32,6 @@
     <string name="checkvalidemail">Please enter a valid email address</string>
     <string name="checkvalidphone">Please enter a valid phone number</string>
     <string name="loginfail">Login failed with Google</string>
+    <string name="checkeditemailsigin">Please enter a email</string>
 
 </resources>
