@@ -45,6 +45,5 @@ public class LoginSMSActivity extends AppCompatActivity implements View.OnClickL
         getSupportFragmentManager().beginTransaction().add(R.id.fr_add_verify, verifyPhoneFragment).commit();
         btnLoginPhone.setVisibility(View.GONE);
         edtPhoneLogin.setVisibility(View.GONE);
-
     }
 }

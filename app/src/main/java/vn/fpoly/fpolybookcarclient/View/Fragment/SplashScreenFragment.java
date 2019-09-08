@@ -1,9 +1,12 @@
 package vn.fpoly.fpolybookcarclient.View.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
@@ -14,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import vn.fpoly.fpolybookcarclient.R;
+import vn.fpoly.fpolybookcarclient.View.Activity.SplashScreenActivity;
 
 public class SplashScreenFragment extends Fragment implements View.OnClickListener {
       ProgressBar progressBar;
@@ -23,7 +27,11 @@ public class SplashScreenFragment extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_splashscreen, container, false);
+
         initEvent(view);
+
+        loadAnimation();
+
 
         btnsigup.setOnClickListener(this);
         btnlogin.setOnClickListener(this);
@@ -40,6 +48,11 @@ public class SplashScreenFragment extends Fragment implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnsigup:
+
+                RegisterFragment registerFragment1 = new RegisterFragment();
+                loadFragment(registerFragment1);
+
+
                 RegisterFragment signInFragment = new RegisterFragment();
                 loadFragment(signInFragment);
                 FragmentManager fragmentManager = getFragmentManager();
@@ -48,16 +61,29 @@ public class SplashScreenFragment extends Fragment implements View.OnClickListen
                 fragmentTransaction.replace(R.id.frame_client, registerFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+
                 break;
             case R.id.btnlogin:
                 LoginFragment loginFragment = new LoginFragment();
                 loadFragment(loginFragment);
+
                 break;
         }
     }
     private void loadFragment(Fragment fragment){
         if(fragment != null){
             getFragmentManager().beginTransaction().replace(R.id.frame_client,fragment).addToBackStack(null).commit();
+
+            getActivity().overridePendingTransition(R.anim.animation_enter,R.anim.fade_in);
         }
     }
-}
+
+    private void loadAnimation(){
+        Animation  animation = AnimationUtils.loadAnimation(getActivity(),R.anim.animation_button );
+        btnlogin.startAnimation(animation);
+        btnsigup.startAnimation(animation);
+    }
+        }
+
+
+

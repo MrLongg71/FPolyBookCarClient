@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import es.dmoral.toasty.Toasty;
+import vn.fpoly.fpolybookcarclient.Library.Dialog;
 import vn.fpoly.fpolybookcarclient.Presenter.IPPresenterLogin;
 import vn.fpoly.fpolybookcarclient.Presenter.PresenterLogin;
 import vn.fpoly.fpolybookcarclient.R;
@@ -38,13 +41,14 @@ import vn.fpoly.fpolybookcarclient.View.Activity.LoginSMSActivity;
 import vn.fpoly.fpolybookcarclient.View.Interface.ViewLogin;
 
 public class LoginFragment extends Fragment implements View.OnClickListener, ViewLogin {
-    Button btnloginHome, btnLoginPhone;
-    SignInButton btngoogle;
-    TextInputEditText edtuser, edtpass;
-    TextView txtforgot;
+    private Button btnloginHome, btnLoginPhone;
+    private SignInButton btngoogle;
+    private TextInputEditText edtuser, edtpass;
+    private TextView txtforgot;
+    private ImageButton imgBtnBackLogIn;
     private FirebaseAuth firebaseAuth;
-    GoogleSignInClient signInClient;
-    PresenterLogin presenterLogin;
+    private GoogleSignInClient signInClient;
+    private PresenterLogin presenterLogin;
     private int REQUEST_CODE_SIGNIN_GOOGLE = 123;
 
     @Nullable
@@ -54,12 +58,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
         initView(view);
         firebaseAuth = FirebaseAuth.getInstance();
         presenterLogin = new PresenterLogin(this);
+
         btnloginHome.setOnClickListener(this);
         btngoogle.setOnClickListener(this);
         btnLoginPhone.setOnClickListener(this);
+        imgBtnBackLogIn.setOnClickListener(this);
         btngoogle.setSize(SignInButton.SIZE_STANDARD);
 
         createClientWithGoogle();
+
         return view;
     }
 
@@ -67,38 +74,41 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
         btnLoginPhone = view.findViewById(R.id.btnLoginWithPhone);
         btnloginHome = view.findViewById(R.id.btnLoginHome);
         btngoogle = view.findViewById(R.id.btngoogle);
-
         edtuser = view.findViewById(R.id.edtEmailLogin);
         edtpass = view.findViewById(R.id.edtPassLogin);
         txtforgot = view.findViewById(R.id.txtforgot);
-        btngoogle   = view.findViewById(R.id.btngoogle);
-        txtforgot   = view.findViewById(R.id.txtforgot);
-
+        btngoogle = view.findViewById(R.id.btngoogle);
+        txtforgot = view.findViewById(R.id.txtforgot);
+        btngoogle = view.findViewById(R.id.btngoogle);
+        txtforgot = view.findViewById(R.id.txtforgot);
+        imgBtnBackLogIn = view.findViewById(R.id.imgBackLogIn);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-
             case R.id.btnLoginHome:
                 loginClientWithEmail();
                 startActivity(new Intent(getActivity(), HomeActivity.class));
+                break;
             case R.id.btngoogle:
                 logInWithGoogle();
                 break;
             case R.id.btnLoginWithPhone:
                 loginClientWithPhone();
                 break;
+            case R.id.imgBackLogIn:
+                getActivity().getSupportFragmentManager().popBackStack();
+                break;
         }
     }
 
     private void loginClientWithPhone() {
         startActivity(new Intent(getActivity(), LoginSMSActivity.class));
-
     }
 
     private void loginClientWithEmail() {
-        if(checkValid()) {
+        if (checkValid()) {
             String user = edtuser.getText().toString().trim();
             String pass = edtpass.getText().toString().trim();
             presenterLogin.doLoginEmail(user, pass);
@@ -127,10 +137,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
             edtuser.setError(getString(R.string.checkvalidemail));
             edtuser.requestFocus();
             return false;
-
-        }
-        else {
-
+        } else {
             return true;
         }
     }
@@ -168,11 +175,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
 
     @Override
     public void onSuccess() {
-        Toast.makeText(getActivity(), "ok", Toast.LENGTH_SHORT).show();
+        Dialog.Success(getActivity());
+        startActivity(new Intent(getActivity(), HomeActivity.class));
+
     }
 
     @Override
     public void onFailed() {
-
+        Dialog.Error(getActivity());
     }
 }

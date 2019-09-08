@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.developer.kalert.KAlertDialog;
 
 import es.dmoral.toasty.Toasty;
+import vn.fpoly.fpolybookcarclient.Library.Dialog;
 import vn.fpoly.fpolybookcarclient.Presenter.PresenterLogin;
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.View.Activity.HomeActivity;
@@ -42,25 +43,8 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
         txtResend.setOnClickListener(this);
         return view;
     }
-    private void initView(View view){
-        presenterLogin  = new PresenterLogin(this);
-        edtphone1       = view.findViewById(R.id.edtnumber1);
-        edtphone2       = view.findViewById(R.id.edtnumber2);
-        edtphone3       = view.findViewById(R.id.edtnumber3);
-        edtphone4       = view.findViewById(R.id.edtnumber4);
-        edtphone5       = view.findViewById(R.id.edtnumber5);
-        edtphone6       = view.findViewById(R.id.edtnumber6);
-        txtPhone        = view.findViewById(R.id.txtPhone);
-        txtResend       = view.findViewById(R.id.txtresendcode);
-        btnVery         = view.findViewById(R.id.btnvery);
-        phone           = getArguments().getString("phone");
-        txtPhone.setText(getString(R.string.messotp) +" "+ phone);
-        presenterLogin.doSendSMS(phone,txtResend,getActivity());
-
-    }
 
     private boolean checkvalid(){
-
         String code1 = edtphone1.getText().toString().trim();
         String code2 = edtphone2.getText().toString().trim();
         String code3 = edtphone3.getText().toString().trim();
@@ -85,23 +69,14 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
 
     @Override
     public void onSuccess() {
-
-        KAlertDialog pDialog = new KAlertDialog(getActivity(), KAlertDialog.SUCCESS_TYPE);
-        pDialog .setTitleText(getString(R.string.success));
-        pDialog .setContentText(getString(R.string.activateaccout));
-        pDialog .show();
-
-
-
-        startActivity(new Intent(getActivity(), HomeActivity.class));
+        Dialog.Success(getActivity());
         getActivity().finish();
-
+        startActivity(new Intent(getActivity(), HomeActivity.class));
     }
 
     @Override
     public void onFailed() {
-        Toast.makeText(getActivity(), "sai mã", Toast.LENGTH_SHORT).show();
-
+        Dialog.Error(getActivity());
     }
 
 
@@ -122,4 +97,20 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
                 break;
         }
     }
+    private void initView(View view){
+        presenterLogin  = new PresenterLogin(this);
+        edtphone1       = view.findViewById(R.id.edtnumber1);
+        edtphone2       = view.findViewById(R.id.edtnumber2);
+        edtphone3       = view.findViewById(R.id.edtnumber3);
+        edtphone4       = view.findViewById(R.id.edtnumber4);
+        edtphone5       = view.findViewById(R.id.edtnumber5);
+        edtphone6       = view.findViewById(R.id.edtnumber6);
+        txtPhone        = view.findViewById(R.id.txtPhone);
+        txtResend       = view.findViewById(R.id.txtresendcode);
+        btnVery         = view.findViewById(R.id.btnvery);
+        phone           = getArguments().getString("phone");
+        txtPhone.setText(getString(R.string.messotp) +" "+ phone);
+        presenterLogin.doSendSMS(phone,txtResend,getActivity());
+    }
+
 }

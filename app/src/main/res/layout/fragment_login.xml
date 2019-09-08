@@ -1,130 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/v"
-    android:layout_width="match_parent"
+
+<ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <ImageView
-        android:id="@+id/edtback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/rsz_1back" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="@string/btn_login"
-        android:textColor="#212B47"
-        android:textSize="50dp"
-        android:textStyle="bold" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edtusername"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:errorEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtEmailLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:hint="@string/titleedt"
-            android:inputType="text"
-            android:textColor="#FA8A04"
-
-            android:textColorHint="#9CA3B5" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edtemail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:errorEnabled="true"
-        app:passwordToggleEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtPassLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="20dp"
-            android:hint="@string/edtpass"
-            android:inputType="textPassword"
-            android:textColor="#FA8A04"
-            android:textColorHint="#9CA3B5" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/txtforgot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="serif"
-        android:text="@string/forgot"
-        android:textColor="#FA8A04"
-        android:textStyle="bold" />
-
-
-    <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/v"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:orientation="vertical">
 
-        <Button
-
-            android:id="@+id/btnLoginHome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="56dp"
-            android:background="@drawable/custom_button_login"
-            android:padding="15dp"
-            android:text="@string/btn_login"
-            android:textColor="#14297A"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/txtchoose"
+        <ImageButton
+            android:background="@null"
+            android:id="@+id/imgBackLogIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btnLoginHome"
-            android:layout_marginTop="49dp"
-            android:layout_marginRight="20dp"
-            android:text="@string/choose"
-            android:textColor="#00020E" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/rsz_1back" />
 
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/btngoogle"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="@string/btn_login"
+            android:textColor="#212B47"
+            android:textSize="50dp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edtusername"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtchoose"
-            android:layout_marginTop="20dp"></com.google.android.gms.common.SignInButton>
+            app:errorEnabled="true">
 
-        <Button
-            android:textAllCaps="false"
-            android:id="@+id/btnLoginWithPhone"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtEmailLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:hint="@string/titleedt"
+                android:inputType="text"
+                android:textColor="#FA8A04"
+
+                android:textColorHint="#9CA3B5" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edtemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btngoogle"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/custom_button_phone"
-            android:drawableLeft="@drawable/rsz_call"
-            android:padding="15dp"
-            android:text="@string/loginsdt"
-            android:textColor="#FF0C08" />
-    </RelativeLayout>
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true">
 
-</LinearLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtPassLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:hint="@string/edtpass"
+                android:inputType="textPassword"
+                android:textColor="#FA8A04"
+                android:textColorHint="#9CA3B5" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/txtforgot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="serif"
+            android:text="@string/forgot"
+            android:textColor="#FA8A04"
+            android:textStyle="bold" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <Button
+
+                android:id="@+id/btnLoginHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="56dp"
+                android:background="@drawable/custom_button_login"
+                android:padding="15dp"
+                android:text="@string/btn_login"
+                android:textColor="#14297A"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/txtchoose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnLoginHome"
+                android:layout_marginTop="49dp"
+                android:layout_marginRight="20dp"
+                android:text="@string/choose"
+                android:textColor="#00020E" />
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/btngoogle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtchoose"
+                android:layout_marginTop="20dp"></com.google.android.gms.common.SignInButton>
+
+            <Button
+                android:textAllCaps="false"
+                android:id="@+id/btnLoginWithPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btngoogle"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_button_phone"
+                android:drawableLeft="@drawable/rsz_call"
+                android:padding="10dp"
+                android:text="@string/loginsdt"
+                android:textColor="#FF0C08" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +27,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
+import vn.fpoly.fpolybookcarclient.Library.Dialog;
 import vn.fpoly.fpolybookcarclient.Model.ObjectClass.Client;
 import vn.fpoly.fpolybookcarclient.Presenter.PresenterLogin;
 import vn.fpoly.fpolybookcarclient.R;
@@ -33,13 +35,12 @@ import vn.fpoly.fpolybookcarclient.View.Interface.ViewLogin;
 
 
 public class RegisterFragment extends Fragment implements View.OnClickListener, ViewLogin {
-
-
-    TextInputEditText edtPhone, edtName, edtPassword, edtEmail;
-    EditText edtcoutry;
-    Button btnRegister;
-    FirebaseAuth mAuth;
-    PresenterLogin presenterLogin;
+    private TextInputEditText edtPhone, edtName, edtPassword, edtEmail;
+    private EditText edtcoutry;
+    private Button btnRegister;
+    private ImageButton imgBackBtnRegister;
+    private FirebaseAuth mAuth;
+    private PresenterLogin presenterLogin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,18 +55,21 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         initView(view);
         edtcoutry.setFocusable(false);
         mAuth = FirebaseAuth.getInstance();
+
         btnRegister.setOnClickListener(this);
+        imgBackBtnRegister.setOnClickListener(this);
         return view;
     }
 
     private void initView(View view) {
-        presenterLogin = new PresenterLogin(this);
-        edtPhone = view.findViewById(R.id.edtPhoneRegister);
-        edtcoutry = view.findViewById(R.id.edtcode);
-        edtName = view.findViewById(R.id.edtNameRegister);
-        edtPassword = view.findViewById(R.id.edtPasswordRegister);
-        edtEmail = view.findViewById(R.id.edtEmailRegister);
-        btnRegister = view.findViewById(R.id.btnRegister);
+        presenterLogin      = new PresenterLogin(this);
+        edtPhone            = view.findViewById(R.id.edtPhoneRegister);
+        edtcoutry           = view.findViewById(R.id.edtcode);
+        edtName             = view.findViewById(R.id.edtNameRegister);
+        edtPassword         = view.findViewById(R.id.edtPasswordRegister);
+        edtEmail            = view.findViewById(R.id.edtEmailRegister);
+        btnRegister         = view.findViewById(R.id.btnRegister);
+        imgBackBtnRegister  = view.findViewById(R.id.imgBackRegister);
     }
 
     @Override
@@ -74,29 +78,34 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             case R.id.btnRegister:
                 createClientWithEmail();
                 break;
+            case R.id.imgBackRegister:
+                getActivity().getSupportFragmentManager().popBackStack();
+                break;
         }
     }
 
-    private void createClientWithEmail(){
-        if(checkValid()){
+    private void createClientWithEmail() {
+        if (checkValid()) {
             final String name = edtName.getText().toString().trim();
             final String email = edtEmail.getText().toString().trim();
             String pass = edtPassword.getText().toString().trim();
             final String phone = edtPhone.getText().toString().trim();
 
-            mAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         String key = task.getResult().getUser().getUid();
-                        Client client = new Client(key,email,phone,name);
+                        Client client = new Client(key, email, phone, name);
                         presenterLogin.doRegisterEmail(client);
+                        onSuccess();
                     }
                 }
             });
 
         }
     }
+
 
     private boolean checkValid() {
         String user = edtName.getText().toString().trim();
@@ -137,7 +146,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             return false;
         } else {
 
-            return  true;
+            return true;
 
         }
 
@@ -145,16 +154,22 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onSuccess() {
-//        FragmentManager fragmentManager = getFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        VerifyPhoneFragment verifyPhoneFragment = new VerifyPhoneFragment();
-//        fragmentTransaction.replace(R.id.frame_client, verifyPhoneFragment);
-//        fragmentTransaction.addToBackStack(null);
-//        fragmentTransaction.commit();
+        Dialog.Success(getActivity());
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        VerifyPhoneFragment verifyPhoneFragment = new VerifyPhoneFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("phone" , edtPhone.getText().toString().trim());
+        verifyPhoneFragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.frame_client, verifyPhoneFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     @Override
     public void onFailed() {
+        Dialog.Error(getActivity());
 
     }
 }
