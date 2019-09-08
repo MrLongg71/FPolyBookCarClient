@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:hint="@string/edtemail"
+            android:hint="@string/titleedt"
             android:inputType="text"
             android:textColor="#FA8A04"
 
@@ -90,7 +90,7 @@
             android:textSize="18dp" />
 
         <TextView
-
+            android:id="@+id/txtchoose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/btnloginhome"
@@ -99,8 +99,12 @@
             android:text="@string/choose"
             android:textColor="#00020E" />
 
+        <com.google.android.gms.common.SignInButton
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtchoose"></com.google.android.gms.common.SignInButton>
 
     </RelativeLayout>
-
 
 </LinearLayout>

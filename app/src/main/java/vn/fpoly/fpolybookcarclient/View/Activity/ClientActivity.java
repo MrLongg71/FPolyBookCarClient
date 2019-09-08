@@ -28,23 +28,17 @@ import java.util.concurrent.TimeUnit;
 
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.View.Fragment.SignInFragment;
+import vn.fpoly.fpolybookcarclient.View.Fragment.SplashScreenFragment;
 
 public class ClientActivity extends AppCompatActivity {
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client);
-//
         initView();
     }
 
-
-
-
     private void initView() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_client, new SignInFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_client, new SplashScreenFragment()).commit();
     }
 }

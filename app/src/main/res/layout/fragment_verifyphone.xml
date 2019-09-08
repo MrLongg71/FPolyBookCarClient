@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--xmlns:tools="http://schemas.android.com/tools"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--tools:context=".View.Fragment.SignInFragment">-->
+
+<!--<LinearLayout-->
+<!--android:orientation="vertical"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent">-->
+
+<!--<ImageView-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:src="@drawable/icon_sms" />-->
+<!--<EditText-->
+<!--android:id="@+id/edtPhone"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content" />-->
+
+<!--<EditText-->
+<!--android:id="@+id/edtCodeOTP"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content" />-->
+<!--<TextView-->
+<!--android:id="@+id/count"-->
+<!--android:text="60"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content" />-->
+<!--<Button-->
+<!--android:id="@+id/btnClick"-->
+<!--android:text="Send"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content" />-->
+<!--<Button-->
+<!--android:id="@+id/btnCodeSMS"-->
+<!--android:text="Send"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content" />-->
+<!--</LinearLayout>-->
+<!--</LinearLayout>-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/edtback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/rsz_1back" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="@string/titleotp"
+        android:textColor="#212B47"
+        android:textSize="50dp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textStyle="bold"
+        android:text="@string/messotp"
+        android:textColor="#252D46"
+        />
+
+    <RelativeLayout
+
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:textColor="#FF8901"
+            android:gravity="center"
+            android:maxLength="1"
+            android:textSize="50dp"
+            android:inputType="number"
+            android:id="@+id/edtnumber1"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content" />
+        <EditText android:textColor="#FF8901"
+            android:gravity="center"
+            android:maxLength="1"
+            android:textSize="50dp"
+            android:inputType="number"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/edtnumber1"
+            android:id="@+id/edtnumber2"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content" />
+
+        <EditText
+
+            android:textColor="#FF8901"
+            android:gravity="center"
+            android:maxLength="1"
+            android:textSize="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/edtnumber2"
+            android:id="@+id/edtnumber3"
+            android:inputType="number"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:textColor="#FF8901"
+            android:gravity="center"
+            android:maxLength="1"
+            android:textSize="50dp"
+            android:inputType="number"
+            android:layout_toRightOf="@id/edtnumber3"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/edtnumber4"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_below="@id/edtnumber1"
+            android:layout_marginTop="30dp"
+            android:textColor="#030923"
+            android:id="@+id/txtproblem"
+            android:text="@string/problemcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_below="@id/edtnumber1"
+            android:layout_marginTop="30dp"
+            android:textColor="#F86505"
+            android:layout_toRightOf="@id/txtproblem"
+            android:id="@+id/txtresendcode"
+            android:text="@string/resendcode"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/btnvery"
+        android:textColor="#163061"
+        android:layout_margin="20dp"
+        android:text="@string/verify"
+        android:textSize="15dp"
+        android:background="#FF8901"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+
