@@ -2,9 +2,17 @@ package vn.fpoly.fpolybookcarclient.Presenter;
 
 import android.app.Activity;
 
+import vn.fpoly.fpolybookcarclient.Model.ObjectClass.Client;
+
 public interface IPPresenterLogin {
+    //    *****Login****//
     void doLoginEmail(String email, String password);
-    void doSendSMS(String phone,Activity activity);
+
+    void doSendSMS(String phone, Activity activity);
+
     void doLoginPhone(String phone, String verify, Activity activity);
+
+    //    *****Register****//
+    void doRegisterEmail(Client client);
 
 }

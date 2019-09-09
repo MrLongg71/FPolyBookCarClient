@@ -1,60 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--tools:context=".View.Fragment.SignInFragment">-->
-
-    <!--<LinearLayout-->
-        <!--android:orientation="vertical"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-
-        <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@drawable/icon_sms" />-->
-        <!--<EditText-->
-            <!--android:id="@+id/edtPhone"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-
-        <!--<EditText-->
-            <!--android:id="@+id/edtCodeOTP"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-        <!--<TextView-->
-            <!--android:id="@+id/count"-->
-            <!--android:text="60"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
-        <!--<Button-->
-        <!--android:id="@+id/btnClick"-->
-        <!--android:text="Send"-->
-        <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-        <!--<Button-->
-            <!--android:id="@+id/btnCodeSMS"-->
-            <!--android:text="Send"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-    <!--</LinearLayout>-->
-<!--</LinearLayout>-->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".View.Fragment.SignInFragment"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".View.Fragment.RegisterFragment">
 
-    <ImageView
-        android:id="@+id/edtback"
+    <ImageButton
+        android:id="@+id/imgBackRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
+        android:background="@null"
         android:src="@drawable/rsz_1back" />
 
     <TextView
@@ -73,11 +32,11 @@
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtNameRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:id="@+id/edtusernamesignup"
             android:hint="@string/edtuser"
             android:inputType="text"
             android:textColor="#000222"
@@ -91,11 +50,11 @@
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtEmailRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
-            android:id="@+id/edtemaisignup"
             android:layout_marginRight="20dp"
             android:hint="@string/edtemail"
             android:inputType="textEmailAddress"
@@ -131,39 +90,38 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:counterMaxLength="11"
             app:counterEnabled="true"
+            app:counterMaxLength="11"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtPhoneRegister"
                 android:layout_width="match_parent"
-                android:maxLength="11"
                 android:layout_height="wrap_content"
-                android:id="@+id/edtphone"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:hint="@string/edtphone"
                 android:inputType="phone"
-                android:textColorHint="#9CA3B5"
-                />
+                android:maxLength="11"
+                android:textColorHint="#9CA3B5" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
 
-        app:passwordToggleEnabled="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:errorEnabled="true">
+        app:errorEnabled="true"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtPasswordRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="20dp"
             android:hint="@string/edtpass"
-            android:id="@+id/edtpasssignup"
             android:inputType="textPassword"
             android:textColorHint="#9CA3B5" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -184,7 +142,7 @@
         android:layout_marginRight="20dp">
 
         <Button
-            android:id="@+id/btnSigup"
+            android:id="@+id/btnRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

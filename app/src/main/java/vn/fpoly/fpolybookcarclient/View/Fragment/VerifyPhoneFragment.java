@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,10 +25,12 @@ import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.View.Interface.ViewLogin;
 
 public class VerifyPhoneFragment extends Fragment implements ViewLogin {
-    EditText edtphone1,edtphone2,edtphone3,edtphone4,edtphone5,edtphone6;
+    EditText edtphone1, edtphone2, edtphone3, edtphone4, edtphone5, edtphone6;
     Button btnvery;
+    TextView txtcheckvery;
     String phone = "";
     PresenterLogin presenterLogin;
+
     @Nullable
     @Override
 
@@ -38,11 +41,14 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin {
             @Override
             public void onClick(View view) {
                 checkvalid();
+
             }
         });
+        txtcheckvery.setText(getString(R.string.messotp) +" " + phone);
         return view;
     }
-    private void initView(View view){
+
+    private void initView(View view) {
         presenterLogin  = new PresenterLogin(this);
         edtphone1       = view.findViewById(R.id.edtnumber1);
         edtphone2       = view.findViewById(R.id.edtnumber2);
@@ -52,11 +58,16 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin {
         edtphone6       = view.findViewById(R.id.edtnumber6);
         btnvery         = view.findViewById(R.id.btnvery);
         phone           = getArguments().getString("phone");
-        presenterLogin.doSendSMS(phone,getActivity());
+        edtphone1       = view.findViewById(R.id.edtnumber1);
+        edtphone2       = view.findViewById(R.id.edtnumber2);
+        edtphone3       = view.findViewById(R.id.edtnumber3);
+        edtphone4       = view.findViewById(R.id.edtnumber4);
+        btnvery         = view.findViewById(R.id.btnvery);
+        txtcheckvery    = view.findViewById(R.id.txtcheckvery);
+        presenterLogin.doSendSMS(phone, getActivity());
     }
 
-    private boolean checkvalid(){
-
+    private boolean checkvalid() {
         String code1 = edtphone1.getText().toString().trim();
         String code2 = edtphone2.getText().toString().trim();
         String code3 = edtphone3.getText().toString().trim();
@@ -64,38 +75,40 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin {
         String code5 = edtphone5.getText().toString().trim();
         String code6 = edtphone6.getText().toString().trim();
 
-        if(code1.length() ==0 || code2.length() == 0 || code3 .length() == 0 || code4.length()==0 || code5.length() == 0 || code6.length() == 0 ){
-            Toasty.error(getActivity(),getString(R.string.checkedtcodevery),Toasty.LENGTH_SHORT).show();
-            return false;
-        }else {
-            String sverify = "123456";
-            checkVerify(phone,sverify);
+        if (code1.length() == 0 || code2.length() == 0 || code3.length() == 0 || code4.length() == 0 || code5.length() == 0 || code6.length() == 0) {
 
-            KAlertDialog pDialog = new KAlertDialog(getActivity(), KAlertDialog.SUCCESS_TYPE);
-            pDialog .setTitleText(getString(R.string.success));
-            pDialog .setContentText(getString(R.string.activateaccout));
-            pDialog .show();
+            if (code1.length() == 0 || code2.length() == 0 || code3.length() == 0 || code4.length() == 0) {
+                Toasty.error(getActivity(), getString(R.string.checkedtcodevery), Toasty.LENGTH_SHORT).show();
+                return false;
+            } else {
+                String sverify = "123456";
+                checkVerify(phone, sverify);
 
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            LoginFragment loginFragment = new LoginFragment();
-            fragmentTransaction.replace(R.id.frame_client,loginFragment);
-            getActivity().getSupportFragmentManager().popBackStack();
-            fragmentTransaction.commit();
+                KAlertDialog pDialog = new KAlertDialog(getActivity(), KAlertDialog.SUCCESS_TYPE);
+                pDialog.setTitleText(getString(R.string.success));
+                pDialog.setContentText(getString(R.string.activateaccout));
+                pDialog.show();
 
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                LoginFragment loginFragment = new LoginFragment();
+                fragmentTransaction.replace(R.id.frame_client, loginFragment);
+                getActivity().getSupportFragmentManager().popBackStack();
+                fragmentTransaction.commit();
+
+            }
         }
-
         return true;
     }
 
-    private void checkVerify(String phone, String verify) {
-        presenterLogin.doLoginPhone(phone,verify,getActivity());
+        private void checkVerify (String phone, String verify){
+            presenterLogin.doLoginPhone(phone, verify, getActivity());
 
-    }
+        }
 
-    @Override
-    public void onSuccess() {
-        Toast.makeText(getActivity(), "ok", Toast.LENGTH_SHORT).show();
+        @Override
+        public void onSuccess () {
+            Toast.makeText(getActivity(), "ok", Toast.LENGTH_SHORT).show();
 //        KAlertDialog pDialog = new KAlertDialog(getActivity(), KAlertDialog.SUCCESS_TYPE);
 //        pDialog .setTitleText(getString(R.string.success));
 //        pDialog .setContentText(getString(R.string.activateaccout));
@@ -107,10 +120,11 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin {
 //        fragmentTransaction.replace(R.id.frame_client,loginFragment);
 //        getActivity().getSupportFragmentManager().popBackStack();
 //        fragmentTransaction.commit();
+        }
+
+        @Override
+        public void onFailed () {
+
+        }
     }
 
-    @Override
-    public void onFailed() {
-
-    }
-}

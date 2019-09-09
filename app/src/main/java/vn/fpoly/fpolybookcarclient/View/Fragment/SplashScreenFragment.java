@@ -13,6 +13,8 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.View.Activity.SplashScreenActivity;
@@ -27,7 +29,9 @@ public class SplashScreenFragment extends Fragment implements View.OnClickListen
         View view = inflater.inflate(R.layout.fragment_splashscreen, container, false);
 
         initEvent(view);
+
         loadAnimation();
+
 
         btnsigup.setOnClickListener(this);
         btnlogin.setOnClickListener(this);
@@ -44,8 +48,8 @@ public class SplashScreenFragment extends Fragment implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnsigup:
-                SignInFragment signInFragment = new SignInFragment();
-                loadFragment(signInFragment);
+                RegisterFragment registerFragment1 = new RegisterFragment();
+                loadFragment(registerFragment1);
 
                 break;
             case R.id.btnlogin:
@@ -58,6 +62,7 @@ public class SplashScreenFragment extends Fragment implements View.OnClickListen
     private void loadFragment(Fragment fragment){
         if(fragment != null){
             getFragmentManager().beginTransaction().replace(R.id.frame_client,fragment).addToBackStack(null).commit();
+
             getActivity().overridePendingTransition(R.anim.animation_enter,R.anim.fade_in);
         }
     }
@@ -67,4 +72,7 @@ public class SplashScreenFragment extends Fragment implements View.OnClickListen
         btnlogin.startAnimation(animation);
         btnsigup.startAnimation(animation);
     }
-}
+        }
+
+
+
