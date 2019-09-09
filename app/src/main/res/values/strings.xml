@@ -36,6 +36,8 @@
     <string name="checkeditemailsigin">Please enter a email</string>
     <string name="checkedtcodevery">Please enter verification code</string>
     <string name="success">Success!</string>
+    <string name="inputsdt">Phone number</string>
+    <string name="button">Submit</string>
     <string name="activateaccout">Your account has successfully created</string>
     <string name="loginsdt">Connect with Phone number </string>
 </resources>

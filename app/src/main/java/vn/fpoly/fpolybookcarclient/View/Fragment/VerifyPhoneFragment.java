@@ -24,7 +24,7 @@ import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.View.Interface.ViewLogin;
 
 public class VerifyPhoneFragment extends Fragment implements ViewLogin {
-    EditText edtphone1,edtphone2,edtphone3,edtphone4;
+    EditText edtphone1,edtphone2,edtphone3,edtphone4,edtphone5,edtphone6;
     Button btnvery;
     String phone = "";
     PresenterLogin presenterLogin;
@@ -48,6 +48,8 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin {
         edtphone2       = view.findViewById(R.id.edtnumber2);
         edtphone3       = view.findViewById(R.id.edtnumber3);
         edtphone4       = view.findViewById(R.id.edtnumber4);
+        edtphone5       = view.findViewById(R.id.edtnumber5);
+        edtphone6       = view.findViewById(R.id.edtnumber6);
         btnvery         = view.findViewById(R.id.btnvery);
         phone           = getArguments().getString("phone");
         presenterLogin.doSendSMS(phone,getActivity());
@@ -59,7 +61,10 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin {
         String code2 = edtphone2.getText().toString().trim();
         String code3 = edtphone3.getText().toString().trim();
         String code4 = edtphone4.getText().toString().trim();
-        if(code1.length() ==0 || code2.length() == 0 || code3 .length() == 0 || code4.length()==0){
+        String code5 = edtphone5.getText().toString().trim();
+        String code6 = edtphone6.getText().toString().trim();
+
+        if(code1.length() ==0 || code2.length() == 0 || code3 .length() == 0 || code4.length()==0 || code5.length() == 0 || code6.length() == 0 ){
             Toasty.error(getActivity(),getString(R.string.checkedtcodevery),Toasty.LENGTH_SHORT).show();
             return false;
         }else {

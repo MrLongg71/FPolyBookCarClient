@@ -144,7 +144,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="#FF8901"
+        android:background="@drawable/custom_button_login"
         android:text="@string/verify"
         android:textColor="#163061"
         android:textSize="15dp" />
