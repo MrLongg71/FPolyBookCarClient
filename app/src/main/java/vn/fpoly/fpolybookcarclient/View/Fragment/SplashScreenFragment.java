@@ -48,8 +48,19 @@ public class SplashScreenFragment extends Fragment implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnsigup:
+
                 RegisterFragment registerFragment1 = new RegisterFragment();
                 loadFragment(registerFragment1);
+
+
+                RegisterFragment signInFragment = new RegisterFragment();
+                loadFragment(signInFragment);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                RegisterFragment registerFragment = new RegisterFragment();
+                fragmentTransaction.replace(R.id.frame_client, registerFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
 
                 break;
             case R.id.btnlogin:
