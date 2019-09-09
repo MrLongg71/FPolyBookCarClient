@@ -16,7 +16,6 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        ProgressBar progressBar = findViewById(R.id.progressbar);
         handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -25,6 +24,5 @@ public class SplashScreenActivity extends AppCompatActivity {
                 finish();
             }
         },5000);
-
     }
 }

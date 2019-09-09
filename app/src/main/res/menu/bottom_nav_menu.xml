@@ -12,6 +12,7 @@
         android:title="@string/activity" />
 
     <item
+        android:enabled="true"
         android:id="@+id/navigation_pay"
         android:icon="@drawable/icon_wallet"
         android:title="@string/pay" />

@@ -31,10 +31,10 @@
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtEmailLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:id="@+id/edtEmailLogin"
             android:layout_marginRight="20dp"
             android:hint="@string/titleedt"
             android:inputType="text"
@@ -47,15 +47,15 @@
         android:id="@+id/edtemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true"
-        app:errorEnabled="true">
+        app:errorEnabled="true"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtPassLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
-            android:id="@+id/edtPassLogin"
             android:layout_marginRight="20dp"
             android:hint="@string/edtpass"
             android:inputType="textPassword"
@@ -64,12 +64,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/txtforgot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:fontFamily="serif"
-        android:id="@+id/txtforgot"
         android:text="@string/forgot"
         android:textColor="#FA8A04"
         android:textStyle="bold" />
@@ -82,6 +82,7 @@
         android:layout_marginRight="20dp">
 
         <Button
+
             android:id="@+id/btnLoginHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,7 +90,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
             android:layout_marginTop="56dp"
-            android:background="#FF8901"
+            android:background="@drawable/custom_button_login"
             android:padding="15dp"
             android:text="@string/btn_login"
             android:textColor="#14297A"
@@ -106,17 +107,24 @@
             android:textColor="#00020E" />
 
         <com.google.android.gms.common.SignInButton
-            android:layout_marginTop="20dp"
             android:id="@+id/btngoogle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtchoose"></com.google.android.gms.common.SignInButton>
+            android:layout_below="@+id/txtchoose"
+            android:layout_marginTop="20dp"></com.google.android.gms.common.SignInButton>
+
         <Button
+            android:textAllCaps="false"
             android:id="@+id/btnLoginWithPhone"
-            android:layout_below="@id/btngoogle"
-            android:text="đăng nhập bằng sdt"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btngoogle"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_button_phone"
+            android:drawableLeft="@drawable/rsz_call"
+            android:padding="15dp"
+            android:text="@string/loginsdt"
+            android:textColor="#FF0C08" />
     </RelativeLayout>
 
 </LinearLayout>

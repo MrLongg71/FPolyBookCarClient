@@ -37,4 +37,5 @@
     <string name="checkedtcodevery">Please enter verification code</string>
     <string name="success">Success!</string>
     <string name="activateaccout">Your account has successfully created</string>
+    <string name="loginsdt">Connect with Phone number </string>
 </resources>

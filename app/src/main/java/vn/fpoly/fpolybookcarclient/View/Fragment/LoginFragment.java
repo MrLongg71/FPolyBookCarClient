@@ -67,17 +67,22 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
         btnLoginPhone = view.findViewById(R.id.btnLoginWithPhone);
         btnloginHome = view.findViewById(R.id.btnLoginHome);
         btngoogle = view.findViewById(R.id.btngoogle);
+
         edtuser = view.findViewById(R.id.edtEmailLogin);
         edtpass = view.findViewById(R.id.edtPassLogin);
         txtforgot = view.findViewById(R.id.txtforgot);
+        btngoogle   = view.findViewById(R.id.btngoogle);
+        txtforgot   = view.findViewById(R.id.txtforgot);
+
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+
             case R.id.btnLoginHome:
                 loginClientWithEmail();
-                break;
+                startActivity(new Intent(getActivity(), HomeActivity.class));
             case R.id.btngoogle:
                 logInWithGoogle();
                 break;
@@ -103,24 +108,29 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
     private boolean checkValid() {
         String user = edtuser.getText().toString().trim();
         String pass = edtpass.getText().toString().trim();
-        if (user.length() == 0 ) {
+        if (user.length() == 0) {
             edtuser.setError(getString(R.string.checkedituser));
             edtuser.requestFocus();
             return false;
+
         } else if (pass.length() == 0) {
             edtpass.setError(getString(R.string.checkeditpass));
             edtpass.requestFocus();
             return false;
-        }else if(pass.length() <6){
+
+        } else if (pass.length() < 6) {
             edtpass.setError(getString(R.string.checklenghpass));
             edtpass.requestFocus();
             return false;
-        }else if(!Patterns.EMAIL_ADDRESS.matcher(user).matches()){
+
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(user).matches()) {
             edtuser.setError(getString(R.string.checkvalidemail));
             edtuser.requestFocus();
             return false;
+
         }
         else {
+
             return true;
         }
     }
@@ -128,31 +138,32 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CODE_SIGNIN_GOOGLE && resultCode == Activity.RESULT_OK){
+        if (requestCode == REQUEST_CODE_SIGNIN_GOOGLE && resultCode == Activity.RESULT_OK) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             String tokenId = task.getResult().getIdToken();
             AuthCredential credential = GoogleAuthProvider.getCredential(tokenId, null);
             firebaseAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(!task.isSuccessful()){
-                        Toasty.error(getActivity(),getString(R.string.loginfail),Toasty.LENGTH_SHORT,true).show();
+                    if (!task.isSuccessful()) {
+                        Toasty.error(getActivity(), getString(R.string.loginfail), Toasty.LENGTH_SHORT, true).show();
                     }
                 }
             });
         }
     }
-    private void logInWithGoogle(){
+
+    private void logInWithGoogle() {
         Intent intent = signInClient.getSignInIntent();
-        startActivityForResult(intent,REQUEST_CODE_SIGNIN_GOOGLE);
+        startActivityForResult(intent, REQUEST_CODE_SIGNIN_GOOGLE);
     }
 
-    private void createClientWithGoogle(){
+    private void createClientWithGoogle() {
         GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder()
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestProfile()
                 .build();
-        signInClient = GoogleSignIn.getClient(getActivity(),signInOptions);
+        signInClient = GoogleSignIn.getClient(getActivity(), signInOptions);
     }
 
     @Override
