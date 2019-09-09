@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,18 +26,19 @@ import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.View.Interface.ViewLogin;
 
 public class VerifyPhoneFragment extends Fragment implements ViewLogin {
-    EditText edtphone1, edtphone2, edtphone3, edtphone4, edtphone5, edtphone6;
-    Button btnvery;
-    TextView txtcheckvery;
-    String phone = "";
-    PresenterLogin presenterLogin;
-
+    private EditText edtphone1, edtphone2, edtphone3, edtphone4, edtphone5, edtphone6;
+    private Button btnvery;
+    private ImageButton imgBtnBackVeri;
+    private TextView txtcheckvery;
+    private String phone = "";
+    private PresenterLogin presenterLogin;
     @Nullable
     @Override
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_verifyphone, container, false);
         initView(view);
+
         btnvery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +46,13 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin {
 
             }
         });
+        imgBtnBackVeri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
         txtcheckvery.setText(getString(R.string.messotp) +" " + phone);
         return view;
     }
@@ -64,6 +73,7 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin {
         edtphone4       = view.findViewById(R.id.edtnumber4);
         btnvery         = view.findViewById(R.id.btnvery);
         txtcheckvery    = view.findViewById(R.id.txtcheckvery);
+        imgBtnBackVeri  = view.findViewById(R.id.imgBackVeri);
         presenterLogin.doSendSMS(phone, getActivity());
     }
 
@@ -77,7 +87,6 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin {
 
         if (code1.length() == 0 || code2.length() == 0 || code3.length() == 0 || code4.length() == 0 || code5.length() == 0 || code6.length() == 0) {
 
-            if (code1.length() == 0 || code2.length() == 0 || code3.length() == 0 || code4.length() == 0) {
                 Toasty.error(getActivity(), getString(R.string.checkedtcodevery), Toasty.LENGTH_SHORT).show();
                 return false;
             } else {
@@ -93,13 +102,14 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 LoginFragment loginFragment = new LoginFragment();
                 fragmentTransaction.replace(R.id.frame_client, loginFragment);
-                getActivity().getSupportFragmentManager().popBackStack();
+
                 fragmentTransaction.commit();
 
             }
-        }
         return true;
     }
+
+
 
         private void checkVerify (String phone, String verify){
             presenterLogin.doLoginPhone(phone, verify, getActivity());
