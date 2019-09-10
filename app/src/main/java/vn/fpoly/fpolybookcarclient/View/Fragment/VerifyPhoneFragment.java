@@ -19,6 +19,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.developer.kalert.KAlertDialog;
+import com.stfalcon.smsverifycatcher.OnSmsCatchListener;
+import com.stfalcon.smsverifycatcher.SmsVerifyCatcher;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import es.dmoral.toasty.Toasty;
 import vn.fpoly.fpolybookcarclient.Library.Dialog;
@@ -28,10 +33,12 @@ import vn.fpoly.fpolybookcarclient.View.Activity.HomeActivity;
 import vn.fpoly.fpolybookcarclient.View.Interface.ViewLogin;
 
 public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnClickListener {
+
     EditText edtphone1,edtphone2,edtphone3,edtphone4,edtphone5,edtphone6;
     Button btnVery;
     TextView txtPhone,txtResend;
     String phone = "";
+    SmsVerifyCatcher smsVerifyCatcher;
     PresenterLogin presenterLogin;
     @Nullable
     @Override
@@ -41,9 +48,12 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
         initView(view);
         btnVery.setOnClickListener(this);
         txtResend.setOnClickListener(this);
+
+        SmsVeri();
+
+
         return view;
     }
-
     private boolean checkvalid(){
         String code1 = edtphone1.getText().toString().trim();
         String code2 = edtphone2.getText().toString().trim();
@@ -57,6 +67,19 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
         }else {
             String sverify = code1+code2+code3+code4+code5+code6;
             checkVerify(phone,sverify);
+
+            KAlertDialog pDialog = new KAlertDialog(getActivity(), KAlertDialog.SUCCESS_TYPE);
+            pDialog .setTitleText(getString(R.string.success));
+            pDialog .setContentText(getString(R.string.activateaccout));
+            pDialog .show();
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            LoginFragment loginFragment = new LoginFragment();
+            fragmentTransaction.replace(R.id.frame_client,loginFragment);
+            getActivity().getSupportFragmentManager().popBackStack();
+            fragmentTransaction.commit();
+
         }
 
         return true;
@@ -113,4 +136,34 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
         presenterLogin.doSendSMS(phone,txtResend,getActivity());
     }
 
+    private void SmsVeri() {
+     smsVerifyCatcher = new SmsVerifyCatcher(getActivity(), new OnSmsCatchListener<String>() {
+            @Override
+            public void onSmsCatch(String message) {
+                String code = parsCode(message);
+                edtphone1.setText(code);
+                edtphone2.setText(code);
+                edtphone3.setText(code);
+                edtphone4.setText(code);
+                edtphone5.setText(code);
+                edtphone6.setText(code);
+            }
+        });
+        smsVerifyCatcher.setPhoneNumberFilter("phone");
+    }
+    private String parsCode(String mess){
+        Pattern pattern = Pattern.compile("\\\\b\\\\d{6}\\\\b");
+        Matcher matcher = pattern.matcher(mess);
+        String code = "";
+        while (matcher.find()){
+            code = matcher.group(0);
+        }
+        return code;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        smsVerifyCatcher.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 }

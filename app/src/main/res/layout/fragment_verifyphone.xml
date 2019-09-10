@@ -6,12 +6,12 @@
     android:orientation="vertical">
 
     <ImageButton
-        android:background="@null"
         android:id="@+id/imgBackVeri"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
+        android:background="@null"
         android:src="@drawable/rsz_1back" />
 
     <TextView
@@ -36,11 +36,11 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       android:layout_margin="20dp">
+        android:layout_margin="20dp">
 
         <EditText
             android:id="@+id/edtnumber1"
-            android:layout_width="45dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:inputType="number"
@@ -50,22 +50,21 @@
 
         <EditText
             android:id="@+id/edtnumber2"
-            android:layout_width="45dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_toRightOf="@id/edtnumber1"
             android:gravity="center"
             android:inputType="number"
+            android:layout_marginLeft="15dp"
             android:maxLength="1"
+            android:layout_toRightOf="@id/edtnumber1"
             android:textColor="#FF8901"
             android:textSize="50dp" />
 
         <EditText
-
             android:id="@+id/edtnumber3"
-            android:layout_width="45dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="15dp"
             android:layout_toRightOf="@id/edtnumber2"
             android:gravity="center"
             android:inputType="number"
@@ -75,9 +74,9 @@
 
         <EditText
             android:id="@+id/edtnumber4"
-            android:layout_width="45dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="15dp"
             android:layout_toRightOf="@id/edtnumber3"
             android:gravity="center"
             android:inputType="number"
@@ -87,9 +86,9 @@
 
         <EditText
             android:id="@+id/edtnumber5"
-            android:layout_width="45dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="15dp"
             android:layout_toRightOf="@id/edtnumber4"
             android:gravity="center"
             android:inputType="number"
@@ -99,15 +98,17 @@
 
         <EditText
             android:id="@+id/edtnumber6"
-            android:layout_width="45dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="15dp"
             android:layout_toRightOf="@id/edtnumber5"
             android:gravity="center"
             android:inputType="number"
             android:maxLength="1"
             android:textColor="#FF8901"
             android:textSize="50dp" />
+
+
 
         <TextView
             android:id="@+id/txtproblem"

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgItemCake"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/rsz_backgroudhome" />
+
+            <TextView
+                android:id="@+id/txttitleCakeItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imgItemCake"
+                android:layout_margin="8dp"
+                android:text="Snowskin mooncake"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/txtDetaiCakeItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txttitleCakeItem"
+                android:layout_margin="8dp">
+
+            </TextView>
+
+            <View
+                android:id="@+id/lineview"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/txtDetaiCakeItem"
+                android:layout_margin="8dp"
+                android:background="@android:color/black" />
+
+            <ToggleButton
+                android:id="@+id/toglelikeCake"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/lineview"
+                android:layout_margin="8dp"
+                android:background="@drawable/custom_checklike"
+                android:textOff=""
+                android:textOn="" />
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+

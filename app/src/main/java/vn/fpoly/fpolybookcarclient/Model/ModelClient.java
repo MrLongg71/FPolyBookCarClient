@@ -7,6 +7,7 @@ import vn.fpoly.fpolybookcarclient.Constans;
 import vn.fpoly.fpolybookcarclient.Model.ObjectClass.Client;
 
 public class ModelClient {
+
     DatabaseReference dataClient;
     public void addClientDatabase(Client client){
         dataClient = FirebaseDatabase.getInstance().getReference().child(Constans.childClient);

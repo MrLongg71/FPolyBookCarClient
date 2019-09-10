@@ -41,4 +41,42 @@
     <string name="button">Submit</string>
     <string name="activateaccout">Your account has successfully created</string>
     <string name="loginsdt">Connect with Phone number </string>
+    <string name="caketitle1">Homemade Cake</string>
+    <string name="cakdetaile1">Homemade moon cakes are sold by the seller,
+        not by worker  available on briquettes. Delicious fresh bread, with soft crust and aromatic fillings. You can buy it because it is very good </string>
+    <string name="caketitle2">Givral Cake</string>
+    <string name="cakedetail2"> Givral Cake is a fresh moon cake, has a shelf life of 20 days, is less sweet, the cake is a combination of T
+        Europe and Asia with natural ingredients, cool bar from Blueberry fruit,
+       </string>
+    <string name="caketitle3">Brodard Cake </string>
+    <string name="cakedetail3">Like Givral moon cake, Brodard also makes high-class moon cake. Brodard moon cake is famous
+        Not only excellent cake quality, but also the market leader in luxurious and classy cake box design.</string>
+    <string name="caketitle4">Lafeve Cake</string>
+    <string name="cakedetail4">A box of cakes has lots of flavors for you to explore. You will love the red apple nest cake, mixed chicken, roasted chicken, red beans, taro, coconut, mix,
+        minh chau, white jade, sa sa, pudding, pudding</string>
+    <string name="caketitle5">Bibica Cake</string>
+    <string name="cakedetail5">BBibica has 2 types of baked goods and cakes, with these products
+        traditional mooncakes like Chinese sausage, roasted chicken, ham, green beans,
+        Green tea lotus seed, coconut milk, taro, mochi</string>
+    <string name="placetitle1">Phố cổ Hà Nội</string>
+    <string name="placedetail1">Phố Cổ có hằng hà sa số những thứ bạn có thể mua về làm quà cho người thân và gia đình:
+        những đồ thủ công, những món quà lưu niệm nhỏ xinh,
+
+</string>
+    <string name="placetitle2">Phố cổ Hội An</string>
+    <string name="placedetail2">Khi du lịch Hội An, du khách nên chọn thời điểm khoảng tháng 2 – tháng 4 hàng năm bởi đó là lúc Hội An
+        chiều lòng khách du lịch nhất
+        </string>
+    <string name="placetitle3">Nhà Thờ Đức Bà</string>
+    <string name="placedetail3">Thành phố Hồ Chí Minh nổi tiếng là một thành phố năng động nhiều màu sắc cùng nhiều điểm vui chơi giải trí. Nếu có cơ hội ghé thăm Sài Gòn bạn sẽ không th
+        ể bỏ qua nhà thờ Đức Bà</string>
+    <string name="placetitle4">Khui vui chơi giải trí</string>
+    <string name="placedetail4">Khu du lịch tọa lạc trên một vùng đất đồi hình chữ S, rộng 200.000m2, chính giữa có dòng suối với nhiều mạch
+       </string>
+    <string name="placetitle5">Phố đi bộ Nguyễn Huệ</string>
+    <string name="placedetail6">Nếu hiểu một cách đơn giản thì nhiều
+        người vẫn cứ tưởng, Nguyễn Huệ chỉ là một con phố đến để tản bộ,
+        dạo mát ngắm cảnh Sài Gòn. </string>
+
+
 </resources>

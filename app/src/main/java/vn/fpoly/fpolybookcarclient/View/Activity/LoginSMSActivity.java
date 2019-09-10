@@ -40,6 +40,7 @@ public class LoginSMSActivity extends AppCompatActivity implements View.OnClickL
         String phone = edtPhoneLogin.getText().toString().trim();
         Bundle bundle = new Bundle();
         bundle.putString("phone", phone);
+
         VerifyPhoneFragment verifyPhoneFragment = new VerifyPhoneFragment();
         verifyPhoneFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().add(R.id.fr_add_verify, verifyPhoneFragment).commit();

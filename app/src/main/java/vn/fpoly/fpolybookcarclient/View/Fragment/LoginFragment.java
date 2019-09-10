@@ -82,20 +82,33 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
         btngoogle = view.findViewById(R.id.btngoogle);
         txtforgot = view.findViewById(R.id.txtforgot);
         imgBtnBackLogIn = view.findViewById(R.id.imgBackLogIn);
+
+        btngoogle   = view.findViewById(R.id.btngoogle);
+
+        txtforgot   = view.findViewById(R.id.txtforgot);
+
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+
             case R.id.btnLoginHome:
                 loginClientWithEmail();
                 startActivity(new Intent(getActivity(), HomeActivity.class));
-                break;
+//            case R.id.btnloginhome:
+//                checkValid();
+//>>>>>>> Stashed changes
+//                startActivity(new Intent(getActivity(), HomeActivity.class));
+//                break;
+
             case R.id.btngoogle:
                 logInWithGoogle();
+                startActivity(new Intent(getActivity(), HomeActivity.class));
                 break;
             case R.id.btnLoginWithPhone:
                 loginClientWithPhone();
+                startActivity(new Intent(getActivity(), HomeActivity.class));
                 break;
             case R.id.imgBackLogIn:
                 getActivity().getSupportFragmentManager().popBackStack();
@@ -137,7 +150,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
             edtuser.setError(getString(R.string.checkvalidemail));
             edtuser.requestFocus();
             return false;
+
         } else {
+
             return true;
         }
     }

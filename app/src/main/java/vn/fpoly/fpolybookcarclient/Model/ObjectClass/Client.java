@@ -1,7 +1,7 @@
 package vn.fpoly.fpolybookcarclient.Model.ObjectClass;
 
 public class Client {
-    String key,email,phone,name;
+    private String key,email,phone,name;
 
     public Client(String key, String email, String phone, String name) {
         this.key = key;

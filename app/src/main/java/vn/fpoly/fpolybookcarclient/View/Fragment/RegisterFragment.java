@@ -106,7 +106,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         }
     }
 
-
     private boolean checkValid() {
         String user = edtName.getText().toString().trim();
         String email = edtEmail.getText().toString().trim();
@@ -147,7 +146,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         } else {
 
             return true;
-
         }
 
     }
@@ -155,10 +153,10 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onSuccess() {
         Dialog.Success(getActivity());
-
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         VerifyPhoneFragment verifyPhoneFragment = new VerifyPhoneFragment();
+
         Bundle bundle = new Bundle();
         bundle.putString("phone" , edtPhone.getText().toString().trim());
         verifyPhoneFragment.setArguments(bundle);
@@ -170,6 +168,5 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onFailed() {
         Dialog.Error(getActivity());
-
     }
 }
