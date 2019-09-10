@@ -5,6 +5,8 @@ import android.widget.TextView;
 
 import vn.fpoly.fpolybookcarclient.Model.ObjectClass.Client;
 
+import vn.fpoly.fpolybookcarclient.Model.ObjectClass.Client;
+
 public interface IPPresenterLogin {
     //    *****Login****//
     void doLoginEmail(String email, String password);
@@ -16,4 +18,5 @@ public interface IPPresenterLogin {
     //    *****Register****//
     void doRegisterEmail(Client client);
 
+    void sentCodeSMS(String phone, TextView txtResend, Activity activity);
 }

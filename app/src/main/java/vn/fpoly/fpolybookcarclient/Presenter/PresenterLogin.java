@@ -22,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 import vn.fpoly.fpolybookcarclient.Model.ModelClient;
 import vn.fpoly.fpolybookcarclient.Model.ObjectClass.Client;
 import vn.fpoly.fpolybookcarclient.R;
+
 import vn.fpoly.fpolybookcarclient.View.Interface.ViewLogin;
 
 public class PresenterLogin implements IPPresenterLogin {
@@ -53,9 +54,11 @@ public class PresenterLogin implements IPPresenterLogin {
     }
 
     @Override
-    public void doSendSMS(String phone,TextView txtResend,Activity activity) {
+    public void doSendSMS(String phone, TextView txtResend, Activity activity) {
         sentCodeSMS(phone,txtResend,activity);
     }
+
+
 
     @Override
     public void doLoginPhone(String phone, String verify, Activity activity) {
@@ -70,8 +73,9 @@ public class PresenterLogin implements IPPresenterLogin {
         ModelClient modelClient = new ModelClient();
         modelClient.addClientDatabase(client);
     }
+    @Override
+    public void sentCodeSMS(String phone, final TextView txtResend, final Activity activity) {
 
-    private void sentCodeSMS(String phone,final TextView txtResend, final Activity activity) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 "+84" + phone,
                 60,

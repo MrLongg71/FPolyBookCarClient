@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +29,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import java.util.concurrent.TimeUnit;
 
 import vn.fpoly.fpolybookcarclient.Library.Dialog;
+
 import vn.fpoly.fpolybookcarclient.Model.ObjectClass.Client;
 import vn.fpoly.fpolybookcarclient.Presenter.PresenterLogin;
 import vn.fpoly.fpolybookcarclient.R;
@@ -55,9 +57,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         initView(view);
         edtcoutry.setFocusable(false);
         mAuth = FirebaseAuth.getInstance();
-
         btnRegister.setOnClickListener(this);
         imgBackBtnRegister.setOnClickListener(this);
+
         return view;
     }
 
@@ -70,6 +72,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         edtEmail            = view.findViewById(R.id.edtEmailRegister);
         btnRegister         = view.findViewById(R.id.btnRegister);
         imgBackBtnRegister  = view.findViewById(R.id.imgBackRegister);
+
     }
 
     @Override
@@ -84,8 +87,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         }
     }
 
-    private void createClientWithEmail() {
-        if (checkValid()) {
+
+    private void createClientWithEmail(){
+        if(checkValid()){
             final String name = edtName.getText().toString().trim();
             final String email = edtEmail.getText().toString().trim();
             String pass = edtPassword.getText().toString().trim();
@@ -146,6 +150,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         } else {
 
             return true;
+
         }
 
     }
@@ -163,10 +168,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         fragmentTransaction.replace(R.id.frame_client, verifyPhoneFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+
     }
 
     @Override
     public void onFailed() {
         Dialog.Error(getActivity());
+
     }
 }

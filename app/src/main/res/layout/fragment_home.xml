@@ -70,7 +70,7 @@
                             android:id="@+id/txttDetailHome"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/txttitleHome"
+                            android:layout_below="@+id/txttitleHome"
                             android:layout_margin="20dp"
                             android:text="Activate"
                             android:textColor="#CB6565"
