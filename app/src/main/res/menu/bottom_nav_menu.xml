@@ -3,28 +3,22 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/icon_laban"
+        android:icon="@drawable/custom_home_check"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_activity"
-        android:icon="@drawable/icon_report"
+        android:icon="@drawable/custom_report_check"
         android:title="@string/activity" />
 
     <item
-        android:enabled="true"
-        android:id="@+id/navigation_pay"
-        android:icon="@drawable/icon_wallet"
-        android:title="@string/pay" />
-
-    <item
         android:id="@+id/navigation_email"
-        android:icon="@drawable/icon_boxmess"
+        android:icon="@drawable/custom_email_check"
         android:title="@string/mailbox" />
 
     <item
         android:id="@+id/navigation_accout"
-        android:icon="@drawable/icon_user"
+        android:icon="@drawable/custom_account_check"
         android:title="@string/account" />
 
 </menu>

@@ -52,28 +52,18 @@
                         android:id="@+id/card1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="80dp"
+                        android:layout_marginTop="120dp"
                         app:cardCornerRadius="20dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-
-                                android:id="@+id/txttitleHome"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="20dp"
-                                android:text="Discovering the Gifts"
-                                android:textColor="#1C1C1C"
-                                android:textSize="15dp" />
+                            android:layout_height="match_parent"
+                            android:paddingBottom="20dp">
 
                             <TextView
                                 android:id="@+id/txttDetailHome"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/txttitleHome"
                                 android:layout_margin="20dp"
                                 android:text="Activate"
                                 android:textColor="#CB6565"
@@ -81,201 +71,183 @@
                                 android:textStyle="bold" />
 
 
-                            <ImageView
-                                android:id="@+id/imgBox"
-                                android:layout_width="150dp"
-                                android:layout_height="100dp"
-                                android:layout_alignParentRight="true"
-                                android:layout_marginTop="20dp"
-                                android:src="@drawable/box1" />
+                            <LinearLayout
+                                android:id="@+id/lineitem"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/txttDetailHome"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/imgIconCarHome"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/iconcar" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:text="Car"
+                                        android:textColor="#000000" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/imgIconMotoBikeHome"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/icon_motorbike" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:text="Motorbike"
+                                        android:textColor="#000000" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/imgIconFoodHome"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/iconfood" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:text="Food"
+                                        android:textColor="#000000" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/imgIconGiftHome"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/gift" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:text="Gift"
+                                        android:textColor="#000000" />
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+
                         </RelativeLayout>
 
                     </androidx.cardview.widget.CardView>
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/card1"
-                        android:layout_marginTop="10dp"
-                        app:cardCornerRadius="20dp">
+                </RelativeLayout>
 
-                        <!--<RelativeLayout-->
-                            <!--android:layout_margin="10dp"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content">-->
-                            <!---->
-                            <!--<ImageView-->
-                                <!---->
-                                <!--android:id="@+id/imgIconCarHome"-->
-                                <!--android:src="@drawable/iconcar"-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content" />-->
-                            <!--<TextView-->
-                                <!--android:layout_marginLeft="10dp"-->
-                                <!--android:layout_below="@+id/imgIconCarHome"-->
-                                <!--android:id="@+id/txtIconCarHome"-->
-                                <!--android:text="Car"-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content" />-->
-                            <!--<ImageView-->
-                                <!--android:id="@+id/imgIconMotorbikeHome"-->
-                                <!--android:layout_marginLeft="50dp"-->
-                                <!--android:layout_toRightOf="@+id/imgIconCarHome"-->
-                                <!--android:src="@drawable/icon_motorbike"-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content" />-->
-                            <!--<TextView-->
-                                <!--android:layout_marginLeft="70dp"-->
-                                <!--android:layout_below="@+id/imgIconMotorbikeHome"-->
-                                <!--android:id="@+id/txtIconMotobikeHome"-->
-                                <!--android:text="Car"-->
-                                <!--android:layout_toRightOf="@id/txtIconCarHome"-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content" />-->
-                            <!---->
-                        <!--</RelativeLayout>-->
-                        <RelativeLayout
-                            android:layout_margin="10dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <LinearLayout
-                                android:id="@+id/lineitem"
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+            </FrameLayout>
 
-                                <ImageView
-                                    android:id="@+id/imgIconCarHome"
-                                    android:layout_weight="1"
-                                    android:src="@drawable/iconcar"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
-                                <ImageView
-                                    android:id="@+id/imgIconMotoBikeHome"
-                                    android:layout_weight="1"
-                                    android:src="@drawable/icon_motorbike"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
-                                <ImageView
-                                    android:id="@+id/imgIconFoodHome"
-                                    android:layout_weight="1"
-                                    android:src="@drawable/iconfood"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
-                                <ImageView
-                                    android:id="@+id/imgIconGiftHome"
-                                    android:layout_weight="1"
-                                    android:src="@drawable/gift"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_marginLeft="30dp"
-                                android:layout_below="@id/lineitem"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Challenge"
+                android:textColor="#000000" />
 
 
-                                <TextView
-                                    android:layout_weight="1"
-                                    android:text="Car"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
-                                <TextView
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_weight="1"
-                                    android:text="Motobike"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reycelviewItem1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:nestedScrollingEnabled="false"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                                <TextView
-                                    android:layout_weight="1"
-                                    android:text="Food"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
-                                <TextView
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_weight="1"
-                                    android:text="Gift"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
+            </androidx.recyclerview.widget.RecyclerView>
 
-                        </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Different Types of Mooncakes"
+                android:textColor="#000000" />
 
-                </androidx.cardview.widget.CardView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reycelviewItem2"
+                android:layout_width="match_parent"
 
-            </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:nestedScrollingEnabled="false"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        </FrameLayout>
+            </androidx.recyclerview.widget.RecyclerView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Challenge"
-            android:textColor="#000000" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Places with Mid-Autum Lanterns"
+                android:textColor="#000000" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reycelviewItem3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:nestedScrollingEnabled="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reycelviewItem1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:nestedScrollingEnabled="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            </androidx.recyclerview.widget.RecyclerView>
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sdadsadsasadsd" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Different Types of Mooncakes"
-            android:textColor="#000000" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reycelviewItem2"
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:nestedScrollingEnabled="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Places with Mid-Autum Lanterns"
-            android:textColor="#000000" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reycelviewItem3"
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:nestedScrollingEnabled="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sdadsadsasadsd" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sdadsadsasadsd" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sdadsadsasadsd" />
 
 
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

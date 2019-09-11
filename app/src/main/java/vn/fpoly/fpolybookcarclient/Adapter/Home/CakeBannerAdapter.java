@@ -1,4 +1,4 @@
-package vn.fpoly.fpolybookcarclient.Adapter;
+package vn.fpoly.fpolybookcarclient.Adapter.Home;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,18 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import vn.fpoly.fpolybookcarclient.Model.ObjectClass.CakesBanner;
-import vn.fpoly.fpolybookcarclient.Model.ObjectClass.PlaceBanner;
 import vn.fpoly.fpolybookcarclient.R;
 
-public class PlaceBannerAdapter extends RecyclerView.Adapter<PlaceBannerAdapter.ViewHolder> {
+public class CakeBannerAdapter extends RecyclerView.Adapter<CakeBannerAdapter.ViewHolder> {
     private Context context;
     private int layout;
-    private List<PlaceBanner> arrPlace;
+    private List<CakesBanner> arrCake;
 
-    public PlaceBannerAdapter(Context context, int layout, List<PlaceBanner> arrPlace) {
+    public CakeBannerAdapter(Context context, int layout, List<CakesBanner> arrCake) {
         this.context = context;
         this.layout = layout;
-        this.arrPlace = arrPlace;
+        this.arrCake = arrCake;
     }
 
     @NonNull
@@ -38,28 +37,27 @@ public class PlaceBannerAdapter extends RecyclerView.Adapter<PlaceBannerAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        PlaceBanner placeBanner = arrPlace.get(position);
-        holder.imgBanner.setImageResource(placeBanner.getImage());
-        holder.txtDetail.setText(placeBanner.getDetail());
-        holder.txtTitle.setText(placeBanner.getTitle());
+        CakesBanner cakesBanner = arrCake.get(position);
+        holder.imgBanner.setImageResource(cakesBanner.getImage());
+        holder.txtTitle.setText(cakesBanner.getTitle());
+        holder.txtDetail.setText(cakesBanner.getDetail());
     }
 
     @Override
     public int getItemCount() {
-        return arrPlace.size();
+        return arrCake.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgBanner;
-        ToggleButton toggleButtonLike;
-        TextView txtTitle,txtDetail,txtbookride;
+        ToggleButton toggleLike;
+        TextView txtTitle,txtDetail;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgBanner            = itemView.findViewById(R.id.imgItemPlace);
-            toggleButtonLike     = itemView.findViewById(R.id.toglelikePlace);
-            txtTitle             = itemView.findViewById(R.id.txttitlePlaceItem);
-            txtDetail            = itemView.findViewById(R.id.txtDetaiPlaceItem);
-            txtbookride          = itemView.findViewById(R.id.txtBookNow);
+            imgBanner   = itemView.findViewById(R.id.imgItemCake);
+            txtDetail   = itemView.findViewById(R.id.txtDetaiCakeItem);
+            txtTitle    = itemView.findViewById(R.id.txttitleCakeItem);
+            toggleLike  = itemView.findViewById(R.id.toglelikeCake);
         }
     }
 }

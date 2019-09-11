@@ -1,22 +1,24 @@
 package vn.fpoly.fpolybookcarclient.View.Fragment;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import vn.fpoly.fpolybookcarclient.Adapter.CakeBannerAdapter;
-import vn.fpoly.fpolybookcarclient.Adapter.ChallengeBannerAdapter;
-import vn.fpoly.fpolybookcarclient.Adapter.PlaceBannerAdapter;
+import vn.fpoly.fpolybookcarclient.Adapter.Home.CakeBannerAdapter;
+import vn.fpoly.fpolybookcarclient.Adapter.Home.ChallengeBannerAdapter;
+import vn.fpoly.fpolybookcarclient.Adapter.Home.PlaceBannerAdapter;
 import vn.fpoly.fpolybookcarclient.Model.ObjectClass.CakesBanner;
 import vn.fpoly.fpolybookcarclient.Model.ObjectClass.ChallengeBanner;
 import vn.fpoly.fpolybookcarclient.Model.ObjectClass.PlaceBanner;
@@ -30,11 +32,14 @@ public class HomeFragment extends Fragment {
     private CakeBannerAdapter cakeBannerAdapter;
     private ChallengeBannerAdapter bannerAdapter;
     private PlaceBannerAdapter placeBannerAdapter;
+    private ImageView imgIconCar;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        initEvent(view);
+        initView(view);
+
 
         recyclerView1.setHasFixedSize(true);
         recyclerView2.setHasFixedSize(true);
@@ -43,6 +48,12 @@ public class HomeFragment extends Fragment {
         itemChallengeBanner();
         itemCakeBanner();
         itemPlacebanner();
+        imgIconCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "CAR ", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }
@@ -74,10 +85,11 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void initEvent(View view) {
+    private void initView(View view) {
         recyclerView1 = view.findViewById(R.id.reycelviewItem1);
         recyclerView2 = view.findViewById(R.id.reycelviewItem2);
         recyclerView3 = view.findViewById(R.id.reycelviewItem3);
+        imgIconCar    = view.findViewById(R.id.imgIconCarHome);
     }
 
     private void itemChallengeBanner() {

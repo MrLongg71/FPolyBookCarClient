@@ -19,7 +19,8 @@
         android:id="@+id/nav_view"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
+        app:itemTextAppearanceActive="@style/BottomNavigation.ActiveItemTextAppearance"
         android:background="?android:attr/windowBackground"
         app:menu="@menu/bottom_nav_menu" />
 

@@ -10,14 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.View.Fragment.AccountFragment;
 import vn.fpoly.fpolybookcarclient.View.Fragment.ActivityFragment;
 import vn.fpoly.fpolybookcarclient.View.Fragment.HomeFragment;
 import vn.fpoly.fpolybookcarclient.View.Fragment.MailFragment;
-import vn.fpoly.fpolybookcarclient.View.Fragment.PayFragment;
 
 public class HomeActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -32,9 +30,6 @@ public class HomeActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_activity:
                     loadFragment(new ActivityFragment());
-                    return true;
-                case R.id.navigation_pay:
-                    loadFragment(new PayFragment());
                     return true;
                 case R.id.navigation_email:
                     loadFragment(new MailFragment());
@@ -56,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
 
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navView.setItemIconTintList(null);
+        navView.setItemTextColor(getResources().getColorStateList(R.color.colorPrimary));
         loadFragment(new HomeFragment());
 
     }

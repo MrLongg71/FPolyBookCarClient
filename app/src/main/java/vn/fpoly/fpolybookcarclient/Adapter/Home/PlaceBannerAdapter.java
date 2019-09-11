@@ -1,4 +1,4 @@
-package vn.fpoly.fpolybookcarclient.Adapter;
+package vn.fpoly.fpolybookcarclient.Adapter.Home;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,24 +9,22 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import vn.fpoly.fpolybookcarclient.Model.ObjectClass.CakesBanner;
+import vn.fpoly.fpolybookcarclient.Model.ObjectClass.PlaceBanner;
 import vn.fpoly.fpolybookcarclient.R;
 
-public class CakeBannerAdapter extends RecyclerView.Adapter<CakeBannerAdapter.ViewHolder> {
+public class PlaceBannerAdapter extends RecyclerView.Adapter<PlaceBannerAdapter.ViewHolder> {
     private Context context;
     private int layout;
-    private List<CakesBanner> arrCake;
+    private List<PlaceBanner> arrPlace;
 
-    public CakeBannerAdapter(Context context, int layout, List<CakesBanner> arrCake) {
+    public PlaceBannerAdapter(Context context, int layout, List<PlaceBanner> arrPlace) {
         this.context = context;
         this.layout = layout;
-        this.arrCake = arrCake;
+        this.arrPlace = arrPlace;
     }
 
     @NonNull
@@ -39,27 +37,28 @@ public class CakeBannerAdapter extends RecyclerView.Adapter<CakeBannerAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CakesBanner cakesBanner = arrCake.get(position);
-        holder.imgBanner.setImageResource(cakesBanner.getImage());
-        holder.txtTitle.setText(cakesBanner.getTitle());
-        holder.txtDetail.setText(cakesBanner.getDetail());
+        PlaceBanner placeBanner = arrPlace.get(position);
+        holder.imgBanner.setImageResource(placeBanner.getImage());
+        holder.txtDetail.setText(placeBanner.getDetail());
+        holder.txtTitle.setText(placeBanner.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return arrCake.size();
+        return arrPlace.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgBanner;
-        ToggleButton toggleLike;
-        TextView txtTitle,txtDetail;
+        ToggleButton toggleButtonLike;
+        TextView txtTitle,txtDetail,txtbookride;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgBanner   = itemView.findViewById(R.id.imgItemCake);
-            txtDetail   = itemView.findViewById(R.id.txtDetaiCakeItem);
-            txtTitle    = itemView.findViewById(R.id.txttitleCakeItem);
-            toggleLike  = itemView.findViewById(R.id.toglelikeCake);
+            imgBanner            = itemView.findViewById(R.id.imgItemPlace);
+            toggleButtonLike     = itemView.findViewById(R.id.toglelikePlace);
+            txtTitle             = itemView.findViewById(R.id.txttitlePlaceItem);
+            txtDetail            = itemView.findViewById(R.id.txtDetaiPlaceItem);
+            txtbookride          = itemView.findViewById(R.id.txtBookNow);
         }
     }
 }
