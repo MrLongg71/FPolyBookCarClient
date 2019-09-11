@@ -1,158 +1,281 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:isScrollContainer="true"
-    android:measureAllChildren="true"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:isScrollContainer="true"
+        android:measureAllChildren="true">
 
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:id="@+id/f1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-
-            <ImageView
+            <FrameLayout
+                android:id="@+id/f1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/rsz_backgroudhome" />
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:textStyle="bold"
-                android:textColor="#ffff"
-                android:textSize="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="30dp"
-                android:text="Chào Bạn!" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/rsz_backgroudhome" />
 
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
-                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:gravity="center"
+                    android:text="Hi !"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="370dp"
-                    android:layout_height="150dp"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
-                    app:cardCornerRadius="20dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="80dp"
+                        app:cardCornerRadius="20dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+
+                                android:id="@+id/txttitleHome"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="20dp"
+                                android:text="Discovering the Gifts"
+                                android:textColor="#1C1C1C"
+                                android:textSize="15dp" />
+
+                            <TextView
+                                android:id="@+id/txttDetailHome"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/txttitleHome"
+                                android:layout_margin="20dp"
+                                android:text="Activate"
+                                android:textColor="#CB6565"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
 
 
-                    <RelativeLayout
+                            <ImageView
+                                android:id="@+id/imgBox"
+                                android:layout_width="150dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="20dp"
+                                android:src="@drawable/box1" />
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#FFFFFF">
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/card1"
+                        android:layout_marginTop="10dp"
+                        app:cardCornerRadius="20dp">
 
-                        <TextView
+                        <!--<RelativeLayout-->
+                            <!--android:layout_margin="10dp"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content">-->
+                            <!---->
+                            <!--<ImageView-->
+                                <!---->
+                                <!--android:id="@+id/imgIconCarHome"-->
+                                <!--android:src="@drawable/iconcar"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content" />-->
+                            <!--<TextView-->
+                                <!--android:layout_marginLeft="10dp"-->
+                                <!--android:layout_below="@+id/imgIconCarHome"-->
+                                <!--android:id="@+id/txtIconCarHome"-->
+                                <!--android:text="Car"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content" />-->
+                            <!--<ImageView-->
+                                <!--android:id="@+id/imgIconMotorbikeHome"-->
+                                <!--android:layout_marginLeft="50dp"-->
+                                <!--android:layout_toRightOf="@+id/imgIconCarHome"-->
+                                <!--android:src="@drawable/icon_motorbike"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content" />-->
+                            <!--<TextView-->
+                                <!--android:layout_marginLeft="70dp"-->
+                                <!--android:layout_below="@+id/imgIconMotorbikeHome"-->
+                                <!--android:id="@+id/txtIconMotobikeHome"-->
+                                <!--android:text="Car"-->
+                                <!--android:layout_toRightOf="@id/txtIconCarHome"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content" />-->
+                            <!---->
+                        <!--</RelativeLayout>-->
+                        <RelativeLayout
+                            android:layout_margin="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:id="@+id/lineitem"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
-                            android:id="@+id/txttitleHome"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="20dp"
-                            android:text="Discovering the Gifts"
-                            android:textColor="#1C1C1C"
-                            android:textSize="15dp" />
+                                <ImageView
+                                    android:id="@+id/imgIconCarHome"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/iconcar"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <ImageView
+                                    android:id="@+id/imgIconMotoBikeHome"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/icon_motorbike"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <ImageView
+                                    android:id="@+id/imgIconFoodHome"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/iconfood"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <ImageView
+                                    android:id="@+id/imgIconGiftHome"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/gift"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
 
-                        <TextView
-                            android:id="@+id/txttDetailHome"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/txttitleHome"
-                            android:layout_margin="20dp"
-                            android:text="Activate"
-                            android:textColor="#CB6565"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginLeft="30dp"
+                                android:layout_below="@id/lineitem"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
 
-                        <ImageView
-                            android:id="@+id/imgBox"
-                            android:layout_width="150dp"
-                            android:layout_height="100dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginTop="20dp"
-                            android:src="@drawable/box1" />
-                    </RelativeLayout>
+                                <TextView
+                                    android:layout_weight="1"
+                                    android:text="Car"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <TextView
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_weight="1"
+                                    android:text="Motobike"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+
+                                <TextView
+                                    android:layout_weight="1"
+                                    android:text="Food"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                                <TextView
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_weight="1"
+                                    android:text="Gift"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                        </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
 
             </RelativeLayout>
+
         </FrameLayout>
+
         <TextView
-            android:textColor="#000000"
-            android:layout_margin="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:text="Challenge"
-            />
+            android:textColor="#000000" />
+
+
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
             android:id="@+id/reycelviewItem1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:nestedScrollingEnabled="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_height="wrap_content">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         </androidx.recyclerview.widget.RecyclerView>
 
         <TextView
-            android:textColor="#000000"
-            android:layout_margin="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:text="Different Types of Mooncakes"
-            />
+            android:textColor="#000000" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
             android:id="@+id/reycelviewItem2"
+            android:layout_width="match_parent"
 
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:nestedScrollingEnabled="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_height="wrap_content">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         </androidx.recyclerview.widget.RecyclerView>
+
         <TextView
-            android:textColor="#000000"
-            android:layout_margin="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:text="Places with Mid-Autum Lanterns"
-            />
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:id="@+id/reycelviewItem3"
+            android:textColor="#000000" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reycelviewItem3"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:nestedScrollingEnabled="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_height="wrap_content">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         </androidx.recyclerview.widget.RecyclerView>
 
         <TextView
-            android:text="sdadsadsasadsd"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="sdadsadsasadsd" />
+
         <TextView
-            android:text="sdadsadsasadsd"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="sdadsadsasadsd" />
 
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

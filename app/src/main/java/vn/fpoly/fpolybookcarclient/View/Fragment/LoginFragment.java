@@ -96,11 +96,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
             case R.id.btnLoginHome:
                 loginClientWithEmail();
                 startActivity(new Intent(getActivity(), HomeActivity.class));
-//            case R.id.btnloginhome:
-//                checkValid();
-//>>>>>>> Stashed changes
-//                startActivity(new Intent(getActivity(), HomeActivity.class));
-//                break;
+
+                break;
 
             case R.id.btngoogle:
                 logInWithGoogle();
