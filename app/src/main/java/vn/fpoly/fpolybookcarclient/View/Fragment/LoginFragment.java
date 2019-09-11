@@ -101,11 +101,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
 
             case R.id.btngoogle:
                 logInWithGoogle();
-                startActivity(new Intent(getActivity(), HomeActivity.class));
                 break;
             case R.id.btnLoginWithPhone:
                 loginClientWithPhone();
-                startActivity(new Intent(getActivity(), HomeActivity.class));
                 break;
             case R.id.imgBackLogIn:
                 getActivity().getSupportFragmentManager().popBackStack();
@@ -166,6 +164,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (!task.isSuccessful()) {
                         Toasty.error(getActivity(), getString(R.string.loginfail), Toasty.LENGTH_SHORT, true).show();
+                    }else {
+                        onSuccess();
                     }
                 }
             });

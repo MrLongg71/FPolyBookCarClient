@@ -103,6 +103,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                         Client client = new Client(key, email, phone, name);
                         presenterLogin.doRegisterEmail(client);
                         onSuccess();
+                    }else {
+                        onFailed();
                     }
                 }
             });

@@ -12,6 +12,7 @@ public class Dialog{
         pDialog .setTitleText(activity.getString(R.string.success));
         pDialog .setContentText(activity.getString(R.string.activateaccout));
         pDialog .show();
+        pDialog.dismissWithAnimation();
     }
     public static void Error(Activity activity){
         KAlertDialog pDialog = new KAlertDialog(activity, KAlertDialog.ERROR_TYPE);

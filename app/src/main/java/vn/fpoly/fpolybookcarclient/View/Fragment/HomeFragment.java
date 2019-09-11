@@ -1,12 +1,15 @@
 package vn.fpoly.fpolybookcarclient.View.Fragment;
 
 import android.media.Image;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,8 +26,9 @@ import vn.fpoly.fpolybookcarclient.Model.ObjectClass.CakesBanner;
 import vn.fpoly.fpolybookcarclient.Model.ObjectClass.ChallengeBanner;
 import vn.fpoly.fpolybookcarclient.Model.ObjectClass.PlaceBanner;
 import vn.fpoly.fpolybookcarclient.R;
+import vn.fpoly.fpolybookcarclient.View.Activity.GoogleMapActivity;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView1, recyclerView2,recyclerView3;
     private  ArrayList<ChallengeBanner> arrayChanllenge = new ArrayList<>();
     private  ArrayList<CakesBanner> arrCake = new ArrayList<>();
@@ -34,6 +38,7 @@ public class HomeFragment extends Fragment {
     private PlaceBannerAdapter placeBannerAdapter;
     private ImageView imgIconCar;
 
+    private LinearLayout layoutChooseCarHome,layoutChooseBikeHome,layoutChooseFoodHome,layoutChooseGiftHome;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,12 +53,8 @@ public class HomeFragment extends Fragment {
         itemChallengeBanner();
         itemCakeBanner();
         itemPlacebanner();
-        imgIconCar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "CAR ", Toast.LENGTH_SHORT).show();
-            }
-        });
+
+        layoutChooseCarHome.setOnClickListener(this);
 
         return view;
     }
@@ -77,7 +78,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void dataPlaceBanner(){
-        arrPlace.add(new PlaceBanner(getString(R.string.placetitle1),getString(R.string.placedetail1),R.drawable.place1));
+        arrPlace.add(new PlaceBanner(getString(R.string.placetitle1),getString(R.string.placedetail2),R.drawable.place1));
         arrPlace.add(new PlaceBanner(getString(R.string.placetitle2),getString(R.string.placedetail2),R.drawable.place3));
         arrPlace.add(new PlaceBanner(getString(R.string.placetitle3),getString(R.string.placedetail3),R.drawable.place5));
         arrPlace.add(new PlaceBanner(getString(R.string.placetitle4),getString(R.string.placedetail4),R.drawable.place2));
@@ -89,7 +90,12 @@ public class HomeFragment extends Fragment {
         recyclerView1 = view.findViewById(R.id.reycelviewItem1);
         recyclerView2 = view.findViewById(R.id.reycelviewItem2);
         recyclerView3 = view.findViewById(R.id.reycelviewItem3);
-        imgIconCar    = view.findViewById(R.id.imgIconCarHome);
+
+        layoutChooseCarHome = view.findViewById(R.id.layoutChooseCarHome);
+        layoutChooseBikeHome = view.findViewById(R.id.layoutChooseBikeHome);
+        layoutChooseFoodHome = view.findViewById(R.id.layoutChooseFoodHome);
+        layoutChooseGiftHome = view.findViewById(R.id.layoutChooseGiftHome);
+
     }
 
     private void itemChallengeBanner() {
@@ -116,4 +122,22 @@ public class HomeFragment extends Fragment {
         recyclerView3.setAdapter(placeBannerAdapter);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.layoutChooseCarHome:
+                startActivity(new Intent(getActivity(), GoogleMapActivity.class));
+                break;
+            case R.id.layoutChooseBikeHome:
+
+                break;
+            case R.id.layoutChooseFoodHome:
+
+                break;
+            case R.id.layoutChooseGiftHome:
+
+                break;
+
+        }
+    }
 }

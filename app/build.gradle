@@ -34,6 +34,8 @@ dependencies {
     implementation 'com.android.support:cardview-v7:28.0.0'
 
     // library firebase
+
+    //** FireBase**//
     implementation 'com.google.firebase:firebase-analytics:17.0.1'
     implementation 'com.google.firebase:firebase-database:19.0.0'
     implementation 'com.google.firebase:firebase-auth:19.0.0'
@@ -45,6 +47,16 @@ dependencies {
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     implementation 'com.github.TutorialsAndroid:KAlertDialog:v5.0.19'
     implementation 'com.github.GrenderG:Toasty:1.4.2'
+
+
+    //***Google Map API**//
+    implementation 'com.google.maps.android:android-maps-utils:0.5+'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.gms:play-services-places:16.0.0'
+    implementation 'com.google.android.libraries.places:places:1.1.0'
+    implementation 'com.github.tintinscorpion:Dual-color-Polyline-Animation:1.0'
+
 
 
 }

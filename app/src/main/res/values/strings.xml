@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">bookcarFPoly</string>
 
+    <!--Google Map API-->
+
+    <string name="google_map_api1">AIzaSyAiuTJQXphAGVYtw3zHY_ANAiMEASvEPZY</string>
+    <string name="google_map_api2">AIzaSyBEEZyII00wNkF7Fcm6FXmomWt5A6RaDEo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="btn_signup">Register</string>
