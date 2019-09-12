@@ -71,21 +71,21 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
     }
 
     private void initView(View view) {
-        btnLoginPhone = view.findViewById(R.id.btnLoginWithPhone);
-        btnloginHome = view.findViewById(R.id.btnLoginHome);
-        btngoogle = view.findViewById(R.id.btngoogle);
-        edtuser = view.findViewById(R.id.edtEmailLogin);
-        edtpass = view.findViewById(R.id.edtPassLogin);
-        txtforgot = view.findViewById(R.id.txtforgot);
-        btngoogle = view.findViewById(R.id.btngoogle);
-        txtforgot = view.findViewById(R.id.txtforgot);
-        btngoogle = view.findViewById(R.id.btngoogle);
-        txtforgot = view.findViewById(R.id.txtforgot);
+        btnLoginPhone   = view.findViewById(R.id.btnLoginWithPhone);
+        btnloginHome    = view.findViewById(R.id.btnLoginHome);
+        btngoogle       = view.findViewById(R.id.btngoogle);
+        edtuser         = view.findViewById(R.id.edtEmailLogin);
+        edtpass         = view.findViewById(R.id.edtPassLogin);
+        txtforgot       = view.findViewById(R.id.txtforgot);
+        btngoogle       = view.findViewById(R.id.btngoogle);
+        txtforgot       = view.findViewById(R.id.txtforgot);
+        btngoogle       = view.findViewById(R.id.btngoogle);
+        txtforgot       = view.findViewById(R.id.txtforgot);
         imgBtnBackLogIn = view.findViewById(R.id.imgBackLogIn);
 
-        btngoogle   = view.findViewById(R.id.btngoogle);
+        btngoogle       = view.findViewById(R.id.btngoogle);
 
-        txtforgot   = view.findViewById(R.id.txtforgot);
+        txtforgot       = view.findViewById(R.id.txtforgot);
 
     }
 

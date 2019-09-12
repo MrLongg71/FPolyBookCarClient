@@ -32,6 +32,7 @@ public class ActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_activity, container, false);
         recyclerView = view.findViewById(R.id.reycelviewItemHistory);
 
+        recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
         dataItem();

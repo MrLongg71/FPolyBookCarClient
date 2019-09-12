@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menushare"
+        app:showAsAction="ifRoom|withText"
+        android:iconTint="@color/colorAccent"
+        android:icon="@drawable/iconshare"
+        android:title="Chia sẻ"></item>
+    <item
+        android:id="@+id/menulike"
+        app:showAsAction="ifRoom|withText"
+        android:iconTint="@color/colorAccent"
+        android:icon="@drawable/iconsmile"
+        android:title="Thích tính năng này!">
+
+    </item>
+    <item
+        android:id="@+id/menusad"
+        app:showAsAction="ifRoom|withText"
+        android:icon="@drawable/iconsad"
+        android:title="Cần cải tiến"></item>
+</menu>

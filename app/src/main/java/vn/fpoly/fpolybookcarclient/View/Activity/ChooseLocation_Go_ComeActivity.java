@@ -67,12 +67,12 @@ public class ChooseLocation_Go_ComeActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        chooseLocationGo = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.chooseLocationGo);
-        chooseLocationCome = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.chooseLocationCome);
+        chooseLocationGo    = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.chooseLocationGo);
+        chooseLocationCome  = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.chooseLocationCome);
 
-        arrBook = new ArrayList<>();
-        intent = new Intent();
-        bundle = new Bundle();
+        arrBook             = new ArrayList<>();
+        intent              = new Intent();
+        bundle              = new Bundle();
 
     }
     private void eventChooseGo(){

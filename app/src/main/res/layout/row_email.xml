@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="match_parent"
+    >
+
+    <ImageView
+        android:id="@+id/imgrowItemEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/custom_emainoti_check" />
+
+    <TextView
+        android:id="@+id/txtTitleEmailItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/imgrowItemEmail"
+        android:text=""
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/txtDetailEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtTitleEmailItem"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/imgrowItemEmail"
+        android:textColor="#39393939" />
+
+    <View
+        android:id="@+id/lineview"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/txtDetailEmail"
+        android:layout_margin="8dp"
+        android:background="#ececec" />
+</RelativeLayout>

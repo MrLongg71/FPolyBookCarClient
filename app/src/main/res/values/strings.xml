@@ -83,6 +83,21 @@
     <string name="placedetail6">Nếu hiểu một cách đơn giản thì nhiều
         người vẫn cứ tưởng, Nguyễn Huệ chỉ là một con phố đến để tản bộ,
         dạo mát ngắm cảnh Sài Gòn. </string>
+    <string name="titlehintfood1">Quán Chay Quan Âm</string>
+    <string name="detailhintfood1"> 137/7 Bình Tiên, quận 6</string>
+    <string name="minutehintfood1">30 minute</string>
+    <string name="titlehintfood2">Sushi Moon</string>
+    <string name="detailhintfood2">60, đường 15 Cư Xá Rada, quận 2</string>
+    <string name="minutehintfood2">22 minute</string>
+    <string name="titlehintfood3">Sườn Cây Nướng  Beer</string>
+    <string name="detailhintfood3">   99 Kinh Dương Vương, quận 5</string>
+    <string name="minutehintfood3">10 minute</string>
+    <string name="titlehintfood4">Gà Nướng Ò Ó O</string>
+    <string name="detailhintfood4">  103 Hậu Giang, quận 10</string>
+    <string name="minutehintfood4">10 minute</string>
+    <string name="titlehintfood5">Ốc 235A</string>
+    <string name="detailhintfood5">235 A Mai Xuân Thưởng, quận 11</string>
+    <string name="minutehintfood5">50 minute</string>
 
 
 </resources>

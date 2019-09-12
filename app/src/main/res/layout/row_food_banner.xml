@@ -16,7 +16,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/imgItemPlace"
+                android:id="@+id/imgItemFood"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -24,20 +24,19 @@
                 android:src="@drawable/rsz_backgroudhome" />
 
             <TextView
-                android:id="@+id/txttitlePlaceItem"
+                android:id="@+id/txttitleFoodItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/imgItemPlace"
+                android:layout_below="@id/imgItemFood"
                 android:layout_margin="8dp"
                 android:text="Snowskin mooncake"
                 android:textColor="#000000" />
 
             <TextView
-                android:id="@+id/txtDetaiPlaceItem"
+                android:id="@+id/txtDetaiFoodItem"
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txttitlePlaceItem"
+                android:layout_below="@id/txttitleFoodItem"
                 android:layout_margin="8dp">
 
             </TextView>
@@ -46,9 +45,9 @@
                 android:textColor="#219BCC"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
-                android:layout_below="@id/txtDetaiPlaceItem"
-                android:text="Book A Ride"
-                android:id="@+id/txtBookNowFood"
+                android:layout_below="@id/txtDetaiFoodItem"
+                android:text="Book now"
+                android:id="@+id/txtBookNow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -56,12 +55,12 @@
                 android:id="@+id/lineview"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@id/txtBookNowFood"
+                android:layout_below="@id/txtBookNow"
                 android:layout_margin="8dp"
                 android:background="@android:color/black" />
 
             <ToggleButton
-                android:id="@+id/toglelikePlace"
+                android:id="@+id/toglelikeFood"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_below="@+id/lineview"
@@ -71,8 +70,6 @@
                 android:textOn="" />
 
         </RelativeLayout>
-
-
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

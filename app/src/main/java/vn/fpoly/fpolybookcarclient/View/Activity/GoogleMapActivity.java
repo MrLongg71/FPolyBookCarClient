@@ -59,6 +59,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     private DownloadPolyLine downloadPolyLine;
     private LocationManager locationManager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -243,6 +244,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
                 startActivityForResult(new Intent(GoogleMapActivity.this, ChooseLocation_Go_ComeActivity.class), REQUESCODE);
                 findViewById(R.id.edt).setVisibility(View.GONE);
                 findViewById(R.id.edt1).setVisibility(View.GONE);
+                findViewById(R.id.chooseservice).setVisibility(View.VISIBLE);
                 break;
         }
     }
