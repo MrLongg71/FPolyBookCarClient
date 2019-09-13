@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -58,6 +59,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     public ParserPolyline parserPolyline;
     private DownloadPolyLine downloadPolyLine;
     private LocationManager locationManager;
+    private RadioButton radioButton1,radioButton2;
 
 
     @Override
@@ -73,7 +75,10 @@ public class GoogleMapActivity extends AppCompatActivity implements
         } else {
             getLocationClient();
         }
+
         findViewById(R.id.edt).setOnClickListener(this);
+        
+        checkedRadioButton();
 
 
     }
@@ -84,6 +89,8 @@ public class GoogleMapActivity extends AppCompatActivity implements
                 .findFragmentById(R.id.map);
 
         locationManager = this.getSystemService(LocationManager.class);
+        radioButton1    = findViewById(R.id.radio1);
+        radioButton2    = findViewById(R.id.radio2);
 
     }
 
@@ -246,6 +253,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
                 findViewById(R.id.edt1).setVisibility(View.GONE);
                 findViewById(R.id.chooseservice).setVisibility(View.VISIBLE);
                 break;
+
         }
     }
 
@@ -256,4 +264,21 @@ public class GoogleMapActivity extends AppCompatActivity implements
                 .icon(BitmapDescriptorFactory.fromResource(icon)));
 
     }
+    private void checkedRadioButton(){
+        radioButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                radioButton1.setChecked(true);
+                radioButton2.setChecked(false);
+            }
+        });
+        radioButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                radioButton1.setChecked(false);
+                radioButton2.setChecked(true);
+            }
+        });
+    }
+
 }
