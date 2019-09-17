@@ -19,7 +19,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/layout1"
+            android:id="@+id/layoutChooseLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -48,7 +48,7 @@
                             android:src="@drawable/iconlocationblue" />
 
                         <EditText
-                            android:id="@+id/edt"
+                            android:enabled="false"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -74,7 +74,7 @@
                             android:src="@drawable/iconlocationred" />
 
                         <EditText
-                            android:id="@+id/edt1"
+                            android:enabled="false"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -93,13 +93,29 @@
     </FrameLayout>
 
     <include
+        android:visibility="gone"
         android:layout_margin="2dp"
         android:layout_gravity="bottom"
         android:id="@+id/chooseservice"
         layout="@layout/add_layout_map"
-        android:visibility="visible"
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
 
     </include>
+    <include
+        android:id="@+id/layoutInfoDriver"
+        android:visibility="gone"
+        android:layout_gravity="bottom"
+        layout="@layout/layout_info_driver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></include>
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/progressbarLoadDriver"
+        style="@style/SpinKitView.Circle"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:SpinKit_Color="@color/color" />
 </FrameLayout>

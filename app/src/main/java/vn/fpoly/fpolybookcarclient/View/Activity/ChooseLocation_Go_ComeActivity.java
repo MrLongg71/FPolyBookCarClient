@@ -89,7 +89,7 @@ public class ChooseLocation_Go_ComeActivity extends AppCompatActivity {
 
             @Override
             public void onError(@NonNull Status status) {
-
+                finish();
             }
         });
     }
@@ -109,7 +109,7 @@ public class ChooseLocation_Go_ComeActivity extends AppCompatActivity {
 
             @Override
             public void onError(@NonNull Status status) {
-
+                finish();
             }
         });
     }
@@ -123,4 +123,10 @@ public class ChooseLocation_Go_ComeActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+       finish();
+
+    }
 }

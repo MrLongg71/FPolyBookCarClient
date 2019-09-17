@@ -98,6 +98,7 @@
     <string name="titlehintfood5">Ốc 235A</string>
     <string name="detailhintfood5">235 A Mai Xuân Thưởng, quận 11</string>
     <string name="minutehintfood5">50 minute</string>
+    <string name="getDriverNearFailed">Hiện tại Tài xế chúng tôi đều đang bận.Vui lòng đặt lại sau.</string>
 
 
 </resources>

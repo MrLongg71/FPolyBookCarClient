@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -115,7 +114,6 @@
 
                                 <TextView
                                     android:layout_width="match_parent"
-<<<<<<< Updated upstream
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center"
@@ -161,36 +159,12 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:src="@drawable/gift" />
-=======
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:text="Motorbike"
-                                    android:textColor="#000000" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/layoutChooseFoodHome"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/imgIconFoodHome"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:src="@drawable/iconfood" />
->>>>>>> Stashed changes
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center"
-<<<<<<< Updated upstream
                                     android:text="Gift"
                                     android:textColor="#000000" />
                             </LinearLayout>
@@ -225,7 +199,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-<<<<<<< Updated upstream
                 android:layout_marginRight="20dp"
                 android:padding="10dp"
                 android:text="&#8942;"
@@ -245,202 +218,65 @@
 
         <RelativeLayout
 
-=======
-                android:layout_margin="20dp"
-                android:text="&#8942;"
-                android:textColor="#000000" />
-        </RelativeLayout>
-=======
-                                    android:text="Food"
-                                    android:textColor="#000000" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/layoutChooseGiftHome"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/imgIconGiftHome"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:src="@drawable/gift" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:text="Gift"
-                                    android:textColor="#000000" />
-                            </LinearLayout>
->>>>>>> Stashed changes
-
-
-                        </LinearLayout>
-
-
-<<<<<<< Updated upstream
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reycelviewItem1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:nestedScrollingEnabled="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <RelativeLayout
-
->>>>>>> Stashed changes
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-=======
-                    </RelativeLayout>
 
-                </androidx.cardview.widget.CardView>
-
-            </RelativeLayout>
-
-        </FrameLayout>
->>>>>>> Stashed changes
-
-        <RelativeLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_margin="10dp"
                 android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-<<<<<<< Updated upstream
-=======
-                android:layout_margin="20dp"
->>>>>>> Stashed changes
                 android:text="Different Types of Mooncakes"
                 android:textColor="#000000" />
 
             <TextView
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
                 android:layout_marginRight="20dp"
                 android:textSize="25dp"
                 android:id="@+id/menuOverflow2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_alignParentRight="true"
-               android:layout_marginLeft="20dp"
-=======
-                android:id="@+id/menuOverflow2"
-=======
-                android:id="@+id/menuOverflow1"
->>>>>>> Stashed changes
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_margin="20dp"
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-                android:text="&#8942;"
-                android:textColor="#000000" />
-        </RelativeLayout>
-
-
-<<<<<<< Updated upstream
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reycelviewItem2"
-            android:layout_width="match_parent"
-<<<<<<< Updated upstream
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:nestedScrollingEnabled="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-=======
-
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:nestedScrollingEnabled="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
->>>>>>> Stashed changes
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <RelativeLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-<<<<<<< Updated upstream
-                android:layout_margin="10dp"
-                android:padding="10dp"
-                android:text="Places with Mid-Autum Lanterns"
-                android:textColor="#000000" />
-
-=======
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reycelviewItem1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:nestedScrollingEnabled="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <RelativeLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
->>>>>>> Stashed changes
-
-            <TextView
-                android:layout_marginRight="20dp"
-                android:textSize="25dp"
-                android:id="@+id/menuOverflow3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-<<<<<<< Updated upstream
                 android:padding="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="20dp"
-=======
-                android:layout_margin="20dp"
+                android:text="&#8942;"
+                android:textColor="#000000" />
+        </RelativeLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reycelviewItem2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:nestedScrollingEnabled="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
                 android:text="Places with Mid-Autum Lanterns"
                 android:textColor="#000000" />
 
-            <TextView
-                android:id="@+id/menuOverflow3"
-=======
-                android:layout_margin="20dp"
-                android:text="Different Types of Mooncakes"
-                android:textColor="#000000" />
 
             <TextView
-                android:id="@+id/menuOverflow2"
->>>>>>> Stashed changes
+                android:layout_marginRight="20dp"
+                android:textSize="25dp"
+                android:id="@+id/menuOverflow3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:layout_alignParentRight="true"
-                android:layout_margin="20dp"
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
+                android:layout_marginLeft="20dp"
                 android:text="&#8942;"
                 android:textColor="#000000" />
         </RelativeLayout>
@@ -465,70 +301,12 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-<<<<<<< Updated upstream
                 android:padding="10dp"
                 android:layout_margin="10dp"
                 android:text="Food Sales"
                 android:textColor="#000000" />
-=======
-                android:text="&#8942;"
-                android:textColor="#000000" />
-        </RelativeLayout>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reycelviewItem2"
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:nestedScrollingEnabled="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <RelativeLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="Places with Mid-Autum Lanterns"
-                android:textColor="#000000" />
-
-            <TextView
-                android:id="@+id/menuOverflow3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_margin="20dp"
-                android:text="&#8942;"
-                android:textColor="#000000" />
-        </RelativeLayout>
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reycelviewItem3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:nestedScrollingEnabled="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <RelativeLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
->>>>>>> Stashed changes
-
-            <TextView
-
-<<<<<<< Updated upstream
             <TextView
                 android:layout_marginRight="20dp"
                 android:textSize="25dp"
@@ -538,25 +316,6 @@
                 android:padding="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="20dp"
-=======
-=======
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
->>>>>>> Stashed changes
-                android:layout_margin="20dp"
-                android:text="Food Sales"
-                android:textColor="#000000" />
-
-            <TextView
-                android:id="@+id/menuOverflow4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_margin="20dp"
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
                 android:text="&#8942;"
                 android:textColor="#000000" />
         </RelativeLayout>
@@ -586,26 +345,9 @@
             android:layout_marginLeft="20dp"
             android:nestedScrollingEnabled="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-<<<<<<< Updated upstream
-
-        </androidx.recyclerview.widget.RecyclerView>
-=======
->>>>>>> Stashed changes
 
         </androidx.recyclerview.widget.RecyclerView>
 
-<<<<<<< Updated upstream
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="sdadasdas" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="sdadasdas" />
-
-=======
 
         <TextView
             android:layout_width="match_parent"
@@ -617,7 +359,6 @@
             android:layout_height="wrap_content"
             android:text="sdadasdas" />
 
->>>>>>> Stashed changes
 
     </LinearLayout>
 
