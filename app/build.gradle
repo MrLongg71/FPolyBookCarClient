@@ -40,6 +40,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.0.1'
     implementation 'com.google.firebase:firebase-database:19.0.0'
     implementation 'com.google.firebase:firebase-auth:19.0.0'
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
 
     // library 3st
     implementation 'com.github.stfalcon:smsverifycatcher:0.3.2'

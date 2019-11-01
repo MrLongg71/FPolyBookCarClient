@@ -15,14 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.Activity.GoogleMapActivity"></activity>
-        <activity android:name=".View.Activity.LoginSMSActivity" />
+        <activity android:name=".view.maps.GoogleMapActivity"></activity>
+        <activity android:name=".view.client.LoginSMSActivity" />
         <activity
-            android:name=".View.Activity.HomeActivity"
+            android:name=".view.Activity.HomeActivity"
             android:label="@string/title_activity_home">
 
         </activity>
-        <activity android:name=".View.Activity.SplashScreenActivity">
+        <activity android:name=".view.Activity.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,14 +30,25 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".View.Activity.ChooseLocation_Go_ComeActivity">
+        <activity android:name=".view.maps.ChooseLocation_Go_ComeActivity">
         </activity>
-        <activity android:name=".View.Activity.ClientActivity" />
+        <activity android:name=".view.client.ClientActivity" />
         <!--Key API Google Map-->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_map_api1" />
 
+        <!--Service Firebase Messaging-->
+        <service
+            android:name=".service.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!--<meta-data-->
+            <!--android:name="com.google.firebase.messaging.default_notification_channel_id"-->
+            <!--android:value="@string/default_notification_channel_id" />-->
     </application>
 
 </manifest>

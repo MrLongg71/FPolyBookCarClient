@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="20dp"
-    tools:context=".View.Activity.LoginSMSActivity">
+    tools:context=".view.client.LoginSMSActivity">
 
     <EditText
         android:hint="@string/inputsdt"
