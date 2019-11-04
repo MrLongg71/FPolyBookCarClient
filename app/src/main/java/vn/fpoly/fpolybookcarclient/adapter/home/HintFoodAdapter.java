@@ -1,6 +1,7 @@
-package vn.fpoly.fpolybookcarclient.adapter.Home;
+package vn.fpoly.fpolybookcarclient.adapter.home;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
@@ -20,6 +27,7 @@ public class HintFoodAdapter extends RecyclerView.Adapter<HintFoodAdapter.ViewHo
     private Context context;
     private int layout;
     private List<HintFood> arrHintFood;
+    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     public HintFoodAdapter(Context context, int layout, List<HintFood> arrHintFood) {
         this.context = context;
@@ -38,11 +46,21 @@ public class HintFoodAdapter extends RecyclerView.Adapter<HintFoodAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         HintFood hintFood = arrHintFood.get(position);
-        holder.imgFood.setImageResource(hintFood.getImage());
-        holder.txtDetail.setText(hintFood.getDetail());
+        holder.txtDetail.setText(hintFood.getAddress());
         holder.txttitle.setText(hintFood.getTitle());
-        holder.txtRate.setText(hintFood.getRate());
-        holder.txtMinute.setText(hintFood.getMinute());
+        holder.txtRate.setText(hintFood.getLike());
+        holder.txtMinute.setText(hintFood.getTime());
+        setImage(holder.imgFood,hintFood);
+    }
+    private void setImage(final ImageView image, HintFood hintFood){
+        storageReference.child("Imagenewstodayeat").child(hintFood.getArrImage().get(0)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                String URL = uri.toString();
+                Uri uri1 = uri.parse(URL);
+                Glide.with(context).load(uri1).into(image);
+            }
+        });
     }
 
     @Override
@@ -51,7 +69,8 @@ public class HintFoodAdapter extends RecyclerView.Adapter<HintFoodAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgFood,imgRate,imgMinute;
+        ImageView imgRate,imgMinute;
+        RoundedImageView imgFood;
         TextView txttitle,txtDetail,txtRate,txtMinute,txtBookNow;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

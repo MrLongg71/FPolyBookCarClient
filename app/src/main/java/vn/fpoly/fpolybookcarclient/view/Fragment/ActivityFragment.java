@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import vn.fpoly.fpolybookcarclient.adapter.Activity.HistoryAdapter;
+import vn.fpoly.fpolybookcarclient.adapter.history.HistoryAdapter;
 import vn.fpoly.fpolybookcarclient.model.objectClass.HistoryBookCar;
 import vn.fpoly.fpolybookcarclient.R;
 

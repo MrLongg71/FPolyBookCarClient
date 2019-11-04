@@ -1,13 +1,24 @@
-package vn.fpoly.fpolybookcarclient.adapter.Home;
+package vn.fpoly.fpolybookcarclient.adapter.home;
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.ObjectKey;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.makeramen.roundedimageview.RoundedImageView;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -18,6 +29,7 @@ public class ChallengeBannerAdapter extends RecyclerView.Adapter<ChallengeBanner
     private List<ChallengeBanner> arrBanner;
     private Context context;
     private int layout;
+    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     public ChallengeBannerAdapter(List<ChallengeBanner> arrBanner, Context context, int layout) {
         this.arrBanner = arrBanner;
@@ -34,10 +46,19 @@ public class ChallengeBannerAdapter extends RecyclerView.Adapter<ChallengeBanner
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         ChallengeBanner banner = arrBanner.get(position);
-        holder.imgBanner.setImageResource(banner.getImage());
+        storageReference.child("Imagenewschallenge").child(banner.getArrImage().get(position)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                String URL = uri.toString();
+                Uri uri1 = uri.parse(URL);
+                Glide.with(context).load(uri1).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.DATA).into(holder.imgBanner);
+//                Picasso.get().load(uri1).into(holder.imgBanner.setTa);
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {
@@ -45,10 +66,11 @@ public class ChallengeBannerAdapter extends RecyclerView.Adapter<ChallengeBanner
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgBanner;
+        RoundedImageView imgBanner;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgBanner = itemView.findViewById(R.id.imgRowBanner);
+            this.setIsRecyclable(true);
         }
     }
 }

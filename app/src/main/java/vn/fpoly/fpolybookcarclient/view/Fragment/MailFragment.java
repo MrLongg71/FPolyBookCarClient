@@ -19,7 +19,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import java.util.ArrayList;
 
-import vn.fpoly.fpolybookcarclient.adapter.Email.EmailAdapter;
+import vn.fpoly.fpolybookcarclient.adapter.email.EmailAdapter;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Email;
 import vn.fpoly.fpolybookcarclient.R;
 
@@ -43,7 +43,7 @@ public class MailFragment extends Fragment {
 
                 detail.setBackground(new ColorDrawable(Color.rgb(0xF9,
                         0x3F, 0x25)));
-                detail.setIcon(R.drawable.icontrash);
+                detail.setIcon(R.drawable.icon_grabage);
                 detail.setTitleColor(Color.BLUE);
                 menu.addMenuItem(detail);
             }

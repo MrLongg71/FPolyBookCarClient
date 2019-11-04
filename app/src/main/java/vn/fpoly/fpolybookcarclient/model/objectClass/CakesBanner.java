@@ -1,14 +1,14 @@
 package vn.fpoly.fpolybookcarclient.model.objectClass;
 
+import java.util.List;
+
 public class CakesBanner {
     private String title;
     private String detail;
-    private int Image;
+    private List<String> arrImage;
+    private String key;
 
-    public CakesBanner(String title, String detail, int image) {
-        this.title = title;
-        this.detail = detail;
-        Image = image;
+    public CakesBanner() {
     }
 
     public String getTitle() {
@@ -27,11 +27,27 @@ public class CakesBanner {
         this.detail = detail;
     }
 
-    public int getImage() {
-        return Image;
+    public List<String> getArrImage() {
+        return arrImage;
     }
 
-    public void setImage(int image) {
-        Image = image;
+    public void setArrImage(List<String> arrImage) {
+        this.arrImage = arrImage;
     }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public CakesBanner(String title, String detail, List<String> arrImage, String key) {
+        this.title = title;
+        this.detail = detail;
+        this.arrImage = arrImage;
+        this.key = key;
+    }
+
 }

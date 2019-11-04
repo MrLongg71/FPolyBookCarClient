@@ -119,7 +119,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
         googleMap.setMaxZoomPreference(14.0f);
         if (locationCurrent != null) {
             placeNameCurrent = "Vị trí của bạn"; //chuyển sai file string dùm t
-            addMarker(locationCurrent, placeNameCurrent, R.drawable.icon_laban);
+            addMarker(locationCurrent, placeNameCurrent, R.drawable.compassun);
 
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(locationCurrent, 18f);
             googleMap.animateCamera(cameraUpdate);

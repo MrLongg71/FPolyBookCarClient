@@ -2,6 +2,8 @@ package vn.fpoly.fpolybookcarclient.view.client;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,12 +32,12 @@ import vn.fpoly.fpolybookcarclient.view.Activity.HomeActivity;
 
 public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnClickListener {
 
-    EditText edtphone1,edtphone2,edtphone3,edtphone4,edtphone5,edtphone6;
-    Button btnVery;
-    TextView txtPhone,txtResend;
-    String phone = "";
-    SmsVerifyCatcher smsVerifyCatcher;
-    PresenterLogin presenterLogin;
+    private EditText edtphone1, edtphone2, edtphone3, edtphone4, edtphone5, edtphone6;
+    private Button btnVery;
+    private TextView txtPhone, txtResend;
+    private String phone = "";
+    private SmsVerifyCatcher smsVerifyCatcher;
+    private PresenterLogin presenterLogin;
     @Nullable
     @Override
 
@@ -44,14 +46,14 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
         initView(view);
         btnVery.setOnClickListener(this);
         txtResend.setOnClickListener(this);
-
+        autoMoveNext();
         SmsVeri();
 
 
         return view;
     }
     private boolean checkvalid(){
-        String code1 = edtphone1.getText().toString().trim();
+        final String code1 = edtphone1.getText().toString().trim();
         String code2 = edtphone2.getText().toString().trim();
         String code3 = edtphone3.getText().toString().trim();
         String code4 = edtphone4.getText().toString().trim();
@@ -61,6 +63,7 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
             Toasty.error(getActivity(),getString(R.string.checkedtcodevery),Toasty.LENGTH_SHORT).show();
             return false;
         }else {
+
             String sverify = code1+code2+code3+code4+code5+code6;
             checkVerify(phone,sverify);
 
@@ -161,5 +164,97 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         smsVerifyCatcher.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+    private void autoMoveNext(){
+        edtphone1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(edtphone1.getText().toString().length() >=1){
+                    edtphone2.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        edtphone2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(edtphone2.getText().toString().length() >=1){
+                    edtphone3.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        edtphone3.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(edtphone3.getText().toString().length() >=1){
+                    edtphone4.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        edtphone4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(edtphone4.getText().toString().length() >=1){
+                    edtphone5.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        edtphone5.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(edtphone5.getText().toString().length() >=1){
+                    edtphone6.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 }

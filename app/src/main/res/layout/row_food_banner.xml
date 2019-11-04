@@ -2,25 +2,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="5dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="300dp"
+        android:layout_width="350dp"
+        android:padding="10dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp">
+       >
 
         <RelativeLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imgItemFood"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:scaleType="fitXY"
+                android:layout_height="180dp"
+                app:riv_corner_radius="10dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/rsz_backgroudhome" />
 
             <TextView
@@ -40,16 +42,17 @@
                 android:layout_margin="8dp">
 
             </TextView>
+
             <TextView
-                android:textStyle="bold"
-                android:textColor="#219BCC"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:layout_below="@id/txtDetaiFoodItem"
-                android:text="Book now"
                 android:id="@+id/txtBookNow"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtDetaiFoodItem"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="Book now"
+                android:textColor="#219BCC"
+                android:textStyle="bold" />
 
             <View
                 android:id="@+id/lineview"

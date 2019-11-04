@@ -1,6 +1,7 @@
-package vn.fpoly.fpolybookcarclient.adapter.Home;
+package vn.fpoly.fpolybookcarclient.adapter.home;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,12 @@ import android.widget.ToggleButton;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.makeramen.roundedimageview.RoundedImageView;
+
 import java.util.List;
 
 import vn.fpoly.fpolybookcarclient.model.objectClass.FoodBanner;
@@ -20,6 +27,7 @@ public class FoodBannerAdapter extends RecyclerView.Adapter<FoodBannerAdapter.Vi
     private Context context;
     private int layout;
     private List<FoodBanner> arrFood;
+    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     public FoodBannerAdapter(Context context, int layout, List<FoodBanner> arrFood) {
         this.context = context;
@@ -38,9 +46,20 @@ public class FoodBannerAdapter extends RecyclerView.Adapter<FoodBannerAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FoodBanner foodBanner = arrFood.get(position);
-        holder.imgBanner.setImageResource(foodBanner.getImage());
         holder.txtDetail.setText(foodBanner.getDetail());
         holder.txtTitle.setText(foodBanner.getTitle());
+        setImage(holder.imgBanner,foodBanner);
+
+    }
+    private void setImage(final RoundedImageView image, FoodBanner foodBanner){
+        storageReference.child("Imagenewsfood").child(foodBanner.getArrImage().get(0)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                String URL = uri.toString();
+                Uri uri1 = uri.parse(URL);
+                Glide.with(context).load(uri1).into(image);
+            }
+        });
     }
 
     @Override
@@ -49,7 +68,7 @@ public class FoodBannerAdapter extends RecyclerView.Adapter<FoodBannerAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgBanner;
+        RoundedImageView imgBanner;
         ToggleButton toggleButtonLike;
         TextView txtTitle, txtDetail, txtbooknow;
 

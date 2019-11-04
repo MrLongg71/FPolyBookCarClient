@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/v"
@@ -11,12 +12,12 @@
         android:orientation="vertical">
 
         <ImageButton
-            android:background="@null"
             android:id="@+id/imgBackLogIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
+            android:background="@null"
             android:src="@drawable/rsz_1back" />
 
         <TextView
@@ -116,10 +117,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtchoose"
-                android:layout_marginTop="20dp"></com.google.android.gms.common.SignInButton>
+                android:layout_marginTop="20dp">
+
+            </com.google.android.gms.common.SignInButton>
 
             <Button
-                android:textAllCaps="false"
                 android:id="@+id/btnLoginWithPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -129,7 +131,23 @@
                 android:drawableLeft="@drawable/rsz_call"
                 android:padding="10dp"
                 android:text="@string/loginsdt"
+                android:textAllCaps="false"
                 android:textColor="#FF0C08" />
+
+            <Button
+
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnLoginWithPhone"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#ccc"
+                android:background="@drawable/custom_button_login"
+                android:padding="10dp"
+
+                android:text="@string/btn_signup"
+                android:textAllCaps="false"
+                android:textColor="#000" />
         </RelativeLayout>
 
     </LinearLayout>

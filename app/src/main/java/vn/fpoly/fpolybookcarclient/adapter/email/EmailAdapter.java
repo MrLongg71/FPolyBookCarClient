@@ -1,4 +1,4 @@
-package vn.fpoly.fpolybookcarclient.adapter.Email;
+package vn.fpoly.fpolybookcarclient.adapter.email;
 
 import android.content.Context;
 import android.view.LayoutInflater;

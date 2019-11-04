@@ -1,6 +1,7 @@
-package vn.fpoly.fpolybookcarclient.adapter.Home;
+package vn.fpoly.fpolybookcarclient.adapter.home;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,12 @@ import android.widget.ToggleButton;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.makeramen.roundedimageview.RoundedImageView;
+
 import java.util.List;
 
 import vn.fpoly.fpolybookcarclient.model.objectClass.PlaceBanner;
@@ -20,6 +27,8 @@ public class PlaceBannerAdapter extends RecyclerView.Adapter<PlaceBannerAdapter.
     private Context context;
     private int layout;
     private List<PlaceBanner> arrPlace;
+    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+
 
     public PlaceBannerAdapter(Context context, int layout, List<PlaceBanner> arrPlace) {
         this.context = context;
@@ -38,9 +47,20 @@ public class PlaceBannerAdapter extends RecyclerView.Adapter<PlaceBannerAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         PlaceBanner placeBanner = arrPlace.get(position);
-        holder.imgBanner.setImageResource(placeBanner.getImage());
         holder.txtDetail.setText(placeBanner.getDetail());
         holder.txtTitle.setText(placeBanner.getTitle());
+        setImagePlace(holder.imgBanner,placeBanner);
+    }
+
+    private void setImagePlace(final ImageView imgBanner, PlaceBanner placeBanner){
+        storageReference.child("Imagenewsplace").child(placeBanner.getArrImage().get(0)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                String URL = uri.toString();
+                Uri linkHinh = uri.parse(URL);
+                Glide.with(context).load(linkHinh).into(imgBanner);
+            }
+        });
     }
 
     @Override
@@ -49,7 +69,7 @@ public class PlaceBannerAdapter extends RecyclerView.Adapter<PlaceBannerAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgBanner;
+        RoundedImageView imgBanner;
         ToggleButton toggleButtonLike;
         TextView txtTitle,txtDetail,txtbookride;
         public ViewHolder(@NonNull View itemView) {
@@ -58,7 +78,7 @@ public class PlaceBannerAdapter extends RecyclerView.Adapter<PlaceBannerAdapter.
             toggleButtonLike     = itemView.findViewById(R.id.toglelikePlace);
             txtTitle             = itemView.findViewById(R.id.txttitlePlaceItem);
             txtDetail            = itemView.findViewById(R.id.txtDetaiPlaceItem);
-            txtbookride          = itemView.findViewById(R.id.txtBookNow);
+            txtbookride          = itemView.findViewById(R.id.txtBookNowFood);
         }
     }
 }

@@ -4,24 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="7dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imgItemPlace"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/rsz_backgroudhome" />
+                android:layout_height="180dp"
+
+                android:scaleType="centerCrop"
+                android:src="@drawable/rsz_backgroudhome"
+                app:riv_corner_radius="10dp" />
 
             <TextView
                 android:id="@+id/txttitlePlaceItem"
@@ -41,16 +41,17 @@
                 android:layout_margin="8dp">
 
             </TextView>
+
             <TextView
-                android:textStyle="bold"
-                android:textColor="#219BCC"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:layout_below="@id/txtDetaiPlaceItem"
-                android:text="Book A Ride"
                 android:id="@+id/txtBookNowFood"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtDetaiPlaceItem"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="Book A Ride"
+                android:textColor="#219BCC"
+                android:textStyle="bold" />
 
             <View
                 android:id="@+id/lineview"
@@ -71,8 +72,6 @@
                 android:textOn="" />
 
         </RelativeLayout>
-
-
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

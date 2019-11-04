@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.view.Fragment.AccountFragment;
@@ -44,6 +45,8 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_home2);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);

@@ -17,4 +17,9 @@
         <item name="android:colorControlNormal">#f9a825</item>
     </style>
 
+    <style name="AppTheme.TextView">
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">@font/fontsplash2</item>
+    </style>
+
 </resources>

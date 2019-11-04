@@ -2,26 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="7dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imgItemCake"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/rsz_backgroudhome" />
+                android:layout_height="180dp"
+                app:riv_corner_radius="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/rsz_loadimg" />
 
             <TextView
                 android:id="@+id/txttitleCakeItem"

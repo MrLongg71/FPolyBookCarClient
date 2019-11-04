@@ -1,14 +1,29 @@
 package vn.fpoly.fpolybookcarclient.model.objectClass;
 
-public class PlaceBanner {
-    private String title;
-    private String detail;
-    private int Image;
+import java.util.List;
 
-    public PlaceBanner(String title, String detail, int image) {
+public class PlaceBanner {
+
+    private String key;
+    private String title;
+    private String like;
+    private String detail;
+    private List<String>arrImage;
+
+    public PlaceBanner(String key, String title, String like, String detail, List<String> arrImage) {
+        this.key = key;
         this.title = title;
+        this.like = like;
         this.detail = detail;
-        Image = image;
+        this.arrImage = arrImage;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getTitle() {
@@ -19,6 +34,14 @@ public class PlaceBanner {
         this.title = title;
     }
 
+    public String getLike() {
+        return like;
+    }
+
+    public void setLike(String like) {
+        this.like = like;
+    }
+
     public String getDetail() {
         return detail;
     }
@@ -27,11 +50,14 @@ public class PlaceBanner {
         this.detail = detail;
     }
 
-    public int getImage() {
-        return Image;
+    public List<String> getArrImage() {
+        return arrImage;
     }
 
-    public void setImage(int image) {
-        Image = image;
+    public void setArrImage(List<String> arrImage) {
+        this.arrImage = arrImage;
+    }
+
+    public PlaceBanner() {
     }
 }

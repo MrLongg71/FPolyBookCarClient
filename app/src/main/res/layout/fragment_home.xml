@@ -45,8 +45,8 @@
                     android:id="@+id/card1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="120dp"
-                    app:cardCornerRadius="20dp">
+                    android:layout_marginTop="100dp"
+                    app:cardCornerRadius="10dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -206,15 +206,28 @@
                 android:textSize="25dp" />
         </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reycelviewItem1"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:nestedScrollingEnabled="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="wrap_content">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/reycelviewItem1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </RelativeLayout>
+
+
+        </FrameLayout>
 
         <RelativeLayout
 
@@ -223,36 +236,56 @@
 
 
             <TextView
-                android:layout_margin="10dp"
-                android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
                 android:text="Different Types of Mooncakes"
                 android:textColor="#000000" />
 
             <TextView
-                android:layout_marginRight="20dp"
-                android:textSize="25dp"
                 android:id="@+id/menuOverflow2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="10dp"
                 android:text="&#8942;"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:textSize="25dp" />
         </RelativeLayout>
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reycelviewItem2"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:nestedScrollingEnabled="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="wrap_content">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/progressbarItem2"
+                    style="@style/SpinKitView.Wave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    app:SpinKit_Color="@color/tim" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/reycelviewItem2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </RelativeLayout>
+
+        </FrameLayout>
+
 
         <RelativeLayout
 
@@ -269,28 +302,47 @@
 
 
             <TextView
-                android:layout_marginRight="20dp"
-                android:textSize="25dp"
                 android:id="@+id/menuOverflow3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="10dp"
                 android:text="&#8942;"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:textSize="25dp" />
         </RelativeLayout>
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reycelviewItem3"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:nestedScrollingEnabled="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="wrap_content">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/progressbarItem3"
+                    style="@style/SpinKitView.Wave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    app:SpinKit_Color="@color/tim" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/reycelviewItem3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:nestedScrollingEnabled="true"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </RelativeLayout>
+        </FrameLayout>
+
 
         <RelativeLayout
 
@@ -301,35 +353,55 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:layout_margin="10dp"
+                android:padding="10dp"
                 android:text="Food Sales"
                 android:textColor="#000000" />
 
 
             <TextView
-                android:layout_marginRight="20dp"
-                android:textSize="25dp"
                 android:id="@+id/menuOverflow4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="10dp"
                 android:text="&#8942;"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:textSize="25dp" />
         </RelativeLayout>
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reycelviewItem4"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:nestedScrollingEnabled="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="wrap_content">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/progressbarItem4"
+                    style="@style/SpinKitView.Wave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    app:SpinKit_Color="@color/tim" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/reycelviewItem4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:nestedScrollingEnabled="true"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </RelativeLayout>
+        </FrameLayout>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -338,26 +410,38 @@
             android:text="Today Eat What"
             android:textColor="#000000" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reycelviewItem5"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:nestedScrollingEnabled="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        </androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="wrap_content">
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="sdadasdas" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="sdadasdas" />
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/progressbarItem5"
+                    style="@style/SpinKitView.Wave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    app:SpinKit_Color="@color/tim" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/reycelviewItem5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="60dp"
+                    android:nestedScrollingEnabled="true"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </RelativeLayout>
+
+        </FrameLayout>
 
 
     </LinearLayout>
