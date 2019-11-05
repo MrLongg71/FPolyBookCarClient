@@ -21,7 +21,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/gradient_splash"
+
             android:orientation="vertical"
             android:padding="30dp">
 
@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/gradient_button"
+
                 android:text="@string/btn_login"
                 android:padding="5dp"
                 android:textAllCaps="false"

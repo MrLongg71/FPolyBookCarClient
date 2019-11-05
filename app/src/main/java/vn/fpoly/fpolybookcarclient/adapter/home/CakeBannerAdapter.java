@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -74,7 +75,7 @@ public class CakeBannerAdapter extends RecyclerView.Adapter<CakeBannerAdapter.Vi
             @Override
             public void onSuccess(Uri uri) {
                 String URL = uri.toString();
-                Glide.with(context).load(URL).skipMemoryCache(true).into(imageCake);
+                Glide.with(context).load(URL).diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(imageCake);
             }
         });
     }

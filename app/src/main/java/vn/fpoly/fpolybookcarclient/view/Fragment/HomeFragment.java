@@ -36,7 +36,7 @@ import vn.fpoly.fpolybookcarclient.model.objectClass.PlaceBanner;
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.presenter.cakebanner.PresenterCakeBanner;
 import vn.fpoly.fpolybookcarclient.presenter.challengebanner.PresenterChallengerBanner;
-import vn.fpoly.fpolybookcarclient.presenter.eatwhatbanner.PresenterEatWhat;
+import vn.fpoly.fpolybookcarclient.presenter.eatwhat.PresenterEatWhat;
 import vn.fpoly.fpolybookcarclient.presenter.foodbanner.PresenterFoodBanner;
 import vn.fpoly.fpolybookcarclient.presenter.placebanner.PresenterPlaceBanner;
 import vn.fpoly.fpolybookcarclient.view.maps.GoogleMapActivity;
@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener,IView
 
 
         presenterEatWhat.getListEatWhat();
-        presenterCakeBanner.getListCake();
+        presenterCakeBanner.getListCakeBanner();
         presenterPlaceBanner.getListPlace();
         presenterFoodBanner.getListFood();
         presenterChallengerBanner.getListChallenge();

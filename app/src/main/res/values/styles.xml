@@ -19,7 +19,7 @@
 
     <style name="AppTheme.TextView">
         <item name="android:textSize">24sp</item>
-        <item name="android:fontFamily">@font/fontsplash2</item>
+        <item name="android:fontFamily">@font/fontsplash21</item>
     </style>
 
 </resources>

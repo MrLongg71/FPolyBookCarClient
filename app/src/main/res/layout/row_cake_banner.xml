@@ -21,7 +21,7 @@
                 android:layout_height="180dp"
                 app:riv_corner_radius="10dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/rsz_loadimg" />
+               />
 
             <TextView
                 android:id="@+id/txttitleCakeItem"

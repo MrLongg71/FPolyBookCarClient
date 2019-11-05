@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+
 import vn.fpoly.fpolybookcarclient.adapter.history.HistoryAdapter;
 import vn.fpoly.fpolybookcarclient.model.objectClass.HistoryBookCar;
 import vn.fpoly.fpolybookcarclient.R;
@@ -32,7 +33,7 @@ public class ActivityFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
         dataItem();
-        historyAdapter = new HistoryAdapter(arrHistoryBook,getActivity(),R.layout.row_historybookcar);
+        historyAdapter = new HistoryAdapter(getActivity(),R.layout.row_email,arrHistoryBook);
         recyclerView.setAdapter(historyAdapter);
         return view;
     }
