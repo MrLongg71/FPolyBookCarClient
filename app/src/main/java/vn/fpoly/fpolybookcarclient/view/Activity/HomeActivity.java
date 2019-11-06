@@ -1,15 +1,14 @@
 package vn.fpoly.fpolybookcarclient.view.Activity;
 
 import android.os.Bundle;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.MenuItem;
 import android.view.WindowManager;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.view.Fragment.AccountFragment;
@@ -18,6 +17,9 @@ import vn.fpoly.fpolybookcarclient.view.Fragment.HomeFragment;
 import vn.fpoly.fpolybookcarclient.view.Fragment.MailFragment;
 
 public class HomeActivity extends AppCompatActivity {
+
+
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -37,6 +39,7 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.navigation_accout:
                     loadFragment(new AccountFragment());
                     return true;
+
             }
             return false;
         }
@@ -46,7 +49,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_home2);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -59,6 +61,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private boolean loadFragment(Fragment fragment) {
+
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.conten, fragment).commit();
             return true;

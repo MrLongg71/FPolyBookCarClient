@@ -1,11 +1,5 @@
 package vn.fpoly.fpolybookcarclient.view.maps;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -17,6 +11,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,6 +19,12 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.developer.kalert.KAlertDialog;
 import com.github.ybq.android.spinkit.SpinKitView;
@@ -40,9 +41,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import de.hdodenhof.circleimageview.CircleImageView;
 import vn.fpoly.fpolybookcarclient.BuildConfig;
 import vn.fpoly.fpolybookcarclient.Constans;
+import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Driver;
 import vn.fpoly.fpolybookcarclient.presenter.maps.PresenterGoogleMap;
-import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.view.Activity.HomeActivity;
 
 public class GoogleMapActivity extends AppCompatActivity implements
@@ -63,13 +64,13 @@ public class GoogleMapActivity extends AppCompatActivity implements
     private SpinKitView progressbarLoadDriver;
     private RelativeLayout relaLayoutChooseBike, relaLayoutChooseCar;
     private int CODE_CAR_OR_MOTO;
-
     private PresenterGoogleMap presenterGoogleMap;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_google_map);
 
         initView();
@@ -305,6 +306,8 @@ public class GoogleMapActivity extends AppCompatActivity implements
             rateDriver.setRating((float) driverNear.getRate());
             locationDriverCar = new LatLng(driverNear.getLatitude(),driverNear.getLongitude());
             mapFragment.getMapAsync(this);
+
+
         }
         imgInfoDriver.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -320,6 +323,8 @@ public class GoogleMapActivity extends AppCompatActivity implements
         });
 
     }
+
+
 
     private void showInfoDriver(Driver driver) {
         Toast.makeText(this, " " + driver.getDistance(), Toast.LENGTH_SHORT).show();
