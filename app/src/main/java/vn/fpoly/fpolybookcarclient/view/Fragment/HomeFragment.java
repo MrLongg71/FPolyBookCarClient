@@ -264,6 +264,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener,IView
         progressBar2.setVisibility(View.GONE);
         cakeBannerAdapter = new CakeBannerAdapter(getActivity(), R.layout.row_cake_banner, arrCakeBanner, true);
         recyclerView2.setAdapter(cakeBannerAdapter);
+        cakeBannerAdapter.notifyDataSetChanged();
 
     }
 

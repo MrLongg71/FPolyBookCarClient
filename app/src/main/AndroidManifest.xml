@@ -21,14 +21,14 @@
             android:name=".view.Activity.HomeActivity"
             android:label="@string/title_activity_home">
 
+
+        </activity>
+        <activity android:name=".view.Activity.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".view.Activity.SplashScreenActivity">
-
         </activity>
         <activity android:name=".view.maps.ChooseLocation_Go_ComeActivity">
         </activity>

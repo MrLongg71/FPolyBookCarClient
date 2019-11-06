@@ -9,8 +9,10 @@ import vn.fpoly.fpolybookcarclient.model.objectClass.Driver;
 
 public interface IPPresenterGoogleMap {
     void getPolyline(Activity activity, GoogleMap googleMap, LatLng locationGo, LatLng locationCome);
-    void getDetailDistance(int distance, int time,int price);
+    void getDetailDistance(int distance, int time,double price);
 
     void getDriverList(Activity activity, LatLng locationGo);
     void distanceDriverNear(Driver driver);
+    void pushOrderToDriver(Driver driver,LatLng locationGo,String placeNameGo,String placeNameCome,LatLng locationCome);
+
 }

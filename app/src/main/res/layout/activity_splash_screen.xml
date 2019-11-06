@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
 
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:gravity="center"
+        android:background="@drawable/gradient_splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical"
         android:padding="30dp">
 
@@ -46,7 +47,6 @@
         android:orientation="horizontal">
 
         <Button
-            android:visibility="gone"
             android:id="@+id/btnsigup"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -57,10 +57,10 @@
             android:textAllCaps="false"
             android:textColor="#FFA87F"
             android:textSize="17dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <Button
-            android:visibility="gone"
             android:id="@+id/btnlogin"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -71,7 +71,8 @@
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="17dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
     </LinearLayout>
 
 </RelativeLayout>

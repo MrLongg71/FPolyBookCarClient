@@ -3,5 +3,5 @@
 
     <font android:fontStyle="italic"
         android:fontWeight="400"
-        android:font="@font/fontsplash2"/>
+        android:font="@font/fontsplash3"/>
 </font-family>

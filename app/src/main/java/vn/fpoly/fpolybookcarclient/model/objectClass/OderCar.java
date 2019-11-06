@@ -1,11 +1,11 @@
 package vn.fpoly.fpolybookcarclient.model.objectClass;
 
 public class OderCar {
-    private String keyclient,placenamego,placenamecome,date;
+    private String keyOrder,keyclient,keydriver,placenamego,placenamecome,date;
     private double latitudego,longitudego,latitudecome,longitudecome,price,rate,distance;
     private boolean status,fisnish;
 
-    public OderCar(String keyclient, String placenamego, String placenamecome, String date, double latitudego, double longitudego, double latitudecome, double longitudecome, double price, double rate, double distance, boolean status, boolean fisnish) {
+    public OderCar(String keyOrder,String keyclient,String keydriver , String placenamego, String placenamecome, String date, double latitudego, double longitudego, double latitudecome, double longitudecome, double price, double rate, double distance, boolean status, boolean fisnish) {
         this.keyclient = keyclient;
         this.placenamego = placenamego;
         this.placenamecome = placenamecome;
@@ -19,6 +19,24 @@ public class OderCar {
         this.distance = distance;
         this.status = status;
         this.fisnish = fisnish;
+        this.keydriver = keydriver;
+        this.keyOrder = keyOrder;
+    }
+
+    public String getKeyOrder() {
+        return keyOrder;
+    }
+
+    public void setKeyOrder(String keyOrder) {
+        this.keyOrder = keyOrder;
+    }
+
+    public String getKeydriver() {
+        return keydriver;
+    }
+
+    public void setKeydriver(String keydriver) {
+        this.keydriver = keydriver;
     }
 
     public String getKeyclient() {

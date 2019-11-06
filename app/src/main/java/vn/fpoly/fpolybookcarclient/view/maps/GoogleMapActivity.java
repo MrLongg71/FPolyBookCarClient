@@ -276,7 +276,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void showDetailDistance(int distance, int time, int price) {
+    public void showDetailDistance(int distance, int time, double price) {
         txtDistanceTime.setText("Bạn sẽ đi " + distance + " km và mất khoảng " + time + " phút");
         txtMotoMoney.setText(price + "K");
         txtCarMoney.setText(15000 * price + "K");
