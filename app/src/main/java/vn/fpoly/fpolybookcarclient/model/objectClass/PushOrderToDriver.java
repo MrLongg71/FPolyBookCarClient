@@ -4,6 +4,7 @@ public class PushOrderToDriver {
     private String idOrder;
     private String idDriver;
 
+
     public String getIdOrder() {
         return idOrder;
     }
@@ -27,4 +28,5 @@ public class PushOrderToDriver {
         this.idOrder = idOrder;
         this.idDriver = idDriver;
     }
+
 }

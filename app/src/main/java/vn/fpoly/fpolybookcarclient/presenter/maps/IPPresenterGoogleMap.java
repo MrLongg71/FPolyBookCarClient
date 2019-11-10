@@ -13,6 +13,6 @@ public interface IPPresenterGoogleMap {
 
     void getDriverList(Activity activity, LatLng locationGo);
     void distanceDriverNear(Driver driver);
-    void pushOrderToDriver(Driver driver,LatLng locationGo,String placeNameGo,String placeNameCome,LatLng locationCome);
+    void pushOrderToDriver(Driver driver,LatLng locationGo,LatLng locationCome,String placeNameGo,String placeNameCome);
 
 }

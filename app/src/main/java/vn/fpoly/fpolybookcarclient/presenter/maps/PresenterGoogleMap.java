@@ -3,16 +3,11 @@ package vn.fpoly.fpolybookcarclient.presenter.maps;
 import android.app.Activity;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,7 +33,6 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
     public PresenterGoogleMap(ViewGoogleMap viewGoogleMap) {
         this.viewGoogleMap = viewGoogleMap;
         modelGoogleMap = new ModelGoogleMap();
-        FirebaseMessaging.getInstance().subscribeToTopic("android");
 
 
     }
@@ -69,51 +63,58 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
     }
 
     @Override
-    public void distanceDriverNear(Driver driver) {
-
+    public void distanceDriverNear(final Driver driver) {
+        Log.d("kiemra" , driverList.size() + "");
         driverList.add(driver);
+        Log.d("kiemra" , driverList.size() + "");
 
-        if (driverList.size() > 0) {
-            if (driver.isStatus() && !driver.isWorking()) {
-                Driver driverProvisional = driverList.get(0);
-                for (Driver driverValue : driverList) {
-                    Log.d("tets", driverProvisional.getDistance() + " - " + driverValue.getDistance());
-                    if (driverProvisional.getDistance() > driverValue.getDistance()) {
-                        driverProvisional = driverValue;
-                    }
-                }
-                viewGoogleMap.getDriverNear(driverProvisional);
-
-            }
-        }
+                 if (driverList.size() > 0) {
+                     if (driver.isStatus() && !driver.isWorking()) {
+                         Driver driverProvisional = driverList.get(0);
+                         for (Driver driverValue : driverList) {
+                             Log.d("tets", driverProvisional.getDistance() + " - " + driverValue.getDistance());
+                             if (driverProvisional.getDistance() > driverValue.getDistance()) {
+                                 driverProvisional = driverValue;
+                             }
+                         }
 
 
-    }
+                         Log.d("fffff", "bbb");
+
+                         viewGoogleMap.getDriverNear(driverProvisional);
+                         Log.d("fffff", "ccc");
+
+
+                     }
+
+                 }
+             }
+
+
+
+
+
+
+
 
     @Override
-    public void pushOrderToDriver(Driver driver, LatLng locationGo, String placeNameGo, String placeNameCome, LatLng locationCome) {
+    public void pushOrderToDriver(Driver driver, LatLng locationGo, LatLng locationCome, String placeNameGo, String placeNameCome) {
         if (driver != null) {
+
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
             String date = simpleDateFormat.format(calendar.getTime());
 
-            final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver();
             String keyOrder = database.push().getKey();
+
+            final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder, driver.getKeydriver());
 
             OderCar oderCar = new OderCar(keyOrder, firebaseAuth.getCurrentUser().getUid(), driver.getKeydriver()
                     , placeNameGo, placeNameCome, date, locationGo.latitude, locationGo.longitude, locationCome.latitude
                     , locationCome.longitude, pricee, driver.getRate(), distancee, false, false);
-            database.child("OrderCar").child(keyOrder).setValue(oderCar).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        database = firebaseDatabase.getReference("order").push();
-                        database.setValue(pushOrderToDriver);
-                    }
-                }
-            });
 
 
+            modelGoogleMap.initPushNotification(oderCar, pushOrderToDriver);
 
         }
     }

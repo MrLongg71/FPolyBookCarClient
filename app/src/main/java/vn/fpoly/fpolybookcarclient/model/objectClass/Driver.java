@@ -1,16 +1,17 @@
 package vn.fpoly.fpolybookcarclient.model.objectClass;
 
 public class Driver {
-    private String keydriver, email, licenseplate, name, phone;
+    private String keydriver, email, licenseplate, name, phone,token;
     private boolean status, working;
     private double rate,latitude,longitude,distance,time;
 
-    public Driver(String keydriver, String email, String licenseplate, String name, String phone, boolean status, boolean working, double rate, double latitude, double longitude, double distance,double time) {
+    public Driver(String keydriver, String email, String licenseplate, String name, String phone, String token, boolean status, boolean working, double rate, double latitude, double longitude, double distance, double time) {
         this.keydriver = keydriver;
         this.email = email;
         this.licenseplate = licenseplate;
         this.name = name;
         this.phone = phone;
+        this.token = token;
         this.status = status;
         this.working = working;
         this.rate = rate;
@@ -18,6 +19,14 @@ public class Driver {
         this.longitude = longitude;
         this.distance = distance;
         this.time = time;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public double getDistance() {

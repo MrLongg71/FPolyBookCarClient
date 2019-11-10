@@ -299,6 +299,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     @Override
     public void getDriverNear(final Driver driverNear) {
         if(driverNear != null){
+
             progressbarLoadDriver.setVisibility(View.GONE);
             findViewById(R.id.layoutInfoDriver).setVisibility(View.VISIBLE);
             txtNameDriver.setText(driverNear.getName());
@@ -307,6 +308,8 @@ public class GoogleMapActivity extends AppCompatActivity implements
             locationDriverCar = new LatLng(driverNear.getLatitude(),driverNear.getLongitude());
             mapFragment.getMapAsync(this);
 
+            presenterGoogleMap.pushOrderToDriver(driverNear,locationGo,locationCome,placeNameGo,placeNameCome);
+//
 
         }
         imgInfoDriver.setOnClickListener(new View.OnClickListener() {
@@ -327,7 +330,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
 
 
     private void showInfoDriver(Driver driver) {
-        Toast.makeText(this, " " + driver.getDistance(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, " " + driver.getDistance(), Toast.LENGTH_SHORT).show();
     }
     private void openPhoneCallDriver(Driver driver){
         Toast.makeText(this, "" +  driver.getPhone(), Toast.LENGTH_SHORT).show();

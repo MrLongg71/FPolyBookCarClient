@@ -81,6 +81,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
 
         txtforgot       = view.findViewById(R.id.txtforgot);
 
+        edtuser.setText("abc@gmail.com");
+        edtpass.setText("123456");
     }
 
     @Override

@@ -5,29 +5,40 @@ var admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
 
 exports.sendNotification = functions.database
-  .ref("/articles/{articleId}")
+  .ref("/notification/{notificationId}")
   .onWrite((change, context) => {
-    const author = change.after.child("author").val();
-    const title = change.after.child("title").val();
+    
+    const idOrder = change.after.child("idOrder").val();
 
-    var str1 = "Author is ";
-    var str = str1.concat(author);
-    console.log(str);
+    const idDriver = change.after.child("idDriver").val();
 
-    var topic = "android";
-    var payload = {
-      data: {
-        title: author,
-        author: title
-      }
-    };
-    return admin
-      .messaging()
-      .sendToTopic(topic,payload)
-      .then(function(response) {
-        return console.log("Successfully sent message:", response);
-      })
-      .catch(function(error) {
-        return console.log("Error sending message:", error);
-      });
-    })
+    return admin.database().ref().child("Driver").child("Car").child(idDriver).child("token").once('value')
+    .then(function(snapshot){
+      var token_id = snapshot.val();
+
+
+      console.log(token_id);
+
+
+      var payload = {
+        data: {
+          idOrder: idOrder,
+          idDriver: idDriver
+        },
+        token : token_id
+  
+      };
+      return admin
+        .messaging()
+        .send(payload)
+        .then(function(response) {
+          return console.log("Successfully sent message:", response);
+        })
+        .catch(function(error) {
+          return console.log("Error sending message:", error);
+        });
+
+
+    
+  });
+});
