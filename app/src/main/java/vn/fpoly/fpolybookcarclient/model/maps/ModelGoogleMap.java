@@ -118,7 +118,6 @@ public class ModelGoogleMap {
             public void onComplete(@NonNull Task<Void> task) {
                 if( task.isSuccessful()){
 
-                    // move the major
                 }
             }
         });

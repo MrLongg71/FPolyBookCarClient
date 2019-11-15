@@ -19,9 +19,9 @@ import vn.fpoly.fpolybookcarclient.model.objectClass.HistoryBookCar;
 import vn.fpoly.fpolybookcarclient.R;
 
 public class ActivityFragment extends Fragment {
-    RecyclerView recyclerView;
-    HistoryAdapter historyAdapter;
-    ArrayList<HistoryBookCar> arrHistoryBook = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private HistoryAdapter historyAdapter;
+    private ArrayList<HistoryBookCar> arrHistoryBook = new ArrayList<>();
 
     @Nullable
     @Override

@@ -67,6 +67,5 @@ dependencies {
     implementation 'com.github.tintinscorpion:Dual-color-Polyline-Animation:1.0'
 
 
-
 }
 apply plugin: 'com.google.gms.google-services'

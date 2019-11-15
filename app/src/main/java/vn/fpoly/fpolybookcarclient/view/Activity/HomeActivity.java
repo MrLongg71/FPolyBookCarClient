@@ -49,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_home2);
+        setContentView(R.layout.activity_home);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
 

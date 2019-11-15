@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgBillFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_assignment_black_24dp">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imgFavoriteFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/imgBillFood"
+                android:src="@drawable/ic_favorite_border_black_24dp">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imgBackFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+
+                android:src="@drawable/ic_keyboard_arrow_left_black_24dp">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imgMarkerCurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/imgBackFood"
+                android:src="@drawable/ic_location_on_black_24dp">
+
+            </ImageView>
+            <TextView
+                android:textColor="#000"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="3dp"
+                android:textSize="18dp"
+                android:layout_toRightOf="@id/imgMarkerCurrent"
+                android:text="23/Califo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+        </RelativeLayout>
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+</LinearLayout>

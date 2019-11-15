@@ -1,5 +1,11 @@
 package vn.fpoly.fpolybookcarclient.view.maps;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -10,21 +16,17 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.developer.kalert.KAlertDialog;
 import com.github.ybq.android.spinkit.SpinKitView;
@@ -36,18 +38,20 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import vn.fpoly.fpolybookcarclient.BuildConfig;
 import vn.fpoly.fpolybookcarclient.Constans;
-import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Driver;
 import vn.fpoly.fpolybookcarclient.presenter.maps.PresenterGoogleMap;
+import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.view.Activity.HomeActivity;
 
 public class GoogleMapActivity extends AppCompatActivity implements
-        OnMapReadyCallback, View.OnClickListener, ViewGoogleMap {
+        OnMapReadyCallback, View.OnClickListener, ViewGoogleMap, GoogleMap.OnCameraMoveStartedListener
+        ,GoogleMap.OnCameraMoveListener,GoogleMap.OnCameraIdleListener {
 
     private GoogleMap googleMap;
     private MapFragment mapFragment;
@@ -61,16 +65,20 @@ public class GoogleMapActivity extends AppCompatActivity implements
     private LocationManager locationManager;
     private LinearLayout layoutChooseLocation;
     private Button btnBook;
+    private EditText edtLocationCurrent;
     private SpinKitView progressbarLoadDriver;
     private RelativeLayout relaLayoutChooseBike, relaLayoutChooseCar;
     private int CODE_CAR_OR_MOTO;
+    Marker marker;
+    private ImageButton imgButtonMyLocation;
+    private ImageView imgMarker;
+
     private PresenterGoogleMap presenterGoogleMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_google_map);
 
         initView();
@@ -105,27 +113,35 @@ public class GoogleMapActivity extends AppCompatActivity implements
         imgInfoDriver  = findViewById(R.id.imgInfoDriver);
         imgCancelDriver = findViewById(R.id.imgCancelDriver);
         presenterGoogleMap = new PresenterGoogleMap(this);
-
+        imgMarker = findViewById(R.id.imgMarker);
         layoutChooseLocation.setOnClickListener(this);
         btnBook.setOnClickListener(this);
-
+        imgButtonMyLocation = findViewById(R.id.imgButtonMyLocation);
         locationManager = this.getSystemService(LocationManager.class);
+        edtLocationCurrent  = findViewById(R.id.edtLocationCurrent);
 
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         this.googleMap = googleMap;
+
+
         googleMap.setMinZoomPreference(6.0f);
         googleMap.setMaxZoomPreference(14.0f);
-        if (locationCurrent != null) {
-            placeNameCurrent = "Vị trí của bạn"; //chuyển sai file string dùm t
-            addMarker(locationCurrent, placeNameCurrent, R.drawable.compassun);
 
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(locationCurrent, 18f);
-            googleMap.animateCamera(cameraUpdate);
+        if (locationCurrent != null) {
+            placeNameCurrent = "Vị trí của bạn";
+            getLocationCurrent();
+            imgButtonMyLocation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getLocationCurrent();
+                }
+            });
 
         }
+
         if (locationGo != null && locationCome != null) {
 
             addMarker(locationGo, placeNameGo, R.drawable.iconlocationblue);
@@ -144,6 +160,9 @@ public class GoogleMapActivity extends AppCompatActivity implements
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(builder.build(), 0);
             googleMap.animateCamera(cameraUpdate);
         }
+
+        googleMap.setOnCameraIdleListener(this);
+        googleMap.setOnCameraMoveListener(this);
 
     }
 
@@ -181,8 +200,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
                     @Override
                     public void onProviderEnabled(String provider) {
                     }
-
-
                     @Override
                     public void onProviderDisabled(String provider) {
                     }
@@ -194,7 +211,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         switch (requestCode) {
             case REQUESCODE:
                 if (resultCode == RESULT_OK && data != null) {
@@ -225,8 +241,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
             case R.id.btnBook:
                 searchDriverNearLocationGo();
                 break;
-//
-
         }
     }
 
@@ -253,7 +267,8 @@ public class GoogleMapActivity extends AppCompatActivity implements
         googleMap.addMarker(new MarkerOptions()
                 .position(location)
                 .title(place)
-                .icon(BitmapDescriptorFactory.fromResource(icon)));
+                .icon(BitmapDescriptorFactory.fromResource(icon)).draggable(false));
+
 
     }
 
@@ -266,9 +281,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
             Toast.makeText(this, "Bạn chưa chọn loại xe", Toast.LENGTH_SHORT).show();
         }
 
-
     }
-
 
     @Override
     public void drawPolyline() {
@@ -299,7 +312,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
     @Override
     public void getDriverNear(final Driver driverNear) {
         if(driverNear != null){
-
             progressbarLoadDriver.setVisibility(View.GONE);
             findViewById(R.id.layoutInfoDriver).setVisibility(View.VISIBLE);
             txtNameDriver.setText(driverNear.getName());
@@ -307,10 +319,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
             rateDriver.setRating((float) driverNear.getRate());
             locationDriverCar = new LatLng(driverNear.getLatitude(),driverNear.getLongitude());
             mapFragment.getMapAsync(this);
-
-            presenterGoogleMap.pushOrderToDriver(driverNear,locationGo,locationCome,placeNameGo,placeNameCome);
-//
-
         }
         imgInfoDriver.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -327,10 +335,8 @@ public class GoogleMapActivity extends AppCompatActivity implements
 
     }
 
-
-
     private void showInfoDriver(Driver driver) {
-//        Toast.makeText(this, " " + driver.getDistance(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, " " + driver.getDistance(), Toast.LENGTH_SHORT).show();
     }
     private void openPhoneCallDriver(Driver driver){
         Toast.makeText(this, "" +  driver.getPhone(), Toast.LENGTH_SHORT).show();
@@ -349,5 +355,28 @@ public class GoogleMapActivity extends AppCompatActivity implements
         }).show();
     }
 
+    @Override
+    public void onCameraMoveStarted(int i) {
+    }
+
+    @Override
+    public void onCameraMove() {
+        googleMap.clear();
+        imgMarker.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onCameraIdle() {
+        imgMarker.setVisibility(View.GONE);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(googleMap.getCameraPosition().target).icon(BitmapDescriptorFactory.fromResource(R.drawable.markercheck)).title("bạn đang ở đây");
+        googleMap.addMarker(markerOptions);
+    }
+    private void getLocationCurrent(){
+        googleMap.setMyLocationEnabled(true);
+        googleMap.getUiSettings().setMyLocationButtonEnabled(false);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(locationCurrent, 18f);
+        googleMap.animateCamera(cameraUpdate);
+    }
 }
 

@@ -23,7 +23,7 @@
             android:layout_marginTop="15dp"
             android:text="BOOK CAR"
 
-            android:textColor="#000000"
+            android:textColor="#fff"
             android:textSize="50dp"
             android:textStyle="bold" />
 

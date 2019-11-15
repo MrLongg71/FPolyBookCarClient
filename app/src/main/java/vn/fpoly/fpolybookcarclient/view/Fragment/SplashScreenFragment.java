@@ -22,7 +22,7 @@ import vn.fpoly.fpolybookcarclient.view.client.LoginFragment;
 import vn.fpoly.fpolybookcarclient.view.client.RegisterFragment;
 
 public class SplashScreenFragment extends Fragment implements View.OnClickListener {
-    ProgressBar progressBar;
+    private  ProgressBar progressBar;
     private Button btnsigup, btnlogin;
     private TextView txtIntro;
 
@@ -41,7 +41,6 @@ public class SplashScreenFragment extends Fragment implements View.OnClickListen
     private void initEvent(View view) {
         progressBar     = view.findViewById(R.id.progressbar);
         btnlogin        = view.findViewById(R.id.btnlogin);
-//        btnsigup        = view.findViewById(R.id.btnsigup);
         txtIntro        = view.findViewById(R.id.txtIntroduction);
     }
 
@@ -76,7 +75,7 @@ public class SplashScreenFragment extends Fragment implements View.OnClickListen
     private void loadAnimation() {
         Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.animation_button);
         btnlogin.startAnimation(animation);
-//        btnsigup.startAnimation(animation);
+
         txtIntro.startAnimation(animation);
     }
 }

@@ -51,6 +51,7 @@ public class HintFoodAdapter extends RecyclerView.Adapter<HintFoodAdapter.ViewHo
         holder.txtRate.setText(hintFood.getLike());
         holder.txtMinute.setText(hintFood.getTime());
         setImage(holder.imgFood,hintFood);
+
     }
     private void setImage(final ImageView image, HintFood hintFood){
         storageReference.child("Imagenewstodayeat").child(hintFood.getArrImage().get(0)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

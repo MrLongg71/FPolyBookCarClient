@@ -34,14 +34,12 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
         this.viewGoogleMap = viewGoogleMap;
         modelGoogleMap = new ModelGoogleMap();
 
-
     }
 
 
     @Override
     public void getPolyline(Activity activity, GoogleMap googleMap, LatLng locationGo, LatLng locationCome) {
         modelGoogleMap.dowlodPolylineList(activity, googleMap, locationGo, locationCome, this);
-
 
     }
 
@@ -54,7 +52,6 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
         pricee = price;
         distancee = distance;
         viewGoogleMap.showDetailDistance(distance, time, price);
-
     }
 
     @Override
@@ -106,15 +103,16 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
             String date = simpleDateFormat.format(calendar.getTime());
 
             String keyOrder = database.push().getKey();
-
-            final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder, driver.getKeydriver());
+            final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder,driver.getKeydriver());
 
             OderCar oderCar = new OderCar(keyOrder, firebaseAuth.getCurrentUser().getUid(), driver.getKeydriver()
                     , placeNameGo, placeNameCome, date, locationGo.latitude, locationGo.longitude, locationCome.latitude
                     , locationCome.longitude, pricee, driver.getRate(), distancee, false, false);
 
 
+
             modelGoogleMap.initPushNotification(oderCar, pushOrderToDriver);
+
 
         }
     }

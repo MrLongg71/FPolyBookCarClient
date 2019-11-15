@@ -25,7 +25,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //            showNotification(remoteMessage.getData().get("idOrder"), remoteMessage.getData().get("idDriver"));
         }
 
-        // Check if message contains a notification payload.
+        // Check if message contains markercheck notification payload.
         if (remoteMessage.getNotification() != null) {
 
         }

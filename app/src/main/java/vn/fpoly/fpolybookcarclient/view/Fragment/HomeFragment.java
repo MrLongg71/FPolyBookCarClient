@@ -50,7 +50,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener,IView
     private PresenterFoodBanner presenterFoodBanner;
     private PresenterEatWhat presenterEatWhat;
     private PresenterChallengerBanner presenterChallengerBanner;
-
     private CakeBannerAdapter cakeBannerAdapter;
     private ChallengeBannerAdapter bannerAdapter;
     private PlaceBannerAdapter placeBannerAdapter;
@@ -87,7 +86,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener,IView
         presenterChallengerBanner.getListChallenge();
 
         layoutChooseCarHome.setOnClickListener(this);
-
+        layoutChooseFoodHome.setOnClickListener(this);
+        layoutChooseBikeHome.setOnClickListener(this);
+        layoutChooseGiftHome.setOnClickListener(this);
 
 
         return view;
@@ -137,6 +138,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener,IView
 
                 break;
             case R.id.layoutChooseFoodHome:
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.conten,new FragmentFood()).commit();
 
                 break;
             case R.id.layoutChooseGiftHome:
