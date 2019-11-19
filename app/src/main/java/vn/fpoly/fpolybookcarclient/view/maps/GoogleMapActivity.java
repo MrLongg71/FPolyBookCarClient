@@ -69,7 +69,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
     private SpinKitView progressbarLoadDriver;
     private RelativeLayout relaLayoutChooseBike, relaLayoutChooseCar;
     private int CODE_CAR_OR_MOTO;
-    Marker marker;
     private ImageButton imgButtonMyLocation;
     private ImageView imgMarker;
 
@@ -125,7 +124,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         this.googleMap = googleMap;
-
 
         googleMap.setMinZoomPreference(6.0f);
         googleMap.setMaxZoomPreference(14.0f);
@@ -214,7 +212,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
         switch (requestCode) {
             case REQUESCODE:
                 if (resultCode == RESULT_OK && data != null) {
-
                     Bundle bundle = data.getBundleExtra(Constans.KEY_BUNDEL_BOOK);
                     locationGo = new LatLng(bundle.getDouble(Constans.KEY_BUNDEL_LATITUDE_GO), bundle.getDouble(Constans.KEY_BUNDEL_LONGITUDE_GO));
                     locationCome = new LatLng(bundle.getDouble(Constans.KEY_BUNDEL_LATITUDE_COME), bundle.getDouble(Constans.KEY_BUNDEL_LONGITUDE_COME));

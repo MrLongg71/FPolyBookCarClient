@@ -56,7 +56,6 @@ public class SplashScreenFragment extends Fragment implements View.OnClickListen
 //                fragmentTransaction.replace(R.id.frame_client, registerFragment);
 //                fragmentTransaction.addToBackStack(null);
 //                fragmentTransaction.commit();
-//
 //                break;
             case R.id.btnlogin:
                 LoginFragment loginFragment = new LoginFragment();

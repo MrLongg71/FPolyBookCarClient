@@ -39,16 +39,16 @@ public class ActivityFragment extends Fragment {
     }
     private void dataItem(){
         arrHistoryBook.add(new HistoryBookCar("Chuyến đi đến 593 Hoàng Xa","18 thg 7","Car",R.drawable.iconcar));
-        arrHistoryBook.add(new HistoryBookCar("Cơm chay thích thì vô","20 thg 10","Food",R.drawable.iconfood));
+        arrHistoryBook.add(new HistoryBookCar("Cơm chay thích thì vô","20 thg 10","FoodPager",R.drawable.iconfood));
         arrHistoryBook.add(new HistoryBookCar("Chuyến đi đến NewYord","30 thg 12","MotoBike",R.drawable.icon_motorbike));
         arrHistoryBook.add(new HistoryBookCar("Chuyến đi đến 593 Hoàng Xa","18 thg 7","Car",R.drawable.iconcar));
-        arrHistoryBook.add(new HistoryBookCar("Cơm chay thích thì vô","20 thg 10","Food",R.drawable.iconfood));
+        arrHistoryBook.add(new HistoryBookCar("Cơm chay thích thì vô","20 thg 10","FoodPager",R.drawable.iconfood));
         arrHistoryBook.add(new HistoryBookCar("Chuyến đi đến NewYord","30 thg 12","MotoBike",R.drawable.icon_motorbike));
         arrHistoryBook.add(new HistoryBookCar("Chuyến đi đến 593 Hoàng Xa","18 thg 7","Car",R.drawable.iconcar));
-        arrHistoryBook.add(new HistoryBookCar("Cơm chay thích thì vô","20 thg 10","Food",R.drawable.iconfood));
+        arrHistoryBook.add(new HistoryBookCar("Cơm chay thích thì vô","20 thg 10","FoodPager",R.drawable.iconfood));
         arrHistoryBook.add(new HistoryBookCar("Chuyến đi đến NewYord","30 thg 12","MotoBike",R.drawable.icon_motorbike));
         arrHistoryBook.add(new HistoryBookCar("Chuyến đi đến 593 Hoàng Xa","18 thg 7","Car",R.drawable.iconcar));
-        arrHistoryBook.add(new HistoryBookCar("Cơm chay thích thì vô","20 thg 10","Food",R.drawable.iconfood));
+        arrHistoryBook.add(new HistoryBookCar("Cơm chay thích thì vô","20 thg 10","FoodPager",R.drawable.iconfood));
         arrHistoryBook.add(new HistoryBookCar("Chuyến đi đến NewYord","30 thg 12","MotoBike",R.drawable.icon_motorbike));
     }
 }

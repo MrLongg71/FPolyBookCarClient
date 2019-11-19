@@ -1,5 +1,7 @@
 package vn.fpoly.fpolybookcarclient.model.challengebanner;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +33,7 @@ public class ModelChallengeBanner {
                         arrImage.add(value.getValue(String.class));
                     }
                     challengeBanner.setArrImage(arrImage);
+
                     presenterChallengerBanner.resultGetListChallenge(challengeBanner);
                 }
             }

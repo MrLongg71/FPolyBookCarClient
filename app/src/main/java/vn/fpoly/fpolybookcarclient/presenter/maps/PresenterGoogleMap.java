@@ -75,11 +75,7 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
                              }
                          }
 
-
-                         Log.d("fffff", "bbb");
-
                          viewGoogleMap.getDriverNear(driverProvisional);
-                         Log.d("fffff", "ccc");
 
 
                      }

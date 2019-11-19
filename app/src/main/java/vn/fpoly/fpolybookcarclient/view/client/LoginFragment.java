@@ -143,7 +143,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
             return false;
 
         } else {
-
+            startActivity(new Intent(getActivity(), HomeActivity.class));
             return true;
         }
     }
@@ -184,7 +184,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
     @Override
     public void onSuccess() {
         Dialog.Success(getActivity());
-        startActivity(new Intent(getActivity(), HomeActivity.class));
 
     }
 

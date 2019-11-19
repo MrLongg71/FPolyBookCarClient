@@ -2,6 +2,7 @@ package vn.fpoly.fpolybookcarclient.adapter.home;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class CakeBannerAdapter extends RecyclerView.Adapter<CakeBannerAdapter.Vi
     private List<CakesBanner> arrCake;
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     private boolean ischeck;
+
     public CakeBannerAdapter(Context context, int layout, List<CakesBanner> arrCake,boolean ischeck) {
         this.context = context;
         this.layout = layout;
@@ -42,7 +44,7 @@ public class CakeBannerAdapter extends RecyclerView.Adapter<CakeBannerAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(layout, null, false);
+        View view = layoutInflater.inflate(layout, parent, false);
         return new ViewHolder(view);
     }
 
@@ -70,12 +72,13 @@ public class CakeBannerAdapter extends RecyclerView.Adapter<CakeBannerAdapter.Vi
         }
     }
 
-    private void setImageCake(final ImageView imageCake, CakesBanner cakesBanner){
+    private void setImageCake(final ImageView imageCake, final CakesBanner cakesBanner){
         storageReference.child("Imagenewscake").child(cakesBanner.getArrImage().get(0)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 String URL = uri.toString();
                 Glide.with(context).load(URL).diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(imageCake);
+
             }
         });
     }

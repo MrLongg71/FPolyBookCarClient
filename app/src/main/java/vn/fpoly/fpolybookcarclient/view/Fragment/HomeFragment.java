@@ -90,7 +90,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener,IView
         layoutChooseBikeHome.setOnClickListener(this);
         layoutChooseGiftHome.setOnClickListener(this);
 
-
         return view;
     }
 
@@ -138,8 +137,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener,IView
 
                 break;
             case R.id.layoutChooseFoodHome:
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.conten,new FragmentFood()).commit();
-
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.conten,new FoodFragment()).commit();
+                getActivity().getSupportFragmentManager().addOnBackStackChangedListener(null);
                 break;
             case R.id.layoutChooseGiftHome:
                 break;
@@ -268,6 +267,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener,IView
         recyclerView2.setAdapter(cakeBannerAdapter);
         cakeBannerAdapter.notifyDataSetChanged();
 
+
     }
 
     @Override
@@ -303,10 +303,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener,IView
 
     @Override
     public void displayListChallenge(ArrayList<ChallengeBanner> arrChallenge) {
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
         recyclerView1.setLayoutManager(layoutManager);
         bannerAdapter = new ChallengeBannerAdapter(arrChallenge, getActivity(), R.layout.row_challenge_banner);
         recyclerView1.setAdapter(bannerAdapter);
     }
+
+
+
+
 }
 
