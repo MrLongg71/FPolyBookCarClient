@@ -77,7 +77,7 @@ public class ModelGoogleMap {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 DataSnapshot nodeCar = dataSnapshot.child("Driver").child("Car");
                 for (DataSnapshot valueDriverCar : nodeCar.getChildren()) {
-                    Log.d("bbbbb", valueDriverCar.getKey() + "");
+
                     Driver driver = valueDriverCar.getValue(Driver.class);
                     driver.setKeydriver(valueDriverCar.getKey());
 

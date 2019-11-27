@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#cccccc"
+    tools:context=".view.food.menu_restaurant.MenuRestaurantFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:adjustViewBounds="true"
+                android:src="@drawable/backgroudhome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <FrameLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize">
+                   <RelativeLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
+
+                       <ImageView
+                           android:src="@drawable/ic_arrow_back_black_24dp"
+                           android:layout_width="30dp"
+                           android:layout_height="30dp"/>
+
+
+                       <ImageView
+                           android:layout_alignParentRight="true"
+                           android:layout_marginRight="10dp"
+                           android:layout_width="30dp"
+                           android:layout_height="30dp"
+                           android:src="@drawable/ic_search_black_24dp" />
+
+                   </RelativeLayout>
+
+
+                </androidx.appcompat.widget.Toolbar>
+
+            </FrameLayout>
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/txtNameRes"
+                android:text="Ten Nha HAng"
+                android:layout_margin="10dp"
+                android:textSize="30sp"
+                android:textColor="#000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:id="@+id/txtStartMenuRes"
+                    android:text="4.3"
+                    android:drawableLeft="@drawable/rsz_iconstar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:id="@+id/txtTimeMenuRes"
+                    android:text="25 mins"
+                    android:drawableLeft="@drawable/rsz_iconstar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:id="@+id/txtDistanceMenuRes"
+                    android:text="10 km"
+                    android:drawableLeft="@drawable/rsz_iconstar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Menu"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <View
+            android:background="@color/gray_btn_bg_color"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_margin="5dp"
+            android:id="@+id/reycelviewMenuRestaurant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
+</LinearLayout>

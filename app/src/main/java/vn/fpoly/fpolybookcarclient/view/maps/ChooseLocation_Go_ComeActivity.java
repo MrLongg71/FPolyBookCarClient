@@ -69,6 +69,7 @@ public class ChooseLocation_Go_ComeActivity extends AppCompatActivity {
     }
     private void eventChooseGo(){
         chooseLocationGo.setHint("Điểm đi");
+        chooseLocationGo.setCountry("vn");
         chooseLocationGo.setPlaceFields(Arrays.asList(Place.Field.NAME,Place.Field.ID, Place.Field.ADDRESS, Place.Field.LAT_LNG));
         chooseLocationGo.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
@@ -88,6 +89,7 @@ public class ChooseLocation_Go_ComeActivity extends AppCompatActivity {
 
     private void eventChooseCome(){
         chooseLocationCome.setHint("Điểm đến");
+        chooseLocationCome.setCountry("vn");
         chooseLocationCome.setPlaceFields(Arrays.asList(Place.Field.NAME,Place.Field.ID, Place.Field.ADDRESS, Place.Field.LAT_LNG));
         chooseLocationCome.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
