@@ -5,22 +5,23 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
-        android:debuggable="false"
         android:icon="@drawable/ic_launcher_background"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_launcher_background"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.Activity.MainActivity"></activity>
+        <activity android:name=".view.activity.MainActivity"></activity>
         <activity android:name=".view.maps.GoogleMapActivity" />
         <activity android:name=".view.client.LoginSMSActivity" />
         <activity
-            android:name=".view.Activity.HomeActivity"
+            android:name=".view.activity.HomeActivity"
             android:label="@string/title_activity_home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.Activity.SplashScreenActivity"></activity>
+        <activity android:name=".view.activity.SplashScreenActivity"></activity>
         <activity android:name=".view.maps.ChooseLocation_Go_ComeActivity"></activity>
         <activity android:name=".view.client.ClientActivity" /> <!-- Key API Google Map -->
         <meta-data

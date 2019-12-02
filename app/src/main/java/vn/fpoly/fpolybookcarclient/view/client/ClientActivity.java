@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import vn.fpoly.fpolybookcarclient.R;
-import vn.fpoly.fpolybookcarclient.view.Fragment.SplashScreenFragment;
+import vn.fpoly.fpolybookcarclient.view.splashscreen.SplashScreenFragment;
 
 public class ClientActivity extends AppCompatActivity {
 

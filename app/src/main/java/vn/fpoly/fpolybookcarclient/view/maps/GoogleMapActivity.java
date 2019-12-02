@@ -10,13 +10,13 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +38,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -47,7 +46,7 @@ import vn.fpoly.fpolybookcarclient.Constans;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Driver;
 import vn.fpoly.fpolybookcarclient.presenter.maps.PresenterGoogleMap;
 import vn.fpoly.fpolybookcarclient.R;
-import vn.fpoly.fpolybookcarclient.view.Activity.HomeActivity;
+import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
 
 public class GoogleMapActivity extends AppCompatActivity implements
         OnMapReadyCallback, View.OnClickListener, ViewGoogleMap, GoogleMap.OnCameraMoveStartedListener
@@ -73,12 +72,19 @@ public class GoogleMapActivity extends AppCompatActivity implements
     private ImageView imgMarker;
 
     private PresenterGoogleMap presenterGoogleMap;
+    SharedPreferences sharedPreferences;
+    String locationLatitude = "";
+    String locationLongitude = "";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_map);
+        sharedPreferences = getSharedPreferences("toado", 0);
+
+        locationLatitude = sharedPreferences.getString("locationlatitude","");
+        locationLongitude = sharedPreferences.getString("locationlongitude","");
 
         initView();
         int checkPermissionCoarseLocaltion_COARSE = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);

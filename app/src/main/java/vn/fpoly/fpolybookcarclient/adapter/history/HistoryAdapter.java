@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import vn.fpoly.fpolybookcarclient.R;
-import vn.fpoly.fpolybookcarclient.adapter.home.FoodBannerAdapter;
 import vn.fpoly.fpolybookcarclient.model.objectClass.HistoryBookCar;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {

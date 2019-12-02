@@ -1,7 +1,5 @@
 package vn.fpoly.fpolybookcarclient.model.challengebanner;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -14,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vn.fpoly.fpolybookcarclient.model.objectClass.ChallengeBanner;
-import vn.fpoly.fpolybookcarclient.presenter.challengebanner.PresenterChallengerBanner;
+import vn.fpoly.fpolybookcarclient.presenter.home.challengebanner.PresenterChallengerBanner;
 
 public class ModelChallengeBanner {
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();

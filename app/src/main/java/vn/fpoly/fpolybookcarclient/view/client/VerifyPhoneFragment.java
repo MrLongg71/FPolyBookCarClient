@@ -28,7 +28,7 @@ import es.dmoral.toasty.Toasty;
 import vn.fpoly.fpolybookcarclient.library.Dialog;
 import vn.fpoly.fpolybookcarclient.presenter.client.PresenterLogin;
 import vn.fpoly.fpolybookcarclient.R;
-import vn.fpoly.fpolybookcarclient.view.Activity.HomeActivity;
+import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
 
 public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnClickListener {
 

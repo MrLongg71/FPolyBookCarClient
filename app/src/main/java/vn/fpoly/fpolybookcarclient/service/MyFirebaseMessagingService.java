@@ -14,7 +14,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import vn.fpoly.fpolybookcarclient.R;
-import vn.fpoly.fpolybookcarclient.view.Activity.SplashScreenActivity;
+import vn.fpoly.fpolybookcarclient.view.activity.SplashScreenActivity;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
