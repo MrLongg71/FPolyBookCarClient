@@ -364,16 +364,16 @@ public class GoogleMapActivity extends AppCompatActivity implements
 
     @Override
     public void onCameraMove() {
-        googleMap.clear();
+//        googleMap.clear();
         imgMarker.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onCameraIdle() {
-        imgMarker.setVisibility(View.GONE);
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(googleMap.getCameraPosition().target).icon(BitmapDescriptorFactory.fromResource(R.drawable.markercheck)).title("bạn đang ở đây");
-        googleMap.addMarker(markerOptions);
+//        imgMarker.setVisibility(View.GONE);
+//        MarkerOptions markerOptions = new MarkerOptions();
+//        markerOptions.position(googleMap.getCameraPosition().target).icon(BitmapDescriptorFactory.fromResource(R.drawable.markercheck)).title("bạn đang ở đây");
+//        googleMap.addMarker(markerOptions);
     }
     private void getLocationCurrent(){
         googleMap.setMyLocationEnabled(true);
