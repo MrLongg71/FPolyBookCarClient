@@ -1,0 +1,91 @@
+[debug] [2019-12-03T07:12:30.230Z] ----------------------------------------------------------------------
+[debug] [2019-12-03T07:12:30.232Z] Command:       /usr/bin/node /usr/bin/firebase depoly
+[debug] [2019-12-03T07:12:30.233Z] CLI Version:   7.8.1
+[debug] [2019-12-03T07:12:30.233Z] Platform:      linux
+[debug] [2019-12-03T07:12:30.233Z] Node Version:  v10.15.3
+[debug] [2019-12-03T07:12:30.233Z] Time:          Tue Dec 03 2019 14:12:30 GMT+0700 (Indochina Time)
+[debug] [2019-12-03T07:12:30.233Z] ----------------------------------------------------------------------
+[debug] [2019-12-03T07:12:30.233Z] 
+[error] Error: [object Object] is not a Firebase command
+[debug] [2019-12-03T07:12:30.240Z] TypeError: str.toLowerCase is not a function
+    at didYouMean (/usr/lib/node_modules/firebase-tools/node_modules/didyoumean/didYouMean-1.2.1.js:147:48)
+    at suggestCommands (/usr/lib/node_modules/firebase-tools/lib/index.js:28:22)
+    at Command.<anonymous> (/usr/lib/node_modules/firebase-tools/lib/index.js:57:14)
+    at Command.listener (/usr/lib/node_modules/firebase-tools/node_modules/commander/index.js:360:8)
+    at Command.emit (events.js:189:13)
+    at Command.EventEmitter.emit (domain.js:441:20)
+    at Command.parseArgs (/usr/lib/node_modules/firebase-tools/node_modules/commander/index.js:801:12)
+    at Command.parse (/usr/lib/node_modules/firebase-tools/node_modules/commander/index.js:563:21)
+    at Object.<anonymous> (/usr/lib/node_modules/firebase-tools/lib/bin/firebase.js:98:22)
+    at Module._compile (internal/modules/cjs/loader.js:701:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:712:10)
+    at Module.load (internal/modules/cjs/loader.js:600:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:539:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:531:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:754:12)
+    at startup (internal/bootstrap/node.js:283:19)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2019-12-03T07:12:39.025Z] ----------------------------------------------------------------------
+[debug] [2019-12-03T07:12:39.028Z] Command:       /usr/bin/node /usr/bin/firebase init
+[debug] [2019-12-03T07:12:39.028Z] CLI Version:   7.8.1
+[debug] [2019-12-03T07:12:39.028Z] Platform:      linux
+[debug] [2019-12-03T07:12:39.029Z] Node Version:  v10.15.3
+[debug] [2019-12-03T07:12:39.029Z] Time:          Tue Dec 03 2019 14:12:39 GMT+0700 (Indochina Time)
+[debug] [2019-12-03T07:12:39.029Z] ----------------------------------------------------------------------
+[debug] [2019-12-03T07:12:39.029Z] 
+[debug] [2019-12-03T07:12:39.037Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-12-03T07:12:39.037Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /media/longkhoa/FEF22454F2241385/Android/DuAn1/FPolyBookCarClient
+
+Before we get started, keep in mind:
+
+  * You are currently outside your home directory
+  * You are initializing in an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  .firebaserc already has a default project, using fpolybookcar.
+[debug] [2019-12-03T07:12:46.540Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-12-03T07:12:46.541Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-12-03T07:12:47.047Z] <<< HTTP RESPONSE 200
+[debug] [2019-12-03T07:12:47.055Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/fpolybookcar  
+ 
+[debug] [2019-12-03T07:12:47.701Z] <<< HTTP RESPONSE 200
+[info] 
+=== Functions Setup
+[info] 
+[info] A functions directory will be created in your project with a Node.js
+[info] package pre-configured. Functions can be deployed with firebase deploy.
+[info] 
+[debug] [2019-12-03T07:12:47.704Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-12-03T07:12:47.704Z] > authorizing via signed-in user
+[debug] [2019-12-03T07:12:47.705Z] [iam] checking project fpolybookcar for permissions ["firebase.projects.get"]
+[debug] [2019-12-03T07:12:47.706Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/fpolybookcar:testIamPermissions  
+
+[debug] [2019-12-03T07:12:49.296Z] <<< HTTP RESPONSE 200
+[debug] [2019-12-03T07:12:49.297Z] >>> HTTP REQUEST POST https://serviceusage.googleapis.com/v1/projects/fpolybookcar/services/cloudfunctions.googleapis.com:enable  
+ 
+[debug] [2019-12-03T07:12:49.298Z] >>> HTTP REQUEST POST https://serviceusage.googleapis.com/v1/projects/fpolybookcar/services/runtimeconfig.googleapis.com:enable  
+ 
+[debug] [2019-12-03T07:12:51.269Z] <<< HTTP RESPONSE 200
+[debug] [2019-12-03T07:12:51.293Z] <<< HTTP RESPONSE 200
+[info] ✔  Wrote functions/package.json
+[info] ✔  Wrote functions/.eslintrc.json
+[info] ✔  Wrote functions/index.js
+[info] ✔  Wrote functions/.gitignore

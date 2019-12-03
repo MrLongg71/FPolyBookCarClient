@@ -9,7 +9,7 @@ import vn.fpoly.fpolybookcarclient.view.food.IViewFoodCategories;
 public class PresenterFoodCategories  implements IPresenterFoodCategories{
     private ModelFoodCategories modelFoodCategories;
     private IViewFoodCategories iViewFoodCategories;
-    private ArrayList<FoodCategories>arrFoodCategories = new ArrayList<>();
+
 
     public PresenterFoodCategories(IViewFoodCategories iViewFoodCategories) {
         this.iViewFoodCategories = iViewFoodCategories;
@@ -22,8 +22,9 @@ public class PresenterFoodCategories  implements IPresenterFoodCategories{
     }
 
     @Override
-    public void resultGetFoodCategories(FoodCategories foodCategories) {
-        arrFoodCategories.add(foodCategories);
-        iViewFoodCategories.displayFoodCategories(arrFoodCategories);
+    public void resultGetFoodCategories(ArrayList<FoodCategories> arrFoodCategoris, ArrayList<FoodCategories> arrMenuFood) {
+        iViewFoodCategories.displayFoodCategories(arrFoodCategoris,arrMenuFood);
     }
+
+
 }

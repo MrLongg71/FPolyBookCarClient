@@ -5,5 +5,5 @@ import java.util.ArrayList;
 import vn.fpoly.fpolybookcarclient.model.objectClass.FoodCategories;
 
 public interface IViewFoodCategories {
-    void displayFoodCategories(ArrayList<FoodCategories>arrFoodCategories);
+    void displayFoodCategories(ArrayList<FoodCategories>arrFoodCategories,ArrayList<FoodCategories>arrMenuFood);
 }

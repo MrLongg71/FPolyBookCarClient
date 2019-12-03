@@ -14,10 +14,7 @@ public class Restaurant {
     private String detail;
     private String address;
     private double rate;
-    private List<String>arrImage;
-
-    public Restaurant() {
-    }
+    private String image;
 
     public String getKey() {
         return key;
@@ -107,15 +104,18 @@ public class Restaurant {
         this.rate = rate;
     }
 
-    public List<String> getArrImage() {
-        return arrImage;
+    public String getImage() {
+        return image;
     }
 
-    public void setArrImage(List<String> arrImage) {
-        this.arrImage = arrImage;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public Restaurant(String key, String name, boolean status, String timeend, String timestart, double longitude, double latitude, String keymenu, String detail, String address, double rate, List<String> arrImage) {
+    public Restaurant() {
+    }
+
+    public Restaurant(String key, String name, boolean status, String timeend, String timestart, double longitude, double latitude, String keymenu, String detail, String address, double rate, String image) {
         this.key = key;
         this.name = name;
         this.status = status;
@@ -127,6 +127,6 @@ public class Restaurant {
         this.detail = detail;
         this.address = address;
         this.rate = rate;
-        this.arrImage = arrImage;
+        this.image = image;
     }
 }

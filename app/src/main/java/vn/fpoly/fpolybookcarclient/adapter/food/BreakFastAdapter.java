@@ -1,7 +1,6 @@
 package vn.fpoly.fpolybookcarclient.adapter.food;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,24 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
 import vn.fpoly.fpolybookcarclient.R;
-import vn.fpoly.fpolybookcarclient.model.objectClass.BreakFast_MenuFood;
 import vn.fpoly.fpolybookcarclient.model.objectClass.FoodMenu;
 
-public class BreakFast_MenuFoodAdapter extends RecyclerView.Adapter<BreakFast_MenuFoodAdapter.ViewHolder> {
+public class BreakFastAdapter extends RecyclerView.Adapter<BreakFastAdapter.ViewHolder> {
     private Context context;
     private int layout;
     private List<FoodMenu> arrFoodMenu;
 
 
-    public BreakFast_MenuFoodAdapter(Context context, int layout, List<FoodMenu> arrFoodMenu) {
+    public BreakFastAdapter(Context context, int layout, List<FoodMenu> arrFoodMenu) {
         this.context = context;
         this.layout = layout;
         this.arrFoodMenu = arrFoodMenu;

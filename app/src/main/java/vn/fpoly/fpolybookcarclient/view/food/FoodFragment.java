@@ -26,41 +26,38 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import vn.fpoly.fpolybookcarclient.R;
-import vn.fpoly.fpolybookcarclient.adapter.food.BreakFast_MenuFoodAdapter;
-import vn.fpoly.fpolybookcarclient.adapter.food.CategoriesAdapter;
+import vn.fpoly.fpolybookcarclient.adapter.food.BreakFastAdapter;
+import vn.fpoly.fpolybookcarclient.adapter.food.Categories_MenuFoodAdapter;
 import vn.fpoly.fpolybookcarclient.adapter.food.RestaurantAdapter;
 import vn.fpoly.fpolybookcarclient.adapter.food.ViewpagerFood;
-import vn.fpoly.fpolybookcarclient.model.objectClass.BreakFast_MenuFood;
+import vn.fpoly.fpolybookcarclient.model.objectClass.FoodMenu;
 import vn.fpoly.fpolybookcarclient.model.objectClass.FoodPager;
 import vn.fpoly.fpolybookcarclient.model.objectClass.FoodCategories;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Restaurant;
-import vn.fpoly.fpolybookcarclient.model.objectClass.PopularFood;
-import vn.fpoly.fpolybookcarclient.presenter.food.breakfast.PresenterBreakFast;
 import vn.fpoly.fpolybookcarclient.presenter.food.foodviewpager.PresenterFood;
 import vn.fpoly.fpolybookcarclient.presenter.food.foodcategories.PresenterFoodCategories;
-import vn.fpoly.fpolybookcarclient.presenter.food.foodsale.PresenterFoodSale;
+import vn.fpoly.fpolybookcarclient.presenter.food.restaurant.PresenterRestaurant;
 
-public class FoodFragment extends Fragment implements IViewFood, IViewFoodCategories, IViewRestaurant, IViewBreakFast {
+public class FoodFragment extends Fragment implements IViewFood, IViewFoodCategories, IViewRestaurant {
     private ViewpagerFood viewpagerFood;
     private ViewPager viewPager;
     private PresenterFood presenterFood;
     private int currentPage = 0;
     private int NUM_PAGES = 10;
-
-    private PresenterFoodSale presenterFoodSale;
+    private PresenterRestaurant presenterRestaurant;
     private Timer timer;
-    private PresenterBreakFast presenterBreakFast;
-    private BreakFast_MenuFoodAdapter breakFastMenuFoodAdapter;
+    private BreakFastAdapter breakFastMenuFoodAdapter;
     private RestaurantAdapter foodSaleAdapter;
-    private CategoriesAdapter categoriesAdapter;
+    private Categories_MenuFoodAdapter categoriesMenuFoodAdapter;
     private PresenterFoodCategories presenterFoodCategories;
-    private RecyclerView recyclerViewFood1,reycelviewFood2,reycelviewFood3,reycelviewFood5;
+    private RecyclerView recyclerViewFoodCategories,recyclerViewRestaurant,recyclerViewBreakFast,recyclerViewMenuFood;
     private SharedPreferences sharedPreferences;
     private String locationLatitude ;
     private String locationLongitude ;
     private TextView txtAdress;
     private Geocoder geocoder;
     private List<Address>arrAddresss;
+    private ArrayList<String> keyListRestaurant = new ArrayList<>();
 
 
     @Nullable
@@ -94,8 +91,8 @@ public class FoodFragment extends Fragment implements IViewFood, IViewFoodCatego
 
         presenterFood.getListFood();
         presenterFoodCategories.getListFoodCategories();
-        presenterFoodSale.getListFoodSale();
-        presenterBreakFast.getListBreakFast();
+        presenterRestaurant.getListRestaurant();
+
 
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
@@ -118,16 +115,15 @@ public class FoodFragment extends Fragment implements IViewFood, IViewFoodCatego
         return view;
     }
     private void initView(View view){
-        viewPager               = view.findViewById(R.id.viewpager);
-        presenterFood           = new PresenterFood(this);
-        recyclerViewFood1       = view.findViewById(R.id.reycelviewFood1);
-        presenterFoodCategories = new PresenterFoodCategories(this);
-        presenterFoodSale       = new PresenterFoodSale(this);
-        reycelviewFood2         = view.findViewById(R.id.reycelviewFood2);
-        reycelviewFood3         = view.findViewById(R.id.reycelviewFood3);
-        reycelviewFood5         = view.findViewById(R.id.reycelviewFood5);
-        presenterBreakFast      = new PresenterBreakFast(this);
-        txtAdress               = view.findViewById(R.id.txtAddress);
+        viewPager                                           = view.findViewById(R.id.viewpager);
+        presenterFood                                       = new PresenterFood(this);
+        recyclerViewFoodCategories                          = view.findViewById(R.id.reycelviewFood1);
+        presenterFoodCategories                             = new PresenterFoodCategories(this);
+        presenterRestaurant                                 = new PresenterRestaurant(this);
+        recyclerViewRestaurant                              = view.findViewById(R.id.reycelviewFood2);
+        recyclerViewBreakFast                               = view.findViewById(R.id.reycelviewFood3);
+        recyclerViewMenuFood                                = view.findViewById(R.id.reycelviewFood5);
+        txtAdress                                           = view.findViewById(R.id.txtAddress);
     }
 
 
@@ -137,39 +133,45 @@ public class FoodFragment extends Fragment implements IViewFood, IViewFoodCatego
         viewPager.setAdapter(viewpagerFood);
     }
 
-    @Override
-    public void displayFoodCategories(ArrayList<FoodCategories> arrFoodCategories) {
-        recyclerViewFood1.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
-        recyclerViewFood1.setLayoutManager(linearLayoutManager);
-        categoriesAdapter = new CategoriesAdapter(arrFoodCategories, R.layout.custom_row_categories, getActivity());
-        recyclerViewFood1.setAdapter(categoriesAdapter);
-        categoriesAdapter.notifyDataSetChanged();
-
-    }
 
     @Override
-    public void displayFoodSale(ArrayList<Restaurant> arrRestaurant) {
-        reycelviewFood2.setHasFixedSize(true);
+    public void displayRestaurant(ArrayList<Restaurant> arrRestaurant) {
+
+        recyclerViewRestaurant.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
-        reycelviewFood2.setLayoutManager(linearLayoutManager);
+        recyclerViewRestaurant.setLayoutManager(linearLayoutManager);
         foodSaleAdapter = new RestaurantAdapter(arrRestaurant, getActivity(), R.layout.custom_row_restaurantprice);
-        reycelviewFood2.setAdapter(foodSaleAdapter);
+        recyclerViewRestaurant.setAdapter(foodSaleAdapter);
         foodSaleAdapter.notifyDataSetChanged();
+        for (int i = 0; i <5;i ++ ){
+            keyListRestaurant.add(arrRestaurant.get(i).getKey());
+        }
+        presenterRestaurant.getListFood(keyListRestaurant);
+
     }
 
     @Override
-    public void displayBreakFast(ArrayList<BreakFast_MenuFood> arrBreakFastMenuFood, ArrayList<BreakFast_MenuFood> arrMenuFood) {
-        reycelviewFood3.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
-        reycelviewFood5.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
+    public void displayFoodMenu(ArrayList<FoodMenu> arrFoodMenu) {
+        recyclerViewBreakFast.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
 
-        breakFastMenuFoodAdapter = new BreakFast_MenuFoodAdapter(getActivity(),R.layout.custom_row_breakfast,arrBreakFastMenuFood);
-        reycelviewFood3.setAdapter(breakFastMenuFoodAdapter);
-        breakFastMenuFoodAdapter.notifyDataSetChanged();
-
-
-        breakFastMenuFoodAdapter = new BreakFast_MenuFoodAdapter(getActivity(),R.layout.custom_row_popular,arrMenuFood);
-        reycelviewFood5.setAdapter(breakFastMenuFoodAdapter);
+        breakFastMenuFoodAdapter = new BreakFastAdapter(getActivity(), R.layout.custom_row_breakfast, arrFoodMenu);
+        recyclerViewBreakFast.setAdapter(breakFastMenuFoodAdapter);
         breakFastMenuFoodAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void displayFoodCategories(ArrayList<FoodCategories> arrFoodCategories, ArrayList<FoodCategories> arrMenuFood) {
+        recyclerViewMenuFood.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        recyclerViewFoodCategories.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+
+        categoriesMenuFoodAdapter = new Categories_MenuFoodAdapter(arrFoodCategories, R.layout.custom_row_categories, getActivity());
+        recyclerViewFoodCategories.setAdapter(categoriesMenuFoodAdapter);
+        categoriesMenuFoodAdapter.notifyDataSetChanged();
+
+        Categories_MenuFoodAdapter categories_menuFoodAdapter = new Categories_MenuFoodAdapter(arrMenuFood, R.layout.custom_row_menufood, getActivity());
+        recyclerViewMenuFood.setAdapter(categories_menuFoodAdapter);
+        categories_menuFoodAdapter.notifyDataSetChanged();
+
+    }
+
 }

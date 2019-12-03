@@ -2,6 +2,7 @@ package vn.fpoly.fpolybookcarclient.adapter.food;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +27,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     private List<Restaurant> arrRestaurant;
     private Context context;
     private int layout;
-    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     public RestaurantAdapter(List<Restaurant> arrRestaurant, Context context, int layout) {
         this.arrRestaurant = arrRestaurant;
         this.context = context;
         this.layout = layout;
+
     }
 
     @NonNull
@@ -47,18 +48,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         Restaurant restaurant = arrRestaurant.get(position);
         holder.txtTitle.setText(restaurant.getName());
         holder.txtDetail.setText(restaurant.getDetail());
-        storageReference.child("ImageRestaurant").child(restaurant.getArrImage().get(0)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                String URL = uri.toString();
-                Glide.with(context).load(URL).into(holder.roundedImageView);
-            }
-        });
+        Log.d("aaaaaa",restaurant.getImage());
+        Glide.with(context).load(restaurant.getImage()).into(holder.roundedImageView);
+
     }
 
     @Override
     public int getItemCount() {
-        return arrRestaurant.size();
+        return 5;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
