@@ -47,7 +47,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         Restaurant restaurant = arrRestaurant.get(position);
         holder.txtTitle.setText(restaurant.getName());
         holder.txtDetail.setText(restaurant.getDetail());
-//        holder.txtDistance.setText(restaurant.getDistance());
         storageReference.child("ImageRestaurant").child(restaurant.getArrImage().get(0)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {

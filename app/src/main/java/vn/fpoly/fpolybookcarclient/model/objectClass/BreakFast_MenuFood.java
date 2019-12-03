@@ -2,14 +2,11 @@ package vn.fpoly.fpolybookcarclient.model.objectClass;
 
 import java.util.List;
 
-public class BreakFast {
+public class BreakFast_MenuFood {
     private String key;
     private String title;
     private String distance;
-    private List<String>arrImage;
-
-    public BreakFast() {
-    }
+    private String image;
 
     public String getKey() {
         return key;
@@ -35,18 +32,21 @@ public class BreakFast {
         this.distance = distance;
     }
 
-    public List<String> getArrImage() {
-        return arrImage;
+    public String getImage() {
+        return image;
     }
 
-    public void setArrImage(List<String> arrImage) {
-        this.arrImage = arrImage;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public BreakFast(String key, String title, String distance, List<String> arrImage) {
+    public BreakFast_MenuFood() {
+    }
+
+    public BreakFast_MenuFood(String key, String title, String distance, String image) {
         this.key = key;
         this.title = title;
         this.distance = distance;
-        this.arrImage = arrImage;
+        this.image = image;
     }
 }
