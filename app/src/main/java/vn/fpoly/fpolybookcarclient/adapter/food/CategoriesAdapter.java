@@ -44,7 +44,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull final CategoriesAdapter.ViewHolder holder, int position) {
         FoodCategories foodCategories = arrFoodCategoris.get(position);
-        holder.txtTitle.setText(foodCategories.getTitle());
+        holder.txtTitle.setText(foodCategories.getTitle()+"fffff");
         storageReference.child("Imageexplorecategories").child(foodCategories.getArrImage().get(0)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {

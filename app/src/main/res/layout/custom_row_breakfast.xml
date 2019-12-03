@@ -27,7 +27,7 @@
                     android:layout_height="match_parent">
 
                     <com.makeramen.roundedimageview.RoundedImageView
-                        android:id="@+id/imgFood2"
+                        android:id="@+id/imgFood4"
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
                         android:scaleType="centerCrop"
@@ -61,7 +61,7 @@
                 </FrameLayout>
 
                 <TextView
-                    android:id="@+id/txtTitleFood2"
+                    android:id="@+id/txtFood4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"

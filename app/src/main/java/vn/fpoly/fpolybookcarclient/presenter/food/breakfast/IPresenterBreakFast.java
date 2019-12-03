@@ -1,8 +1,10 @@
 package vn.fpoly.fpolybookcarclient.presenter.food.breakfast;
 
-import vn.fpoly.fpolybookcarclient.model.objectClass.BreakFast;
+import java.util.ArrayList;
+
+import vn.fpoly.fpolybookcarclient.model.objectClass.BreakFast_MenuFood;
 
 public interface IPresenterBreakFast {
     void getListBreakFast();
-    void resualGetBreakFast(BreakFast breakFast);
+    void resualGetBreakFast(ArrayList<BreakFast_MenuFood>arrBreakFast,ArrayList<BreakFast_MenuFood>arrMenuFood);
 }
