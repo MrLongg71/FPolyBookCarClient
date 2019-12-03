@@ -20,17 +20,18 @@ import java.util.List;
 
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.model.objectClass.BreakFast_MenuFood;
+import vn.fpoly.fpolybookcarclient.model.objectClass.FoodMenu;
 
 public class BreakFast_MenuFoodAdapter extends RecyclerView.Adapter<BreakFast_MenuFoodAdapter.ViewHolder> {
     private Context context;
     private int layout;
-    private List<BreakFast_MenuFood> arrBreakFastMenuFood;
-    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    private List<FoodMenu> arrFoodMenu;
 
-    public BreakFast_MenuFoodAdapter(Context context, int layout, List<BreakFast_MenuFood> arrBreakFastMenuFood) {
+
+    public BreakFast_MenuFoodAdapter(Context context, int layout, List<FoodMenu> arrFoodMenu) {
         this.context = context;
         this.layout = layout;
-        this.arrBreakFastMenuFood = arrBreakFastMenuFood;
+        this.arrFoodMenu = arrFoodMenu;
     }
 
     @NonNull
@@ -43,21 +44,15 @@ public class BreakFast_MenuFoodAdapter extends RecyclerView.Adapter<BreakFast_Me
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        BreakFast_MenuFood breakFastMenuFood = arrBreakFastMenuFood.get(position);
-        holder.txtTitle.setText(breakFastMenuFood.getTitle());
+        FoodMenu foodMenu = arrFoodMenu.get(position);
+        holder.txtTitle.setText(foodMenu.getName());
+        Glide.with(context).load(foodMenu.getImage()).into(holder.roundedImageView);
 
-        storageReference.child("Imagenewbreakfast").child(breakFastMenuFood.getImage()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                String URL = uri.toString();
-                Glide.with(context).load(URL).into(holder.roundedImageView);
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
-        return arrBreakFastMenuFood.size();
+        return arrFoodMenu.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
