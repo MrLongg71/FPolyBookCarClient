@@ -1,7 +1,6 @@
 
 package vn.fpoly.fpolybookcarclient.presenter.maps;
 import android.app.Activity;
-import android.os.Handler;
 import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -13,9 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import vn.fpoly.fpolybookcarclient.model.maps.ModelGoogleMap;
@@ -27,10 +24,8 @@ import vn.fpoly.fpolybookcarclient.view.maps.ViewGoogleMap;
 public class PresenterGoogleMap implements IPPresenterGoogleMap {
     ViewGoogleMap viewGoogleMap;
     ModelGoogleMap modelGoogleMap;
-    List<Driver> driverList = new ArrayList<>();
     Calendar calendar = Calendar.getInstance();
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     double pricee = 0;
     int distancee = 0;
@@ -44,7 +39,7 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
 
     @Override
     public void getPolyline(Activity activity, GoogleMap googleMap, LatLng locationGo, LatLng locationCome) {
-        modelGoogleMap.dowlodPolylineList(activity, googleMap, locationGo, locationCome, this);
+        modelGoogleMap.downloadPolylineList(activity, googleMap, locationGo, locationCome, this);
 
     }
 
@@ -71,55 +66,14 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
     }
 
     @Override
-    public void distanceDriverNear(final Driver driver) {
-        //phần này e xử lí để trả ra driver gần nhất
-
-
-
-
-//        if(driver.getDistance()  <10 && driver.isStatus() && !driver.isWorking()){
-//            driverList.add(driver);
-//        }
-
-//        driverList.add(driver);
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                Collections.sort(driverList, new Comparator<Driver>() {
-//                    @Override
-//                    public int compare(Driver driver, Driver t1) {
-//                        return (int) (driver.getDistance() - t1.getDistance());
-//                    }
-//                });
-//
-//            }
-//        },30000);
-//        for(Driver driver1 : driverList){
-//            Log.d("kiemtradixeta", driver1.getEmail()+" - "+driver1.getDistance() +  " ");
-//        }
-//        Log.d("kiemtradixeta", "----");
-
-//        Log.d("kiemra" , driverList.size() + "");
-//        driverList.add(driver);
-//        Log.d("kiemra" , driverList.size() + "");
-//
-//                 if (driverList.size() > 0) {
-//                     if (driver.isStatus() && !driver.isWorking()) {
-//                         Driver driverProvisional = driverList.get(0);
-//                         for (Driver driverValue : driverList) {
-//                             Log.d("tets", driverProvisional.getDistance() + " - " + driverValue.getDistance());
-//                             if (driverProvisional.getDistance() > driverValue.getDistance()) {
-//                                 driverProvisional = driverValue;
-//                             }
-//                         }
-//
-//                         viewGoogleMap.getDriverNear(driverProvisional);
-//
-//
-//                     }
-//
-//                 }
-             }
+    public void distanceDriverNear(ArrayList<Driver> driverList) {
+        Collections.sort(driverList);
+        if(driverList.size() >0){
+            viewGoogleMap.getDriverNear(driverList.get(0));
+        }else {
+            viewGoogleMap.getDriverNearFailed();
+        }
+    }
 
 
 
@@ -131,8 +85,6 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
     @Override
     public void pushOrderToDriver(Driver driver, LatLng locationGo, LatLng locationCome, String placeNameGo, String placeNameCome) {
         if (driver != null) {
-
-
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
             String date = simpleDateFormat.format(calendar.getTime());
 

@@ -70,6 +70,7 @@ public class NewsBannerAdapter extends RecyclerView.Adapter<NewsBannerAdapter.Vi
             public void onSuccess(Uri uri) {
                 String URL = uri.toString();
                 Glide.with(context).load(URL).into(imageCake);
+
             }
         });
 

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 
 
 import vn.fpoly.fpolybookcarclient.adapter.history.HistoryAdapter;
+import vn.fpoly.fpolybookcarclient.library.CallBackFragment;
 import vn.fpoly.fpolybookcarclient.model.objectClass.HistoryBookCar;
 import vn.fpoly.fpolybookcarclient.R;
 
@@ -22,13 +24,15 @@ public class HistoryFragment extends Fragment {
     private RecyclerView recyclerView;
     private HistoryAdapter historyAdapter;
     private ArrayList<HistoryBookCar> arrHistoryBook = new ArrayList<>();
+    private FragmentManager fragmentManager;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activity, container, false);
         recyclerView = view.findViewById(R.id.reycelviewItemHistory);
-
+        fragmentManager = getActivity().getSupportFragmentManager();
+        CallBackFragment.CallbackHome(view,fragmentManager);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);

@@ -25,7 +25,7 @@ public class ModelNewsBanner {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 DataSnapshot dataNewsCake = dataSnapshot.child("NewsCake");
                 DataSnapshot dataNewsPlace = dataSnapshot.child("NewsPlace");
-                DataSnapshot dataNewsFood = dataSnapshot.child("NewsFood");
+
 
                 for (DataSnapshot valueNewsCake : dataNewsCake.getChildren()) {
                     final News newsCakeBanner = valueNewsCake.getValue(News.class);
@@ -37,11 +37,7 @@ public class ModelNewsBanner {
                     newsPlaceBannerList.add(newsPlaceBanner);
 
                 }
-//                for (DataSnapshot valueFood : dataNewsFood.getChildren()) {
-//                    News newsFoodBanner = valueFood.getValue(News.class);
-//                    newsFoodBanner.setKey(valueFood.getKey());
-//                    newsFoodBannerList.add(newsFoodBanner);
-//                }
+
 
                 presenterNewsBanner.resultGetListCake(newsCakeBannerList, newsPlaceBannerList, newsFoodBannerList);
 

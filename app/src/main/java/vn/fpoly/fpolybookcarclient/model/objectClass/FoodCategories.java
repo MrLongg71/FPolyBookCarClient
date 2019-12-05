@@ -5,7 +5,7 @@ import java.util.List;
 public class FoodCategories {
     private String key;
     private String title;
-    private List<String> arrImage;
+    private String image;
 
     public FoodCategories() {
     }
@@ -26,17 +26,17 @@ public class FoodCategories {
         this.title = title;
     }
 
-    public List<String> getArrImage() {
-        return arrImage;
+    public String getImage() {
+        return image;
     }
 
-    public void setArrImage(List<String> arrImage) {
-        this.arrImage = arrImage;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public FoodCategories(String key, String title, List<String> arrImage) {
+    public FoodCategories(String key, String title, String image) {
         this.key = key;
         this.title = title;
-        this.arrImage = arrImage;
+        this.image = image;
     }
 }

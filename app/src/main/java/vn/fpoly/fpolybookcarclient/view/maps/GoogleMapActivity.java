@@ -50,16 +50,16 @@ import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
 
 public class GoogleMapActivity extends AppCompatActivity implements
         OnMapReadyCallback, View.OnClickListener, ViewGoogleMap, GoogleMap.OnCameraMoveStartedListener
-        ,GoogleMap.OnCameraMoveListener,GoogleMap.OnCameraIdleListener {
+        , GoogleMap.OnCameraMoveListener, GoogleMap.OnCameraIdleListener {
 
     private GoogleMap googleMap;
     private MapFragment mapFragment;
     private LatLng locationCurrent, locationGo, locationCome, locationDriverCar;
     private String placeNameGo, placeNameCome, placeNameCurrent, LINK;
     private final int REQUESCODE = 1;
-    private TextView txtMotoMoney, txtCarMoney, txtDistanceTime,txtNameDriver,txtLicensePlateDriver;
+    private TextView txtMotoMoney, txtCarMoney, txtDistanceTime, txtNameDriver, txtLicensePlateDriver;
     private CircleImageView imgDriver;
-    private ImageView imgSMSDriver,imgPhoneDriver,imgInfoDriver,imgCancelDriver;
+    private ImageView imgSMSDriver, imgPhoneDriver, imgInfoDriver, imgCancelDriver;
     private RatingBar rateDriver;
     private LocationManager locationManager;
     private LinearLayout layoutChooseLocation;
@@ -83,8 +83,8 @@ public class GoogleMapActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_google_map);
         sharedPreferences = getSharedPreferences("toado", 0);
 
-        locationLatitude = sharedPreferences.getString("locationlatitude","");
-        locationLongitude = sharedPreferences.getString("locationlongitude","");
+        locationLatitude = sharedPreferences.getString("locationlatitude", "");
+        locationLongitude = sharedPreferences.getString("locationlongitude", "");
 
         initView();
         int checkPermissionCoarseLocaltion_COARSE = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
@@ -115,7 +115,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
         rateDriver = findViewById(R.id.ratingbarShow);
         imgSMSDriver = findViewById(R.id.imgSMSDriver);
         imgPhoneDriver = findViewById(R.id.imgPhoneDriver);
-        imgInfoDriver  = findViewById(R.id.imgInfoDriver);
+        imgInfoDriver = findViewById(R.id.imgInfoDriver);
         imgCancelDriver = findViewById(R.id.imgCancelDriver);
         presenterGoogleMap = new PresenterGoogleMap(this);
         imgMarker = findViewById(R.id.imgMarker);
@@ -123,7 +123,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
         btnBook.setOnClickListener(this);
         imgButtonMyLocation = findViewById(R.id.imgButtonMyLocation);
         locationManager = this.getSystemService(LocationManager.class);
-        edtLocationCurrent  = findViewById(R.id.edtLocationCurrent);
+        edtLocationCurrent = findViewById(R.id.edtLocationCurrent);
 
     }
 
@@ -157,8 +157,8 @@ public class GoogleMapActivity extends AppCompatActivity implements
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(builder.build(), 100);
             googleMap.animateCamera(cameraUpdate);
         }
-        if(locationDriverCar != null){
-            addMarker(locationDriverCar,"",R.drawable.ic_driver_bike);
+        if (locationDriverCar != null) {
+            addMarker(locationDriverCar, "", R.drawable.ic_driver_bike);
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
             builder.include(locationGo).include(locationDriverCar);
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(builder.build(), 0);
@@ -204,6 +204,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
                     @Override
                     public void onProviderEnabled(String provider) {
                     }
+
                     @Override
                     public void onProviderDisabled(String provider) {
                     }
@@ -314,14 +315,15 @@ public class GoogleMapActivity extends AppCompatActivity implements
 
     @Override
     public void getDriverNear(final Driver driverNear) {
-        if(driverNear != null){
+        if (driverNear != null) {
             progressbarLoadDriver.setVisibility(View.GONE);
             findViewById(R.id.layoutInfoDriver).setVisibility(View.VISIBLE);
             txtNameDriver.setText(driverNear.getName());
             txtLicensePlateDriver.setText(driverNear.getLicenseplate());
             rateDriver.setRating((float) driverNear.getRate());
-            locationDriverCar = new LatLng(driverNear.getLatitude(),driverNear.getLongitude());
+            locationDriverCar = new LatLng(driverNear.getLatitude(), driverNear.getLongitude());
             mapFragment.getMapAsync(this);
+            presenterGoogleMap.pushOrderToDriver(driverNear,locationGo,locationCome,placeNameGo,placeNameCome);
         }
         imgInfoDriver.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -341,8 +343,9 @@ public class GoogleMapActivity extends AppCompatActivity implements
     private void showInfoDriver(Driver driver) {
         Toast.makeText(this, " " + driver.getDistance(), Toast.LENGTH_SHORT).show();
     }
-    private void openPhoneCallDriver(Driver driver){
-        Toast.makeText(this, "" +  driver.getPhone(), Toast.LENGTH_SHORT).show();
+
+    private void openPhoneCallDriver(Driver driver) {
+        Toast.makeText(this, "" + driver.getPhone(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -351,11 +354,11 @@ public class GoogleMapActivity extends AppCompatActivity implements
                 .setContentText(getString(R.string.getDriverNearFailed))
                 .setConfirmText("ok")
                 .setConfirmClickListener(new KAlertDialog.KAlertClickListener() {
-            @Override
-            public void onClick(KAlertDialog kAlertDialog) {
-                startActivity(new Intent(GoogleMapActivity.this, HomeActivity.class));
-            }
-        }).show();
+                    @Override
+                    public void onClick(KAlertDialog kAlertDialog) {
+                        startActivity(new Intent(GoogleMapActivity.this, HomeActivity.class));
+                    }
+                }).show();
     }
 
     @Override
@@ -375,7 +378,8 @@ public class GoogleMapActivity extends AppCompatActivity implements
 //        markerOptions.position(googleMap.getCameraPosition().target).icon(BitmapDescriptorFactory.fromResource(R.drawable.markercheck)).title("bạn đang ở đây");
 
     }
-    private void getLocationCurrent(){
+
+    private void getLocationCurrent() {
         googleMap.setMyLocationEnabled(true);
         googleMap.getUiSettings().setMyLocationButtonEnabled(false);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(locationCurrent, 18f);

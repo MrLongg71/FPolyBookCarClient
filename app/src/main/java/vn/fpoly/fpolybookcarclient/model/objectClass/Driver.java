@@ -1,6 +1,8 @@
 package vn.fpoly.fpolybookcarclient.model.objectClass;
 
-public class Driver {
+import java.util.concurrent.locks.Condition;
+
+public class Driver implements Comparable<Driver> {
     private String keydriver, email, licenseplate, name, phone,token;
     private boolean status, working;
     private double rate,latitude,longitude,distance,time;
@@ -125,5 +127,18 @@ public class Driver {
 
     public void setRate(double rate) {
         this.rate = rate;
+    }
+
+    @Override
+    public int compareTo(Driver driverN) {
+        if (distance > driverN.distance) {
+            return 1;
+        }
+        else if (distance <  driverN.distance) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
     }
 }

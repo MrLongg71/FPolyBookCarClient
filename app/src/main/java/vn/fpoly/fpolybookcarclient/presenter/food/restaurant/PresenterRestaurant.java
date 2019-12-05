@@ -1,30 +1,36 @@
-package vn.fpoly.fpolybookcarclient.presenter.food.foodsale;
+package vn.fpoly.fpolybookcarclient.presenter.food.restaurant;
 
 import java.util.ArrayList;
 
 import vn.fpoly.fpolybookcarclient.model.food.restaurant.ModelRestaurant;
+import vn.fpoly.fpolybookcarclient.model.objectClass.FoodMenu;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Restaurant;
 import vn.fpoly.fpolybookcarclient.view.food.IViewRestaurant;
 
-public class PresenterFoodSale implements IPresenterFoodSale {
+public class PresenterRestaurant implements IPresenterRestaurant {
     private ModelRestaurant modelFoodSale;
-    private ArrayList<Restaurant> arrRestaurant = new ArrayList<>();
     private IViewRestaurant iViewFoodSale;
 
-    public PresenterFoodSale(IViewRestaurant iViewFoodSale) {
+    public PresenterRestaurant(IViewRestaurant iViewFoodSale) {
         this.iViewFoodSale = iViewFoodSale;
         modelFoodSale = new ModelRestaurant();
 
     }
 
     @Override
-    public void getListFoodSale() {
-        modelFoodSale.dowloadListNewsFood(this);
+    public void getListRestaurant() {
+        modelFoodSale.dowloadListRestaurant(this);
     }
 
     @Override
-    public void resultGetListFoodSale(Restaurant restaurant) {
-        arrRestaurant.add(restaurant);
-        iViewFoodSale.displayFoodSale(arrRestaurant);
+    public void resultGetListRestaurant(ArrayList<Restaurant> arrRestaurant) {
+        iViewFoodSale.displayRestaurant(arrRestaurant);
+        iViewFoodSale.displayFoodMenu(arrRestaurant);
     }
+
+
+
+
+
+
 }

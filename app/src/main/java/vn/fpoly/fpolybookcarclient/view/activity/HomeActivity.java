@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     private int REQUESCODE = 1234;
     private LocationManager locationManager;
     private LatLng locationCurrent;
+    public static BottomNavigationView navView;
     SharedPreferences sharedPreferences;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -47,7 +49,10 @@ public class HomeActivity extends AppCompatActivity {
        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_home);
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
+        Log.d("kiemtra", "creany");
+
+
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navView.setItemIconTintList(null);
         navView.setItemTextColor(getResources().getColorStateList(R.color.colorPrimary));
@@ -106,8 +111,6 @@ public class HomeActivity extends AppCompatActivity {
     }
     @SuppressLint("MissingPermission")
     private void getLocationClient() {
-        Log.d("kiemtradataa","vo1");
-
         String provider = BuildConfig.DEBUG ? LocationManager.GPS_PROVIDER : LocationManager.NETWORK_PROVIDER;
 
         locationManager.requestLocationUpdates(provider, 5000L
@@ -115,12 +118,9 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onLocationChanged(Location location) {
                         locationCurrent = new LatLng(location.getLatitude(), location.getLongitude());
-                        Log.d("kiemtradataa","vo");
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("locationlatitude",locationCurrent.latitude+"");
                         editor.putString("locationlongitude",locationCurrent.longitude+"");
-                        Log.d("kiemtraaaaa",location.getLongitude()+"");
-                        Log.d("kiemtraaaaa",locationCurrent.longitude+"");
                         editor.commit();
                     }
 

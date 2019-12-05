@@ -21,13 +21,13 @@ import java.util.List;
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.model.objectClass.FoodCategories;
 
-public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {
+public class Categories_MenuFoodAdapter extends RecyclerView.Adapter<Categories_MenuFoodAdapter.ViewHolder> {
     private List<FoodCategories> arrFoodCategoris;
     private int layout;
     private Context context;
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
-    public CategoriesAdapter(List<FoodCategories> arrFoodCategoris, int layout, Context context) {
+    public Categories_MenuFoodAdapter(List<FoodCategories> arrFoodCategoris, int layout, Context context) {
         this.arrFoodCategoris = arrFoodCategoris;
         this.layout = layout;
         this.context = context;
@@ -35,17 +35,17 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
 
     @NonNull
     @Override
-    public CategoriesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Categories_MenuFoodAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(layout, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final CategoriesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final Categories_MenuFoodAdapter.ViewHolder holder, int position) {
         FoodCategories foodCategories = arrFoodCategoris.get(position);
-        holder.txtTitle.setText(foodCategories.getTitle()+"fffff");
-        storageReference.child("Imageexplorecategories").child(foodCategories.getArrImage().get(0)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        holder.txtTitle.setText(foodCategories.getTitle());
+        storageReference.child("Imageexplorecategories").child(foodCategories.getImage()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 String URL = uri.toString();

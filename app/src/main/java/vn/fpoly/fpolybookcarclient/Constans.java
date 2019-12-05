@@ -13,6 +13,10 @@ public class Constans {
     public static String KEY_BUNDEL_LONGITUDE_GO ="longitudego";
     public static String KEY_BUNDEL_LATITUDE_COME ="latitudecome";
     public static String KEY_BUNDEL_LONGITUDE_COME ="longitudecome";
+    public static String KEY_BUNDEL_RESTAURANT = "restaurant";
+    public static String KEY_BUNDEL_RESTAURANT_DISTANCETO = "restaurant_distanceto";
+
+
     //******/
 
     //**Link Google API draw Polyline **//
@@ -20,4 +24,13 @@ public class Constans {
     public static String Destination = "&destination=";
     public static String Comma = ",";
     public static String Language = "&language=vi&key=";
+
+    //**Key SharePrefent **//
+    public static String KEY_RESTAURANT = "key_restaurant";
+    public static String KEY_RESTAURANT_HEART = "key_restaurant_heart";
+
+    public static String KEY_CHECKED_HEART = "key_checked_heart";
+
+
+
 }

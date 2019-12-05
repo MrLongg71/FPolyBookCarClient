@@ -1,21 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    android:id="@+id/layoutItemMenuFoodRes"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/imgFoodItemMenuRes"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="centerCrop"
-        app:riv_corner_radius="5dp">
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    </com.makeramen.roundedimageview.RoundedImageView>
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imgFoodItemMenuRes"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="5dp">
+
+        </com.makeramen.roundedimageview.RoundedImageView>
+
+        <FrameLayout
+
+            android:id="@+id/frame_news_menu_res"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_promo"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="News"
+                android:textColor="#fff"
+                android:textSize="10dp"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </FrameLayout>
+    </FrameLayout>
+
 
     <LinearLayout
-        android:layout_margin="10dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -25,26 +61,38 @@
             android:textSize="20sp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
+            android:textStyle="bold"
             android:text="Ten mon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/txtDetailFoodItemMenuRes"
             android:textColor="#000000"
+            android:textStyle="italic"
             android:textSize="15sp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:text="chi tiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/txtPriceFoodItemMenuRes"
-            android:textColor="#FF0000"
-            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:text="gia"
-            android:layout_width="match_parent"
+            android:padding="5dp"
+            android:background="@drawable/custom_promo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
 
+</LinearLayout>
+<View
+    android:layout_marginTop="10dp"
+    android:background="@color/gray_btn_bg_color"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"/>
 </LinearLayout>

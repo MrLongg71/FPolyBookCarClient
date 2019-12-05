@@ -3,7 +3,6 @@ package vn.fpoly.fpolybookcarclient.model.maps;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -19,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -32,24 +32,26 @@ import vn.fpoly.fpolybookcarclient.server.DownloadPolyLine;
 import vn.fpoly.fpolybookcarclient.server.ParserPolyline;
 
 public class ModelGoogleMap {
-    private FirebaseDatabase databaseDriver;
-    private DatabaseReference databaseReference;
+
+
+    private FirebaseDatabase databaseDriver = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = databaseDriver.getReference();
     private FirebaseDatabase firebaseDatabaseOrder = FirebaseDatabase.getInstance();
     private DatabaseReference databaseOrder = firebaseDatabaseOrder.getReference();
 
-    public void dowlodPolylineList(Activity activity, GoogleMap googleMap, LatLng locationGo, LatLng locationCome, final PresenterGoogleMap presenterGoogleMap) {
+    //Sai chính tả nó báo xanh xanh ni thì nhớ fix
+    public void downloadPolylineList(Activity activity, GoogleMap googleMap, LatLng locationGo, LatLng locationCome, final PresenterGoogleMap presenterGoogleMap) {
         String LINK = Constans.LINK_GOOGLE_API_DRAW_POLYLINE + locationGo.latitude + Constans.Comma + locationGo.longitude + Constans.Destination + locationCome.latitude + Constans.Comma + locationCome.longitude + Constans.Language + activity.getString(R.string.google_map_api2);
-        ParserPolyline parserPolyline = new ParserPolyline();
+//        ParserPolyline parserPolyline = new ParserPolyline();
         DownloadPolyLine downloadPolyLine = new DownloadPolyLine();
-
         //open dowload
         downloadPolyLine.execute(LINK);
 
         try {
             String dataJSON = downloadPolyLine.get();
-            List<LatLng> latLngList = parserPolyline.getListLocation(dataJSON);
-            int disttance = parserPolyline.getDistance(dataJSON) / 1000;
-            int time = parserPolyline.getTime(dataJSON) / 60;
+            List<LatLng> latLngList = ParserPolyline.getListLocation(dataJSON);
+            int disttance = ParserPolyline.getDistance(dataJSON) / 1000;
+            int time = ParserPolyline.getTime(dataJSON) / 60;
             PolylineOptions polylineOptions = new PolylineOptions();
             for (LatLng latLng : latLngList) {
                 polylineOptions.add(latLng);
@@ -62,48 +64,53 @@ public class ModelGoogleMap {
 
             presenterGoogleMap.getDetailDistance(disttance, time, 0);
 
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
     }
 
     public void dowloadDriverCarList(final Activity activity, final LatLng locationGo, final PresenterGoogleMap presenterGoogleMap) {
-        databaseDriver = FirebaseDatabase.getInstance();
-        databaseReference = databaseDriver.getReference();
 
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 DataSnapshot nodeCar = dataSnapshot.child("Driver").child("Car");
+                ArrayList<Driver> driverArrayList = new ArrayList<>();
                 for (DataSnapshot valueDriverCar : nodeCar.getChildren()) {
 
                     Driver driver = valueDriverCar.getValue(Driver.class);
+                    assert driver != null;
                     driver.setKeydriver(valueDriverCar.getKey());
 
                     LatLng locationDriver = new LatLng(driver.getLatitude(), driver.getLongitude());
 
                     String LINK = Constans.LINK_GOOGLE_API_DRAW_POLYLINE + locationDriver.latitude + Constans.Comma + locationDriver.longitude + Constans.Destination + locationGo.latitude + Constans.Comma + locationGo.longitude + Constans.Language + activity.getString(R.string.google_map_api2);
-                    ParserPolyline parserPolyline = new ParserPolyline();
+//                    ParserPolyline parserPolyline = new ParserPolyline();
+
+
                     DownloadPolyLine downloadPolyLine = new DownloadPolyLine();
-                    String dataJSON = null;
+                    String dataJSON;
                     //open dowload
                     downloadPolyLine.execute(LINK);
                     try {
                         dataJSON = downloadPolyLine.get();
-                        List<LatLng> latLngList = parserPolyline.getListLocation(dataJSON);
-                        double disttance = parserPolyline.getDistance(dataJSON) / 1000;
-                        double time = parserPolyline.getTime(dataJSON) / 60;
+//                        List<LatLng> latLngList = ParserPolyline.getListLocation(dataJSON);
+                        double disttance = ParserPolyline.getDistance(dataJSON) / 1000;
+                        double time = ParserPolyline.getTime(dataJSON) / 60;
                         driver.setDistance(disttance);
                         driver.setTime(time);
-                        presenterGoogleMap.distanceDriverNear(driver);
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
+                        if(driver.isStatus() && !driver.isWorking() && driver.getDistance() < 10){
+                            driverArrayList.add(driver);
+                        }
+
+                    } catch (ExecutionException | InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
+
+
+                presenterGoogleMap.distanceDriverNear(driverArrayList);
+
             }
 
             @Override
@@ -113,18 +120,20 @@ public class ModelGoogleMap {
         databaseReference.addListenerForSingleValueEvent(valueEventListener);
     }
 
+    //mấy cái này thì defind thành const
     public void initPushNotification(final OderCar oderCar, final PushOrderToDriver pushOrderToDriver) {
         databaseOrder.child("Order").child(oderCar.getKeydriver()).child(oderCar.getKeyOrder()).setValue(oderCar).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if( task.isSuccessful()){
+                if (task.isSuccessful()) {
+//                    //TODO
+                databaseOrder.child("notification").push().setValue(pushOrderToDriver);
 
                 }
             }
         });
 
 
-        databaseOrder.child("notification").push().setValue(pushOrderToDriver);
 
     }
 }

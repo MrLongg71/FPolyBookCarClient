@@ -11,6 +11,7 @@ import android.view.animation.BounceInterpolator;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -20,6 +21,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import java.util.ArrayList;
 
 import vn.fpoly.fpolybookcarclient.adapter.email.EmailAdapter;
+import vn.fpoly.fpolybookcarclient.library.CallBackFragment;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Email;
 import vn.fpoly.fpolybookcarclient.R;
 
@@ -27,13 +29,15 @@ public class MailFragment extends Fragment {
     SwipeMenuListView swipeMenuListView;
     EmailAdapter emailAdapter;
     ArrayList<Email> arrEmail = new ArrayList<>();
+    private FragmentManager fragmentManager;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mail, container, false);
         swipeMenuListView = view.findViewById(R.id.swipmenu);
-
+        fragmentManager = getActivity().getSupportFragmentManager();
+        CallBackFragment.CallbackHome(view,fragmentManager);
         SwipeMenuCreator swipeMenuCreator = new SwipeMenuCreator() {
             @Override
             public void create(SwipeMenu menu) {

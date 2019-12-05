@@ -31,6 +31,7 @@ import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.presenter.home.newsbanner.PresenterNewsBanner;
 import vn.fpoly.fpolybookcarclient.presenter.home.challengebanner.PresenterChallengerBanner;
 import vn.fpoly.fpolybookcarclient.presenter.home.eatwhat.PresenterEatWhat;
+import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
 import vn.fpoly.fpolybookcarclient.view.food.FoodFragment;
 import vn.fpoly.fpolybookcarclient.view.maps.GoogleMapActivity;
 
@@ -84,7 +85,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, IVie
         recyclerViewCake                                = view.findViewById(R.id.reycelviewItem2);
         recyclerViewPlace                               = view.findViewById(R.id.reycelviewItem3);
         recyclerViewFood                                = view.findViewById(R.id.reycelviewItem4);
-        recyclerViewEatWhat                             =    view.findViewById(R.id.reycelviewItem5);
+        recyclerViewEatWhat                             =   view.findViewById(R.id.reycelviewItem5);
 
         txtOverFlowMenuChallenge                        =  view.findViewById(R.id.menuOverflow1);
         txtOverFlowMenuCakeBanner                       =  view.findViewById(R.id.menuOverflow2);
@@ -120,6 +121,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, IVie
             case R.id.layoutChooseFoodHome:
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.conten,new FoodFragment()).commit();
                 getActivity().getSupportFragmentManager().addOnBackStackChangedListener(null);
+                HomeActivity.navView.setVisibility(View.GONE);
                 break;
             case R.id.layoutChooseGiftHome:
                 break;
@@ -283,6 +285,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, IVie
 
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        HomeActivity.navView.setVisibility(View.VISIBLE);
+    }
 }
 

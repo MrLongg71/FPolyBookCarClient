@@ -1,8 +1,11 @@
 package vn.fpoly.fpolybookcarclient.model.objectClass;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class Restaurant {
+public class Restaurant implements Parcelable{
     private String key;
     private String name;
     private boolean status;
@@ -14,10 +17,34 @@ public class Restaurant {
     private String detail;
     private String address;
     private double rate;
-    private List<String>arrImage;
+    private String image;
 
-    public Restaurant() {
+    protected Restaurant(Parcel in) {
+        key = in.readString();
+        name = in.readString();
+        status = in.readByte() != 0;
+        timeend = in.readString();
+        timestart = in.readString();
+        longitude = in.readDouble();
+        latitude = in.readDouble();
+        keymenu = in.readString();
+        detail = in.readString();
+        address = in.readString();
+        rate = in.readDouble();
+        image = in.readString();
     }
+
+    public static final Creator<Restaurant> CREATOR = new Creator<Restaurant>() {
+        @Override
+        public Restaurant createFromParcel(Parcel in) {
+            return new Restaurant(in);
+        }
+
+        @Override
+        public Restaurant[] newArray(int size) {
+            return new Restaurant[size];
+        }
+    };
 
     public String getKey() {
         return key;
@@ -107,15 +134,18 @@ public class Restaurant {
         this.rate = rate;
     }
 
-    public List<String> getArrImage() {
-        return arrImage;
+    public String getImage() {
+        return image;
     }
 
-    public void setArrImage(List<String> arrImage) {
-        this.arrImage = arrImage;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public Restaurant(String key, String name, boolean status, String timeend, String timestart, double longitude, double latitude, String keymenu, String detail, String address, double rate, List<String> arrImage) {
+    public Restaurant() {
+    }
+
+    public Restaurant(String key, String name, boolean status, String timeend, String timestart, double longitude, double latitude, String keymenu, String detail, String address, double rate, String image) {
         this.key = key;
         this.name = name;
         this.status = status;
@@ -127,6 +157,27 @@ public class Restaurant {
         this.detail = detail;
         this.address = address;
         this.rate = rate;
-        this.arrImage = arrImage;
+        this.image = image;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(key);
+        parcel.writeString(name);
+        parcel.writeByte((byte) (status ? 1 : 0));
+        parcel.writeString(timeend);
+        parcel.writeString(timestart);
+        parcel.writeDouble(longitude);
+        parcel.writeDouble(latitude);
+        parcel.writeString(keymenu);
+        parcel.writeString(detail);
+        parcel.writeString(address);
+        parcel.writeDouble(rate);
+        parcel.writeString(image);
     }
 }
