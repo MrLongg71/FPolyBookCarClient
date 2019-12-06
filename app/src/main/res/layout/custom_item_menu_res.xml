@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_height="wrap_content"
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_margin="5dp"
     android:id="@+id/layoutItemMenuFoodRes"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -40,10 +37,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="News"
+                android:text="@string/news"
                 android:textColor="#fff"
-                android:textSize="10dp"
-                android:textStyle="bold">
+                android:textSize="10sp"
+                android:textStyle="bold"
+                tools:ignore="SmallSp">
 
             </TextView>
 
@@ -60,9 +58,8 @@
             android:textColor="#000000"
             android:textSize="20sp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:textStyle="bold"
-            android:text="Ten mon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
@@ -71,8 +68,7 @@
             android:textStyle="italic"
             android:textSize="15sp"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:text="chi tiet"
+            android:layout_marginStart="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
@@ -80,8 +76,7 @@
             android:textColor="#FFFFFF"
             android:textSize="15sp"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:text="gia"
+            android:layout_marginStart="10dp"
             android:padding="5dp"
             android:background="@drawable/custom_promo"
             android:layout_width="wrap_content"

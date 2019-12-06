@@ -99,6 +99,11 @@
     <string name="detailhintfood5">235 A Mai Xuân Thưởng, quận 11</string>
     <string name="minutehintfood5">50 minute</string>
     <string name="getDriverNearFailed">Hiện tại Tài xế chúng tôi đều đang bận.Vui lòng đặt lại sau.</string>
+    <string name="news">News</string>
+    <string name="increase">+</string>
+    <string name="reduce">-</string>
+    <string name="number_0">0</string>
+    <string name="menu">Menu</string>
 
 
 </resources>

@@ -2,13 +2,11 @@ package vn.fpoly.fpolybookcarclient.adapter.food;
 
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,17 +21,19 @@ import java.util.ArrayList;
 
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.model.objectClass.FoodMenu;
+import vn.fpoly.fpolybookcarclient.view.food.menu_restaurant.CallbackRestaurantMenuFood;
 
-public class RestaurentMenuFoodAdapter extends RecyclerView.Adapter<RestaurentMenuFoodAdapter.ViewHolder> {
+public class RestaurantMenuFoodAdapter extends RecyclerView.Adapter<RestaurantMenuFoodAdapter.ViewHolder> {
     private Context context;
     private int layout;
     private ArrayList<FoodMenu> foodMenuArrayList;
-    final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-
-    public RestaurentMenuFoodAdapter(Context context, int layout, ArrayList<FoodMenu> foodMenuArrayList) {
+    private final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    private CallbackRestaurantMenuFood callbackRestaurantMenuFood;
+    public RestaurantMenuFoodAdapter(Context context, int layout, ArrayList<FoodMenu> foodMenuArrayList, CallbackRestaurantMenuFood callbackRestaurantMenuFood) {
         this.context = context;
         this.layout = layout;
         this.foodMenuArrayList = foodMenuArrayList;
+        this.callbackRestaurantMenuFood = callbackRestaurantMenuFood;
     }
 
     @NonNull
@@ -58,14 +58,14 @@ public class RestaurentMenuFoodAdapter extends RecyclerView.Adapter<RestaurentMe
                     public void onSuccess(Uri uri) {
 
                         Glide.with(context).load(uri.toString()).centerCrop().into(holder.imgFoodItemMenuRes);
-
+                        foodMenu.setImage(uri.toString());
                     }
                 });
 
         holder.layoutItemMenuFoodRes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //interface
+                callbackRestaurantMenuFood.onClickItemMenuToCart(foodMenuArrayList.get(position));
 
             }
         });
@@ -76,12 +76,12 @@ public class RestaurentMenuFoodAdapter extends RecyclerView.Adapter<RestaurentMe
         return foodMenuArrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         LinearLayout layoutItemMenuFoodRes;
         RoundedImageView imgFoodItemMenuRes;
         TextView txtNameFoodItemMenuRes,txtDetailFoodItemMenuRes,txtPriceFoodItemMenuRes;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             layoutItemMenuFoodRes = itemView.findViewById(R.id.layoutItemMenuFoodRes);
             imgFoodItemMenuRes = itemView.findViewById(R.id.imgFoodItemMenuRes);
