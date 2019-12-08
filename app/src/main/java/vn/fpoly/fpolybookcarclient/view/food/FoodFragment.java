@@ -64,6 +64,7 @@ public class FoodFragment extends Fragment implements IViewFood, IViewFoodCatego
     private List<Address>arrAddresss;
     private ArrayList<Restaurant> restaurantArrayList = new ArrayList<>();
     private FragmentManager fragmentManager;
+    private String addresCurrent = "";
 
 
     @Nullable
@@ -87,8 +88,9 @@ public class FoodFragment extends Fragment implements IViewFood, IViewFoodCatego
                arrAddresss = geocoder.getFromLocation(latitude, longitude, 1);
                String addres = arrAddresss.get(0).getAddressLine(0);
                String address[] = addres.split(",");
+               addresCurrent = address[0] + " Quận " + address[2];
 
-               txtAdress.setText(address[0] + " Quận " + address[2] );
+               txtAdress.setText(addresCurrent);
            } catch (IOException e) {
                e.printStackTrace();
            }
@@ -186,6 +188,8 @@ public class FoodFragment extends Fragment implements IViewFood, IViewFoodCatego
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constans.KEY_BUNDEL_RESTAURANT,restaurant);
         bundle.putString(Constans.KEY_BUNDEL_RESTAURANT_DISTANCETO,distance);
+        bundle.putString(Constans.KEY_BUNDEL_RESTAURANT_ADDRES_NAME_CURRENT,addresCurrent);
+
         MenuRestaurantFragment menuRestaurantFragment = new MenuRestaurantFragment();
         menuRestaurantFragment.setArguments(bundle);
 

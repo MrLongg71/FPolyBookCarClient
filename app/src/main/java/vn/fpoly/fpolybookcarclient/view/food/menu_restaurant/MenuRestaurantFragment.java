@@ -1,11 +1,24 @@
 package vn.fpoly.fpolybookcarclient.view.food.menu_restaurant;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,34 +31,27 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-
 import com.bumptech.glide.Glide;
-import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 import vn.fpoly.fpolybookcarclient.Constans;
 import vn.fpoly.fpolybookcarclient.R;
-import vn.fpoly.fpolybookcarclient.adapter.food.RestaurantMenuFoodCartItemAdapter;
 import vn.fpoly.fpolybookcarclient.adapter.food.RestaurantMenuFoodAdapter;
+import vn.fpoly.fpolybookcarclient.adapter.food.RestaurantMenuFoodCartItemAdapter;
 import vn.fpoly.fpolybookcarclient.model.objectClass.BillFood;
+import vn.fpoly.fpolybookcarclient.model.objectClass.Driver;
 import vn.fpoly.fpolybookcarclient.model.objectClass.FoodMenu;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Restaurant;
 import vn.fpoly.fpolybookcarclient.presenter.food.menu_restaurant.PresenterMenuRes;
+import vn.fpoly.fpolybookcarclient.presenter.maps.PresenterGoogleMap;
+import vn.fpoly.fpolybookcarclient.view.maps.GoogleMapActivity;
+import vn.fpoly.fpolybookcarclient.view.maps.ViewGoogleMap;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -53,6 +59,7 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
 
     private ImageView imgBackgroundMenuRes;
     private TextView txtStartMenuRes, txtTimeMenuRes, txtDistanceMenuRes, txtTotalPriceCart;
+    private Button btnBookFoodMenuRes;
     private RecyclerView recyclerviewMenuRestaurant, recyclerItemCartFoodMenuRes;
     private PresenterMenuRes presenterMenuRes;
     private Toolbar toolbarMenuRes;
@@ -61,9 +68,12 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
     private ArrayList<FoodMenu> foodMenuListCart = new ArrayList<>();
     private ArrayList<BillFood> billFoodArrayList = new ArrayList<>();
     private BottomSheetBehavior bottomSheetBehavior;
-    private AppBarLayout app_bar_layout_menu_res;
     private int amount = 0;
     private NestedScrollView nestedScrollMenuFoodRes;
+    private PresenterGoogleMap presenterGoogleMap;
+    private LatLng locationRes,locationCurrent;
+    private String addresCurrent = "";
+    private  int priceTotal = 0;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -94,16 +104,17 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
     }
 
     private void initView(View view) {
-        app_bar_layout_menu_res = view.findViewById(R.id.app_bar_layout_menu_res);
         imgBackgroundMenuRes = view.findViewById(R.id.imgBackgroudMenuRes);
         txtStartMenuRes = view.findViewById(R.id.txtStartMenuRes);
         txtDistanceMenuRes = view.findViewById(R.id.txtDistanceMenuRes);
         txtTimeMenuRes = view.findViewById(R.id.txtTimeMenuRes);
+        btnBookFoodMenuRes = view.findViewById(R.id.btnBookFoodMenuRes);
         recyclerviewMenuRestaurant = view.findViewById(R.id.reycelviewMenuRestaurant);
         nestedScrollMenuFoodRes = view.findViewById(R.id.nestedScrollMenuFoodRes);
 
 
         presenterMenuRes = new PresenterMenuRes(this);
+
         toolbar(view);
 
         initEvent();
@@ -131,7 +142,13 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
             txtStartMenuRes.setText(restaurant.getRate() + "");
             txtDistanceMenuRes.setText(distance + " km");
             presenterMenuRes.getListMenuFood(restaurant.getKey());
+            locationRes = new LatLng(restaurant.getLatitude(), restaurant.getLongitude());
+            addresCurrent = bundle.getString(Constans.KEY_BUNDEL_RESTAURANT_ADDRES_NAME_CURRENT);
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("toado", 0);
+            locationCurrent = new LatLng(Double.parseDouble(sharedPreferences.getString("locationlatitude","")),Double.parseDouble(sharedPreferences.getString("locationlongitude","")) );
+
         }
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -210,8 +227,7 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
     }
 
     private void addToCart(FoodMenu foodMenu) {
-        foodMenuListCart.add(foodMenu);
-        if (foodMenuListCart.size() > 0) {
+            foodMenuListCart.add(foodMenu);
 
             billFoodArrayList.add(new BillFood("", foodMenu.getKeyfood(), 1));
             setTotalCart();
@@ -222,18 +238,11 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
             recyclerItemCartFoodMenuRes.setAdapter(restaurantMenuFoodCartItemAdapter);
             restaurantMenuFoodCartItemAdapter.notifyDataSetChanged();
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        }
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void listenerScroll() {
-        app_bar_layout_menu_res.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-
-            }
-        });
         nestedScrollMenuFoodRes.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View view, int i, int i1, int i2, int i3) {
@@ -270,11 +279,32 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
 
     @SuppressLint("SetTextI18n")
     private void setTotalCart() {
-        int total = 0;
+
         for (int i = 0; i < billFoodArrayList.size(); i++) {
-            total += billFoodArrayList.get(i).getAmountBuy() * Integer.parseInt(foodMenuListCart.get(i).getPrice());
+            priceTotal += billFoodArrayList.get(i).getAmountBuy() * Integer.parseInt(foodMenuListCart.get(i).getPrice());
         }
-        txtTotalPriceCart.setText(total + "K");
+        txtTotalPriceCart.setText(priceTotal + "K");
+        initBookFood();
+    }
+
+    private void initBookFood() {
+        btnBookFoodMenuRes.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent  = new Intent(getActivity(),GoogleMapActivity.class);
+                intent.putParcelableArrayListExtra(Constans.KEY_ORDERFOOD_BILLLIST, billFoodArrayList);
+                intent.putExtra(Constans.KEY_ORDERFOOD_RESTAURANT, restaurant);
+                intent.putExtra(Constans.KEY_ORDERFOOD_ADDRES_CURRENT,addresCurrent);
+                intent.putExtra(Constans.KEY_ORDERFOOD_PRICE,priceTotal);
+                startActivity(intent);
+
+            }
+        });
 
     }
+
+
+
+
+
 }

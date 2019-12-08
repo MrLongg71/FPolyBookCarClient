@@ -13,8 +13,8 @@ public interface IPPresenterGoogleMap {
     void getPolyline(Activity activity, GoogleMap googleMap, LatLng locationGo, LatLng locationCome);
     void getDetailDistance(int distance, int time,double price);
 
-    void getDriverList(Activity activity, LatLng locationGo);
-    void distanceDriverNear(ArrayList<Driver> driverList);
+    void getDriverList(Activity activity, LatLng locationGo, boolean isbook);
+    void distanceDriverNear(ArrayList<Driver> driverList, boolean isbook);
     void pushOrderToDriver(Driver driver,LatLng locationGo,LatLng locationCome,String placeNameGo,String placeNameCome);
 
 }

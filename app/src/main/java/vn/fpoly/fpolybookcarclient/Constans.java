@@ -15,6 +15,10 @@ public class Constans {
     public static String KEY_BUNDEL_LONGITUDE_COME ="longitudecome";
     public static String KEY_BUNDEL_RESTAURANT = "restaurant";
     public static String KEY_BUNDEL_RESTAURANT_DISTANCETO = "restaurant_distanceto";
+    public static String KEY_BUNDEL_RESTAURANT_ADDRES_NAME_CURRENT = "restaurant_addres_name_current";
+    public static String KEY_BUNDEL_RESTAURANT_LATITUDE_CURRENT = "restaurant_latitude_current";
+    public static String KEY_BUNDEL_RESTAURANT_LONGITUDE_CURRENT = "restaurant_longitude_current";
+
 
 
     //******/
@@ -30,6 +34,13 @@ public class Constans {
     public static String KEY_RESTAURANT_HEART = "key_restaurant_heart";
 
     public static String KEY_CHECKED_HEART = "key_checked_heart";
+
+    //**Key OrderFood**//
+    public static String KEY_ORDERFOOD_BILLLIST = "bill_list";
+    public static String KEY_ORDERFOOD_ADDRES_CURRENT = "address_current";
+    public static String KEY_ORDERFOOD_RESTAURANT = "restaurant_order_food";
+    public static String KEY_ORDERFOOD_PRICE = "price_order_food";
+
 
 
 

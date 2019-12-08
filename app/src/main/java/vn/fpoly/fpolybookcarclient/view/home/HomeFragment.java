@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.ybq.android.spinkit.SpinKitView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 
 import vn.fpoly.fpolybookcarclient.adapter.home.NewsBannerAdapter;
@@ -33,6 +35,7 @@ import vn.fpoly.fpolybookcarclient.presenter.home.challengebanner.PresenterChall
 import vn.fpoly.fpolybookcarclient.presenter.home.eatwhat.PresenterEatWhat;
 import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
 import vn.fpoly.fpolybookcarclient.view.food.FoodFragment;
+import vn.fpoly.fpolybookcarclient.view.food.menu_restaurant.MenuRestaurantFragment;
 import vn.fpoly.fpolybookcarclient.view.maps.GoogleMapActivity;
 
 
@@ -114,6 +117,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, IVie
         switch (v.getId()) {
             case R.id.layoutChooseCarHome:
                 startActivity(new Intent(getActivity(), GoogleMapActivity.class));
+
                 break;
             case R.id.layoutChooseBikeHome:
 
@@ -290,5 +294,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, IVie
         super.onResume();
         HomeActivity.navView.setVisibility(View.VISIBLE);
     }
+
 }
+
+
 

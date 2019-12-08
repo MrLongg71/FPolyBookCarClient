@@ -7,6 +7,6 @@ public interface ViewGoogleMap {
    void showDetailDistance(int distance, int time,double price);
    void loadDriverCarList();
    void loadDriverMotoList();
-   void getDriverNear(Driver driverNear);
+   void getDriverNear(Driver driverNear, boolean isbook);
    void getDriverNearFailed();
 }

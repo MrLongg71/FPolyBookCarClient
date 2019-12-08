@@ -17,6 +17,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,13 +41,23 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
+import java.util.EventListener;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import vn.fpoly.fpolybookcarclient.BuildConfig;
 import vn.fpoly.fpolybookcarclient.Constans;
+import vn.fpoly.fpolybookcarclient.model.objectClass.BillFood;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Driver;
+import vn.fpoly.fpolybookcarclient.model.objectClass.Restaurant;
 import vn.fpoly.fpolybookcarclient.presenter.maps.PresenterGoogleMap;
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
+
 
 public class GoogleMapActivity extends AppCompatActivity implements
         OnMapReadyCallback, View.OnClickListener, ViewGoogleMap, GoogleMap.OnCameraMoveStartedListener
@@ -70,11 +81,16 @@ public class GoogleMapActivity extends AppCompatActivity implements
     private int CODE_CAR_OR_MOTO;
     private ImageButton imgButtonMyLocation;
     private ImageView imgMarker;
-
+    private Intent intent;
+    private ArrayList<BillFood> billFoodArrayList = new ArrayList<>();
+    private Restaurant restaurant;
     private PresenterGoogleMap presenterGoogleMap;
+    private LatLng locationRestaurant;
     SharedPreferences sharedPreferences;
     String locationLatitude = "";
     String locationLongitude = "";
+    String addressCurrent = "";
+    double priceOrderFood = 0;
 
 
     @Override
@@ -124,7 +140,28 @@ public class GoogleMapActivity extends AppCompatActivity implements
         imgButtonMyLocation = findViewById(R.id.imgButtonMyLocation);
         locationManager = this.getSystemService(LocationManager.class);
         edtLocationCurrent = findViewById(R.id.edtLocationCurrent);
+        initEventBookFood();
 
+    }
+
+    private void initEventBookFood() {
+        intent = getIntent();
+        if (intent != null) {
+            billFoodArrayList = intent.getParcelableArrayListExtra(Constans.KEY_ORDERFOOD_BILLLIST);
+            restaurant = intent.getParcelableExtra(Constans.KEY_ORDERFOOD_RESTAURANT);
+            addressCurrent = intent.getStringExtra(Constans.KEY_ORDERFOOD_ADDRES_CURRENT);
+            progressbarLoadDriver.setVisibility(View.VISIBLE);
+            locationRestaurant = new LatLng(restaurant.getLatitude(), restaurant.getLongitude());
+            sharedPreferences = getSharedPreferences("toado", 0);
+
+            locationLatitude = sharedPreferences.getString("locationlatitude","");
+            locationLongitude = sharedPreferences.getString("locationlongitude","");
+
+            locationCurrent = new LatLng(Double.parseDouble(locationLatitude), Double.parseDouble(locationLongitude));
+            priceOrderFood = intent.getDoubleExtra(Constans.KEY_ORDERFOOD_PRICE,0);
+
+            presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationRestaurant,false);
+        }
     }
 
     @Override
@@ -157,10 +194,11 @@ public class GoogleMapActivity extends AppCompatActivity implements
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(builder.build(), 100);
             googleMap.animateCamera(cameraUpdate);
         }
-        if (locationDriverCar != null) {
+        if (locationDriverCar != null && locationGo != null) {
             addMarker(locationDriverCar, "", R.drawable.ic_driver_bike);
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
             builder.include(locationGo).include(locationDriverCar);
+
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(builder.build(), 0);
             googleMap.animateCamera(cameraUpdate);
         }
@@ -305,7 +343,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     public void loadDriverCarList() {
         findViewById(R.id.chooseservice).setVisibility(View.GONE);
         progressbarLoadDriver.setVisibility(View.VISIBLE);
-        presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationGo);
+        presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationGo,true);
     }
 
     @Override
@@ -314,7 +352,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void getDriverNear(final Driver driverNear) {
+    public void getDriverNear(final Driver driverNear, boolean isbook) {
         if (driverNear != null) {
             progressbarLoadDriver.setVisibility(View.GONE);
             findViewById(R.id.layoutInfoDriver).setVisibility(View.VISIBLE);
@@ -323,7 +361,14 @@ public class GoogleMapActivity extends AppCompatActivity implements
             rateDriver.setRating((float) driverNear.getRate());
             locationDriverCar = new LatLng(driverNear.getLatitude(), driverNear.getLongitude());
             mapFragment.getMapAsync(this);
-            presenterGoogleMap.pushOrderToDriver(driverNear,locationGo,locationCome,placeNameGo,placeNameCome);
+            if(isbook){
+                presenterGoogleMap.pushOrderToDriver(driverNear, locationGo, locationCome, placeNameGo, placeNameCome);
+
+            }else {
+                presenterGoogleMap.pushOrderFoodToDriver(driverNear,billFoodArrayList,locationCurrent,restaurant,restaurant.getName(),addressCurrent,priceOrderFood);
+
+            }
+
         }
         imgInfoDriver.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -385,5 +430,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(locationCurrent, 18f);
         googleMap.animateCamera(cameraUpdate);
     }
+
+
 }
 

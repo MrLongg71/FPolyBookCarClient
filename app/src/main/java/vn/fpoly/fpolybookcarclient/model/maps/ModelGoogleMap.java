@@ -24,8 +24,10 @@ import java.util.concurrent.ExecutionException;
 
 import vn.fpoly.fpolybookcarclient.Constans;
 import vn.fpoly.fpolybookcarclient.R;
+import vn.fpoly.fpolybookcarclient.model.objectClass.BillFood;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Driver;
 import vn.fpoly.fpolybookcarclient.model.objectClass.OderCar;
+import vn.fpoly.fpolybookcarclient.model.objectClass.OrderFood;
 import vn.fpoly.fpolybookcarclient.model.objectClass.PushOrderToDriver;
 import vn.fpoly.fpolybookcarclient.presenter.maps.PresenterGoogleMap;
 import vn.fpoly.fpolybookcarclient.server.DownloadPolyLine;
@@ -69,7 +71,7 @@ public class ModelGoogleMap {
         }
     }
 
-    public void dowloadDriverCarList(final Activity activity, final LatLng locationGo, final PresenterGoogleMap presenterGoogleMap) {
+    public void dowloadDriverCarList(final Activity activity, final LatLng locationGo, final boolean isbook, final PresenterGoogleMap presenterGoogleMap) {
 
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
@@ -109,7 +111,7 @@ public class ModelGoogleMap {
                 }
 
 
-                presenterGoogleMap.distanceDriverNear(driverArrayList);
+                presenterGoogleMap.distanceDriverNear(driverArrayList,isbook);
 
             }
 
@@ -132,6 +134,34 @@ public class ModelGoogleMap {
                 }
             }
         });
+
+
+
+    }
+    public void initPushNotificationBookFood(final OrderFood orderFood, final PushOrderToDriver pushOrderToDriver,ArrayList<BillFood> billFoodArrayList) {
+
+        String keyBillDetail = databaseOrder.push().getKey();
+        orderFood.setKeyBillDetail(keyBillDetail);
+        databaseOrder.child("OrderFood").child(orderFood.getKeyDriver()).child(orderFood.getKey()).setValue(orderFood).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+//                    //TODO
+                    databaseOrder.child("notification").push().setValue(pushOrderToDriver);
+                }
+            }
+        });
+        for(BillFood billFood : billFoodArrayList){
+            String keyBill = databaseOrder.push().getKey();
+            billFood.setKey(keyBill);
+            databaseOrder.child("BillFoodDetails").child(keyBillDetail).child(keyBill).setValue(billFood).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
+        }
+
 
 
 
