@@ -158,7 +158,9 @@ public class GoogleMapActivity extends AppCompatActivity implements
             locationLongitude = sharedPreferences.getString("locationlongitude","");
 
             locationCurrent = new LatLng(Double.parseDouble(locationLatitude), Double.parseDouble(locationLongitude));
-            priceOrderFood = intent.getDoubleExtra(Constans.KEY_ORDERFOOD_PRICE,0);
+            priceOrderFood = (double) intent.getIntExtra(Constans.KEY_ORDERFOOD_PRICE,0);
+            Log.d("LONgKUTE", "initEventBookFood: " + priceOrderFood);
+
 
             presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationRestaurant,false);
         }
