@@ -25,12 +25,6 @@ public class ModelChallengeBanner {
                 for (DataSnapshot valueImage : dataImage.getChildren()){
                     ChallengeBanner challengeBanner = valueImage.getValue(ChallengeBanner.class);
                     challengeBanner.setKey(valueImage.getKey());
-                    List<String>arrImage = new ArrayList<>();
-                    DataSnapshot dataImage1 = dataSnapshot.child("ImageNewsChallege").child(challengeBanner.getKey());
-                    for (DataSnapshot value: dataImage1.getChildren() ){
-                        arrImage.add(value.getValue(String.class));
-                    }
-                    challengeBanner.setArrImage(arrImage);
 
                     presenterChallengerBanner.resultGetListChallenge(challengeBanner);
                 }

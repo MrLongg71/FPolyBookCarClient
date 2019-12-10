@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ChallengeBanner   {
     private String key;
-    private List<String>arrImage;
+    private String image;
 
     public String getKey() {
         return key;
@@ -14,19 +14,19 @@ public class ChallengeBanner   {
         this.key = key;
     }
 
-    public List<String> getArrImage() {
-        return arrImage;
+    public String getImage() {
+        return image;
     }
 
-    public void setArrImage(List<String> arrImage) {
-        this.arrImage = arrImage;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public ChallengeBanner() {
     }
 
-    public ChallengeBanner(String key, List<String> arrImage) {
+    public ChallengeBanner(String key, String image) {
         this.key = key;
-        this.arrImage = arrImage;
+        this.image = image;
     }
 }

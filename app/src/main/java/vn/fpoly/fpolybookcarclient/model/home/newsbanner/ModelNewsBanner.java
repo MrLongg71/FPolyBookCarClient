@@ -25,21 +25,21 @@ public class ModelNewsBanner {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 DataSnapshot dataNewsCake = dataSnapshot.child("NewsCake");
                 DataSnapshot dataNewsPlace = dataSnapshot.child("NewsPlace");
+                if (dataNewsCake.exists() && dataNewsPlace.exists() ){
+                    for (DataSnapshot valueNewsCake : dataNewsCake.getChildren()) {
+                        final News newsCakeBanner = valueNewsCake.getValue(News.class);
+                        newsCakeBannerList.add(newsCakeBanner);
+                    }
 
+                    for (DataSnapshot valuePlace : dataNewsPlace.getChildren()) {
+                        News newsPlaceBanner = valuePlace.getValue(News.class);
+                        newsPlaceBannerList.add(newsPlaceBanner);
 
-                for (DataSnapshot valueNewsCake : dataNewsCake.getChildren()) {
-                    final News newsCakeBanner = valueNewsCake.getValue(News.class);
-                    newsCakeBannerList.add(newsCakeBanner);
+                    }
+                    presenterNewsBanner.resultGetListCake(newsCakeBannerList, newsPlaceBannerList, newsFoodBannerList);
+
                 }
 
-                for (DataSnapshot valuePlace : dataNewsPlace.getChildren()) {
-                    News newsPlaceBanner = valuePlace.getValue(News.class);
-                    newsPlaceBannerList.add(newsPlaceBanner);
-
-                }
-
-
-                presenterNewsBanner.resultGetListCake(newsCakeBannerList, newsPlaceBannerList, newsFoodBannerList);
 
             }
 

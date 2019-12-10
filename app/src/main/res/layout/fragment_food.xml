@@ -12,10 +12,9 @@
         android:background="#fff">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
 
             <ImageView
@@ -38,16 +37,15 @@
             </ImageView>
 
             <TextView
-                android:layout_weight="1"
                 android:id="@+id/txtAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="3dp"
                 android:layout_toRightOf="@+id/imgMarkerCurrent"
+                android:layout_weight="1"
                 android:text="23/Califo"
-                android:textColor="#000"
-               >
+                android:textColor="#000">
 
             </TextView>
 
@@ -60,6 +58,7 @@
                 android:src="@drawable/ic_favorite_border_black_24dp">
 
             </ImageView>
+
             <ImageView
                 android:id="@+id/imgBillFood"
                 android:layout_width="wrap_content"
@@ -104,13 +103,29 @@
 
             </TextView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/reycelviewFood1"
-
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/progressbarCategorie"
+                    style="@style/SpinKitView.Wave"
+                    android:layout_gravity="center|top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    app:SpinKit_Color="@color/tim" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/reycelviewFood1"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </FrameLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -139,7 +154,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/custom_button_login"
-                        android:backgroundTint="#f38523"
+                        android:backgroundTint="@color/fullapp"
                         android:text="View"
                         android:textAllCaps="false"
                         android:textColor="#fff">
@@ -177,12 +192,30 @@
 
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/reycelviewFood2"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/progressbarfoodsale"
+                    style="@style/SpinKitView.Wave"
+                    android:layout_gravity="center|top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    app:SpinKit_Color="@color/tim" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/reycelviewFood2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </FrameLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -220,12 +253,28 @@
 
             </TextView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/reycelviewFood3"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/progressbarBreakFast"
+                    style="@style/SpinKitView.Wave"
+                    android:layout_gravity="center|top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    app:SpinKit_Color="@color/tim" />
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/reycelviewFood3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </FrameLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -254,14 +303,28 @@
 
 
             </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/reycelviewFood5"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/progressbarMenutype"
+                    style="@style/SpinKitView.Wave"
+                    android:layout_gravity="center|top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    app:SpinKit_Color="@color/tim" />
 
-            </androidx.recyclerview.widget.RecyclerView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/reycelviewFood5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </FrameLayout>
+
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -38,22 +38,11 @@ public class SplashScreenFragment extends Fragment implements View.OnClickListen
     private void initEvent(View view) {
         progressBar     = view.findViewById(R.id.progressbar);
         btnlogin        = view.findViewById(R.id.btnlogin);
-        txtIntro        = view.findViewById(R.id.txtIntroduction);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-//            case R.id.btnsigup:
-//                RegisterFragment registerFragment1 = new RegisterFragment();
-//                loadFragment(registerFragment1);
-//                FragmentManager fragmentManager = getFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                RegisterFragment registerFragment = new RegisterFragment();
-//                fragmentTransaction.replace(R.id.frame_client, registerFragment);
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-//                break;
             case R.id.btnlogin:
                 LoginFragment loginFragment = new LoginFragment();
                 loadFragment(loginFragment);
@@ -72,7 +61,6 @@ public class SplashScreenFragment extends Fragment implements View.OnClickListen
         Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.animation_button);
         btnlogin.startAnimation(animation);
 
-        txtIntro.startAnimation(animation);
     }
 }
 

@@ -46,6 +46,8 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="#39000000"
                 app:layout_collapseMode="pin"
+                app:subtitleTextColor="#f17f1c"
+                app:titleTextColor="#f17f1c"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:title="cjsdcjdsjncosdn">
 
@@ -81,17 +83,19 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:textStyle="bold"
                         android:id="@+id/txtStartMenuRes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:textColor="@color/fullapp"
                         android:drawableLeft="@drawable/rsz_iconstar"
                         android:gravity="center_vertical"
-                        android:textColor="#000000"
                         tools:ignore="RtlHardcoded" />
 
                     <TextView
+                        android:textStyle="bold"
                         android:id="@+id/txtTimeMenuRes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -100,10 +104,10 @@
                         android:drawableLeft="@drawable/ic_access_time_black_24dp"
                         android:drawablePadding="5dp"
                         android:gravity="center_vertical"
-                        android:textColor="#000000"
-                        tools:ignore="RtlHardcoded" />
+                        android:textColor="@color/fullapp"                        tools:ignore="RtlHardcoded" />
 
                     <TextView
+                        android:textStyle="bold"
                         android:id="@+id/txtDistanceMenuRes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -111,8 +115,7 @@
                         android:layout_weight="1"
                         android:drawableLeft="@drawable/ic_directions_walk_black_24dp"
                         android:gravity="center_vertical"
-                        android:textColor="#000000"
-                        tools:ignore="RtlHardcoded" />
+                        android:textColor="@color/fullapp"                        tools:ignore="RtlHardcoded" />
 
                 </LinearLayout>
 
@@ -122,15 +125,30 @@
                     android:background="@drawable/view_dashed" />
 
                 <TextView
+                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_time_open"
                     android:drawablePadding="10dp"
                     android:gravity="center_vertical"
                     android:padding="5dp"
-                    android:textColor="#000000"
+                    android:textColor="@color/fullapp"
                     android:textSize="15sp"
                     tools:ignore="RtlHardcoded" />
+
+                <TextView
+                    android:id="@+id/txtDetailRestaurant"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_loyalty_black_24dp"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    tools:ignore="RtlHardcoded" />
+
 
                 <TextView
                     android:layout_width="match_parent"
@@ -151,7 +169,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/menu"
-                    android:textColor="#000000"
+                    android:textColor="@color/fullapp"
                     android:textSize="24sp" />
 
                 <View

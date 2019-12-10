@@ -56,7 +56,6 @@ public class RestaurantMenuFoodAdapter extends RecyclerView.Adapter<RestaurantMe
                 .addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-
                         Glide.with(context).load(uri.toString()).centerCrop().into(holder.imgFoodItemMenuRes);
                         foodMenu.setImage(uri.toString());
                     }
@@ -88,6 +87,7 @@ public class RestaurantMenuFoodAdapter extends RecyclerView.Adapter<RestaurantMe
             txtNameFoodItemMenuRes = itemView.findViewById(R.id.txtNameFoodItemMenuRes);
             txtDetailFoodItemMenuRes = itemView.findViewById(R.id.txtDetailFoodItemMenuRes);
             txtPriceFoodItemMenuRes = itemView.findViewById(R.id.txtPriceFoodItemMenuRes);
+
         }
     }
 }

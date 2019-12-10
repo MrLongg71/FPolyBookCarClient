@@ -43,15 +43,13 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        sharedPreferences  = getSharedPreferences("toado",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("toado", MODE_PRIVATE);
 
         locationManager = this.getSystemService(LocationManager.class);
-       this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_home);
 
         navView = findViewById(R.id.nav_view);
-        Log.d("kiemtra", "creany");
-
 
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navView.setItemIconTintList(null);

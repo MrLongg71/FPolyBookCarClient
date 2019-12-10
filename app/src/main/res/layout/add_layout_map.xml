@@ -162,6 +162,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/custom_button_bookcar"
                 android:text="Book"
+                android:backgroundTint="@color/fullapp"
                 android:textAllCaps="false"
                 android:textColor="#feffff"
                 android:textSize="18dp" />

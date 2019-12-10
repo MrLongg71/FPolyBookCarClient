@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import vn.fpoly.fpolybookcarclient.model.food.foodcategories.ModelFoodCategories;
 import vn.fpoly.fpolybookcarclient.model.objectClass.FoodCategories;
-import vn.fpoly.fpolybookcarclient.view.food.IViewFoodCategories;
+import vn.fpoly.fpolybookcarclient.view.food.food_home.IViewFoodCategories;
 
 public class PresenterFoodCategories  implements IPresenterFoodCategories{
     private ModelFoodCategories modelFoodCategories;

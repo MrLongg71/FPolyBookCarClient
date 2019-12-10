@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +30,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 import vn.fpoly.fpolybookcarclient.library.Dialog;
 import vn.fpoly.fpolybookcarclient.presenter.client.PresenterLogin;
@@ -35,12 +38,11 @@ import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
 
 public class LoginFragment extends Fragment implements View.OnClickListener, ViewLogin {
-    private Button btnloginHome, btnLoginPhone;
-    private SignInButton btngoogle;
-    private TextInputEditText edtuser, edtpass;
+    private Button btnloginHome;
+    private ImageView btnFb,btnGoogle,btnLoginPhone;
+    private EditText edtuser, edtpass;
     private TextView txtforgot;
-    private ImageButton imgBtnBackLogIn;
-    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth   firebaseAuth = FirebaseAuth.getInstance();
     private GoogleSignInClient signInClient;
     private PresenterLogin presenterLogin;
     private int REQUEST_CODE_SIGNIN_GOOGLE = 123;
@@ -50,14 +52,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         initView(view);
-        firebaseAuth = FirebaseAuth.getInstance();
+
         presenterLogin = new PresenterLogin(this);
 
+        btnFb.setOnClickListener(this);
         btnloginHome.setOnClickListener(this);
-        btngoogle.setOnClickListener(this);
+        btnGoogle.setOnClickListener(this);
         btnLoginPhone.setOnClickListener(this);
-        imgBtnBackLogIn.setOnClickListener(this);
-        btngoogle.setSize(SignInButton.SIZE_STANDARD);
 
         createClientWithGoogle();
 
@@ -65,22 +66,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
     }
 
     private void initView(View view) {
-        btnLoginPhone   = view.findViewById(R.id.btnLoginWithPhone);
+        btnLoginPhone   = view.findViewById(R.id.btnPhone);
         btnloginHome    = view.findViewById(R.id.btnLoginHome);
-        btngoogle       = view.findViewById(R.id.btngoogle);
+        btnFb           = view.findViewById(R.id.btnFb);
         edtuser         = view.findViewById(R.id.edtEmailLogin);
         edtpass         = view.findViewById(R.id.edtPassLogin);
         txtforgot       = view.findViewById(R.id.txtforgot);
-        btngoogle       = view.findViewById(R.id.btngoogle);
-        txtforgot       = view.findViewById(R.id.txtforgot);
-        btngoogle       = view.findViewById(R.id.btngoogle);
-        txtforgot       = view.findViewById(R.id.txtforgot);
-        imgBtnBackLogIn = view.findViewById(R.id.imgBackLogIn);
-
-        btngoogle       = view.findViewById(R.id.btngoogle);
-
-        txtforgot       = view.findViewById(R.id.txtforgot);
-
+        btnGoogle       = view.findViewById(R.id.btnGoogle);
         edtuser.setText("abc@gmail.com");
         edtpass.setText("123456");
     }
@@ -95,14 +87,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
 
                 break;
 
-            case R.id.btngoogle:
+            case R.id.btnGoogle:
                 logInWithGoogle();
                 break;
-            case R.id.btnLoginWithPhone:
+            case R.id.btnPhone:
                 loginClientWithPhone();
-                break;
-            case R.id.imgBackLogIn:
-                getActivity().getSupportFragmentManager().popBackStack();
                 break;
         }
     }

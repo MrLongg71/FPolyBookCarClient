@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import vn.fpoly.fpolybookcarclient.model.food.foodpager.ModelFood;
 import vn.fpoly.fpolybookcarclient.model.objectClass.FoodPager;
-import vn.fpoly.fpolybookcarclient.view.food.IViewFood;
+import vn.fpoly.fpolybookcarclient.view.food.food_home.IViewFood;
 
 public class PresenterFood implements IPresenterFood {
     private ModelFood modelFood;

@@ -47,15 +47,15 @@ public class ChallengeBannerAdapter extends RecyclerView.Adapter<ChallengeBanner
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        ChallengeBanner banner = arrBanner.get(position);
-        storageReference.child("Imagenewschallenge").child(banner.getArrImage().get(0)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        final ChallengeBanner banner = arrBanner.get(position);
+        storageReference.child("Imagenewschallenge").child(banner.getImage()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                String URL = uri.toString();
-                Uri uri1 = uri.parse(URL);
-                Glide.with(context).load(uri1).into(holder.imgBanner);
+                banner.setImage(uri.toString());
+                Glide.with(context).load(banner.getImage()).into(holder.imgBanner);
             }
         });
+        Glide.with(context).load(banner.getImage()).into(holder.imgBanner);
     }
 
 

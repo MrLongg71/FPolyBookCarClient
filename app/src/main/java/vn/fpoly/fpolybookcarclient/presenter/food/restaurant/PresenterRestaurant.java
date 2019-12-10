@@ -3,9 +3,8 @@ package vn.fpoly.fpolybookcarclient.presenter.food.restaurant;
 import java.util.ArrayList;
 
 import vn.fpoly.fpolybookcarclient.model.food.restaurant.ModelRestaurant;
-import vn.fpoly.fpolybookcarclient.model.objectClass.FoodMenu;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Restaurant;
-import vn.fpoly.fpolybookcarclient.view.food.IViewRestaurant;
+import vn.fpoly.fpolybookcarclient.view.food.food_home.IViewRestaurant;
 
 public class PresenterRestaurant implements IPresenterRestaurant {
     private ModelRestaurant modelFoodSale;

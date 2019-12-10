@@ -35,8 +35,6 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -58,7 +56,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, CallbackRestaurantMenuFood, CallbackRestaurantMenuFoodCartItem {
 
     private ImageView imgBackgroundMenuRes;
-    private TextView txtStartMenuRes, txtTimeMenuRes, txtDistanceMenuRes, txtTotalPriceCart;
+    private TextView txtStartMenuRes, txtTimeMenuRes, txtDistanceMenuRes, txtTotalPriceCart,txtDetailRestaurant;
     private Button btnBookFoodMenuRes;
     private RecyclerView recyclerviewMenuRestaurant, recyclerItemCartFoodMenuRes;
     private PresenterMenuRes presenterMenuRes;
@@ -111,7 +109,7 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
         btnBookFoodMenuRes = view.findViewById(R.id.btnBookFoodMenuRes);
         recyclerviewMenuRestaurant = view.findViewById(R.id.reycelviewMenuRestaurant);
         nestedScrollMenuFoodRes = view.findViewById(R.id.nestedScrollMenuFoodRes);
-
+        txtDetailRestaurant     = view.findViewById(R.id.txtDetailRestaurant);
 
         presenterMenuRes = new PresenterMenuRes(this);
 
@@ -141,11 +139,12 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
             txtTimeMenuRes.setText((time + ""));
             txtStartMenuRes.setText(restaurant.getRate() + "");
             txtDistanceMenuRes.setText(distance + " km");
+            txtDetailRestaurant.setText(restaurant.getDetail());
             presenterMenuRes.getListMenuFood(restaurant.getKey());
             locationRes = new LatLng(restaurant.getLatitude(), restaurant.getLongitude());
             addresCurrent = bundle.getString(Constans.KEY_BUNDEL_RESTAURANT_ADDRES_NAME_CURRENT);
             SharedPreferences sharedPreferences = getActivity().getSharedPreferences("toado", 0);
-            locationCurrent = new LatLng(Double.parseDouble(sharedPreferences.getString("locationlatitude","")),Double.parseDouble(sharedPreferences.getString("locationlongitude","")) );
+            locationCurrent = new LatLng(Double.parseDouble(sharedPreferences.getString("locationlatitude", "")), Double.parseDouble(sharedPreferences.getString("locationlongitude", "")));
 
         }
 
@@ -168,6 +167,7 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
     public void displayListMenuFoodFailed() {
 
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -279,7 +279,7 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
 
     @SuppressLint("SetTextI18n")
     private void setTotalCart() {
-
+        priceTotal = 0;
         for (int i = 0; i < billFoodArrayList.size(); i++) {
             priceTotal += billFoodArrayList.get(i).getAmountBuy() * Integer.parseInt(foodMenuListCart.get(i).getPrice());
         }
@@ -292,19 +292,19 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
             @Override
             public void onClick(View view) {
                 Intent intent  = new Intent(getActivity(),GoogleMapActivity.class);
-                intent.putParcelableArrayListExtra(Constans.KEY_ORDERFOOD_BILLLIST, billFoodArrayList);
-                intent.putExtra(Constans.KEY_ORDERFOOD_RESTAURANT, restaurant);
-                intent.putExtra(Constans.KEY_ORDERFOOD_ADDRES_CURRENT,addresCurrent);
-                intent.putExtra(Constans.KEY_ORDERFOOD_PRICE,priceTotal);
+
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList(Constans.KEY_ORDERFOOD_BILLLIST, billFoodArrayList);
+                bundle.putParcelable(Constans.KEY_ORDERFOOD_RESTAURANT, restaurant);
+                bundle.putString(Constans.KEY_ORDERFOOD_ADDRES_CURRENT,addresCurrent);
+                bundle.putInt(Constans.KEY_ORDERFOOD_PRICE,priceTotal);
+                intent.putExtras(bundle);
+
                 startActivity(intent);
 
             }
         });
 
     }
-
-
-
-
 
 }

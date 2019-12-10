@@ -1,4 +1,4 @@
-package vn.fpoly.fpolybookcarclient.view.food;
+package vn.fpoly.fpolybookcarclient.view.food.food_home;
 
 import android.content.SharedPreferences;
 import android.location.Address;
@@ -13,11 +13,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+
+import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,8 +40,6 @@ import vn.fpoly.fpolybookcarclient.model.objectClass.Restaurant;
 import vn.fpoly.fpolybookcarclient.presenter.food.foodviewpager.PresenterFood;
 import vn.fpoly.fpolybookcarclient.presenter.food.foodcategories.PresenterFoodCategories;
 import vn.fpoly.fpolybookcarclient.presenter.food.restaurant.PresenterRestaurant;
-import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
-import vn.fpoly.fpolybookcarclient.view.food.food_home.CallbackRestaurantAdpater;
 import vn.fpoly.fpolybookcarclient.view.food.menu_restaurant.MenuRestaurantFragment;
 
 public class FoodFragment extends Fragment implements IViewFood, IViewFoodCategories,
@@ -65,6 +64,7 @@ public class FoodFragment extends Fragment implements IViewFood, IViewFoodCatego
     private ArrayList<Restaurant> restaurantArrayList = new ArrayList<>();
     private FragmentManager fragmentManager;
     private String addresCurrent = "";
+    private SpinKitView progressbarCate,progressbarfoodSale,progressbarBreakFast,progressbarMenufood;
 
 
     @Nullable
@@ -97,7 +97,7 @@ public class FoodFragment extends Fragment implements IViewFood, IViewFoodCatego
        } else {
            txtAdress.setText("");
        }
-
+        presenterFood.getListFood();
         presenterFoodCategories.getListFoodCategories();
         presenterRestaurant.getListRestaurant();
 
@@ -123,7 +123,7 @@ public class FoodFragment extends Fragment implements IViewFood, IViewFoodCatego
         return view;
     }
     private void initView(View view){
-        fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentManager                                     = getActivity().getSupportFragmentManager();
         viewPager                                           = view.findViewById(R.id.viewpager);
         presenterFood                                       = new PresenterFood(this);
         recyclerViewFoodCategories                          = view.findViewById(R.id.reycelviewFood1);
@@ -133,6 +133,10 @@ public class FoodFragment extends Fragment implements IViewFood, IViewFoodCatego
         recyclerViewBreakFast                               = view.findViewById(R.id.reycelviewFood3);
         recyclerViewMenuFood                                = view.findViewById(R.id.reycelviewFood5);
         txtAdress                                           = view.findViewById(R.id.txtAddress);
+        progressbarCate                                     = view.findViewById(R.id.progressbarCategorie);
+        progressbarBreakFast                                = view.findViewById(R.id.progressbarBreakFast);
+        progressbarfoodSale                                 = view.findViewById(R.id.progressbarfoodsale);
+        progressbarMenufood                                 = view.findViewById(R.id.progressbarMenutype);
     }
 
 
@@ -145,7 +149,7 @@ public class FoodFragment extends Fragment implements IViewFood, IViewFoodCatego
 
     @Override
     public void displayRestaurant(ArrayList<Restaurant> arrRestaurant) {
-
+        progressbarfoodSale.setVisibility(View.GONE);
         recyclerViewRestaurant.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
         recyclerViewRestaurant.setLayoutManager(linearLayoutManager);
@@ -159,6 +163,7 @@ public class FoodFragment extends Fragment implements IViewFood, IViewFoodCatego
     public void displayFoodMenu(ArrayList<Restaurant> arrRestaurant) {
         restaurantArrayList.addAll(arrRestaurant);
         Collections.reverse(restaurantArrayList);
+        progressbarBreakFast.setVisibility(View.GONE);
         recyclerViewBreakFast.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
         recyclerViewBreakFast.setLayoutManager(linearLayoutManager);
@@ -172,7 +177,8 @@ public class FoodFragment extends Fragment implements IViewFood, IViewFoodCatego
     public void displayFoodCategories(ArrayList<FoodCategories> arrFoodCategories, ArrayList<FoodCategories> arrMenuFood) {
         recyclerViewMenuFood.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         recyclerViewFoodCategories.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
-
+        progressbarCate.setVisibility(View.GONE);
+        progressbarMenufood.setVisibility(View.GONE);
         categoriesMenuFoodAdapter = new Categories_MenuFoodAdapter(arrFoodCategories, R.layout.custom_row_categories, getActivity());
         recyclerViewFoodCategories.setAdapter(categoriesMenuFoodAdapter);
         categoriesMenuFoodAdapter.notifyDataSetChanged();

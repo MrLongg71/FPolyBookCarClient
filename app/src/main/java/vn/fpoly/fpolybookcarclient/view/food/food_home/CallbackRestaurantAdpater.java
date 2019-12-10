@@ -7,5 +7,4 @@ import vn.fpoly.fpolybookcarclient.model.objectClass.Restaurant;
 
 public interface CallbackRestaurantAdpater {
     void onClickRestautantMenu(Restaurant restaurant,String distance);
-
 }

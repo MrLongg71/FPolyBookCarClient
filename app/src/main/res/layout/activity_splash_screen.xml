@@ -6,26 +6,18 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:background="@drawable/gradient_splash"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="30dp">
+        <ImageView
+            android:src="@drawable/icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-
-        <TextView
-
-            style="@style/AppTheme.TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:text="BOOK CAR"
-
-            android:textColor="#fff"
-            android:textSize="50dp"
-            android:textStyle="bold" />
+        </ImageView>
 
         <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/progressbar"
@@ -38,41 +30,5 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnsigup"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="#ffff"
-            android:text="@string/btn_signup"
-            android:textAllCaps="false"
-            android:textColor="#FFA87F"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/btnlogin"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:background="#5EFF6C00"
-            android:text="@string/btn_login"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            android:visibility="gone" />
-    </LinearLayout>
 
 </RelativeLayout>

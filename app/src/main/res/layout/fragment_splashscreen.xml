@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/contentlayout"
+    android:background="#fff"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -11,33 +12,20 @@
 
         android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/backgroud" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/gradient_splash"
 
             android:orientation="vertical"
             android:padding="30dp">
 
+            <ImageView
+                android:src="@drawable/icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/txtIntroduction"
-                style="@style/AppTheme.TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="BOOK CAR"
-                android:textColor="#fff"
-                android:padding="10dp"
-                android:textSize="50dp"
-                android:textStyle="bold" />
+            </ImageView>
         </LinearLayout>
 
         <LinearLayout
@@ -55,10 +43,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/gradient_button"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:text="@string/btn_login"
                 android:textAllCaps="false"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/fullapp"
                 android:textSize="25sp"
 
                 />

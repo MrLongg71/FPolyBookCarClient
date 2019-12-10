@@ -66,7 +66,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             public void onSuccess(Uri uri) {
                 restaurant.setImage(uri.toString());
                 Glide.with(context).load(restaurant.getImage()).centerCrop().into(holder.roundedImageView);
-
             }
         });
         Glide.with(context).load(restaurant.getImage()).centerCrop().into(holder.roundedImageView);

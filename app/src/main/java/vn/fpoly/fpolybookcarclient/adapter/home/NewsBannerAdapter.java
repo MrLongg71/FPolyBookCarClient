@@ -68,11 +68,11 @@ public class NewsBannerAdapter extends RecyclerView.Adapter<NewsBannerAdapter.Vi
         storageReference.child("Imagenewscake").child(cakesBanner.getImage()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                String URL = uri.toString();
-                Glide.with(context).load(URL).into(imageCake);
-
+                cakesBanner.setImage(uri.toString());
+                Glide.with(context).load(cakesBanner.getImage()).into(imageCake);
             }
         });
+        Glide.with(context).load(cakesBanner.getImage()).into(imageCake);
 
     }
 

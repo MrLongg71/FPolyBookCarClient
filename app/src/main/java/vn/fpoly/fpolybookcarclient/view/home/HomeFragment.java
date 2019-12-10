@@ -19,8 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.ybq.android.spinkit.SpinKitView;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 
 import vn.fpoly.fpolybookcarclient.adapter.home.NewsBannerAdapter;
@@ -34,8 +32,7 @@ import vn.fpoly.fpolybookcarclient.presenter.home.newsbanner.PresenterNewsBanner
 import vn.fpoly.fpolybookcarclient.presenter.home.challengebanner.PresenterChallengerBanner;
 import vn.fpoly.fpolybookcarclient.presenter.home.eatwhat.PresenterEatWhat;
 import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
-import vn.fpoly.fpolybookcarclient.view.food.FoodFragment;
-import vn.fpoly.fpolybookcarclient.view.food.menu_restaurant.MenuRestaurantFragment;
+import vn.fpoly.fpolybookcarclient.view.food.food_home.FoodFragment;
 import vn.fpoly.fpolybookcarclient.view.maps.GoogleMapActivity;
 
 

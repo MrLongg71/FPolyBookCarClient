@@ -3,11 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
+    android:background="#fff"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.activity.HomeActivity">
 
     <FrameLayout
+        android:background="#fff"
         android:id="@+id/conten"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,11 +19,12 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
+
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:itemTextAppearanceActive="@style/BottomNavigation.ActiveItemTextAppearance"
-        android:background="?android:attr/windowBackground"
+        android:background="#fff"
         app:menu="@menu/bottom_nav_menu" />
 
 </RelativeLayout>

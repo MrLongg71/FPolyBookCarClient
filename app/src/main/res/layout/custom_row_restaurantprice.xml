@@ -40,6 +40,7 @@
                         android:layout_width="65dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:backgroundTint="@color/fullapp"
                         android:background="@drawable/custom_promo"
                         android:padding="10dp">
 
@@ -112,6 +113,7 @@
                         android:layout_marginLeft="10dp"
                         android:ellipsize="end"
                         android:maxLines="1"
+                        android:textColor="#FF0018"
                         android:maxLength="30"
                         android:text="gfdsa"
                         android:textStyle="bold">

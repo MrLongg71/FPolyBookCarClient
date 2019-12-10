@@ -41,9 +41,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+
 
 import java.util.ArrayList;
 import java.util.EventListener;
@@ -81,7 +79,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     private int CODE_CAR_OR_MOTO;
     private ImageButton imgButtonMyLocation;
     private ImageView imgMarker;
-    private Intent intent;
+
     private ArrayList<BillFood> billFoodArrayList = new ArrayList<>();
     private Restaurant restaurant;
     private PresenterGoogleMap presenterGoogleMap;
@@ -145,8 +143,10 @@ public class GoogleMapActivity extends AppCompatActivity implements
     }
 
     private void initEventBookFood() {
-        intent = getIntent();
-        if (intent != null) {
+        Intent intent = getIntent();
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            Log.d("voooo","bbb");
             billFoodArrayList = intent.getParcelableArrayListExtra(Constans.KEY_ORDERFOOD_BILLLIST);
             restaurant = intent.getParcelableExtra(Constans.KEY_ORDERFOOD_RESTAURANT);
             addressCurrent = intent.getStringExtra(Constans.KEY_ORDERFOOD_ADDRES_CURRENT);
@@ -159,8 +159,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
 
             locationCurrent = new LatLng(Double.parseDouble(locationLatitude), Double.parseDouble(locationLongitude));
             priceOrderFood = (double) intent.getIntExtra(Constans.KEY_ORDERFOOD_PRICE,0);
-            Log.d("LONgKUTE", "initEventBookFood: " + priceOrderFood);
-
 
             presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationRestaurant,false);
         }
@@ -174,7 +172,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
         googleMap.setMaxZoomPreference(14.0f);
 
         if (locationCurrent != null) {
-            placeNameCurrent = "Vị trí của bạn";
+            placeNameCurrent = "You are here!";
             getLocationCurrent();
             imgButtonMyLocation.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -414,13 +412,13 @@ public class GoogleMapActivity extends AppCompatActivity implements
 
     @Override
     public void onCameraMove() {
-        googleMap.clear();
-        imgMarker.setVisibility(View.VISIBLE);
+//        googleMap.clear();
+//        imgMarker.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onCameraIdle() {
-        imgMarker.setVisibility(View.GONE);
+//        imgMarker.setVisibility(View.GONE);
 //        MarkerOptions markerOptions = new MarkerOptions();
 //        markerOptions.position(googleMap.getCameraPosition().target).icon(BitmapDescriptorFactory.fromResource(R.drawable.markercheck)).title("bạn đang ở đây");
 
