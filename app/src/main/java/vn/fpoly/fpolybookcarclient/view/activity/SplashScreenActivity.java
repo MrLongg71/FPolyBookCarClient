@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.view.client.ClientActivity;
-import vn.fpoly.fpolybookcarclient.service.MyFirebaseMessagingService;
+import vn.fpoly.fpolybookcarclient.service.MessagingService;
 
 public class SplashScreenActivity extends AppCompatActivity {
     Handler handler;
@@ -28,7 +28,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             public void run() {
                 startActivity(new Intent(SplashScreenActivity.this, ClientActivity.class));
                 overridePendingTransition(R.anim.animation_enter, R.anim.animation_exit);
-                startService(new Intent(SplashScreenActivity.this, MyFirebaseMessagingService.class));
+                startService(new Intent(SplashScreenActivity.this, MessagingService.class));
 
                 finish();
             }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">bookcarFPoly</string>
+    <string name="app_name">VNGo</string>
 
     <!--Google Map API-->
 
@@ -104,6 +104,12 @@
     <string name="reduce">-</string>
     <string name="number_0">0</string>
     <string name="menu">Menu</string>
+    <string name="review_order">Review Order</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="phone">phone</string>
+    <string name="update">Update</string>
+    <string name="cancel">Cancel</string>
 
 
 </resources>

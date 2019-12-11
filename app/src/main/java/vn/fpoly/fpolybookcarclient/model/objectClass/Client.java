@@ -1,14 +1,26 @@
 package vn.fpoly.fpolybookcarclient.model.objectClass;
 
 public class Client {
-    private String key,email,phone,name;
+    private String key,email,phone,name,token;
 
 
-    public Client(String key, String email, String phone, String name) {
+    public Client(String key, String email, String phone, String name, String token) {
         this.key = key;
         this.email = email;
         this.phone = phone;
         this.name = name;
+        this.token = token;
+    }
+
+    public Client() {
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getKey() {

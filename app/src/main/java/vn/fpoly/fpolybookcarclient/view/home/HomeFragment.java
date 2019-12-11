@@ -31,6 +31,7 @@ import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.presenter.home.newsbanner.PresenterNewsBanner;
 import vn.fpoly.fpolybookcarclient.presenter.home.challengebanner.PresenterChallengerBanner;
 import vn.fpoly.fpolybookcarclient.presenter.home.eatwhat.PresenterEatWhat;
+import vn.fpoly.fpolybookcarclient.service.MessagingService;
 import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
 import vn.fpoly.fpolybookcarclient.view.food.food_home.FoodFragment;
 import vn.fpoly.fpolybookcarclient.view.maps.GoogleMapActivity;
@@ -55,6 +56,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, IVie
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         initView(view);
 
+        getToken();
         recyclerViewChallenge.setHasFixedSize(true);
         recyclerViewCake.setHasFixedSize(true);
         recyclerViewPlace.setHasFixedSize(true);
@@ -141,6 +143,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, IVie
 
         }
     }
+    private void getToken() {
+        getActivity().startService(new Intent(getActivity(), MessagingService.class));
+    }
 
     private void creatOptionMenu1() {
         PopupMenu popupMenu = new PopupMenu(getActivity(), txtOverFlowMenuChallenge);
@@ -166,6 +171,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, IVie
         });
         popupMenu.show();
     }
+
 
     private void creatOptionMenu2() {
         PopupMenu popupMenu = new PopupMenu(getActivity(), txtOverFlowMenuCakeBanner);

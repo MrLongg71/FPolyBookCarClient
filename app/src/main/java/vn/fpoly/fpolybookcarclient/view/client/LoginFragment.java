@@ -100,6 +100,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
         startActivity(new Intent(getActivity(), LoginSMSActivity.class));
     }
 
+
     private void loginClientWithEmail() {
         if (checkValid()) {
             String user = edtuser.getText().toString().trim();
