@@ -104,6 +104,14 @@
     <string name="reduce">-</string>
     <string name="number_0">0</string>
     <string name="menu">Menu</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="remmember_me">Remmember me?</string>
+    <string name="login">LOGIN</string>
+    <string name="username">Username</string>
+
+    <string name="password">Password</string>
+
+    <string name="connect_using_account">Connect using account</string>
 
 
 </resources>

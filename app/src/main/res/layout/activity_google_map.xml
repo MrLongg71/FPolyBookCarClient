@@ -143,7 +143,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:visibility="gone"></include>
+        android:visibility="gone">
+
+    </include>
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/progressbarLoadDriver"

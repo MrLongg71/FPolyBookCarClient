@@ -146,7 +146,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            Log.d("voooo","bbb");
             billFoodArrayList = intent.getParcelableArrayListExtra(Constans.KEY_ORDERFOOD_BILLLIST);
             restaurant = intent.getParcelableExtra(Constans.KEY_ORDERFOOD_RESTAURANT);
             addressCurrent = intent.getStringExtra(Constans.KEY_ORDERFOOD_ADDRES_CURRENT);
@@ -333,7 +332,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
 
     @Override
     public void showDetailDistance(int distance, int time, double price) {
-        txtDistanceTime.setText("Bạn sẽ đi " + distance + " km và mất khoảng " + time + " phút");
+        txtDistanceTime.setText("You will have to go " + distance + " km and take about " + time + " minute");
         txtMotoMoney.setText(price + "K");
         txtCarMoney.setText(15000 * price + "K");
         checkedChooseVerhical();

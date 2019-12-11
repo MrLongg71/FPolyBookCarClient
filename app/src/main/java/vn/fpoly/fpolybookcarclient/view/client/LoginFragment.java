@@ -39,7 +39,7 @@ import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
 
 public class LoginFragment extends Fragment implements View.OnClickListener, ViewLogin {
     private Button btnloginHome;
-    private ImageView btnFb,btnGoogle,btnLoginPhone;
+    private ImageView btnAdd,btnGoogle,btnLoginPhone;
     private EditText edtuser, edtpass;
     private TextView txtforgot;
     private FirebaseAuth   firebaseAuth = FirebaseAuth.getInstance();
@@ -55,7 +55,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
 
         presenterLogin = new PresenterLogin(this);
 
-        btnFb.setOnClickListener(this);
+        btnAdd.setOnClickListener(this);
         btnloginHome.setOnClickListener(this);
         btnGoogle.setOnClickListener(this);
         btnLoginPhone.setOnClickListener(this);
@@ -68,7 +68,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
     private void initView(View view) {
         btnLoginPhone   = view.findViewById(R.id.btnPhone);
         btnloginHome    = view.findViewById(R.id.btnLoginHome);
-        btnFb           = view.findViewById(R.id.btnFb);
+        btnAdd           = view.findViewById(R.id.btnAdd);
         edtuser         = view.findViewById(R.id.edtEmailLogin);
         edtpass         = view.findViewById(R.id.edtPassLogin);
         txtforgot       = view.findViewById(R.id.txtforgot);
@@ -84,7 +84,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
             case R.id.btnLoginHome:
                 loginClientWithEmail();
                 startActivity(new Intent(getActivity(), HomeActivity.class));
-
                 break;
 
             case R.id.btnGoogle:
@@ -93,6 +92,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
             case R.id.btnPhone:
                 loginClientWithPhone();
                 break;
+            case R.id.btnAdd:
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_client,new RegisterFragment()).commit();
+                break;
+
         }
     }
 
