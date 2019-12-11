@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">bookcarFPoly</string>
+    <string name="app_name">VNGo</string>
 
     <!--Google Map API-->
 
@@ -104,6 +104,7 @@
     <string name="reduce">-</string>
     <string name="number_0">0</string>
     <string name="menu">Menu</string>
+<<<<<<< HEAD
     <string name="forgot_password">Forgot Password?</string>
     <string name="remmember_me">Remmember me?</string>
     <string name="login">LOGIN</string>
@@ -112,6 +113,14 @@
     <string name="password">Password</string>
 
     <string name="connect_using_account">Connect using account</string>
+=======
+    <string name="review_order">Review Order</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="phone">phone</string>
+    <string name="update">Update</string>
+    <string name="cancel">Cancel</string>
+>>>>>>> cef81b8fbe6fc725795c08db88d78562f89b8c70
 
 
 </resources>

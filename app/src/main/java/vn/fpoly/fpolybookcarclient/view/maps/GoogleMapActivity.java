@@ -5,11 +5,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -108,6 +112,8 @@ public class GoogleMapActivity extends AppCompatActivity implements
         } else {
             getLocationClient();
         }
+        LocalBroadcastManager.getInstance(GoogleMapActivity.this).registerReceiver(mMessageReceiver,new IntentFilter("myFunction"));
+
 
 
     }
@@ -141,7 +147,13 @@ public class GoogleMapActivity extends AppCompatActivity implements
         initEventBookFood();
 
     }
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d("LONgKUTE", "onReceive: " + intent.getStringExtra("text"));
 
+        }
+    };
     private void initEventBookFood() {
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
@@ -186,17 +198,20 @@ public class GoogleMapActivity extends AppCompatActivity implements
 
             addMarker(locationGo, placeNameGo, R.drawable.iconlocationblue);
             addMarker(locationCome, placeNameCome, R.drawable.iconlocationred);
-            drawPolyline();
+            drawPolyline(locationGo,locationCome);
             //move camera theo lat log
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
             builder.include(locationGo).include(locationCome);
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(builder.build(), 100);
             googleMap.animateCamera(cameraUpdate);
         }
-        if (locationDriverCar != null && locationGo != null) {
+        if (locationRestaurant != null && locationCurrent != null) {
             addMarker(locationDriverCar, "", R.drawable.ic_driver_bike);
+            addMarker(locationRestaurant, placeNameGo, R.drawable.iconlocationblue);//nha hang
+            addMarker(locationCurrent, placeNameCome, R.drawable.iconlocationred);
+            drawPolyline(locationRestaurant,locationCurrent);
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
-            builder.include(locationGo).include(locationDriverCar);
+            builder.include(locationRestaurant).include(locationCurrent);
 
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(builder.build(), 0);
             googleMap.animateCamera(cameraUpdate);
@@ -325,7 +340,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void drawPolyline() {
+    public void drawPolyline(LatLng locationGo,LatLng locationCome) {
         presenterGoogleMap.getPolyline(GoogleMapActivity.this, googleMap, locationGo, locationCome);
 
     }
@@ -334,7 +349,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     public void showDetailDistance(int distance, int time, double price) {
         txtDistanceTime.setText("You will have to go " + distance + " km and take about " + time + " minute");
         txtMotoMoney.setText(price + "K");
-        txtCarMoney.setText(15000 * price + "K");
+        txtCarMoney.setText(15 * price + "K");
         checkedChooseVerhical();
     }
 

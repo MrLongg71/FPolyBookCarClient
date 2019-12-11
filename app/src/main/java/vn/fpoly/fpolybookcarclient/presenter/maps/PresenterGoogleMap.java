@@ -92,7 +92,7 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
             String date = simpleDateFormat.format(calendar.getTime());
 
             String keyOrder = database.push().getKey();
-            final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder,driver.getKeydriver());
+            final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder,driver.getKeydriver(),true);
 
             OderCar oderCar = new OderCar(keyOrder, firebaseAuth.getCurrentUser().getUid(), driver.getKeydriver()
                     , placeNameGo, placeNameCome, date, locationGo.latitude, locationGo.longitude, locationCome.latitude
@@ -113,7 +113,7 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
             String date = simpleDateFormat.format(calendar.getTime());
 
             String keyOrder = database.push().getKey();
-            final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder,driver.getKeydriver());
+            final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder,driver.getKeydriver(),false);
 
 
             OrderFood orderFood = new OrderFood(keyOrder,restaurant.getKey(),driver.getKeydriver(),FirebaseAuth.getInstance().getCurrentUser().getUid(),"",date,locationClient.latitude,locationClient.longitude,price,5,distancee,true,false);

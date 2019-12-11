@@ -92,7 +92,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         String key = task.getResult().getUser().getUid();
-                        Client client = new Client(key, email, phone, name);
+                        Client client = new Client(key, email, phone, name,"");
                         presenterLogin.doRegisterEmail(client);
                         onSuccess();
                     }else {

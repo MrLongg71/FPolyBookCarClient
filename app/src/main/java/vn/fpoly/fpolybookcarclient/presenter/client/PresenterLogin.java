@@ -115,7 +115,7 @@ public class PresenterLogin implements IPPresenterLogin {
                         if (task.isSuccessful()) {
                             viewLogin.onSuccess();
                             String key = task.getResult().getUser().getUid();
-                            Client client = new Client(key,"", task.getResult().getUser().getPhoneNumber(),"" );
+                            Client client = new Client(key,"", task.getResult().getUser().getPhoneNumber(),"" ,"");
                             ModelClient modelClient = new ModelClient();
                             modelClient.addClientDatabase(client);
                         }else {

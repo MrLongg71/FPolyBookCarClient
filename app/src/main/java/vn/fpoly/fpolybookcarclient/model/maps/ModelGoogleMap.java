@@ -122,7 +122,6 @@ public class ModelGoogleMap {
         databaseReference.addListenerForSingleValueEvent(valueEventListener);
     }
 
-    //mấy cái này thì defind thành const
     public void initPushNotification(final OderCar oderCar, final PushOrderToDriver pushOrderToDriver) {
         databaseOrder.child("Order").child(oderCar.getKeydriver()).child(oderCar.getKeyOrder()).setValue(oderCar).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
