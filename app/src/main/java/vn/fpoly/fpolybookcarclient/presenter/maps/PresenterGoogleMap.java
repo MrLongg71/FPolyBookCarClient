@@ -71,6 +71,7 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
     @Override
     public void distanceDriverNear(ArrayList<Driver> driverList, boolean isbook) {
         Collections.sort(driverList);
+
         if(driverList.size() >0){
             viewGoogleMap.getDriverNear(driverList.get(0),isbook);
         }else {
@@ -92,7 +93,7 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
             String date = simpleDateFormat.format(calendar.getTime());
 
             String keyOrder = database.push().getKey();
-            final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder,driver.getKeydriver(),true);
+            final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder,driver.getKeydriver(),"1");
 
             OderCar oderCar = new OderCar(keyOrder, firebaseAuth.getCurrentUser().getUid(), driver.getKeydriver()
                     , placeNameGo, placeNameCome, date, locationGo.latitude, locationGo.longitude, locationCome.latitude
@@ -107,16 +108,16 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
     }
 
 
-    public void pushOrderFoodToDriver(Driver driver, ArrayList<BillFood> billFoodArrayList, LatLng locationClient, Restaurant restaurant, String placeNameGo, String placeNameCome,double price) {
+    public void pushOrderFoodToDriver(Driver driver, ArrayList<BillFood> billFoodArrayList, LatLng locationClient, Restaurant restaurant, String placeNameRes, String placeNameClient,double price) {
         if (driver != null) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
             String date = simpleDateFormat.format(calendar.getTime());
 
             String keyOrder = database.push().getKey();
-            final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder,driver.getKeydriver(),false);
+            final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder,driver.getKeydriver(),"2");
 
 
-            OrderFood orderFood = new OrderFood(keyOrder,restaurant.getKey(),driver.getKeydriver(),FirebaseAuth.getInstance().getCurrentUser().getUid(),"",date,locationClient.latitude,locationClient.longitude,price,5,distancee,true,false);
+            OrderFood orderFood = new OrderFood(keyOrder,restaurant.getKey(),driver.getKeydriver(),FirebaseAuth.getInstance().getCurrentUser().getUid(),"",date,placeNameRes,placeNameClient,locationClient.latitude,locationClient.longitude,price,5,distancee,true,false);
 
             modelGoogleMap.initPushNotificationBookFood(orderFood, pushOrderToDriver,billFoodArrayList);
 

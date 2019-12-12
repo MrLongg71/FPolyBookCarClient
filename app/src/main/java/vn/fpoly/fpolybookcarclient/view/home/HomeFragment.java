@@ -56,7 +56,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, IVie
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         initView(view);
 
-        getToken();
         recyclerViewChallenge.setHasFixedSize(true);
         recyclerViewCake.setHasFixedSize(true);
         recyclerViewPlace.setHasFixedSize(true);
@@ -78,6 +77,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, IVie
         layoutChooseFoodHome.setOnClickListener(this);
         layoutChooseBikeHome.setOnClickListener(this);
         layoutChooseGiftHome.setOnClickListener(this);
+        getToken();
 
         return view;
     }

@@ -158,7 +158,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            Log.d("voooo","bbb");
             billFoodArrayList = intent.getParcelableArrayListExtra(Constans.KEY_ORDERFOOD_BILLLIST);
             restaurant = intent.getParcelableExtra(Constans.KEY_ORDERFOOD_RESTAURANT);
             addressCurrent = intent.getStringExtra(Constans.KEY_ORDERFOOD_ADDRES_CURRENT);
@@ -380,7 +379,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
                 presenterGoogleMap.pushOrderToDriver(driverNear, locationGo, locationCome, placeNameGo, placeNameCome);
 
             }else {
-                presenterGoogleMap.pushOrderFoodToDriver(driverNear,billFoodArrayList,locationCurrent,restaurant,restaurant.getName(),addressCurrent,priceOrderFood);
+                presenterGoogleMap.pushOrderFoodToDriver(driverNear,billFoodArrayList,locationCurrent,restaurant,restaurant.getAddress(),addressCurrent,priceOrderFood);
 
             }
 
