@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,6 +43,7 @@ import vn.fpoly.fpolybookcarclient.Constans;
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.adapter.food.RestaurantMenuFoodAdapter;
 import vn.fpoly.fpolybookcarclient.adapter.food.RestaurantMenuFoodCartItemAdapter;
+import vn.fpoly.fpolybookcarclient.library.CallBackFragment;
 import vn.fpoly.fpolybookcarclient.model.objectClass.BillFood;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Driver;
 import vn.fpoly.fpolybookcarclient.model.objectClass.FoodMenu;
@@ -96,7 +98,7 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
 //                getActivity().getSupportFragmentManager().popBackStack();
 
 
-//                CallBackFragment.callBackpress(view,getActivity().getSupportFragmentManager());
+                CallBackFragment.callBackpress(view,getActivity().getSupportFragmentManager());
             }
         });
     }
@@ -299,11 +301,17 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
                 bundle.putString(Constans.KEY_ORDERFOOD_ADDRES_CURRENT,addresCurrent);
                 bundle.putInt(Constans.KEY_ORDERFOOD_PRICE,priceTotal);
                 intent.putExtras(bundle);
-
                 startActivity(intent);
 
             }
         });
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getActivity().finish();
 
     }
 

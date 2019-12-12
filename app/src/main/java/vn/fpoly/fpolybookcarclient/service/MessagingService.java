@@ -47,21 +47,21 @@ public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onCreate() {
         super.onCreate();
-        getToken();
+//        getToken();
 
     }
 
-    private void getToken() {
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (task.isSuccessful()) {
-                            onNewToken(task.getResult().getToken());
-                        }
-                    }
-                });
-    }
+//    private void getToken() {
+//        FirebaseInstanceId.getInstance().getInstanceId()
+//                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+//                        if (task.isSuccessful()) {
+//                            onNewToken(task.getResult().getToken());
+//                        }
+//                    }
+//                });
+//    }
 
     @Override
     public void onNewToken(@NonNull String s) {

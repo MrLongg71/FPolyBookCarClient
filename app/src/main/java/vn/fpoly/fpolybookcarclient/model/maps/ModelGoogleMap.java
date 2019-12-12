@@ -42,7 +42,7 @@ public class ModelGoogleMap {
     private DatabaseReference databaseOrder = firebaseDatabaseOrder.getReference();
 
     //Sai chính tả nó báo xanh xanh ni thì nhớ fix
-    public void downloadPolylineList(Activity activity, GoogleMap googleMap, LatLng locationGo, LatLng locationCome, final PresenterGoogleMap presenterGoogleMap) {
+    public void downloadPolylineList(Activity activity, GoogleMap googleMap, LatLng locationGo, LatLng locationCome, final PresenterGoogleMap presenterGoogleMap,boolean isBookCar) {
         String LINK = Constans.LINK_GOOGLE_API_DRAW_POLYLINE + locationGo.latitude + Constans.Comma + locationGo.longitude + Constans.Destination + locationCome.latitude + Constans.Comma + locationCome.longitude + Constans.Language + activity.getString(R.string.google_map_api2);
 //        ParserPolyline parserPolyline = new ParserPolyline();
         DownloadPolyLine downloadPolyLine = new DownloadPolyLine();
@@ -64,7 +64,7 @@ public class ModelGoogleMap {
 //            MapAnimator.getInstance().setSecondaryLineColor();
             //MapAnimator.getInstance().animateRoute(googleMap, latLngList);
 
-            presenterGoogleMap.getDetailDistance(disttance, time, 0);
+            presenterGoogleMap.getDetailDistance(disttance, time, 0,isBookCar);
 
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();

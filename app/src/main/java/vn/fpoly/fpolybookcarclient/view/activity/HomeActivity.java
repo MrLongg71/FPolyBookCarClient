@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -37,7 +38,10 @@ public class HomeActivity extends AppCompatActivity {
     private LocationManager locationManager;
     private LatLng locationCurrent;
     public static BottomNavigationView navView;
+    private int number = 0;
+
     SharedPreferences sharedPreferences;
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -101,24 +106,25 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUESCODE  && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                getLocationClient();
-        }else {
-                finish();
+        if (requestCode == REQUESCODE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            getLocationClient();
+        } else {
+            finish();
         }
     }
+
     @SuppressLint("MissingPermission")
     private void getLocationClient() {
-//        String provider = BuildConfig.DEBUG ? LocationManager.GPS_PROVIDER : LocationManager.NETWORK_PROVIDER;
+        String provider = BuildConfig.DEBUG ? LocationManager.GPS_PROVIDER : LocationManager.NETWORK_PROVIDER;
 
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000L
+        locationManager.requestLocationUpdates(provider, 5000L
                 , 500.0F, new LocationListener() {
                     @Override
                     public void onLocationChanged(Location location) {
                         locationCurrent = new LatLng(location.getLatitude(), location.getLongitude());
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("locationlatitude",locationCurrent.latitude+"");
-                        editor.putString("locationlongitude",locationCurrent.longitude+"");
+                        editor.putString("locationlatitude", locationCurrent.latitude + "");
+                        editor.putString("locationlongitude", locationCurrent.longitude + "");
                         editor.commit();
                     }
 
@@ -129,12 +135,24 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onProviderEnabled(String provider) {
                     }
+
                     @Override
                     public void onProviderDisabled(String provider) {
                     }
                 });
 
-
     }
 
+    @Override
+    public void onBackPressed() {
+        if (number == 0) {
+            number = 1;
+            Toast.makeText(this, "bam them", Toast.LENGTH_SHORT).show();
+        } else {
+            super.onBackPressed();
+            finish();
+        }
+
+
+    }
 }

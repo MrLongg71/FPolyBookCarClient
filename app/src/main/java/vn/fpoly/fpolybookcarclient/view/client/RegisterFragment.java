@@ -167,7 +167,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onFailed() {
-        Dialog.Error(getActivity());
+        Dialog.Error(getActivity(),getActivity().getString(R.string.activateaccout));
 
     }
 }

@@ -14,10 +14,10 @@ public class Dialog{
         pDialog .show();
         pDialog.dismissWithAnimation();
     }
-    public static void Error(Activity activity){
+    public static void Error(Activity activity,String message){
         KAlertDialog pDialog = new KAlertDialog(activity, KAlertDialog.ERROR_TYPE);
         pDialog .setTitleText(activity.getString(R.string.error));
-        pDialog .setContentText(activity.getString(R.string.activateaccout));
+        pDialog .setContentText(message);
         pDialog .show();
     }
 

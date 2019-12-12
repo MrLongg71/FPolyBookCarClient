@@ -20,4 +20,10 @@ public class ClientActivity extends AppCompatActivity {
     private void initView() {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_client, new SplashScreenFragment()).commit();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

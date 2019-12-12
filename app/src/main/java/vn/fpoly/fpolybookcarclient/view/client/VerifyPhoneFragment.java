@@ -98,7 +98,7 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
 
     @Override
     public void onFailed() {
-        Dialog.Error(getActivity());
+        Dialog.Error(getActivity(),getActivity().getString(R.string.activateaccout));
     }
 
 

@@ -42,13 +42,13 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
 
 
     @Override
-    public void getPolyline(Activity activity, GoogleMap googleMap, LatLng locationGo, LatLng locationCome) {
-        modelGoogleMap.downloadPolylineList(activity, googleMap, locationGo, locationCome, this);
+    public void getPolyline(Activity activity, GoogleMap googleMap, LatLng locationGo, LatLng locationCome,boolean isBookCar) {
+        modelGoogleMap.downloadPolylineList(activity, googleMap, locationGo, locationCome, this,isBookCar);
 
     }
 
     @Override
-    public void getDetailDistance(int distance, int time, double price) {
+    public void getDetailDistance(int distance, int time, double price,boolean isBookCar) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh");
         int hourCurrent = Integer.parseInt(simpleDateFormat.format(calendar.getTime()));
 
@@ -61,7 +61,7 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
         }
         pricee = price;
         distancee = distance;
-        viewGoogleMap.showDetailDistance(distance, time, price);
+        viewGoogleMap.showDetailDistance(distance, time, price,isBookCar);
     }
 
     @Override
