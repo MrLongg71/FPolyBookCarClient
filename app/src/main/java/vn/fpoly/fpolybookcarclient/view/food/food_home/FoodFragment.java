@@ -198,8 +198,7 @@ public class FoodFragment extends Fragment implements IViewFood, IViewFoodCatego
 
         MenuRestaurantFragment menuRestaurantFragment = new MenuRestaurantFragment();
         menuRestaurantFragment.setArguments(bundle);
-
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.conten,menuRestaurantFragment).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.conten,menuRestaurantFragment).addToBackStack(null).commit();
 
     }
 

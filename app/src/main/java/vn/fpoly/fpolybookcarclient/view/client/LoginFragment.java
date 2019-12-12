@@ -1,6 +1,8 @@
 package vn.fpoly.fpolybookcarclient.view.client;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -46,6 +48,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
     private GoogleSignInClient signInClient;
     private PresenterLogin presenterLogin;
     private int REQUEST_CODE_SIGNIN_GOOGLE = 123;
+    private ProgressDialog progressDialog;
 
     @Nullable
     @Override
@@ -56,6 +59,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
         presenterLogin = new PresenterLogin(this);
 
         btnAdd.setOnClickListener(this);
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading");
         btnloginHome.setOnClickListener(this);
         btnGoogle.setOnClickListener(this);
         btnLoginPhone.setOnClickListener(this);
@@ -82,7 +87,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
         switch (view.getId()) {
             case R.id.btnLoginHome:
                 loginClientWithEmail();
-                startActivity(new Intent(getActivity(), HomeActivity.class));
                 break;
             case R.id.btnGoogle:
                 logInWithGoogle();
@@ -104,6 +108,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
 
     private void loginClientWithEmail() {
         if (checkValid()) {
+            progressDialog.show();
             String user = edtuser.getText().toString().trim();
             String pass = edtpass.getText().toString().trim();
             presenterLogin.doLoginEmail(user, pass);
@@ -133,10 +138,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
             edtuser.requestFocus();
             return false;
 
-        } else {
-            startActivity(new Intent(getActivity(), HomeActivity.class));
-            return true;
         }
+        return  true;
     }
 
     @Override
@@ -174,12 +177,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
 
     @Override
     public void onSuccess() {
-        Dialog.Success(getActivity());
+        progressDialog.dismiss();
+        startActivity(new Intent(getActivity(), HomeActivity.class));
+        getActivity().finish();
 
     }
 
     @Override
     public void onFailed() {
-        Dialog.Error(getActivity());
+        Dialog.Error(getActivity(),getString(R.string.activateaccout));
     }
 }

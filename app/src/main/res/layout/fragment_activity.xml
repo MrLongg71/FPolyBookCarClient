@@ -28,13 +28,61 @@
         android:textSize="15dp"
         android:textStyle="bold" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reycelviewItemHistory"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="50dp">
+        android:layout_height="wrap_content">
 
-    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+        <LinearLayout
+            android:id="@+id/layoutHistoryOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <TextView
+                android:padding="5dp"
+                android:textSize="24sp"
+                android:textColor="#000000"
+                android:text="@string/order_car"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <View
+                android:background="#cccc"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewHistoryOrderCar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:background="#cccc"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+            <TextView
+                android:padding="5dp"
+                android:textSize="24sp"
+                android:textColor="#000000"
+                android:text="@string/order_food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <View
+                android:background="#cccc"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewHistoryOrderFood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
 
 
 </LinearLayout>

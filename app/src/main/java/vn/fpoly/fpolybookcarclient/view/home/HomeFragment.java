@@ -123,7 +123,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, IVie
                 break;
             case R.id.layoutChooseFoodHome:
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.conten,new FoodFragment()).commit();
-                getActivity().getSupportFragmentManager().addOnBackStackChangedListener(null);
                 HomeActivity.navView.setVisibility(View.GONE);
                 break;
             case R.id.layoutChooseGiftHome:

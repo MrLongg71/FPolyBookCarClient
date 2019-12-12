@@ -1,5 +1,6 @@
 
 package vn.fpoly.fpolybookcarclient.presenter.maps;
+
 import android.app.Activity;
 import android.util.Log;
 
@@ -41,49 +42,43 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
 
 
     @Override
-    public void getPolyline(Activity activity, GoogleMap googleMap, LatLng locationGo, LatLng locationCome) {
-        modelGoogleMap.downloadPolylineList(activity, googleMap, locationGo, locationCome, this);
+    public void getPolyline(Activity activity, GoogleMap googleMap, LatLng locationGo, LatLng locationCome,boolean isBookCar) {
+        modelGoogleMap.downloadPolylineList(activity, googleMap, locationGo, locationCome, this,isBookCar);
 
     }
 
     @Override
-    public void getDetailDistance(int distance, int time, double price) {
+    public void getDetailDistance(int distance, int time, double price,boolean isBookCar) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh");
         int hourCurrent = Integer.parseInt(simpleDateFormat.format(calendar.getTime()));
 
-        if(hourCurrent > 18){
+        if (hourCurrent > 18) {
             price = 15 * distance;
-        }else if (distance > 10) {
+        } else if (distance > 10) {
             price = 10 * distance;
-        }else {
+        } else {
             price = 5 * distance;
         }
         pricee = price;
         distancee = distance;
-        viewGoogleMap.showDetailDistance(distance, time, price);
+        viewGoogleMap.showDetailDistance(distance, time, price,isBookCar);
     }
 
     @Override
     public void getDriverList(Activity activity, LatLng locationGo, boolean isbook) {
-        modelGoogleMap.dowloadDriverCarList(activity, locationGo, isbook,this);
+        modelGoogleMap.dowloadDriverCarList(activity, locationGo, isbook, this);
     }
 
     @Override
     public void distanceDriverNear(ArrayList<Driver> driverList, boolean isbook) {
         Collections.sort(driverList);
 
-        if(driverList.size() >0){
-            viewGoogleMap.getDriverNear(driverList.get(0),isbook);
-        }else {
+        if (driverList.size() > 0) {
+            viewGoogleMap.getDriverNear(driverList.get(0), isbook);
+        } else {
             viewGoogleMap.getDriverNearFailed();
         }
     }
-
-
-
-
-
-
 
 
     @Override
@@ -93,12 +88,11 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
             String date = simpleDateFormat.format(calendar.getTime());
 
             String keyOrder = database.push().getKey();
-            final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder,driver.getKeydriver(),"1");
+            final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder, driver.getKeydriver(), "1");
 
             OderCar oderCar = new OderCar(keyOrder, firebaseAuth.getCurrentUser().getUid(), driver.getKeydriver()
                     , placeNameGo, placeNameCome, date, locationGo.latitude, locationGo.longitude, locationCome.latitude
                     , locationCome.longitude, pricee, driver.getRate(), distancee, false, false);
-
 
 
             modelGoogleMap.initPushNotification(oderCar, pushOrderToDriver);
@@ -108,18 +102,18 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
     }
 
 
-    public void pushOrderFoodToDriver(Driver driver, ArrayList<BillFood> billFoodArrayList, LatLng locationClient, Restaurant restaurant, String placeNameRes, String placeNameClient,double price) {
+    public void pushOrderFoodToDriver(Driver driver, ArrayList<BillFood> billFoodArrayList, LatLng locationClient, Restaurant restaurant, String placeNameRes, String placeNameClient, double price) {
         if (driver != null) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
             String date = simpleDateFormat.format(calendar.getTime());
 
             String keyOrder = database.push().getKey();
-            final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder,driver.getKeydriver(),"2");
+            final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder, driver.getKeydriver(), "2");
 
 
-            OrderFood orderFood = new OrderFood(keyOrder,restaurant.getKey(),driver.getKeydriver(),FirebaseAuth.getInstance().getCurrentUser().getUid(),"",date,placeNameRes,placeNameClient,locationClient.latitude,locationClient.longitude,price,5,distancee,true,false);
+            OrderFood orderFood = new OrderFood(keyOrder, restaurant.getKey(), driver.getKeydriver(), FirebaseAuth.getInstance().getCurrentUser().getUid(), "", date, placeNameRes, placeNameClient, locationClient.latitude, locationClient.longitude, price, 5, distancee, true, false);
 
-            modelGoogleMap.initPushNotificationBookFood(orderFood, pushOrderToDriver,billFoodArrayList);
+            modelGoogleMap.initPushNotificationBookFood(orderFood, pushOrderToDriver, billFoodArrayList);
 
 
         }

@@ -120,6 +120,8 @@
     <string name="phone">phone</string>
     <string name="update">Update</string>
     <string name="cancel">Cancel</string>
+    <string name="order_food">Order Food</string>
+    <string name="order_car">Order Car</string>
 
 
 
