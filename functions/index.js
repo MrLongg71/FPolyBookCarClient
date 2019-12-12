@@ -9,17 +9,21 @@ exports.sendNotification = functions.database
   .onWrite((change, context) => {
     
     const idOrder = change.after.child("idOrder").val();
+
     const idDriver = change.after.child("idDriver").val();
-    const isBookCar = change.after.child("isBookCar").val();
-        return admin.database().ref().child("Driver").child("Car").child(idDriver).child("token").once('value')
+
+    return admin.database().ref().child("Driver").child("Car").child(idDriver).child("token").once('value')
     .then(function(snapshot){
       var token_id = snapshot.val();
+
+
       console.log(token_id);
+
+
       var payload = {
         data: {
           idOrder: idOrder,
-          idDriver: idDriver,
-          isBookCar : isBookCar,
+          idDriver: idDriver
         },
         token : token_id
   
@@ -33,35 +37,8 @@ exports.sendNotification = functions.database
         .catch(function(error) {
           return console.log("Error sending message:", error);
         });
-  });
-});
 
 
-
-functions.sendNotification = functions.database
-  .ref("/notificationRV/{notificationRVId}")
-  .onWrite((change, context) => {
     
-  const idClient = change.after.child("idClient").val();
-        return admin.database().ref().child("Client").child(idClient).child("token").once('value')
-    .then(function(snapshot){
-      var token_id = snapshot.val();
-      console.log(token_id);
-      var payload = {
-        data: {
-          text : "Please! Review Order",
-        },
-        token : token_id
-  
-      };
-      return admin
-        .messaging()
-        .send(payload)
-        .then(function(response) {
-          return console.log("Successfully sent message REVIEW: ", response);
-        })
-        .catch(function(error) {
-          return console.log("Error sending message:", error);
-        });
   });
 });

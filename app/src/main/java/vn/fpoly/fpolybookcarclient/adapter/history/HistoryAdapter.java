@@ -49,10 +49,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         TextView txtDate,txttitle,txtdetail;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView       = itemView.findViewById(R.id.imgIconCarHistory);;
-            txtDate         = itemView.findViewById(R.id.txttitleHistoryItem);
-            txttitle       = itemView.findViewById(R.id.txttitleHistoryItem);
-            txtdetail       = itemView.findViewById(R.id.txtgenreHistoryItem);
+//            imageView       = itemView.findViewById(R.id.imgIconCarHistory);;
+//            txtDate         = itemView.findViewById(R.id.txttitleHistoryItem);
+//            txttitle       = itemView.findViewById(R.id.txttitleHistoryItem);
+//            txtdetail       = itemView.findViewById(R.id.txtgenreHistoryItem);
         }
     }
 }
