@@ -379,7 +379,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
                 presenterGoogleMap.pushOrderToDriver(driverNear, locationGo, locationCome, placeNameGo, placeNameCome);
 
             }else {
-                presenterGoogleMap.pushOrderFoodToDriver(driverNear,billFoodArrayList,locationCurrent,restaurant,restaurant.getName(),addressCurrent,priceOrderFood);
+                presenterGoogleMap.pushOrderFoodToDriver(driverNear,billFoodArrayList,locationCurrent,restaurant,restaurant.getAddress(),addressCurrent,priceOrderFood);
 
             }
 

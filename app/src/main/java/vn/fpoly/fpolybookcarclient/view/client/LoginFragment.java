@@ -80,12 +80,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-
             case R.id.btnLoginHome:
                 loginClientWithEmail();
                 startActivity(new Intent(getActivity(), HomeActivity.class));
                 break;
-
             case R.id.btnGoogle:
                 logInWithGoogle();
                 break;

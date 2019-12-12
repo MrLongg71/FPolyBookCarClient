@@ -1,17 +1,19 @@
 package vn.fpoly.fpolybookcarclient.model.objectClass;
 
 public class OrderFood {
-    private String key,keyRestaurant,keyDriver,keyClient,keyBillDetail,date;
+    private String key,keyRestaurant,keyDriver,keyClient,keyBillDetail,date,placeNameRes,placeNameC;
     private double latitudeClient,longitudeClient,price,rate,distance;
     private boolean status,finish;
 
-    public OrderFood(String key, String keyRestaurant, String keyDriver, String keyClient, String keyBillDetail, String date, double latitudeClient, double longitudeClient, double price, double rate, double distance, boolean status, boolean finish) {
+    public OrderFood(String key, String keyRestaurant, String keyDriver, String keyClient, String keyBillDetail, String date, String placeNameRes, String placeNameC, double latitudeClient, double longitudeClient, double price, double rate, double distance, boolean status, boolean finish) {
         this.key = key;
         this.keyRestaurant = keyRestaurant;
         this.keyDriver = keyDriver;
         this.keyClient = keyClient;
         this.keyBillDetail = keyBillDetail;
         this.date = date;
+        this.placeNameRes = placeNameRes;
+        this.placeNameC = placeNameC;
         this.latitudeClient = latitudeClient;
         this.longitudeClient = longitudeClient;
         this.price = price;
@@ -22,6 +24,22 @@ public class OrderFood {
     }
 
     public OrderFood() {
+    }
+
+    public String getPlaceNameRes() {
+        return placeNameRes;
+    }
+
+    public void setPlaceNameRes(String placeNameRes) {
+        this.placeNameRes = placeNameRes;
+    }
+
+    public String getPlaceNameC() {
+        return placeNameC;
+    }
+
+    public void setPlaceNameC(String placeNameC) {
+        this.placeNameC = placeNameC;
     }
 
     public boolean isStatus() {

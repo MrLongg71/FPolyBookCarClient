@@ -57,7 +57,7 @@ public class MessagingService extends FirebaseMessagingService {
                     @Override
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
                         if (task.isSuccessful()) {
-                            onNewToken(task.getResult().getToken());
+//                            onNewToken(task.getResult().getToken());
                         }
                     }
                 });
@@ -66,12 +66,12 @@ public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull String s) {
         super.onNewToken(s);
-        sendTokenToServer(s);
+//        sendTokenToServer(s);
     }
 
     private void sendTokenToServer(String s) {
 
-        dataDriver.child("Client").child(auth.getCurrentUser().getUid()).child("token").setValue(s);
+//        dataDriver.child("Client").child(auth.getCurrentUser().getUid()).child("token").setValue(s);
 
 
     }

@@ -3,7 +3,7 @@ package vn.fpoly.fpolybookcarclient.model.objectClass;
 public class PushOrderToDriver {
     private String idOrder;
     private String idDriver;
-    private boolean isBookCar;
+    private String event;
 
 
     public String getIdOrder() {
@@ -25,9 +25,17 @@ public class PushOrderToDriver {
     public PushOrderToDriver() {
     }
 
-    public PushOrderToDriver(String idOrder, String idDriver, boolean isBookCar) {
+    public PushOrderToDriver(String idOrder, String idDriver, String event) {
         this.idOrder = idOrder;
         this.idDriver = idDriver;
-        this.isBookCar = isBookCar;
+        this.event = event;
+    }
+
+    public String getEvent() {
+        return event;
+    }
+
+    public void setEvent(String event) {
+        this.event = event;
     }
 }

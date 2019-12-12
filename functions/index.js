@@ -9,21 +9,17 @@ exports.sendNotification = functions.database
   .onWrite((change, context) => {
     
     const idOrder = change.after.child("idOrder").val();
-
     const idDriver = change.after.child("idDriver").val();
-
-    return admin.database().ref().child("Driver").child("Car").child(idDriver).child("token").once('value')
+    const event = change.after.child("event").val();
+        return admin.database().ref().child("Driver").child("Car").child(idDriver).child("token").once('value')
     .then(function(snapshot){
       var token_id = snapshot.val();
-
-
       console.log(token_id);
-
-
       var payload = {
         data: {
           idOrder: idOrder,
-          idDriver: idDriver
+          idDriver: idDriver,
+          event : event,
         },
         token : token_id
   
@@ -37,8 +33,6 @@ exports.sendNotification = functions.database
         .catch(function(error) {
           return console.log("Error sending message:", error);
         });
-
-
-    
   });
 });
+
