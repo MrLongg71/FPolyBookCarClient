@@ -133,6 +133,12 @@ public class ModelGoogleMap {
                 }
             }
         });
+        databaseOrder.child("OrderCarClient").child(oderCar.getKeyclient()).child(oderCar.getKeyOrder()).setValue(oderCar).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
 
 
 
@@ -148,6 +154,12 @@ public class ModelGoogleMap {
 //                    //TODO
                     databaseOrder.child("notification").push().setValue(pushOrderToDriver);
                 }
+            }
+        });
+        databaseOrder.child("OrderFoodClient").child(orderFood.getKeyClient()).child(orderFood.getKey()).setValue(orderFood).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
             }
         });
         for(BillFood billFood : billFoodArrayList){

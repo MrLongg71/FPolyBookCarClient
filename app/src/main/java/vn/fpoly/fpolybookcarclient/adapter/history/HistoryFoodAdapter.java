@@ -13,14 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import vn.fpoly.fpolybookcarclient.R;
-import vn.fpoly.fpolybookcarclient.model.objectClass.HistoryBookCar;
+import vn.fpoly.fpolybookcarclient.model.objectClass.OderCar;
+import vn.fpoly.fpolybookcarclient.model.objectClass.OrderFood;
 
-public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
+public class HistoryFoodAdapter extends RecyclerView.Adapter<HistoryFoodAdapter.ViewHolder> {
     private Context context;
     private int layout;
-    private List<HistoryBookCar>arrHistory;
+    private List<OrderFood>arrHistory;
 
-    public HistoryAdapter(Context context, int layout, List<HistoryBookCar> arrHistory) {
+    public HistoryFoodAdapter(Context context, int layout, List<OrderFood> arrHistory) {
         this.context = context;
         this.layout = layout;
         this.arrHistory = arrHistory;
@@ -36,6 +37,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        OrderFood orderFood = arrHistory.get(position);
+        holder.txtTimeOrder.setText(orderFood.getDate());
+        holder.txtPlaceComeOrder.setText(orderFood.getPlaceNameRes());
+        holder.txtPriceOrder.setText(orderFood.getPrice()+"");
 
     }
 
@@ -46,13 +51,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView txtDate,txttitle,txtdetail;
+        TextView txtTimeOrder,txtPlaceComeOrder,txtPriceOrder;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView       = itemView.findViewById(R.id.imgIconCarHistory);;
-            txtDate         = itemView.findViewById(R.id.txttitleHistoryItem);
-            txttitle       = itemView.findViewById(R.id.txttitleHistoryItem);
-            txtdetail       = itemView.findViewById(R.id.txtgenreHistoryItem);
+//            imageView       = itemView.findViewById(R.id.imgIconCarHistory);
+            txtTimeOrder         = itemView.findViewById(R.id.txtTimeOrder);
+            txtPlaceComeOrder       = itemView.findViewById(R.id.txtPlaceComeOrder);
+            txtPriceOrder       = itemView.findViewById(R.id.txtPriceOrder);
         }
     }
 }

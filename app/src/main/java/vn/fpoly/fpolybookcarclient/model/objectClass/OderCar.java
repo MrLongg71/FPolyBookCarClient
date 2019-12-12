@@ -23,6 +23,9 @@ public class OderCar {
         this.keyOrder = keyOrder;
     }
 
+    public OderCar() {
+    }
+
     public String getKeyOrder() {
         return keyOrder;
     }

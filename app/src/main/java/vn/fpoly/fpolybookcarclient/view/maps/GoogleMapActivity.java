@@ -10,6 +10,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -78,7 +79,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     private LinearLayout layoutChooseLocation;
     private Button btnBook;
     private EditText edtLocationCurrent;
-    private SpinKitView progressbarLoadDriver;
+    private ProgressDialog progressDialog;
     private RelativeLayout relaLayoutChooseBike, relaLayoutChooseCar;
     private int CODE_CAR_OR_MOTO;
     private ImageButton imgButtonMyLocation;
@@ -128,7 +129,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
         layoutChooseLocation = findViewById(R.id.layoutChooseLocation);
         relaLayoutChooseBike = findViewById(R.id.relaLayoutChooseBike);
         relaLayoutChooseCar = findViewById(R.id.relaLayoutChooseCar);
-        progressbarLoadDriver = findViewById(R.id.progressbarLoadDriver);
         btnBook = findViewById(R.id.btnBook);
         txtNameDriver = findViewById(R.id.txtNameDriver);
         txtLicensePlateDriver = findViewById(R.id.txtLicensePlateDriver);
@@ -137,6 +137,8 @@ public class GoogleMapActivity extends AppCompatActivity implements
         imgPhoneDriver = findViewById(R.id.imgPhoneDriver);
         imgInfoDriver = findViewById(R.id.imgInfoDriver);
         imgCancelDriver = findViewById(R.id.imgCancelDriver);
+        progressDialog = new ProgressDialog(GoogleMapActivity.this);
+        progressDialog.setMessage("Loading");
         presenterGoogleMap = new PresenterGoogleMap(this);
         imgMarker = findViewById(R.id.imgMarker);
         layoutChooseLocation.setOnClickListener(this);
@@ -158,10 +160,10 @@ public class GoogleMapActivity extends AppCompatActivity implements
         Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
+            progressDialog.show();
             billFoodArrayList = intent.getParcelableArrayListExtra(Constans.KEY_ORDERFOOD_BILLLIST);
             restaurant = intent.getParcelableExtra(Constans.KEY_ORDERFOOD_RESTAURANT);
             addressCurrent = intent.getStringExtra(Constans.KEY_ORDERFOOD_ADDRES_CURRENT);
-            progressbarLoadDriver.setVisibility(View.VISIBLE);
             locationRestaurant = new LatLng(restaurant.getLatitude(), restaurant.getLongitude());
             sharedPreferences = getSharedPreferences("toado", 0);
 
@@ -356,7 +358,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     @Override
     public void loadDriverCarList() {
         findViewById(R.id.chooseservice).setVisibility(View.GONE);
-        progressbarLoadDriver.setVisibility(View.VISIBLE);
+        progressDialog.show();
         presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationGo,true);
     }
 
@@ -368,7 +370,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     @Override
     public void getDriverNear(final Driver driverNear, boolean isbook) {
         if (driverNear != null) {
-            progressbarLoadDriver.setVisibility(View.GONE);
+            progressDialog.dismiss();
             findViewById(R.id.layoutInfoDriver).setVisibility(View.VISIBLE);
             txtNameDriver.setText(driverNear.getName());
             txtLicensePlateDriver.setText(driverNear.getLicenseplate());

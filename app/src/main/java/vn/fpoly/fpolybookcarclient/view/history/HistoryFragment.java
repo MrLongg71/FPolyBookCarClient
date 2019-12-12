@@ -15,44 +15,55 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 
-import vn.fpoly.fpolybookcarclient.adapter.history.HistoryAdapter;
+import vn.fpoly.fpolybookcarclient.adapter.history.HistoryCarAdapter;
+import vn.fpoly.fpolybookcarclient.adapter.history.HistoryFoodAdapter;
 import vn.fpoly.fpolybookcarclient.library.CallBackFragment;
-import vn.fpoly.fpolybookcarclient.model.objectClass.HistoryBookCar;
 import vn.fpoly.fpolybookcarclient.R;
+import vn.fpoly.fpolybookcarclient.model.objectClass.OderCar;
+import vn.fpoly.fpolybookcarclient.model.objectClass.OrderFood;
+import vn.fpoly.fpolybookcarclient.presenter.history.PresenterHistoryOrder;
 
-public class HistoryFragment extends Fragment {
-    private RecyclerView recyclerView;
-    private HistoryAdapter historyAdapter;
-    private ArrayList<HistoryBookCar> arrHistoryBook = new ArrayList<>();
+public class HistoryFragment extends Fragment implements IVIewHistoryOrder {
+    private RecyclerView recyclerViewHistoryOrderCar,recyclerViewHistoryOrderFood;
+    private HistoryCarAdapter historyCarAdapter;
+    private HistoryFoodAdapter historyFoodAdapter;
     private FragmentManager fragmentManager;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activity, container, false);
-        recyclerView = view.findViewById(R.id.reycelviewItemHistory);
+        recyclerViewHistoryOrderCar = view.findViewById(R.id.recyclerViewHistoryOrderCar);
+        recyclerViewHistoryOrderFood = view.findViewById(R.id.recyclerViewHistoryOrderFood);
         fragmentManager = getActivity().getSupportFragmentManager();
         CallBackFragment.CallbackHome(view,fragmentManager);
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false);
-        recyclerView.setLayoutManager(layoutManager);
-        dataItem();
-        historyAdapter = new HistoryAdapter(getActivity(),R.layout.row_email,arrHistoryBook);
-        recyclerView.setAdapter(historyAdapter);
+        PresenterHistoryOrder presenterHistoryOrder = new PresenterHistoryOrder(this);
+        presenterHistoryOrder.getListOrder();
+
+
         return view;
     }
-    private void dataItem(){
-        arrHistoryBook.add(new HistoryBookCar("Chuyến đi đến 593 Hoàng Xa","18 thg 7","Car",R.drawable.iconcar));
-        arrHistoryBook.add(new HistoryBookCar("Cơm chay thích thì vô","20 thg 10","FoodPager",R.drawable.iconfood));
-        arrHistoryBook.add(new HistoryBookCar("Chuyến đi đến NewYord","30 thg 12","MotoBike",R.drawable.icon_motorbike));
-        arrHistoryBook.add(new HistoryBookCar("Chuyến đi đến 593 Hoàng Xa","18 thg 7","Car",R.drawable.iconcar));
-        arrHistoryBook.add(new HistoryBookCar("Cơm chay thích thì vô","20 thg 10","FoodPager",R.drawable.iconfood));
-        arrHistoryBook.add(new HistoryBookCar("Chuyến đi đến NewYord","30 thg 12","MotoBike",R.drawable.icon_motorbike));
-        arrHistoryBook.add(new HistoryBookCar("Chuyến đi đến 593 Hoàng Xa","18 thg 7","Car",R.drawable.iconcar));
-        arrHistoryBook.add(new HistoryBookCar("Cơm chay thích thì vô","20 thg 10","FoodPager",R.drawable.iconfood));
-        arrHistoryBook.add(new HistoryBookCar("Chuyến đi đến NewYord","30 thg 12","MotoBike",R.drawable.icon_motorbike));
-        arrHistoryBook.add(new HistoryBookCar("Chuyến đi đến 593 Hoàng Xa","18 thg 7","Car",R.drawable.iconcar));
-        arrHistoryBook.add(new HistoryBookCar("Cơm chay thích thì vô","20 thg 10","FoodPager",R.drawable.iconfood));
-        arrHistoryBook.add(new HistoryBookCar("Chuyến đi đến NewYord","30 thg 12","MotoBike",R.drawable.icon_motorbike));
+
+    @Override
+    public void displayListOrder(ArrayList<OderCar> oderCars, ArrayList<OrderFood> orderFoods) {
+        recyclerViewHistoryOrderCar.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false);
+        recyclerViewHistoryOrderCar.setLayoutManager(layoutManager);
+        historyCarAdapter = new HistoryCarAdapter(getActivity(),R.layout.custom_item_history_order,oderCars);
+        recyclerViewHistoryOrderCar.setAdapter(historyCarAdapter);
+
+        recyclerViewHistoryOrderFood.setHasFixedSize(true);
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false);
+        recyclerViewHistoryOrderFood.setLayoutManager(manager);
+        historyFoodAdapter = new HistoryFoodAdapter(getActivity(),R.layout.custom_item_history_order,orderFoods);
+        recyclerViewHistoryOrderFood.setAdapter(historyFoodAdapter);
+
+        historyFoodAdapter.notifyDataSetChanged();
+        historyCarAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void displayListOrderFailed() {
+
     }
 }
