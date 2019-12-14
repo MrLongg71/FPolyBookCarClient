@@ -152,7 +152,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
     public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("LONgKUTE", "onReceive: " + intent.getStringExtra("text"));
 
         }
     };
@@ -234,7 +233,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     getLocationClient();
                 } else {
-                    Toast.makeText(this, "Bạn chưa cấp quyền", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "You can not permission", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -346,19 +345,13 @@ public class GoogleMapActivity extends AppCompatActivity implements
 
     }
 
-    @Override
-    public void showDetailDistance(int distance, int time, double price) {
-        txtDistanceTime.setText("You will have to go " + distance + " km and take about " + time + " minute");
-        txtMotoMoney.setText(price + "K");
-        txtCarMoney.setText(15 * price + "K");
-        checkedChooseVerhical();
         public void showDetailDistance ( int distance, int time, double price, boolean isBookCar){
             progressDialog.dismiss();
             findViewById(R.id.chooseservice).setVisibility(View.VISIBLE);
             layoutChooseLocation.setVisibility(View.GONE);
             if (!isBookCar) {
                 relaLayoutChooseCar.setVisibility(View.GONE);
-                txtDistanceTime.setText("Nhà hàng cách bạn " + distance + " km và mất khoảng " + time + " phút để nhận món ăn!");
+                txtDistanceTime.setText("The restaurant is "+ distance +" km and it takes about "+ time +" minutes to receive the food!");
                 txtMotoMoney.setText(price + "K");
                 btnBook.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -369,7 +362,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
                     }
                 });
             } else {
-                txtDistanceTime.setText("Bạn sẽ  " + distance + " km và mất khoảng " + time + " phút!");
+                txtDistanceTime.setText("You will "+ distance +" km and take "+ time +" minutes!");
                 txtCarMoney.setText(15 * price + "K");
                 txtMotoMoney.setText(price + "K");
                 checkedChooseVerhical();
@@ -447,7 +440,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
                     }).show();
         }
 
-        @Override
         public void onCameraMoveStarted ( int i){
         }
 
@@ -460,7 +452,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
             googleMap.animateCamera(cameraUpdate);
         }
 
-    }
+
     @Override
     public void onBackPressed () {
         if (findViewById(R.id.layoutInfoDriver).getVisibility() == View.VISIBLE) {
@@ -472,4 +464,18 @@ public class GoogleMapActivity extends AppCompatActivity implements
         }
     }
 
+    @Override
+    public void onCameraIdle() {
+
+    }
+
+    @Override
+    public void onCameraMove() {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 }

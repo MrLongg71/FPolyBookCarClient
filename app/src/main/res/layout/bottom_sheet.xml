@@ -28,12 +28,12 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:orientation="horizontal"
-                android:weightSum="3">
+             >
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+
                     android:background="@drawable/custom_promo"
                     android:padding="10dp"
                     android:backgroundTint="@color/fullapp"
@@ -44,7 +44,7 @@
 
                 <TextView
                     android:id="@+id/txtTotalPriceCart"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
