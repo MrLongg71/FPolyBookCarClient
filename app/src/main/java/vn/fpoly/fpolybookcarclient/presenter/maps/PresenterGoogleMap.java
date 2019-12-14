@@ -1,8 +1,8 @@
 
 package vn.fpoly.fpolybookcarclient.presenter.maps;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.List;
+import java.util.Objects;
 
 import vn.fpoly.fpolybookcarclient.model.maps.ModelGoogleMap;
 import vn.fpoly.fpolybookcarclient.model.objectClass.BillFood;
@@ -26,13 +26,13 @@ import vn.fpoly.fpolybookcarclient.model.objectClass.Restaurant;
 import vn.fpoly.fpolybookcarclient.view.maps.ViewGoogleMap;
 
 public class PresenterGoogleMap implements IPPresenterGoogleMap {
-    ViewGoogleMap viewGoogleMap;
-    ModelGoogleMap modelGoogleMap;
-    Calendar calendar = Calendar.getInstance();
-    DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    double pricee = 0;
-    int distancee = 0;
+    private ViewGoogleMap viewGoogleMap;
+    private ModelGoogleMap modelGoogleMap;
+    private Calendar calendar = Calendar.getInstance();
+    private DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private double pricee = 0;
+    private int distancee = 0;
 
     public PresenterGoogleMap(ViewGoogleMap viewGoogleMap) {
         this.viewGoogleMap = viewGoogleMap;
@@ -49,7 +49,7 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
 
     @Override
     public void getDetailDistance(int distance, int time, double price,boolean isBookCar) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh");
         int hourCurrent = Integer.parseInt(simpleDateFormat.format(calendar.getTime()));
 
         if (hourCurrent > 18) {
@@ -72,25 +72,26 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
     @Override
     public void distanceDriverNear(ArrayList<Driver> driverList, boolean isbook) {
         Collections.sort(driverList);
-
         if (driverList.size() > 0) {
             viewGoogleMap.getDriverNear(driverList.get(0), isbook);
         } else {
             viewGoogleMap.getDriverNearFailed();
         }
+
+
     }
 
 
     @Override
     public void pushOrderToDriver(Driver driver, LatLng locationGo, LatLng locationCome, String placeNameGo, String placeNameCome) {
         if (driver != null) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
             String date = simpleDateFormat.format(calendar.getTime());
 
             String keyOrder = database.push().getKey();
             final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder, driver.getKeydriver(), "1");
 
-            OderCar oderCar = new OderCar(keyOrder, firebaseAuth.getCurrentUser().getUid(), driver.getKeydriver()
+            OderCar oderCar = new OderCar(keyOrder, Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid(), driver.getKeydriver()
                     , placeNameGo, placeNameCome, date, locationGo.latitude, locationGo.longitude, locationCome.latitude
                     , locationCome.longitude, pricee, driver.getRate(), distancee, false, false);
 
@@ -104,14 +105,14 @@ public class PresenterGoogleMap implements IPPresenterGoogleMap {
 
     public void pushOrderFoodToDriver(Driver driver, ArrayList<BillFood> billFoodArrayList, LatLng locationClient, Restaurant restaurant, String placeNameRes, String placeNameClient, double price) {
         if (driver != null) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
             String date = simpleDateFormat.format(calendar.getTime());
 
             String keyOrder = database.push().getKey();
             final PushOrderToDriver pushOrderToDriver = new PushOrderToDriver(keyOrder, driver.getKeydriver(), "2");
 
 
-            OrderFood orderFood = new OrderFood(keyOrder, restaurant.getKey(), driver.getKeydriver(), FirebaseAuth.getInstance().getCurrentUser().getUid(), "", date, placeNameRes, placeNameClient, locationClient.latitude, locationClient.longitude, price, 5, distancee, true, false);
+            OrderFood orderFood = new OrderFood(keyOrder, restaurant.getKey(), driver.getKeydriver(), Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid(), "", date, placeNameRes, placeNameClient, locationClient.latitude, locationClient.longitude, price, 5, distancee, true, false);
 
             modelGoogleMap.initPushNotificationBookFood(orderFood, pushOrderToDriver, billFoodArrayList);
 

@@ -1,6 +1,7 @@
 package vn.fpoly.fpolybookcarclient.view.food.menu_restaurant;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -50,6 +51,7 @@ import vn.fpoly.fpolybookcarclient.model.objectClass.FoodMenu;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Restaurant;
 import vn.fpoly.fpolybookcarclient.presenter.food.menu_restaurant.PresenterMenuRes;
 import vn.fpoly.fpolybookcarclient.presenter.maps.PresenterGoogleMap;
+import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
 import vn.fpoly.fpolybookcarclient.view.maps.GoogleMapActivity;
 import vn.fpoly.fpolybookcarclient.view.maps.ViewGoogleMap;
 
@@ -70,10 +72,13 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
     private BottomSheetBehavior bottomSheetBehavior;
     private int amount = 0;
     private NestedScrollView nestedScrollMenuFoodRes;
+    private RestaurantMenuFoodCartItemAdapter restaurantMenuFoodCartItemAdapter;
     private PresenterGoogleMap presenterGoogleMap;
     private LatLng locationRes,locationCurrent;
     private String addresCurrent = "";
     private  int priceTotal = 0;
+    private ProgressDialog progressDialog;
+    private int orderAgain = 0;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -112,7 +117,8 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
         recyclerviewMenuRestaurant = view.findViewById(R.id.reycelviewMenuRestaurant);
         nestedScrollMenuFoodRes = view.findViewById(R.id.nestedScrollMenuFoodRes);
         txtDetailRestaurant     = view.findViewById(R.id.txtDetailRestaurant);
-
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading");
         presenterMenuRes = new PresenterMenuRes(this);
 
         toolbar(view);
@@ -224,19 +230,32 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
 
     @Override
     public void onClickItemMenuToCart(FoodMenu foodMenu) {
-//        linearLayoutBottomSheet.setVisibility(View.VISIBLE);
         addToCart(foodMenu);
     }
 
     private void addToCart(FoodMenu foodMenu) {
             foodMenuListCart.add(foodMenu);
+            if(billFoodArrayList.size() ==0){
+                billFoodArrayList.add(new BillFood("", foodMenu.getKeyfood(), 1));
+            }else {
+                for(BillFood billFood : billFoodArrayList){
+                    if(foodMenu.getKeyfood().equals(billFood.getKeyFood())){
+                        Log.d("LONgKUTE", "addToCart: aa");
+                        billFood.setAmountBuy(billFood.getAmountBuy() + 1);
+                        break;
+                    }else {
+                        Log.d("LONgKUTE", "addToCart: cc");
 
-            billFoodArrayList.add(new BillFood("", foodMenu.getKeyfood(), 1));
+                        billFoodArrayList.add(new BillFood("", foodMenu.getKeyfood(), 1));
+                    }
+                }
+            }
+
             setTotalCart();
             LayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
             recyclerItemCartFoodMenuRes.setLayoutManager(layoutManager);
 
-            RestaurantMenuFoodCartItemAdapter restaurantMenuFoodCartItemAdapter = new RestaurantMenuFoodCartItemAdapter(getActivity(), R.layout.custom_item_menu_res_cart, foodMenuListCart, billFoodArrayList, this);
+            restaurantMenuFoodCartItemAdapter = new RestaurantMenuFoodCartItemAdapter(getActivity(), R.layout.custom_item_menu_res_cart, foodMenuListCart, billFoodArrayList, this);
             recyclerItemCartFoodMenuRes.setAdapter(restaurantMenuFoodCartItemAdapter);
             restaurantMenuFoodCartItemAdapter.notifyDataSetChanged();
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -293,6 +312,7 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
         btnBookFoodMenuRes.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.show();
                 Intent intent  = new Intent(getActivity(),GoogleMapActivity.class);
 
                 Bundle bundle = new Bundle();

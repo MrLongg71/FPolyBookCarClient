@@ -2,6 +2,8 @@ package vn.fpoly.fpolybookcarclient.view.maps;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
+
 import vn.fpoly.fpolybookcarclient.model.objectClass.Driver;
 
 public interface ViewGoogleMap {
@@ -11,4 +13,5 @@ public interface ViewGoogleMap {
    void loadDriverMotoList();
    void getDriverNear(Driver driverNear, boolean isbook);
    void getDriverNearFailed();
+
 }
