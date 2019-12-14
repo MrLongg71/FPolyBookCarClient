@@ -47,7 +47,7 @@ public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onCreate() {
         super.onCreate();
-        getToken();
+//        getToken();
 
     }
 
