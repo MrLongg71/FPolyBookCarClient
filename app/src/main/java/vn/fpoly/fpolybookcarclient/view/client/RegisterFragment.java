@@ -29,10 +29,8 @@ import vn.fpoly.fpolybookcarclient.R;
 
 
 public class RegisterFragment extends Fragment implements View.OnClickListener, ViewLogin {
-    private TextInputEditText edtPhone, edtName, edtPassword, edtEmail;
-    private EditText edtcoutry;
+    private EditText edtPhone, edtName, edtPassword, edtEmail;
     private Button btnRegister;
-    private ImageButton imgBackBtnRegister;
     private FirebaseAuth mAuth;
     private PresenterLogin presenterLogin;
 
@@ -47,10 +45,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
         initView(view);
-        edtcoutry.setFocusable(false);
+
         mAuth = FirebaseAuth.getInstance();
         btnRegister.setOnClickListener(this);
-        imgBackBtnRegister.setOnClickListener(this);
 
         return view;
     }
@@ -58,12 +55,10 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     private void initView(View view) {
         presenterLogin      = new PresenterLogin(this);
         edtPhone            = view.findViewById(R.id.edtPhoneRegister);
-        edtcoutry           = view.findViewById(R.id.edtcode);
-        edtName             = view.findViewById(R.id.edtNameRegister);
-        edtPassword         = view.findViewById(R.id.edtPasswordRegister);
+        edtName             = view.findViewById(R.id.edtUserNameRegister);
+        edtPassword         = view.findViewById(R.id.edtPassRegister);
         edtEmail            = view.findViewById(R.id.edtEmailRegister);
         btnRegister         = view.findViewById(R.id.btnRegister);
-        imgBackBtnRegister  = view.findViewById(R.id.imgBackRegister);
 
     }
 
@@ -73,9 +68,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             case R.id.btnRegister:
                 createClientWithEmail();
                 break;
-            case R.id.imgBackRegister:
-                getActivity().getSupportFragmentManager().popBackStack();
-                break;
+
         }
     }
 
