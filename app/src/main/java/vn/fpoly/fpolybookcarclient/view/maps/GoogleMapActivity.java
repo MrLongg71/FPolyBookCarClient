@@ -153,7 +153,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
     public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("LONgKUTE", "onReceive: " + intent.getStringExtra("text"));
 
         }
     };
@@ -199,6 +198,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
         }
 
         if (locationGo != null && locationCome != null) {
+
             addMarker(locationGo, placeNameGo, R.drawable.iconlocationblue);
             addMarker(locationCome, placeNameCome, R.drawable.iconlocationred);
             drawPolyline(locationGo, locationCome, true);
@@ -235,22 +235,8 @@ public class GoogleMapActivity extends AppCompatActivity implements
             }
         });
     }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUESCODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getLocationClient();
-            } else {
-                Toast.makeText(this, "Bạn chưa cấp quyền", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
     @SuppressLint("MissingPermission")
-    private void getLocationClient() {
+    private void getLocationClient () {
         String provider = BuildConfig.DEBUG ? LocationManager.GPS_PROVIDER : LocationManager.NETWORK_PROVIDER;
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000L
                 , 500.0F, new LocationListener() {
@@ -276,12 +262,30 @@ public class GoogleMapActivity extends AppCompatActivity implements
                     public void onProviderDisabled(String provider) {
                     }
                 });
-
-
     }
 
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            if (requestCode == REQUESCODE) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getLocationClient();
+                } else {
+                    Toast.makeText(this, "Bạn chưa cấp quyền", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+
+
+
+
+
+
+    @Override
+    protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUESCODE) {
             if (resultCode == RESULT_OK && data != null) {
@@ -297,69 +301,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
             }
         }
 
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.layoutChooseLocation:
-                Intent intent = new Intent(GoogleMapActivity.this, ChooseLocation_Go_ComeActivity.class);
-                if (locationCurrent != null) {
-                    intent.putExtra(Constans.KEY_BUNDEL_LATITUDE_GO, locationCurrent.latitude);
-                    intent.putExtra(Constans.KEY_BUNDEL_LONGITUDE_GO, locationCurrent.longitude);
-                }
-                startActivityForResult(intent, REQUESCODE);
-                break;
-            case R.id.btnBook:
-                searchDriverNearLocationGo();
-                break;
-        }
-    }
-
-    private void checkedChooseVerhical() {
-        relaLayoutChooseBike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                relaLayoutChooseCar.setBackground(null);
-                relaLayoutChooseBike.setBackground(ContextCompat.getDrawable(GoogleMapActivity.this, R.drawable.custom_clicked));
-                CODE_CAR_OR_MOTO = 1;
-            }
-        });
-        relaLayoutChooseCar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                relaLayoutChooseBike.setBackground(null);
-                relaLayoutChooseCar.setBackground(ContextCompat.getDrawable(GoogleMapActivity.this, R.drawable.custom_clicked));
-                CODE_CAR_OR_MOTO = 2;
-            }
-        });
-    }
-
-    private void addMarker(LatLng location, String place, int icon) {
-        googleMap.addMarker(new MarkerOptions()
-                .position(location)
-                .title(place)
-                .icon(BitmapDescriptorFactory.fromResource(icon)));
-
-
-    }
-
-    private void searchDriverNearLocationGo() {
-        if (CODE_CAR_OR_MOTO == 1) {
-            loadDriverMotoList();
-        } else if (CODE_CAR_OR_MOTO == 2) {
-            loadDriverCarList();
-        } else {
-            Toast.makeText(this, "Bạn chưa chọn loại xe", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    @Override
-    public void drawPolyline(LatLng locationGo, LatLng locationCome, boolean isBookCar) {
-        Log.d("LONgKUTE", "drawPolyline: ");
-        presenterGoogleMap.getPolyline(GoogleMapActivity.this, googleMap, locationGo, locationCome, isBookCar);
     }
 
     @Override
@@ -388,23 +329,96 @@ public class GoogleMapActivity extends AppCompatActivity implements
         }
 
     }
+    @SuppressLint("MissingPermission")
+
 
     @Override
-    public void loadDriverCarList() {
+    public void onClick (View v){
+        switch (v.getId()) {
+            case R.id.layoutChooseLocation:
+                Intent intent = new Intent(GoogleMapActivity.this, ChooseLocation_Go_ComeActivity.class);
+                if (locationCurrent != null) {
+                    intent.putExtra(Constans.KEY_BUNDEL_LATITUDE_GO, locationCurrent.latitude);
+                    intent.putExtra(Constans.KEY_BUNDEL_LONGITUDE_GO, locationCurrent.longitude);
+                }
+                startActivityForResult(intent, REQUESCODE);
+                break;
+            case R.id.btnBook:
+                searchDriverNearLocationGo();
+                break;
+        }
+    }
+
+    private void checkedChooseVerhical () {
+        relaLayoutChooseBike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                relaLayoutChooseCar.setBackground(null);
+                relaLayoutChooseBike.setBackground(ContextCompat.getDrawable(GoogleMapActivity.this, R.drawable.custom_clicked));
+                CODE_CAR_OR_MOTO = 1;
+            }
+        });
+        relaLayoutChooseCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                relaLayoutChooseBike.setBackground(null);
+                relaLayoutChooseCar.setBackground(ContextCompat.getDrawable(GoogleMapActivity.this, R.drawable.custom_clicked));
+                CODE_CAR_OR_MOTO = 2;
+            }
+        });
+    }
+
+
+
+    private void searchDriverNearLocationGo () {
+        if (CODE_CAR_OR_MOTO == 1) {
+            loadDriverMotoList();
+        } else if (CODE_CAR_OR_MOTO == 2) {
+            loadDriverCarList();
+        } else {
+            Toast.makeText(this, "Bạn chưa chọn loại xe", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
+    private void addMarker (LatLng location, String place,int icon){
+        googleMap.addMarker(new MarkerOptions()
+                .position(location)
+                .title(place)
+                .icon(BitmapDescriptorFactory.fromResource(icon)));
+
+
+    }
+
+    @Override
+    public void drawPolyline (LatLng locationGo, LatLng locationCome,boolean isBookCar){
+
+        presenterGoogleMap.getPolyline(GoogleMapActivity.this, googleMap, locationGo, locationCome, isBookCar);
+    }
+
+
+
+
+
+    @Override
+    public void loadDriverCarList () {
         findViewById(R.id.chooseservice).setVisibility(View.GONE);
         progressDialog.show();
         presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationGo, true);
     }
 
+
     @Override
-    public void loadDriverMotoList() {
+    public void loadDriverMotoList () {
         findViewById(R.id.chooseservice).setVisibility(View.GONE);
         progressDialog.show();
         presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationGo, true);
     }
 
+
     @Override
-    public void getDriverNear(final Driver driverNear, boolean isbook) {
+    public void getDriverNear ( final Driver driverNear, boolean isbook){
         if (driverNear != null) {
             progressDialog.dismiss();
             findViewById(R.id.layoutInfoDriver).setVisibility(View.VISIBLE);
@@ -412,62 +426,61 @@ public class GoogleMapActivity extends AppCompatActivity implements
             txtLicensePlateDriver.setText(driverNear.getLicenseplate());
             rateDriver.setRating((float) driverNear.getRate());
             locationDriverCar = new LatLng(driverNear.getLatitude(), driverNear.getLongitude());
-            addMarker(locationDriverCar, "Driver", R.drawable.ic_driver_bike);
             mapFragment.getMapAsync(this);
             if (isbook) {
                 presenterGoogleMap.pushOrderToDriver(driverNear, locationGo, locationCome, placeNameGo, placeNameCome);
 
+
             } else {
                 addressCurrent = GeocoderAddress.getAddress(GoogleMapActivity.this,locationCurrent.latitude,locationCurrent.longitude);
                 presenterGoogleMap.pushOrderFoodToDriver(driverNear, billFoodArrayList, locationCurrent, restaurant, restaurant.getAddress(), addressCurrent, priceOrderFood);
+                imgInfoDriver.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (driverNear != null) {
+                            showInfoDriver(driverNear);
+                        }
+                    }
+                });
+                imgPhoneDriver.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (driverNear != null) {
+                            openPhoneCallDriver(driverNear);
+                        }
+                    }
+                });
+                imgCancelDriver.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (cancel != 0) {
+                            Toast.makeText(GoogleMapActivity.this, "Mày bị từ chối phục vụ vì quá láo LÂM VĂN MẬP", Toast.LENGTH_SHORT).show();
 
+                            finish();
+                        } else {
+                            cancel = 1;
+
+                            Toast.makeText(GoogleMapActivity.this, "mày ngon bấm lần nữa coi khứa!", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
             }
 
         }
-        imgInfoDriver.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (driverNear != null) {
-                    showInfoDriver(driverNear);
-                }
-            }
-        });
-        imgPhoneDriver.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (driverNear != null) {
-                    openPhoneCallDriver(driverNear);
-                }
-            }
-        });
-        imgCancelDriver.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(cancel!= 0){
-                    Toast.makeText(GoogleMapActivity.this, "Mày bị từ chối phục vụ vì quá láo LÂM VĂN MẬP", Toast.LENGTH_SHORT).show();
-
-                    finish();
-                }else {
-                    cancel = 1;
-
-                    Toast.makeText(GoogleMapActivity.this, "mày ngon bấm lần nữa coi khứa!", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-
     }
 
-    private void showInfoDriver(Driver driver) {
+
+    private void showInfoDriver (Driver driver){
         Toast.makeText(this, " " + driver.getDistance(), Toast.LENGTH_SHORT).show();
     }
 
-    private void openPhoneCallDriver(Driver driver) {
+    private void openPhoneCallDriver (Driver driver){
         Toast.makeText(this, "" + driver.getPhone(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void getDriverNearFailed() {
+    public void getDriverNearFailed () {
         new KAlertDialog(GoogleMapActivity.this)
                 .setContentText(getString(R.string.getDriverNearFailed))
                 .setConfirmText("ok")
@@ -479,17 +492,20 @@ public class GoogleMapActivity extends AppCompatActivity implements
                 }).show();
     }
 
+    public void onCameraMoveStarted ( int i){
+    }
 
-    private void getLocationCurrent() {
+
+
+
+    private void getLocationCurrent () {
         googleMap.setMyLocationEnabled(true);
         googleMap.getUiSettings().setMyLocationButtonEnabled(false);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(locationCurrent, 18f);
         googleMap.animateCamera(cameraUpdate);
     }
-
-
     @Override
-    public void onBackPressed() {
+    public void onBackPressed () {
         if (findViewById(R.id.layoutInfoDriver).getVisibility() == View.VISIBLE) {
             Dialog.Error(GoogleMapActivity.this, "Đã có chuyến xe, k ");
         } else {
@@ -509,4 +525,5 @@ public class GoogleMapActivity extends AppCompatActivity implements
         }
     }
 }
+
 

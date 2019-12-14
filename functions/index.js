@@ -35,6 +35,9 @@ exports.sendNotification = functions.database
         });
   });
 });
+<<<<<<< HEAD
+
+=======
 exports.sendNotification = functions.database
   .ref("/notificationRV/{notificationRVId}")
   .onWrite((change, context) => {
@@ -62,3 +65,4 @@ exports.sendNotification = functions.database
         });
   });
 });
+>>>>>>> 78105b17ce147e2091b5b3166170a8de721b1531

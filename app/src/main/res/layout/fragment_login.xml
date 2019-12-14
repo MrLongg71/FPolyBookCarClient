@@ -11,14 +11,15 @@
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ImageView
 
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/race">
+            android:src="@drawable/race"
+            >
 
         </ImageView>
 
@@ -41,12 +42,13 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:letterSpacing=".2"
                     android:textColor="#000"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Login"
-                    android:textSize="30dp"
+                    android:text="@string/login"
+                    android:textSize="30sp"
                     android:textStyle="bold">
 
                 </TextView>
@@ -55,9 +57,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:text="Username"
+                    android:text="@string/username"
                     android:textColor="#000"
-                    android:textSize="18dp">
+                    android:textSize="18sp">
 
                 </TextView>
 
@@ -67,7 +69,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:hint="Username">
+                    android:hint="@string/username"
+                    android:importantForAutofill="no">
 
                 </EditText>
 
@@ -75,9 +78,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:text="Password"
+                    android:text="@string/password"
                     android:textColor="#000"
-                    android:textSize="18dp">
+                    android:textSize="18sp">
 
                 </TextView>
 
@@ -86,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:hint="Password">
+                    android:hint="@string/password">
 
                 </EditText>
 
@@ -97,9 +100,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:gravity="right"
-                    android:text="Forgot Password?"
+                    android:text="@string/forgot_password"
                     android:textColor="@color/fullapp"
-                    android:textSize="20dp">
+                    android:textSize="20sp"
+                    card_view:ignore="RtlHardcoded">
 
                 </TextView>
 
@@ -118,7 +122,7 @@
 
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Remmember me?">
+                android:text="@string/remmember_me">
 
             </CheckBox>
 
@@ -129,9 +133,9 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/fullapp"
                 android:background="@drawable/custom_button_login"
-                android:text="LOGIN"
+                android:text="@string/login"
                 android:textColor="#fff"
-                android:textSize="18dp">
+                android:textSize="18sp">
 
             </Button>
         </LinearLayout>
@@ -151,10 +155,10 @@
           </View>
           <TextView
               android:layout_marginLeft="10dp"
-              android:textSize="18dp"
+              android:textSize="18sp"
               android:layout_marginRight="10dp"
               android:textColor="#000"
-              android:text="Connect using  account "
+              android:text="@string/connect_using_account"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content">
 
@@ -177,22 +181,23 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                card_view:ignore="UselessParent">
 
                 <ImageView
                     android:layout_width="60dp"
                     android:scaleType="centerInside"
-                    android:id="@+id/btnFb"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/custom_icon_fb"
-                    android:src="@drawable/iconfb"
+                    android:id="@+id/btnAdd"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/custom_icon_google"
+                    android:src="@drawable/ic_add_black_24dp"
                     android:layout_height="60dp">
 
                 </ImageView>
 
                 <ImageView
                     android:layout_width="60dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:scaleType="centerInside"
                     android:id="@+id/btnGoogle"
                     android:background="@drawable/custom_icon_google"
@@ -202,10 +207,10 @@
 
                 <ImageView
                     android:layout_width="60dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:scaleType="centerInside"
                     android:id="@+id/btnPhone"
-                    android:background="@drawable/custom_icon_fb"
+                    android:background="@drawable/custom_icon_google"
                     android:src="@drawable/ic_call_black_24dp"
                     android:layout_height="60dp">
                 </ImageView>

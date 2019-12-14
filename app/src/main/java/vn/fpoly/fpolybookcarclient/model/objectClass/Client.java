@@ -1,6 +1,9 @@
 package vn.fpoly.fpolybookcarclient.model.objectClass;
 
-public class Client {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Client implements Parcelable {
     private String key,email,phone,name,token;
 
 
@@ -15,12 +18,13 @@ public class Client {
     public Client() {
     }
 
-    public String getToken() {
-        return token;
-    }
 
-    public void setToken(String token) {
-        this.token = token;
+    protected Client(Parcel in) {
+        key = in.readString();
+        email = in.readString();
+        phone = in.readString();
+        name = in.readString();
+        token = in.readString();
     }
 
     public String getKey() {
@@ -53,5 +57,47 @@ public class Client {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+
+
+
+
+    public static Creator<Client> getCREATOR() {
+        return CREATOR;
+    }
+
+    public static final Creator<Client> CREATOR = new Creator<Client>() {
+        @Override
+        public Client createFromParcel(Parcel in) {
+            return new Client(in);
+        }
+
+        @Override
+        public Client[] newArray(int size) {
+            return new Client[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(key);
+        parcel.writeString(email);
+        parcel.writeString(phone);
+        parcel.writeString(name);
+        parcel.writeString(token);
     }
 }

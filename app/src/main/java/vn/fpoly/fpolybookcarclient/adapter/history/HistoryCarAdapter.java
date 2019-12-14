@@ -53,7 +53,7 @@ public class HistoryCarAdapter extends RecyclerView.Adapter<HistoryCarAdapter.Vi
         TextView txtTimeOrder,txtPlaceComeOrder,txtPriceOrder;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-//            imageView       = itemView.findViewById(R.id.imgIconCarHistory);
+
             txtTimeOrder         = itemView.findViewById(R.id.txtTimeOrder);
             txtPlaceComeOrder       = itemView.findViewById(R.id.txtPlaceComeOrder);
             txtPriceOrder       = itemView.findViewById(R.id.txtPriceOrder);

@@ -7,13 +7,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/imgBackRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+        android:backgroundTint="#000"
         android:layout_marginTop="20dp"
-        android:src="@drawable/rsz_1back" />
+        android:background="@drawable/ic_arrow_back_black_24dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -146,7 +147,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:background="#FF8901"
+            android:background="@drawable/custom_button_bookcar"
             android:padding="15dp"
             android:text="@string/btn_signup"
             android:textColor="#14297A"
