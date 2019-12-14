@@ -35,4 +35,34 @@ exports.sendNotification = functions.database
         });
   });
 });
+<<<<<<< HEAD
 
+=======
+exports.sendNotification = functions.database
+  .ref("/notificationRV/{notificationRVId}")
+  .onWrite((change, context) => {
+    
+  const idClient = change.after.child("idClient").val();
+        return admin.database().ref().child("Client").child(idClient).child("token").once('value')
+    .then(function(snapshot){
+      var token_id = snapshot.val();
+      console.log(token_id);
+      var payload = {
+        data: {
+          idClient : idClient,
+        },
+        token : token_id
+  
+      };
+      return admin
+        .messaging()
+        .send(payload)
+        .then(function(response) {
+          return console.log("Successfully sent message REVIEW: ", response);
+        })
+        .catch(function(error) {
+          return console.log("Error sending message:", error);
+        });
+  });
+});
+>>>>>>> 78105b17ce147e2091b5b3166170a8de721b1531

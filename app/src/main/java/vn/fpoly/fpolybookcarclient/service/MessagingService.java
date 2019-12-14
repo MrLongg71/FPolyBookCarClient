@@ -37,9 +37,9 @@ public class MessagingService extends FirebaseMessagingService {
         if (remoteMessage.getData().size() > 0) {
             Intent intent = new Intent("myFunction");
             // add data
-            intent.putExtra("finish", remoteMessage.getData().get("text"));
+            intent.putExtra("finish", remoteMessage.getData().get("idClient"));
             LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-
+            Log.d("LONgKUTE", "onMessageReceived: "+remoteMessage.getData().get("idClient"));
         }
     }
 
@@ -51,17 +51,17 @@ public class MessagingService extends FirebaseMessagingService {
 
     }
 
-//    private void getToken() {
-//        FirebaseInstanceId.getInstance().getInstanceId()
-//                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-//                        if (task.isSuccessful()) {
-//                            onNewToken(task.getResult().getToken());
-//                        }
-//                    }
-//                });
-//    }
+    private void getToken() {
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (task.isSuccessful()) {
+                            onNewToken(task.getResult().getToken());
+                        }
+                    }
+                });
+    }
 
     @Override
     public void onNewToken(@NonNull String s) {

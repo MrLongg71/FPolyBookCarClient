@@ -35,7 +35,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.developer.kalert.KAlertDialog;
-import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -48,12 +47,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 import java.util.ArrayList;
-import java.util.EventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import vn.fpoly.fpolybookcarclient.BuildConfig;
 import vn.fpoly.fpolybookcarclient.Constans;
 import vn.fpoly.fpolybookcarclient.library.Dialog;
+import vn.fpoly.fpolybookcarclient.library.GeocoderAddress;
 import vn.fpoly.fpolybookcarclient.model.objectClass.BillFood;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Driver;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Restaurant;
@@ -63,8 +62,7 @@ import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
 
 
 public class GoogleMapActivity extends AppCompatActivity implements
-        OnMapReadyCallback, View.OnClickListener, ViewGoogleMap, GoogleMap.OnCameraMoveStartedListener
-        , GoogleMap.OnCameraMoveListener, GoogleMap.OnCameraIdleListener {
+        OnMapReadyCallback, View.OnClickListener, ViewGoogleMap {
 
     private GoogleMap googleMap;
     private MapFragment mapFragment;
@@ -94,6 +92,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     String locationLongitude = "";
     String addressCurrent = "";
     double priceOrderFood = 0;
+    int cancel = 0;
 
 
     @Override
@@ -173,7 +172,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
             locationCurrent = new LatLng(Double.parseDouble(locationLatitude), Double.parseDouble(locationLongitude));
             priceOrderFood = (double) intent.getIntExtra(Constans.KEY_ORDERFOOD_PRICE, 0);
             mapFragment.getMapAsync(this);
-//            presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationRestaurant,false);
         }
     }
 
@@ -184,7 +182,9 @@ public class GoogleMapActivity extends AppCompatActivity implements
         googleMap.setMinZoomPreference(6.0f);
         googleMap.setMaxZoomPreference(14.0f);
 
-        if (locationCurrent != null) {
+        Log.d("LONgKUTE", "onMapReady: " + layoutChooseLocation.getVisibility() + " - " + View.VISIBLE);
+        if (layoutChooseLocation.getVisibility() == View.VISIBLE) {
+            Log.d("LONgKUTE", "onMapReady: ");
             placeNameCurrent = "You are here!";
             getLocationCurrent();
             imgButtonMyLocation.setOnClickListener(new View.OnClickListener() {
@@ -193,11 +193,13 @@ public class GoogleMapActivity extends AppCompatActivity implements
                     getLocationCurrent();
                 }
             });
+            edtLocationCurrent.setText(GeocoderAddress.getAddress(GoogleMapActivity.this, locationCurrent.latitude, locationCurrent.longitude));
+            lisenerCameraMove();
 
         }
 
         if (locationGo != null && locationCome != null) {
-
+            Log.d("LONgKUTE", "onMapReady: car");
             addMarker(locationGo, placeNameGo, R.drawable.iconlocationblue);
             addMarker(locationCome, placeNameCome, R.drawable.iconlocationred);
             drawPolyline(locationGo, locationCome, true);
@@ -208,6 +210,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
             googleMap.animateCamera(cameraUpdate);
         }
         if (locationRestaurant != null && locationCurrent != null) {
+            Log.d("LONgKUTE", "onMapReady: foood");
 //            addMarker(locationCurrent, "", R.drawable.ic_driver_bike);
             addMarker(locationRestaurant, placeNameGo, R.drawable.iconlocationblue);//nha hang
             addMarker(locationCurrent, placeNameCome, R.drawable.iconlocationred);
@@ -219,28 +222,23 @@ public class GoogleMapActivity extends AppCompatActivity implements
             googleMap.animateCamera(cameraUpdate);
         }
 
-        googleMap.setOnCameraIdleListener(this);
-        googleMap.setOnCameraMoveListener(this);
-
     }
 
+    private void lisenerCameraMove() {
+        googleMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+            @Override
+            public void onCameraIdle() {
+                LatLng center = googleMap.getCameraPosition().target;
+                if (center != null) {
+                    locationCurrent = center;
+                    edtLocationCurrent.setText(GeocoderAddress.getAddress(GoogleMapActivity.this, center.latitude, center.longitude));
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case REQUESCODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getLocationClient();
-                } else {
-                    Toast.makeText(this, "You can not permission", Toast.LENGTH_SHORT).show();
                 }
-                break;
-        }
+            }
+        });
     }
-
     @SuppressLint("MissingPermission")
-    private void getLocationClient() {
+    private void getLocationClient () {
         String provider = BuildConfig.DEBUG ? LocationManager.GPS_PROVIDER : LocationManager.NETWORK_PROVIDER;
 
         locationManager.requestLocationUpdates(provider, 5000L
@@ -263,36 +261,86 @@ public class GoogleMapActivity extends AppCompatActivity implements
                     public void onProviderDisabled(String provider) {
                     }
                 });
-
-
     }
 
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            if (requestCode == REQUESCODE) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getLocationClient();
+                } else {
+                    Toast.makeText(this, "Bạn chưa cấp quyền", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+
+
+
+
+
+
+    @Override
+    protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQUESCODE:
-                if (resultCode == RESULT_OK && data != null) {
-                    Bundle bundle = data.getBundleExtra(Constans.KEY_BUNDEL_BOOK);
+        if (requestCode == REQUESCODE) {
+            if (resultCode == RESULT_OK && data != null) {
+                Bundle bundle = data.getBundleExtra(Constans.KEY_BUNDEL_BOOK);
+
+                if (bundle.size() == 6) {
                     locationGo = new LatLng(bundle.getDouble(Constans.KEY_BUNDEL_LATITUDE_GO), bundle.getDouble(Constans.KEY_BUNDEL_LONGITUDE_GO));
                     locationCome = new LatLng(bundle.getDouble(Constans.KEY_BUNDEL_LATITUDE_COME), bundle.getDouble(Constans.KEY_BUNDEL_LONGITUDE_COME));
                     placeNameGo = bundle.getString(Constans.KEY_BUNDEL_PLACENAME_GO);
                     placeNameCome = bundle.getString(Constans.KEY_BUNDEL_PLACENAME_COME);
-
-                    mapFragment.getMapAsync(this);
                 }
-
-                break;
+                mapFragment.getMapAsync(this);
+            }
         }
-
 
     }
 
     @Override
-    public void onClick(View v) {
+    public void showDetailDistance(int distance, int time, double price, boolean isBookCar) {
+        progressDialog.dismiss();
+        findViewById(R.id.chooseservice).setVisibility(View.VISIBLE);
+        imgMarker.setVisibility(View.GONE);
+        layoutChooseLocation.setVisibility(View.GONE);
+        if (!isBookCar) {
+            relaLayoutChooseCar.setVisibility(View.GONE);
+            txtDistanceTime.setText("Nhà hàng cách bạn " + distance + " km và mất khoảng " + time + " phút để nhận món ăn!");
+            txtMotoMoney.setText(price + "K");
+            btnBook.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    progressDialog.show();
+                    presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationRestaurant, false);
+
+                }
+            });
+        } else {
+            txtDistanceTime.setText("Bạn sẽ  " + distance + " km và mất khoảng " + time + " phút!");
+            txtCarMoney.setText(15 * price + "K");
+            txtMotoMoney.setText(price + "K");
+            checkedChooseVerhical();
+        }
+
+    }
+    @SuppressLint("MissingPermission")
+
+
+    @Override
+    public void onClick (View v){
         switch (v.getId()) {
             case R.id.layoutChooseLocation:
-                startActivityForResult(new Intent(GoogleMapActivity.this, ChooseLocation_Go_ComeActivity.class), REQUESCODE);
+                Intent intent = new Intent(GoogleMapActivity.this, ChooseLocation_Go_ComeActivity.class);
+                if (locationCurrent != null) {
+                    intent.putExtra(Constans.KEY_BUNDEL_LATITUDE_GO, locationCurrent.latitude);
+                    intent.putExtra(Constans.KEY_BUNDEL_LONGITUDE_GO, locationCurrent.longitude);
+                }
+                startActivityForResult(intent, REQUESCODE);
                 break;
             case R.id.btnBook:
                 searchDriverNearLocationGo();
@@ -300,7 +348,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
         }
     }
 
-    private void checkedChooseVerhical() {
+    private void checkedChooseVerhical () {
         relaLayoutChooseBike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -319,16 +367,9 @@ public class GoogleMapActivity extends AppCompatActivity implements
         });
     }
 
-    private void addMarker(LatLng location, String place, int icon) {
-        googleMap.addMarker(new MarkerOptions()
-                .position(location)
-                .title(place)
-                .icon(BitmapDescriptorFactory.fromResource(icon)));
 
 
-    }
-
-    private void searchDriverNearLocationGo() {
+    private void searchDriverNearLocationGo () {
         if (CODE_CAR_OR_MOTO == 1) {
             loadDriverMotoList();
         } else if (CODE_CAR_OR_MOTO == 2) {
@@ -339,120 +380,128 @@ public class GoogleMapActivity extends AppCompatActivity implements
 
     }
 
-    @Override
-    public void drawPolyline(LatLng locationGo, LatLng locationCome, boolean isBookCar) {
-        presenterGoogleMap.getPolyline(GoogleMapActivity.this, googleMap, locationGo, locationCome, isBookCar);
+
+    private void addMarker (LatLng location, String place,int icon){
+        googleMap.addMarker(new MarkerOptions()
+                .position(location)
+                .title(place)
+                .icon(BitmapDescriptorFactory.fromResource(icon)));
+
 
     }
 
-        public void showDetailDistance ( int distance, int time, double price, boolean isBookCar){
+    @Override
+    public void drawPolyline (LatLng locationGo, LatLng locationCome,boolean isBookCar){
+
+        presenterGoogleMap.getPolyline(GoogleMapActivity.this, googleMap, locationGo, locationCome, isBookCar);
+    }
+
+
+
+
+
+    @Override
+    public void loadDriverCarList () {
+        findViewById(R.id.chooseservice).setVisibility(View.GONE);
+        progressDialog.show();
+        presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationGo, true);
+    }
+
+
+    @Override
+    public void loadDriverMotoList () {
+        findViewById(R.id.chooseservice).setVisibility(View.GONE);
+        progressDialog.show();
+        presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationGo, true);
+    }
+
+
+    @Override
+    public void getDriverNear ( final Driver driverNear, boolean isbook){
+        if (driverNear != null) {
             progressDialog.dismiss();
-            findViewById(R.id.chooseservice).setVisibility(View.VISIBLE);
-            layoutChooseLocation.setVisibility(View.GONE);
-            if (!isBookCar) {
-                relaLayoutChooseCar.setVisibility(View.GONE);
-                txtDistanceTime.setText("The restaurant is "+ distance +" km and it takes about "+ time +" minutes to receive the food!");
-                txtMotoMoney.setText(price + "K");
-                btnBook.setOnClickListener(new View.OnClickListener() {
+            findViewById(R.id.layoutInfoDriver).setVisibility(View.VISIBLE);
+            txtNameDriver.setText(driverNear.getName());
+            txtLicensePlateDriver.setText(driverNear.getLicenseplate());
+            rateDriver.setRating((float) driverNear.getRate());
+            locationDriverCar = new LatLng(driverNear.getLatitude(), driverNear.getLongitude());
+            mapFragment.getMapAsync(this);
+            if (isbook) {
+                presenterGoogleMap.pushOrderToDriver(driverNear, locationGo, locationCome, placeNameGo, placeNameCome);
+
+
+            } else {
+                presenterGoogleMap.pushOrderFoodToDriver(driverNear, billFoodArrayList, locationCurrent, restaurant, restaurant.getAddress(), addressCurrent, priceOrderFood);
+                imgInfoDriver.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (driverNear != null) {
+                            showInfoDriver(driverNear);
+                        }
+                    }
+                });
+                imgPhoneDriver.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (driverNear != null) {
+                            openPhoneCallDriver(driverNear);
+                        }
+                    }
+                });
+                imgCancelDriver.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        progressDialog.show();
-                        presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationRestaurant, false);
+                        if (cancel != 0) {
+                            Toast.makeText(GoogleMapActivity.this, "Mày bị từ chối phục vụ vì quá láo LÂM VĂN MẬP", Toast.LENGTH_SHORT).show();
+
+                            finish();
+                        } else {
+                            cancel = 1;
+
+                            Toast.makeText(GoogleMapActivity.this, "mày ngon bấm lần nữa coi khứa!", Toast.LENGTH_SHORT).show();
+                        }
 
                     }
                 });
-            } else {
-                txtDistanceTime.setText("You will "+ distance +" km and take "+ time +" minutes!");
-                txtCarMoney.setText(15 * price + "K");
-                txtMotoMoney.setText(price + "K");
-                checkedChooseVerhical();
             }
 
-
         }
+    }
 
-        @Override
-        public void loadDriverCarList () {
-            findViewById(R.id.chooseservice).setVisibility(View.GONE);
-            progressDialog.show();
-            presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationGo, true);
-        }
 
-        @Override
-        public void loadDriverMotoList () {
-            findViewById(R.id.chooseservice).setVisibility(View.GONE);
-            progressDialog.show();
-            presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationGo, true);
-        }
+    private void showInfoDriver (Driver driver){
+        Toast.makeText(this, " " + driver.getDistance(), Toast.LENGTH_SHORT).show();
+    }
 
-        @Override
-        public void getDriverNear ( final Driver driverNear, boolean isbook){
-            if (driverNear != null) {
-                progressDialog.dismiss();
-                findViewById(R.id.layoutInfoDriver).setVisibility(View.VISIBLE);
-                txtNameDriver.setText(driverNear.getName());
-                txtLicensePlateDriver.setText(driverNear.getLicenseplate());
-                rateDriver.setRating((float) driverNear.getRate());
-                locationDriverCar = new LatLng(driverNear.getLatitude(), driverNear.getLongitude());
-                mapFragment.getMapAsync(this);
-                if (isbook) {
-                    presenterGoogleMap.pushOrderToDriver(driverNear, locationGo, locationCome, placeNameGo, placeNameCome);
+    private void openPhoneCallDriver (Driver driver){
+        Toast.makeText(this, "" + driver.getPhone(), Toast.LENGTH_SHORT).show();
+    }
 
-                } else {
-                    presenterGoogleMap.pushOrderFoodToDriver(driverNear, billFoodArrayList, locationCurrent, restaurant, restaurant.getAddress(), addressCurrent, priceOrderFood);
+    @Override
+    public void getDriverNearFailed () {
+        new KAlertDialog(GoogleMapActivity.this)
+                .setContentText(getString(R.string.getDriverNearFailed))
+                .setConfirmText("ok")
+                .setConfirmClickListener(new KAlertDialog.KAlertClickListener() {
+                    @Override
+                    public void onClick(KAlertDialog kAlertDialog) {
+                        startActivity(new Intent(GoogleMapActivity.this, HomeActivity.class));
+                    }
+                }).show();
+    }
 
-                }
-
-            }
-            imgInfoDriver.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showInfoDriver(driverNear);
-                }
-            });
-            imgPhoneDriver.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    openPhoneCallDriver(driverNear);
-                }
-            });
-
-        }
-
-        private void showInfoDriver (Driver driver){
-            Toast.makeText(this, " " + driver.getDistance(), Toast.LENGTH_SHORT).show();
-        }
-
-        private void openPhoneCallDriver (Driver driver){
-            Toast.makeText(this, "" + driver.getPhone(), Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void getDriverNearFailed () {
-            new KAlertDialog(GoogleMapActivity.this)
-                    .setContentText(getString(R.string.getDriverNearFailed))
-                    .setConfirmText("ok")
-                    .setConfirmClickListener(new KAlertDialog.KAlertClickListener() {
-                        @Override
-                        public void onClick(KAlertDialog kAlertDialog) {
-                            startActivity(new Intent(GoogleMapActivity.this, HomeActivity.class));
-                        }
-                    }).show();
-        }
-
-        public void onCameraMoveStarted ( int i){
-        }
+    public void onCameraMoveStarted ( int i){
+    }
 
 
 
-        private void getLocationCurrent () {
-            googleMap.setMyLocationEnabled(true);
-            googleMap.getUiSettings().setMyLocationButtonEnabled(false);
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(locationCurrent, 18f);
-            googleMap.animateCamera(cameraUpdate);
-        }
 
-
+    private void getLocationCurrent () {
+        googleMap.setMyLocationEnabled(true);
+        googleMap.getUiSettings().setMyLocationButtonEnabled(false);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(locationCurrent, 18f);
+        googleMap.animateCamera(cameraUpdate);
+    }
     @Override
     public void onBackPressed () {
         if (findViewById(R.id.layoutInfoDriver).getVisibility() == View.VISIBLE) {
@@ -463,19 +512,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
             finish();
         }
     }
-
-    @Override
-    public void onCameraIdle() {
-
-    }
-
-    @Override
-    public void onCameraMove() {
-
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
 }
+
+

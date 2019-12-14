@@ -34,6 +34,7 @@ import vn.fpoly.fpolybookcarclient.adapter.food.Categories_MenuFoodAdapter;
 import vn.fpoly.fpolybookcarclient.adapter.food.RestaurantAdapter;
 import vn.fpoly.fpolybookcarclient.adapter.food.ViewpagerFood;
 import vn.fpoly.fpolybookcarclient.library.CallBackFragment;
+import vn.fpoly.fpolybookcarclient.library.GeocoderAddress;
 import vn.fpoly.fpolybookcarclient.model.objectClass.FoodPager;
 import vn.fpoly.fpolybookcarclient.model.objectClass.FoodCategories;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Restaurant;
@@ -59,8 +60,6 @@ public class FoodFragment extends Fragment implements IViewFood, IViewFoodCatego
     private String locationLatitude ;
     private String locationLongitude ;
     private TextView txtAdress;
-    private Geocoder geocoder;
-    private List<Address>arrAddresss;
     private ArrayList<Restaurant> restaurantArrayList = new ArrayList<>();
     private FragmentManager fragmentManager;
     private String addresCurrent = "";
@@ -73,30 +72,13 @@ public class FoodFragment extends Fragment implements IViewFood, IViewFoodCatego
         View view = inflater.inflate(R.layout.fragment_food, container, false);
         initView(view);
         CallBackFragment.CallbackHome(view,fragmentManager);
-        geocoder  = new Geocoder(getActivity(), Locale.getDefault());
-
         sharedPreferences = getActivity().getSharedPreferences("toado", 0);
 
         locationLatitude = sharedPreferences.getString("locationlatitude","");
         locationLongitude = sharedPreferences.getString("locationlongitude","");
 
-       if (locationLatitude != null && locationLongitude != null ){
-           double latitude = Double.parseDouble(locationLatitude);
-           double longitude = Double.parseDouble(locationLongitude);
-           try {
+        txtAdress.setText(GeocoderAddress.getAddress(getActivity(),Double.parseDouble(locationLatitude),Double.parseDouble(locationLongitude)));
 
-               arrAddresss = geocoder.getFromLocation(latitude, longitude, 1);
-               String addres = arrAddresss.get(0).getAddressLine(0);
-               String address[] = addres.split(",");
-               addresCurrent = address[0] + " Quận " + address[2];
-
-               txtAdress.setText(addresCurrent);
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
-       } else {
-           txtAdress.setText("");
-       }
         presenterFood.getListFood();
         presenterFoodCategories.getListFoodCategories();
         presenterRestaurant.getListRestaurant();

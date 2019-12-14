@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,9 +49,11 @@ public class RestaurantMenuFoodCartItemAdapter extends RecyclerView.Adapter<Rest
         Glide.with(context).load(foodMenu.getImage()).into(holder.imgFoodItemMenuRes);
         holder.txtNameFoodItemMenuRes.setText(foodMenu.getName());
         holder.txtPriceFoodItemMenuRes.setText(foodMenu.getPrice());
-        holder.txtNumberCart.setText(String.format("%d", billFoodArrayList.get(position).getAmountBuy()));
+        holder.txtNumberCart.setText(""+billFoodArrayList.get(position).getAmountBuy());
+//        holder.txtNumberCart.setText(String.format("%d", billFoodArrayList.get(position).getAmountBuy()));
 
         setAmoutCart(holder,position);
+
 
     }
 
@@ -68,6 +71,13 @@ public class RestaurantMenuFoodCartItemAdapter extends RecyclerView.Adapter<Rest
             }
         });
 
+        holder.imgDeleteItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                billFoodArrayList.remove(position);
+                notifyDataSetChanged();
+            }
+        });
 
     }
 
@@ -80,6 +90,7 @@ public class RestaurantMenuFoodCartItemAdapter extends RecyclerView.Adapter<Rest
     class ViewHolder extends RecyclerView.ViewHolder {
         RoundedImageView imgFoodItemMenuRes;
         TextView txtNameFoodItemMenuRes,txtPriceFoodItemMenuRes,txtNumberCart,txtIncrease,txtReduce;
+        ImageView imgDeleteItem;
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgFoodItemMenuRes = itemView.findViewById(R.id.imgFoodItemMenuResCart);
@@ -88,6 +99,7 @@ public class RestaurantMenuFoodCartItemAdapter extends RecyclerView.Adapter<Rest
             txtNumberCart = itemView.findViewById(R.id.numberCart);
             txtIncrease =  itemView.findViewById(R.id.increase);
             txtReduce = itemView.findViewById(R.id.reduce);
+            imgDeleteItem = itemView.findViewById(R.id.imgDeleteItem);
         }
     }
 }

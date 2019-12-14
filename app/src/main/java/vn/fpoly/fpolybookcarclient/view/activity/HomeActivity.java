@@ -2,6 +2,8 @@ package vn.fpoly.fpolybookcarclient.view.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -39,7 +41,6 @@ public class HomeActivity extends AppCompatActivity {
     private LatLng locationCurrent;
     public static BottomNavigationView navView;
     private int number = 0;
-
     SharedPreferences sharedPreferences;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -54,6 +55,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         navView = findViewById(R.id.nav_view);
+
 
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navView.setItemIconTintList(null);

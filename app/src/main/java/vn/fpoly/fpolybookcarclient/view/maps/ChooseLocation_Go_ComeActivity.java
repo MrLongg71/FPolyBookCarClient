@@ -5,6 +5,7 @@ package vn.fpoly.fpolybookcarclient.view.maps;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import vn.fpoly.fpolybookcarclient.Constans;
+import vn.fpoly.fpolybookcarclient.library.GeocoderAddress;
 import vn.fpoly.fpolybookcarclient.model.objectClass.OderCar;
 import vn.fpoly.fpolybookcarclient.R;
 
@@ -40,6 +42,7 @@ public class ChooseLocation_Go_ComeActivity extends AppCompatActivity {
     private Intent intent;
     private Bundle bundle;
     private List<String> arrBook;
+    private int selected = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +58,6 @@ public class ChooseLocation_Go_ComeActivity extends AppCompatActivity {
         }
         eventChooseGo();
         eventChooseCome();
-//        oderCar = new OderCar(keyClient,placeNameGo,placeNameCome,"",locationGo.latitude,locationGo.longitude,locationCome.latitude,locationCome.longitude,1,5,10,true ,true);
 
     }
 
@@ -69,12 +71,21 @@ public class ChooseLocation_Go_ComeActivity extends AppCompatActivity {
 
     }
     private void eventChooseGo(){
-        chooseLocationGo.setHint("Điểm đi");
+        chooseLocationGo.setHint("Diem di");
         chooseLocationGo.setCountry("vn");
         chooseLocationGo.setPlaceFields(Arrays.asList(Place.Field.NAME,Place.Field.ID, Place.Field.ADDRESS, Place.Field.LAT_LNG));
+        Intent intent = getIntent();
+        if(intent !=null){
+            LatLng latLngCurrent = new LatLng(intent.getDoubleExtra(Constans.KEY_BUNDEL_LATITUDE_GO,0),intent.getDoubleExtra(Constans.KEY_BUNDEL_LONGITUDE_GO,0));
+            chooseLocationGo.setText(GeocoderAddress.getAddress(ChooseLocation_Go_ComeActivity.this,latLngCurrent.latitude,latLngCurrent.longitude));
+            bundle.putString(Constans.KEY_BUNDEL_PLACENAME_GO,GeocoderAddress.getAddress(ChooseLocation_Go_ComeActivity.this,latLngCurrent.latitude,latLngCurrent.longitude));
+            bundle.putDouble(Constans.KEY_BUNDEL_LATITUDE_GO,intent.getDoubleExtra(Constans.KEY_BUNDEL_LATITUDE_GO,0));
+            bundle.putDouble(Constans.KEY_BUNDEL_LONGITUDE_GO,intent.getDoubleExtra(Constans.KEY_BUNDEL_LONGITUDE_GO,0));
+        }
         chooseLocationGo.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
+                selected = 1;
                 bundle.putString(Constans.KEY_BUNDEL_PLACENAME_GO,place.getName());
                 bundle.putDouble(Constans.KEY_BUNDEL_LATITUDE_GO,place.getLatLng().latitude);
                 bundle.putDouble(Constans.KEY_BUNDEL_LONGITUDE_GO,place.getLatLng().longitude);
@@ -116,6 +127,12 @@ public class ChooseLocation_Go_ComeActivity extends AppCompatActivity {
             setResult(Activity.RESULT_OK,intent);
             finish();
         }
+        if(bundle.size() == 6 && selected == 0 ){
+            intent.putExtra(Constans.KEY_BUNDEL_BOOK,bundle);
+            setResult(Activity.RESULT_OK,intent);
+            finish();
+        }
+
     }
 
     @Override
