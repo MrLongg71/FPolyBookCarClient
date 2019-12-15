@@ -78,7 +78,6 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
     private String addresCurrent = "";
     private  int priceTotal = 0;
     private ProgressDialog progressDialog;
-    private int orderAgain = 0;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -97,13 +96,11 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
         setHasOptionsMenu(true);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayShowHomeEnabled(true);
+        CallBackFragment.callBackpress(view,getActivity().getSupportFragmentManager());
         toolbarMenuRes.setNavigationOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-//                getActivity().getSupportFragmentManager().popBackStack();
-
-
-                CallBackFragment.callBackpress(view,getActivity().getSupportFragmentManager());
+                getActivity().getSupportFragmentManager().popBackStack();
             }
         });
     }
@@ -328,11 +325,5 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
 
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        getActivity().finish();
-
-    }
 
 }
