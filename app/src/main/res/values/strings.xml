@@ -124,6 +124,8 @@
     <string name="order_car">Order Car</string>
     <string name="register">REGISTER</string>
 
+    <string name="virify_success">Verify Success</string>
+    <string name="virify_failed">Virify failed</string>
 
 
 </resources>

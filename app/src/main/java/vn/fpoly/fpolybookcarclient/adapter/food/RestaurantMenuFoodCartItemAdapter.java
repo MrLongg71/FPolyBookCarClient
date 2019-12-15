@@ -49,8 +49,7 @@ public class RestaurantMenuFoodCartItemAdapter extends RecyclerView.Adapter<Rest
         Glide.with(context).load(foodMenu.getImage()).into(holder.imgFoodItemMenuRes);
         holder.txtNameFoodItemMenuRes.setText(foodMenu.getName());
         holder.txtPriceFoodItemMenuRes.setText(foodMenu.getPrice());
-        holder.txtNumberCart.setText(""+billFoodArrayList.get(position).getAmountBuy());
-//        holder.txtNumberCart.setText(String.format("%d", billFoodArrayList.get(position).getAmountBuy()));
+        holder.txtNumberCart.setText(String.format("%d", billFoodArrayList.get(position).getAmountBuy()));
 
         setAmoutCart(holder,position);
 

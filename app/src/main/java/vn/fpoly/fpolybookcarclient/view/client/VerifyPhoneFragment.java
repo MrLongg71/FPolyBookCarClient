@@ -1,6 +1,7 @@
 package vn.fpoly.fpolybookcarclient.view.client;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,30 +15,31 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.developer.kalert.KAlertDialog;
 import com.stfalcon.smsverifycatcher.OnSmsCatchListener;
 import com.stfalcon.smsverifycatcher.SmsVerifyCatcher;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import es.dmoral.toasty.Toasty;
-import vn.fpoly.fpolybookcarclient.library.Dialog;
-import vn.fpoly.fpolybookcarclient.presenter.client.PresenterLogin;
+import vn.fpoly.fpolybookcarclient.model.objectClass.Client;
+import vn.fpoly.fpolybookcarclient.presenter.client.PresenterRegister;
 import vn.fpoly.fpolybookcarclient.R;
-import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
 
-public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnClickListener {
+public class VerifyPhoneFragment extends Fragment implements IViewRegister, View.OnClickListener {
 
     private EditText edtphone1, edtphone2, edtphone3, edtphone4, edtphone5, edtphone6;
     private Button btnVery;
     private TextView txtPhone, txtResend;
     private String phone = "";
+    private String pass = "";
     private SmsVerifyCatcher smsVerifyCatcher;
-    private PresenterLogin presenterLogin;
+    private PresenterRegister presenterSignUp;
+    private Client client;
+    private ProgressDialog progressDialog;
+
     @Nullable
     @Override
 
@@ -52,64 +54,39 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
 
         return view;
     }
-    private boolean checkvalid(){
-        final String code1 = edtphone1.getText().toString().trim();
+
+    private boolean checkvalid() {
+        String code1 = edtphone1.getText().toString().trim();
         String code2 = edtphone2.getText().toString().trim();
         String code3 = edtphone3.getText().toString().trim();
         String code4 = edtphone4.getText().toString().trim();
         String code5 = edtphone5.getText().toString().trim();
         String code6 = edtphone6.getText().toString().trim();
-        if(code1.length() ==0 || code2.length() == 0 || code3 .length() == 0 || code4.length()==0){
-            Toasty.error(getActivity(),getString(R.string.checkedtcodevery),Toasty.LENGTH_SHORT).show();
+        if (code1.length() == 0 || code2.length() == 0 || code3.length() == 0 || code4.length() == 0) {
+            Toasty.error(getActivity(), getString(R.string.checkedtcodevery), Toasty.LENGTH_SHORT).show();
             return false;
-        }else {
-
-            String sverify = code1+code2+code3+code4+code5+code6;
-            checkVerify(phone,sverify);
-
-            KAlertDialog pDialog = new KAlertDialog(getActivity(), KAlertDialog.SUCCESS_TYPE);
-            pDialog .setTitleText(getString(R.string.success));
-            pDialog .setContentText(getString(R.string.activateaccout));
-            pDialog .show();
-
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            LoginFragment loginFragment = new LoginFragment();
-            fragmentTransaction.replace(R.id.frame_client,loginFragment);
-            getActivity().getSupportFragmentManager().popBackStack();
-            fragmentTransaction.commit();
-
+        } else {
+            progressDialog.show();
+            String sverify = code1 + code2 + code3 + code4 + code5 + code6;
+            checkVerify(phone, sverify);
+            return true;
         }
 
-        return true;
     }
+
 
     private void checkVerify(String phone, String verify) {
-        presenterLogin.doLoginPhone(phone,verify,getActivity());
-
+        presenterSignUp.doVerifyOTP(verify, getActivity());
     }
-
-    @Override
-    public void onSuccess() {
-        Dialog.Success(getActivity());
-        getActivity().finish();
-        startActivity(new Intent(getActivity(), HomeActivity.class));
-    }
-
-    @Override
-    public void onFailed() {
-        Dialog.Error(getActivity(),getActivity().getString(R.string.activateaccout));
-    }
-
 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.txtresendcode:
-                if(txtResend.getText().equals(getString(R.string.resendcode)) && phone !=null){
-                    presenterLogin.doSendSMS(phone,txtResend,getActivity());
-                }else {
+                if (txtResend.getText().equals(getString(R.string.resendcode)) && phone != null) {
+                    presenterSignUp.doSendVerifyOTP(phone, txtResend, getActivity());
+                } else {
                     Toasty.error(getActivity(), "Có lỗi xảy ra");
                     getActivity().finish();
                 }
@@ -119,24 +96,32 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
                 break;
         }
     }
-    private void initView(View view){
-        presenterLogin  = new PresenterLogin(this);
-        edtphone1       = view.findViewById(R.id.edtnumber1);
-        edtphone2       = view.findViewById(R.id.edtnumber2);
-        edtphone3       = view.findViewById(R.id.edtnumber3);
-        edtphone4       = view.findViewById(R.id.edtnumber4);
-        edtphone5       = view.findViewById(R.id.edtnumber5);
-        edtphone6       = view.findViewById(R.id.edtnumber6);
-        txtPhone        = view.findViewById(R.id.txtPhone);
-        txtResend       = view.findViewById(R.id.txtresendcode);
-        btnVery         = view.findViewById(R.id.btnvery);
-        phone           = getArguments().getString("phone");
-        txtPhone.setText(getString(R.string.messotp) +" "+ phone);
-        presenterLogin.doSendSMS(phone,txtResend,getActivity());
+
+    private void initView(View view) {
+        presenterSignUp = new PresenterRegister(this);
+        edtphone1 = view.findViewById(R.id.edtnumber1);
+        edtphone2 = view.findViewById(R.id.edtnumber2);
+        edtphone3 = view.findViewById(R.id.edtnumber3);
+        edtphone4 = view.findViewById(R.id.edtnumber4);
+        edtphone5 = view.findViewById(R.id.edtnumber5);
+        edtphone6 = view.findViewById(R.id.edtnumber6);
+        txtPhone = view.findViewById(R.id.txtPhone);
+        txtResend = view.findViewById(R.id.txtresendcode);
+        btnVery = view.findViewById(R.id.btnvery);
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading");
+        
+        
+        client = getArguments().getParcelable("client");
+        phone = client.getPhone();
+        pass = getArguments().getString("pass");
+
+        txtPhone.setText(getString(R.string.messotp) + " " + phone);
+        presenterSignUp.doSendVerifyOTP(phone, txtResend, getActivity());
     }
 
     private void SmsVeri() {
-     smsVerifyCatcher = new SmsVerifyCatcher(getActivity(), new OnSmsCatchListener<String>() {
+        smsVerifyCatcher = new SmsVerifyCatcher(getActivity(), new OnSmsCatchListener<String>() {
             @Override
             public void onSmsCatch(String message) {
                 String code = parsCode(message);
@@ -150,11 +135,12 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
         });
         smsVerifyCatcher.setPhoneNumberFilter("phone");
     }
-    private String parsCode(String mess){
+
+    private String parsCode(String mess) {
         Pattern pattern = Pattern.compile("\\\\b\\\\d{6}\\\\b");
         Matcher matcher = pattern.matcher(mess);
         String code = "";
-        while (matcher.find()){
+        while (matcher.find()) {
             code = matcher.group(0);
         }
         return code;
@@ -165,7 +151,8 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         smsVerifyCatcher.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
-    private void autoMoveNext(){
+
+    private void autoMoveNext() {
         edtphone1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -174,7 +161,7 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(edtphone1.getText().toString().length() >=1){
+                if (edtphone1.getText().toString().length() >= 1) {
                     edtphone2.requestFocus();
                 }
             }
@@ -192,7 +179,7 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(edtphone2.getText().toString().length() >=1){
+                if (edtphone2.getText().toString().length() >= 1) {
                     edtphone3.requestFocus();
                 }
             }
@@ -210,7 +197,7 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(edtphone3.getText().toString().length() >=1){
+                if (edtphone3.getText().toString().length() >= 1) {
                     edtphone4.requestFocus();
                 }
             }
@@ -228,7 +215,7 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(edtphone4.getText().toString().length() >=1){
+                if (edtphone4.getText().toString().length() >= 1) {
                     edtphone5.requestFocus();
                 }
             }
@@ -246,7 +233,7 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(edtphone5.getText().toString().length() >=1){
+                if (edtphone5.getText().toString().length() >= 1) {
                     edtphone6.requestFocus();
                 }
             }
@@ -256,5 +243,47 @@ public class VerifyPhoneFragment extends Fragment implements ViewLogin, View.OnC
 
             }
         });
+    }
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void onSendSuccess() {
+       Toasty.success(getActivity(),"Send success OTP SMS " + phone, 3);
+    }
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void onSendFailed() {
+        Toasty.warning(Objects.requireNonNull(getActivity()),"The phone " +phone + " send many OTP (SPAM) ", 3);
+
+    }
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void onVerifyOTPSuccess() {
+        presenterSignUp.doSignUp(client,pass);
+    }
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void onVerifyOTPFailed() {
+        progressDialog.dismiss();
+        Toasty.error(Objects.requireNonNull(getActivity()),getActivity().getString(R.string.virify_failed), 3);
+
+    }
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void onSuccessSignUp() {
+        progressDialog.dismiss();
+        Toasty.success(Objects.requireNonNull(getActivity()),getActivity().getString(R.string.virify_success), 3);
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_client, new LoginFragment()).commit();
+    }
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void onFailedSignUp() {
+        Toasty.error(Objects.requireNonNull(getActivity()),getActivity().getString(R.string.virify_failed), 3);
+        getActivity().finish();
     }
 }

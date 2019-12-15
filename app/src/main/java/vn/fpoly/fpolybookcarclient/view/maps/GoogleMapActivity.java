@@ -62,7 +62,7 @@ import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
 
 
 public class GoogleMapActivity extends AppCompatActivity implements
-        OnMapReadyCallback, View.OnClickListener, ViewGoogleMap {
+        OnMapReadyCallback, View.OnClickListener, ViewGoogleMap,GoogleMap.OnCameraIdleListener {
 
     private GoogleMap googleMap;
     private MapFragment mapFragment;
@@ -105,6 +105,8 @@ public class GoogleMapActivity extends AppCompatActivity implements
         locationLongitude = sharedPreferences.getString("locationlongitude", "");
 
         initView();
+        progressDialog.show();
+
         int checkPermissionCoarseLocaltion_COARSE = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
         int checkPermissionCoarseLocaltion_FINE = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         if (checkPermissionCoarseLocaltion_COARSE != PackageManager.PERMISSION_GRANTED && checkPermissionCoarseLocaltion_FINE != PackageManager.PERMISSION_GRANTED) {
@@ -194,12 +196,11 @@ public class GoogleMapActivity extends AppCompatActivity implements
                 }
             });
             edtLocationCurrent.setText(GeocoderAddress.getAddress(GoogleMapActivity.this, locationCurrent.latitude, locationCurrent.longitude));
-            lisenerCameraMove();
-
+            googleMap.setOnCameraIdleListener(this);
         }
 
         if (locationGo != null && locationCome != null) {
-            Log.d("LONgKUTE", "onMapReady: car");
+
             addMarker(locationGo, placeNameGo, R.drawable.iconlocationblue);
             addMarker(locationCome, placeNameCome, R.drawable.iconlocationred);
             drawPolyline(locationGo, locationCome, true);
@@ -210,7 +211,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
             googleMap.animateCamera(cameraUpdate);
         }
         if (locationRestaurant != null && locationCurrent != null) {
-            Log.d("LONgKUTE", "onMapReady: foood");
 //            addMarker(locationCurrent, "", R.drawable.ic_driver_bike);
             addMarker(locationRestaurant, placeNameGo, R.drawable.iconlocationblue);//nha hang
             addMarker(locationCurrent, placeNameCome, R.drawable.iconlocationred);
@@ -240,13 +240,16 @@ public class GoogleMapActivity extends AppCompatActivity implements
     @SuppressLint("MissingPermission")
     private void getLocationClient () {
         String provider = BuildConfig.DEBUG ? LocationManager.GPS_PROVIDER : LocationManager.NETWORK_PROVIDER;
-
-        locationManager.requestLocationUpdates(provider, 5000L
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000L
                 , 500.0F, new LocationListener() {
                     @Override
                     public void onLocationChanged(Location location) {
-                        locationCurrent = new LatLng(location.getLatitude(), location.getLongitude());
-                        mapFragment.getMapAsync(GoogleMapActivity.this);
+                        if(locationCurrent != null){
+                            locationCurrent = new LatLng(location.getLatitude(), location.getLongitude());
+                            progressDialog.dismiss();
+                            mapFragment.getMapAsync(GoogleMapActivity.this);
+
+                        }
                     }
 
                     @Override
@@ -424,6 +427,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
 
 
             } else {
+                addressCurrent = GeocoderAddress.getAddress(GoogleMapActivity.this,locationCurrent.latitude,locationCurrent.longitude);
                 presenterGoogleMap.pushOrderFoodToDriver(driverNear, billFoodArrayList, locationCurrent, restaurant, restaurant.getAddress(), addressCurrent, priceOrderFood);
                 imgInfoDriver.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -501,6 +505,16 @@ public class GoogleMapActivity extends AppCompatActivity implements
             super.onBackPressed();
             startActivity(new Intent(GoogleMapActivity.this, HomeActivity.class));
             finish();
+        }
+    }
+
+    @Override
+    public void onCameraIdle() {
+        LatLng center = googleMap.getCameraPosition().target;
+        if (center != null && layoutChooseLocation.getVisibility() == View.VISIBLE) {
+            locationCurrent = center;
+            addressCurrent = GeocoderAddress.getAddress(GoogleMapActivity.this,locationCurrent.latitude,locationCurrent.longitude);
+            edtLocationCurrent.setText(GeocoderAddress.getAddress(GoogleMapActivity.this, center.latitude, center.longitude));
         }
     }
 }

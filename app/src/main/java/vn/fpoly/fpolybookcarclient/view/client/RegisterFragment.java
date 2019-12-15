@@ -1,8 +1,8 @@
 package vn.fpoly.fpolybookcarclient.view.client;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -13,27 +13,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-
-import vn.fpoly.fpolybookcarclient.library.Dialog;
 
 import vn.fpoly.fpolybookcarclient.model.objectClass.Client;
-import vn.fpoly.fpolybookcarclient.presenter.client.PresenterLogin;
+import vn.fpoly.fpolybookcarclient.presenter.client.PresenterRegister;
 import vn.fpoly.fpolybookcarclient.R;
 
 
-public class RegisterFragment extends Fragment implements View.OnClickListener, ViewLogin {
-    private EditText edtPhone, edtName, edtPassword, edtEmail;
+public class RegisterFragment extends Fragment implements View.OnClickListener, IViewRegister {
+    private TextInputEditText edtPhone, edtName, edtPassword, edtEmail;
+    private EditText edtcoutry;
     private Button btnRegister;
-    private FirebaseAuth mAuth;
-    private PresenterLogin presenterLogin;
-
+    private ImageView imgBackBtnRegister;
+    private PresenterRegister presenterSignUp;
+    private ProgressDialog progressDialog;
+    private Client client;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,19 +42,24 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         View view = inflater.inflate(R.layout.fragment_register, container, false);
         initView(view);
 
-        mAuth = FirebaseAuth.getInstance();
+        edtcoutry.setFocusable(false);
         btnRegister.setOnClickListener(this);
 
         return view;
     }
 
     private void initView(View view) {
-        presenterLogin      = new PresenterLogin(this);
+        presenterSignUp = new PresenterRegister(this);
         edtPhone            = view.findViewById(R.id.edtPhoneRegister);
         edtName             = view.findViewById(R.id.edtUserNameRegister);
         edtPassword         = view.findViewById(R.id.edtPassRegister);
         edtEmail            = view.findViewById(R.id.edtEmailRegister);
         btnRegister         = view.findViewById(R.id.btnRegister);
+
+        imgBackBtnRegister  = view.findViewById(R.id.imgBackRegister);
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading");
+
 
     }
 
@@ -75,24 +76,28 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
     private void createClientWithEmail(){
         if(checkValid()){
+            progressDialog.show();
             final String name = edtName.getText().toString().trim();
             final String email = edtEmail.getText().toString().trim();
             String pass = edtPassword.getText().toString().trim();
             final String phone = edtPhone.getText().toString().trim();
+            client = new Client("",email,phone,name,"");
+            // -> otp
 
-            mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        String key = task.getResult().getUser().getUid();
-                        Client client = new Client(key, email, phone, name,"");
-                        presenterLogin.doRegisterEmail(client);
-                        onSuccess();
-                    }else {
-                        onFailed();
-                    }
-                }
-            });
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            VerifyPhoneFragment verifyPhoneFragment = new VerifyPhoneFragment();
+
+            if(client != null){
+                Bundle bundle = new Bundle();
+                bundle.putString("pass" , edtPassword.getText().toString().trim());
+                bundle.putParcelable("client",client);
+                verifyPhoneFragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.frame_client, verifyPhoneFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                progressDialog.dismiss();
+            }
 
         }
     }
@@ -142,25 +147,36 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
     }
 
-    @Override
-    public void onSuccess() {
-        Dialog.Success(getActivity());
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        VerifyPhoneFragment verifyPhoneFragment = new VerifyPhoneFragment();
 
-        Bundle bundle = new Bundle();
-        bundle.putString("phone" , edtPhone.getText().toString().trim());
-        verifyPhoneFragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.frame_client, verifyPhoneFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+    @Override
+    public void onSendSuccess() {
 
     }
 
     @Override
-    public void onFailed() {
-        Dialog.Error(getActivity(),getActivity().getString(R.string.activateaccout));
+    public void onSendFailed() {
+
+    }
+
+    @Override
+    public void onVerifyOTPSuccess() {
+
+    }
+
+    @Override
+    public void onVerifyOTPFailed() {
+
+    }
+
+    @Override
+    public void onSuccessSignUp() {
+
+
+    }
+
+    @Override
+    public void onFailedSignUp() {
+
 
     }
 }

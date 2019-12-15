@@ -1,8 +1,8 @@
 package vn.fpoly.fpolybookcarclient.view.client;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,23 +22,20 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 import vn.fpoly.fpolybookcarclient.library.Dialog;
 import vn.fpoly.fpolybookcarclient.presenter.client.PresenterLogin;
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
 
-public class LoginFragment extends Fragment implements View.OnClickListener, ViewLogin {
+public class LoginFragment extends Fragment implements View.OnClickListener ,IViewLogin {
     private Button btnloginHome;
     private ImageView btnAdd,btnGoogle,btnLoginPhone;
     private EditText edtuser, edtpass;
@@ -56,7 +52,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         initView(view);
 
-        presenterLogin = new PresenterLogin(this);
 
         btnAdd.setOnClickListener(this);
         progressDialog = new ProgressDialog(getActivity());
@@ -78,6 +73,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
         edtpass         = view.findViewById(R.id.edtPassLogin);
         txtforgot       = view.findViewById(R.id.txtforgot);
         btnGoogle       = view.findViewById(R.id.btnGoogle);
+        presenterLogin = new PresenterLogin(this);
         edtuser.setText("abc@gmail.com");
         edtpass.setText("123456");
     }
@@ -109,9 +105,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
     private void loginClientWithEmail() {
         if (checkValid()) {
             progressDialog.show();
-            String user = edtuser.getText().toString().trim();
+            String email = edtuser.getText().toString().trim();
             String pass = edtpass.getText().toString().trim();
-            presenterLogin.doLoginEmail(user, pass);
+            presenterLogin.doSignIn(email,pass);
         }
     }
 
@@ -175,16 +171,22 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Vie
         signInClient = GoogleSignIn.getClient(getActivity(), signInOptions);
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void onSuccess() {
         progressDialog.dismiss();
+        Toasty.success(getActivity(),getActivity().getString(R.string.success),3);
         startActivity(new Intent(getActivity(), HomeActivity.class));
         getActivity().finish();
-
     }
 
     @Override
-    public void onFailed() {
-        Dialog.Error(getActivity(),getString(R.string.activateaccout));
+    public void onFailed(String message) {
+        progressDialog.dismiss();
+        Dialog.Error(getActivity(),message);
     }
+
+
+
+
 }
