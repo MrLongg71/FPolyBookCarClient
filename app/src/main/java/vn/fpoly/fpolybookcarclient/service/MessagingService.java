@@ -47,7 +47,7 @@ public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onCreate() {
         super.onCreate();
-        getToken();
+//        getToken();
 
     }
 
@@ -71,8 +71,11 @@ public class MessagingService extends FirebaseMessagingService {
 
     private void sendTokenToServer(String s) {
 
-        dataDriver.child("Client").child(auth.getCurrentUser().getUid()).child("token").setValue(s);
+        try {
+            dataDriver.child("Client").child(auth.getCurrentUser().getUid()).child("token").setValue(s);
 
+        } catch (Exception e) {
 
+        }
     }
 }

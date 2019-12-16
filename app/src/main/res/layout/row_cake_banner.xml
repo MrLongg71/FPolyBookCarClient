@@ -58,6 +58,17 @@
                 android:background="@drawable/custom_checklike"
                 android:textOff=""
                 android:textOn="" />
+            <TextView
+                android:id="@+id/amountLike"
+                android:layout_marginLeft="5dp"
+                android:text="50"
+                android:layout_marginTop="14dp"
+                android:layout_below="@+id/lineview"
+                android:layout_toRightOf="@+id/toglelikeCake"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </TextView>
 
         </RelativeLayout>
 

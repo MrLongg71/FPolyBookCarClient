@@ -54,6 +54,7 @@ public class NewsBannerAdapter extends RecyclerView.Adapter<NewsBannerAdapter.Vi
         News cakesBanner = arrCake.get(position);
         holder.txtTitle.setText(cakesBanner.getTitle());
         holder.txtDetail.setText(cakesBanner.getDetail());
+        holder.txtLike.setText(cakesBanner.getLike());
         setImageCake(holder.imgBanner, cakesBanner);
     }
 
@@ -80,13 +81,14 @@ public class NewsBannerAdapter extends RecyclerView.Adapter<NewsBannerAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         RoundedImageView imgBanner;
         ToggleButton toggleLike;
-        TextView txtTitle,txtDetail;
+        TextView txtTitle,txtDetail,txtLike;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgBanner   = itemView.findViewById(R.id.imgItemCake);
             txtDetail   = itemView.findViewById(R.id.txtDetaiCakeItem);
             txtTitle    = itemView.findViewById(R.id.txttitleCakeItem);
             toggleLike  = itemView.findViewById(R.id.toglelikeCake);
+            txtLike     = itemView.findViewById(R.id.amountLike);
         }
     }
 }

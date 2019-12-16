@@ -237,7 +237,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="See all"
-                    android:textColor="#079eb9"
+                    android:textColor="#09C510"
                     android:textStyle="bold">
 
                 </TextView>
@@ -296,7 +296,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="See all"
-                    android:textColor="#079eb9"
+                    android:textColor="#09C510"
                     android:textStyle="bold">
 
                 </TextView>

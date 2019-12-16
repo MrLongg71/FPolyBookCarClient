@@ -26,6 +26,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
@@ -78,6 +80,8 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
     private String addresCurrent = "";
     private  int priceTotal = 0;
     private ProgressDialog progressDialog;
+    private SearchView searchView;
+    private   RestaurantMenuFoodAdapter restaurantMenuFoodAdapter;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -161,7 +165,7 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
         LayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         recyclerviewMenuRestaurant.setLayoutManager(layoutManager);
 
-        RestaurantMenuFoodAdapter restaurantMenuFoodAdapter = new RestaurantMenuFoodAdapter(getActivity(), R.layout.custom_item_menu_res, foodMenulist, this);
+         restaurantMenuFoodAdapter = new RestaurantMenuFoodAdapter(getActivity(), R.layout.custom_item_menu_res, foodMenulist, this);
         recyclerviewMenuRestaurant.setAdapter(restaurantMenuFoodAdapter);
         restaurantMenuFoodAdapter.notifyDataSetChanged();
         listenerScroll();
@@ -179,6 +183,20 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_search, menu);
         getCheckedHeartRestaurant();
+        searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+      searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+          @Override
+          public boolean onQueryTextSubmit(String query) {
+              return false;
+          }
+
+          @Override
+          public boolean onQueryTextChange(String newText) {
+              restaurantMenuFoodAdapter.search(newText);
+              restaurantMenuFoodAdapter.notifyDataSetChanged();
+              return false;
+          }
+      });
     }
 
     @Override

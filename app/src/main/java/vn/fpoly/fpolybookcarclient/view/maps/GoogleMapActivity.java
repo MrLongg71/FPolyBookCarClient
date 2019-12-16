@@ -240,16 +240,20 @@ public class GoogleMapActivity extends AppCompatActivity implements
     @SuppressLint("MissingPermission")
     private void getLocationClient () {
         String provider = BuildConfig.DEBUG ? LocationManager.GPS_PROVIDER : LocationManager.NETWORK_PROVIDER;
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000L
+        locationManager.requestLocationUpdates(provider, 5000L
                 , 500.0F, new LocationListener() {
                     @Override
                     public void onLocationChanged(Location location) {
-                        if(locationCurrent != null){
-                            locationCurrent = new LatLng(location.getLatitude(), location.getLongitude());
-                            progressDialog.dismiss();
-                            mapFragment.getMapAsync(GoogleMapActivity.this);
+//                        locationCurrent = new LatLng(location.getLatitude(), location.getLongitude());
+//                        if(locationCurrent != null){
+//                            progressDialog.dismiss();
+//                            mapFragment.getMapAsync(GoogleMapActivity.this);
+//
+//                        }
+                        locationCurrent = new LatLng(location.getLatitude(), location.getLongitude());
+                        progressDialog.dismiss();
+                        mapFragment.getMapAsync(GoogleMapActivity.this);
 
-                        }
                     }
 
                     @Override

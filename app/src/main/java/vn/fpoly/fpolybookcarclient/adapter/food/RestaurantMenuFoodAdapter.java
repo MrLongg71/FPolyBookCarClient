@@ -18,6 +18,7 @@ import com.google.firebase.storage.StorageReference;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.model.objectClass.FoodMenu;
@@ -29,11 +30,14 @@ public class RestaurantMenuFoodAdapter extends RecyclerView.Adapter<RestaurantMe
     private ArrayList<FoodMenu> foodMenuArrayList;
     private final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     private CallbackRestaurantMenuFood callbackRestaurantMenuFood;
+    private List<FoodMenu> arrFoodMenuCoppy = new ArrayList<>();
     public RestaurantMenuFoodAdapter(Context context, int layout, ArrayList<FoodMenu> foodMenuArrayList, CallbackRestaurantMenuFood callbackRestaurantMenuFood) {
         this.context = context;
         this.layout = layout;
         this.foodMenuArrayList = foodMenuArrayList;
         this.callbackRestaurantMenuFood = callbackRestaurantMenuFood;
+        this.arrFoodMenuCoppy = arrFoodMenuCoppy;
+        arrFoodMenuCoppy.addAll(foodMenuArrayList);
     }
 
     @NonNull
@@ -88,6 +92,24 @@ public class RestaurantMenuFoodAdapter extends RecyclerView.Adapter<RestaurantMe
             txtDetailFoodItemMenuRes = itemView.findViewById(R.id.txtDetailFoodItemMenuRes);
             txtPriceFoodItemMenuRes = itemView.findViewById(R.id.txtPriceFoodItemMenuRes);
 
+        }
+
+    }
+    public void search(String text){
+        text = text.toLowerCase();
+        if (text.length() == 0 ){
+            foodMenuArrayList.clear();
+            foodMenuArrayList.addAll(arrFoodMenuCoppy);
+            notifyDataSetChanged();
+        }else {
+            foodMenuArrayList.clear();
+            for (int i = 0; i<arrFoodMenuCoppy.size() ; i ++ ){
+                FoodMenu foodMenu = arrFoodMenuCoppy.get(i);
+                if (foodMenu.getName().toLowerCase().contains(text)){
+                    foodMenuArrayList.add(foodMenu);
+                    notifyDataSetChanged();
+                }
+            }
         }
     }
 }

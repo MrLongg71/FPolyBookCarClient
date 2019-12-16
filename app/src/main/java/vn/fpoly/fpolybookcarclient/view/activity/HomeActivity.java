@@ -119,7 +119,7 @@ public class HomeActivity extends AppCompatActivity {
     private void getLocationClient() {
         String provider = BuildConfig.DEBUG ? LocationManager.GPS_PROVIDER : LocationManager.NETWORK_PROVIDER;
 
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000L
+        locationManager.requestLocationUpdates(provider, 5000L
                 , 500.0F, new LocationListener() {
                     @Override
                     public void onLocationChanged(Location location) {

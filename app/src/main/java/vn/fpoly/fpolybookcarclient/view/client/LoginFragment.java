@@ -3,6 +3,7 @@ package vn.fpoly.fpolybookcarclient.view.client;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -29,11 +30,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.Objects;
+
 import es.dmoral.toasty.Toasty;
 import vn.fpoly.fpolybookcarclient.library.Dialog;
 import vn.fpoly.fpolybookcarclient.presenter.client.PresenterLogin;
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
+import vn.fpoly.fpolybookcarclient.view.activity.SplashScreenActivity;
 
 public class LoginFragment extends Fragment implements View.OnClickListener ,IViewLogin {
     private Button btnloginHome;
@@ -55,7 +59,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener ,IVi
 
         btnAdd.setOnClickListener(this);
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading");
+        progressDialog.setMessage("Loading...");
         btnloginHome.setOnClickListener(this);
         btnGoogle.setOnClickListener(this);
         btnLoginPhone.setOnClickListener(this);
@@ -175,9 +179,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener ,IVi
     @Override
     public void onSuccess() {
         progressDialog.dismiss();
-        Toasty.success(getActivity(),getActivity().getString(R.string.success),3);
+//        Toasty.success(Objects.requireNonNull(getActivity()),getActivity().getString(R.string.success),3);
         startActivity(new Intent(getActivity(), HomeActivity.class));
-        getActivity().finish();
+//        getActivity().finish();
     }
 
     @Override
@@ -185,7 +189,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener ,IVi
         progressDialog.dismiss();
         Dialog.Error(getActivity(),message);
     }
-
 
 
 
