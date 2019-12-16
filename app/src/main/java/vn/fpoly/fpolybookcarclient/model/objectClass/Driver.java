@@ -1,6 +1,5 @@
 package vn.fpoly.fpolybookcarclient.model.objectClass;
 
-import java.util.concurrent.locks.Condition;
 
 public class Driver implements Comparable<Driver> {
     private String keydriver, email, licenseplate, name, phone,token;

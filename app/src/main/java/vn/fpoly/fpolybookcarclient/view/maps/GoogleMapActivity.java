@@ -44,6 +44,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 import java.util.ArrayList;
@@ -59,10 +60,11 @@ import vn.fpoly.fpolybookcarclient.model.objectClass.Restaurant;
 import vn.fpoly.fpolybookcarclient.presenter.maps.PresenterGoogleMap;
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
+import vn.fpoly.fpolybookcarclient.view.order.ReviewOrderActivity;
 
 
 public class GoogleMapActivity extends AppCompatActivity implements
-        OnMapReadyCallback, View.OnClickListener, ViewGoogleMap,GoogleMap.OnCameraIdleListener {
+        OnMapReadyCallback, View.OnClickListener, ViewGoogleMap, GoogleMap.OnCameraIdleListener {
 
     private GoogleMap googleMap;
     private MapFragment mapFragment;
@@ -104,8 +106,8 @@ public class GoogleMapActivity extends AppCompatActivity implements
         locationLatitude = sharedPreferences.getString("locationlatitude", "");
         locationLongitude = sharedPreferences.getString("locationlongitude", "");
 
+        locationCurrent = new LatLng(Double.parseDouble(locationLatitude), Double.parseDouble(locationLongitude));
         initView();
-        progressDialog.show();
 
         int checkPermissionCoarseLocaltion_COARSE = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
         int checkPermissionCoarseLocaltion_FINE = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
@@ -114,10 +116,29 @@ public class GoogleMapActivity extends AppCompatActivity implements
         } else {
             getLocationClient();
         }
-        LocalBroadcastManager.getInstance(GoogleMapActivity.this).registerReceiver(mMessageReceiver, new IntentFilter("myFunction"));
+        LocalBroadcastManager.getInstance(GoogleMapActivity.this).registerReceiver(mMessageReceiver, new IntentFilter(Constans.REVIEW_ORDER));
 
 
     }
+
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            String idOrder = intent.getStringExtra(Constans.REVIEW_ORDER_ID);
+            String event = intent.getStringExtra(Constans.REVIEW_ORDER_EVENT);
+
+            Log.d("LONgKUTE", "onReceive: " + idOrder + " - " + event);
+
+            Intent review = new Intent(new Intent(GoogleMapActivity.this, ReviewOrderActivity.class));
+            review.putExtra(Constans.REVIEW_ORDER_ID, idOrder);
+            review.putExtra(Constans.REVIEW_ORDER_EVENT, event);
+            startActivity(review);
+
+            finish();
+
+        }
+    };
 
     @TargetApi(Build.VERSION_CODES.M)
     private void initView() {
@@ -151,12 +172,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
 
     }
 
-    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-        }
-    };
 
     private void initEventBookFood() {
         Intent intent = getIntent();
@@ -196,7 +211,8 @@ public class GoogleMapActivity extends AppCompatActivity implements
                 }
             });
             edtLocationCurrent.setText(GeocoderAddress.getAddress(GoogleMapActivity.this, locationCurrent.latitude, locationCurrent.longitude));
-            googleMap.setOnCameraIdleListener(this);
+//            googleMap.setOnCameraIdleListener(this);
+            lisenerCameraMove();
         }
 
         if (locationGo != null && locationCome != null) {
@@ -237,13 +253,15 @@ public class GoogleMapActivity extends AppCompatActivity implements
             }
         });
     }
+
     @SuppressLint("MissingPermission")
-    private void getLocationClient () {
+    private void getLocationClient() {
         String provider = BuildConfig.DEBUG ? LocationManager.GPS_PROVIDER : LocationManager.NETWORK_PROVIDER;
         locationManager.requestLocationUpdates(provider, 5000L
                 , 500.0F, new LocationListener() {
                     @Override
                     public void onLocationChanged(Location location) {
+
 //                        locationCurrent = new LatLng(location.getLatitude(), location.getLongitude());
 //                        if(locationCurrent != null){
 //                            progressDialog.dismiss();
@@ -253,6 +271,15 @@ public class GoogleMapActivity extends AppCompatActivity implements
                         locationCurrent = new LatLng(location.getLatitude(), location.getLongitude());
                         progressDialog.dismiss();
                         mapFragment.getMapAsync(GoogleMapActivity.this);
+
+
+                        if (locationCurrent != null) {
+                            locationCurrent = new LatLng(location.getLatitude(), location.getLongitude());
+                            mapFragment.getMapAsync(GoogleMapActivity.this);
+                        } else {
+                            Toast.makeText(GoogleMapActivity.this, "đéo định vị đc", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
 
                     }
 
@@ -275,17 +302,20 @@ public class GoogleMapActivity extends AppCompatActivity implements
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-            if (requestCode == REQUESCODE) {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getLocationClient();
-                } else {
-                    Toast.makeText(this, "Bạn chưa cấp quyền", Toast.LENGTH_SHORT).show();
-                }
+        if (requestCode == REQUESCODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLocationClient();
+            } else {
+                Toast.makeText(this, "Bạn chưa cấp quyền", Toast.LENGTH_SHORT).show();
             }
         }
 
+
+    }
+
+
     @Override
-    protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUESCODE) {
             if (resultCode == RESULT_OK && data != null) {
@@ -329,11 +359,12 @@ public class GoogleMapActivity extends AppCompatActivity implements
         }
 
     }
+
     @SuppressLint("MissingPermission")
 
 
     @Override
-    public void onClick (View v){
+    public void onClick(View v) {
         switch (v.getId()) {
             case R.id.layoutChooseLocation:
                 Intent intent = new Intent(GoogleMapActivity.this, ChooseLocation_Go_ComeActivity.class);
@@ -349,7 +380,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
         }
     }
 
-    private void checkedChooseVerhical () {
+    private void checkedChooseVerhical() {
         relaLayoutChooseBike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -369,8 +400,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     }
 
 
-
-    private void searchDriverNearLocationGo () {
+    private void searchDriverNearLocationGo() {
         if (CODE_CAR_OR_MOTO == 1) {
             loadDriverMotoList();
         } else if (CODE_CAR_OR_MOTO == 2) {
@@ -382,7 +412,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     }
 
 
-    private void addMarker (LatLng location, String place,int icon){
+    private void addMarker(LatLng location, String place, int icon) {
         googleMap.addMarker(new MarkerOptions()
                 .position(location)
                 .title(place)
@@ -392,14 +422,13 @@ public class GoogleMapActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void drawPolyline (LatLng locationGo, LatLng locationCome,boolean isBookCar){
-
+    public void drawPolyline(LatLng locationGo, LatLng locationCome, boolean isBookCar) {
         presenterGoogleMap.getPolyline(GoogleMapActivity.this, googleMap, locationGo, locationCome, isBookCar);
     }
 
 
     @Override
-    public void loadDriverCarList () {
+    public void loadDriverCarList() {
         findViewById(R.id.chooseservice).setVisibility(View.GONE);
         progressDialog.show();
         presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationGo, true);
@@ -407,7 +436,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
 
 
     @Override
-    public void loadDriverMotoList () {
+    public void loadDriverMotoList() {
         findViewById(R.id.chooseservice).setVisibility(View.GONE);
         progressDialog.show();
         presenterGoogleMap.getDriverList(GoogleMapActivity.this, locationGo, true);
@@ -415,10 +444,17 @@ public class GoogleMapActivity extends AppCompatActivity implements
 
 
     @Override
-    public void getDriverNear ( final Driver driverNear, boolean isbook){
+    public void getDriverNear(final Driver driverNear, boolean isbook) {
         if (driverNear != null) {
             progressDialog.dismiss();
+
            lineInfoDriver.setVisibility(View.VISIBLE);
+
+            findViewById(R.id.layoutInfoDriver).setVisibility(View.VISIBLE);
+            findViewById(R.id.layoutInfoDriver).setClickable(true);
+            findViewById(R.id.layoutInfoDriver).setFocusable(true);
+
+
             txtNameDriver.setText(driverNear.getName());
             txtLicensePlateDriver.setText(driverNear.getLicenseplate());
             rateDriver.setRating((float) driverNear.getRate());
@@ -431,7 +467,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
 
 
             } else {
-                addressCurrent = GeocoderAddress.getAddress(GoogleMapActivity.this,locationCurrent.latitude,locationCurrent.longitude);
+                addressCurrent = GeocoderAddress.getAddress(GoogleMapActivity.this, locationCurrent.latitude, locationCurrent.longitude);
                 presenterGoogleMap.pushOrderFoodToDriver(driverNear, billFoodArrayList, locationCurrent, restaurant, restaurant.getAddress(), addressCurrent, priceOrderFood);
                 imgInfoDriver.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -468,16 +504,16 @@ public class GoogleMapActivity extends AppCompatActivity implements
     }
 
 
-    private void showInfoDriver (Driver driver){
+    private void showInfoDriver(Driver driver) {
         Toast.makeText(this, " " + driver.getDistance(), Toast.LENGTH_SHORT).show();
     }
 
-    private void openPhoneCallDriver (Driver driver){
+    private void openPhoneCallDriver(Driver driver) {
         Toast.makeText(this, "" + driver.getPhone(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void getDriverNearFailed () {
+    public void getDriverNearFailed() {
         new KAlertDialog(GoogleMapActivity.this)
                 .setContentText(getString(R.string.getDriverNearFailed))
                 .setConfirmText("ok")
@@ -489,20 +525,16 @@ public class GoogleMapActivity extends AppCompatActivity implements
                 }).show();
     }
 
-    public void onCameraMoveStarted ( int i){
-    }
 
-
-
-
-    private void getLocationCurrent () {
+    private void getLocationCurrent() {
         googleMap.setMyLocationEnabled(true);
         googleMap.getUiSettings().setMyLocationButtonEnabled(false);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(locationCurrent, 18f);
         googleMap.animateCamera(cameraUpdate);
     }
+
     @Override
-    public void onBackPressed () {
+    public void onBackPressed() {
         if (findViewById(R.id.layoutInfoDriver).getVisibility() == View.VISIBLE) {
             Dialog.Error(GoogleMapActivity.this, "Đã có chuyến xe, k ");
         } else {
@@ -517,7 +549,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
         LatLng center = googleMap.getCameraPosition().target;
         if (center != null && layoutChooseLocation.getVisibility() == View.VISIBLE) {
             locationCurrent = center;
-            addressCurrent = GeocoderAddress.getAddress(GoogleMapActivity.this,locationCurrent.latitude,locationCurrent.longitude);
+            addressCurrent = GeocoderAddress.getAddress(GoogleMapActivity.this, locationCurrent.latitude, locationCurrent.longitude);
             edtLocationCurrent.setText(GeocoderAddress.getAddress(GoogleMapActivity.this, center.latitude, center.longitude));
         }
     }

@@ -16,8 +16,10 @@ public class Constans {
     public static String KEY_BUNDEL_RESTAURANT = "restaurant";
     public static String KEY_BUNDEL_RESTAURANT_DISTANCETO = "restaurant_distanceto";
     public static String KEY_BUNDEL_RESTAURANT_ADDRES_NAME_CURRENT = "restaurant_addres_name_current";
-    public static String KEY_BUNDEL_RESTAURANT_LATITUDE_CURRENT = "restaurant_latitude_current";
-    public static String KEY_BUNDEL_RESTAURANT_LONGITUDE_CURRENT = "restaurant_longitude_current";
+    public static String REVIEW_ORDER = "review_order";
+    public static String REVIEW_ORDER_ID = "review_order_id";
+    public static String REVIEW_ORDER_EVENT = "review_order_event";
+
 
 
 

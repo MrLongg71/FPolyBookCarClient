@@ -44,7 +44,6 @@
                 android:layout_marginTop="3dp"
                 android:layout_toRightOf="@+id/imgMarkerCurrent"
                 android:layout_weight="1"
-                android:text="23/Califo"
                 android:textColor="#000">
 
             </TextView>
@@ -97,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Explore Categories"
+                android:text="@string/explore_categories"
                 android:textColor="#000"
                 android:textSize="18dp">
 
@@ -144,7 +143,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="5dp"
-                        android:text="Check out your food rewards "
+                        android:text="@string/check_out_your_food_rewards"
                         android:textColor="#743B36"
                         android:textStyle="bold">
 
@@ -155,7 +154,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/custom_button_login"
                         android:backgroundTint="@color/fullapp"
-                        android:text="View"
+                        android:text="@string/view"
                         android:textAllCaps="false"
                         android:textColor="#fff">
 
@@ -174,7 +173,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tuần Couple - Giá Giật Gân"
+                    android:text="@string/week_couple_price_splash"
                     android:textColor="#000"
                     android:textSize="18dp">
 
@@ -183,7 +182,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="See all"
+                    android:text="@string/see_all"
                     android:textColor="#09C510"
                     android:textStyle="bold">
 
@@ -227,7 +226,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="What's Good for Breakfast"
+                    android:text="@string/what_s_good_for_breakfast"
                     android:textColor="#000"
                     android:textSize="18dp">
 
@@ -249,7 +248,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Start your day right!">
+                android:text="@string/start_your_day_right">
 
             </TextView>
 

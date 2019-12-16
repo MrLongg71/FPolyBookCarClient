@@ -22,6 +22,7 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import vn.fpoly.fpolybookcarclient.Constans;
 import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.view.activity.SplashScreenActivity;
 
@@ -35,11 +36,13 @@ public class MessagingService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         if (remoteMessage.getData().size() > 0) {
-            Intent intent = new Intent("myFunction");
+            Intent intent = new Intent(Constans.REVIEW_ORDER);
             // add data
-            intent.putExtra("finish", remoteMessage.getData().get("idClient"));
+            intent.putExtra(Constans.REVIEW_ORDER_ID, remoteMessage.getData().get("idOrder"));
+            intent.putExtra(Constans.REVIEW_ORDER_EVENT, remoteMessage.getData().get("event"));
+            Log.d("LongKhoa", "onMessageReceived: "+remoteMessage.getData().get("idOrder"));
             LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-            Log.d("LONgKUTE", "onMessageReceived: "+remoteMessage.getData().get("idClient"));
+
         }
     }
 
@@ -47,7 +50,7 @@ public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onCreate() {
         super.onCreate();
-//        getToken();
+        getToken();
 
     }
 
@@ -71,8 +74,10 @@ public class MessagingService extends FirebaseMessagingService {
 
     private void sendTokenToServer(String s) {
 
+
         try {
             dataDriver.child("Client").child(auth.getCurrentUser().getUid()).child("token").setValue(s);
+
 
         } catch (Exception e) {
 

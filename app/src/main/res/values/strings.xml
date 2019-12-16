@@ -3,10 +3,10 @@
 
     <!--Google Map API-->
 
-    <string name="google_map_api1">AIzaSyAiuTJQXphAGVYtw3zHY_ANAiMEASvEPZY</string>
-    <string name="google_map_api2">AIzaSyBEEZyII00wNkF7Fcm6FXmomWt5A6RaDEo</string>
+    <string name="google_map_api1" translatable="false">AIzaSyAiuTJQXphAGVYtw3zHY_ANAiMEASvEPZY</string>
+    <string name="google_map_api2" translatable="false">AIzaSyBEEZyII00wNkF7Fcm6FXmomWt5A6RaDEo</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="btn_signup">Register</string>
     <string name="btn_login">Log in</string>
     <string name="edtpass">Password</string>
@@ -21,14 +21,14 @@
     <string name="problemcode">Did not recevie SMS?  </string>
     <string name="resendcode">Resend Code?</string>
     <string name="verify">Verify</string>
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="titleedt">Email,Phone Number</string>
+    <string name="title_activity_home" translatable="false">HomeActivity</string>
+    <string name="title_home" translatable="false">Home</string>
+    <string name="title_dashboard" translatable="false">Dashboard</string>
+    <string name="title_notifications" translatable="false">Notifications</string>
+    <string name="titleedt" translatable="false">Email,Phone Number</string>
     <string name="activity">Activity</string>
     <string name="pay">Pay</string>
-    <string name="mailbox">Mail</string>
+    <string name="mailbox" translatable="false">Mail</string>
     <string name="account">Account</string>
     <string name="checkedituser">Please enter a username,phone</string>
     <string name="checkeditpass">Please enter a password</string>
@@ -44,66 +44,16 @@
     <string name="inputsdt">Phone number</string>
     <string name="button">Submit</string>
     <string name="activateaccout">Your account has successfully created</string>
-    <string name="loginsdt">Connect with Phone number </string>
+    <string name="loginsdt" translatable="false">Connect with Phone number </string>
     <string name="caketitle1">Homemade Cake</string>
-    <string name="cakdetaile1">Homemade moon cakes are sold by the seller,
-        not by worker  available on briquettes. Delicious fresh bread, with soft crust and aromatic fillings. You can buy it because it is very good </string>
-    <string name="caketitle2">Givral Cake</string>
-    <string name="cakedetail2"> Givral Cake is a fresh moon cake, has a shelf life of 20 days, is less sweet, the cake is a combination of T
-        Europe and Asia with natural ingredients, cool bar from Blueberry fruit,
-       </string>
-    <string name="caketitle3">Givral Cake</string>
 
-    <string name="cakedetail3">Like Givral moon cake, Brodard also makes high-class moon cake. Brodard moon cake is famous
-        Not only excellent cake quality, but also the market leader in luxurious and classy cake box design.</string>
-    <string name="caketitle4">Lafeve Cake</string>
-    <string name="cakedetail4">A box of cakes has lots of flavors for you to explore. You will love the red apple nest cake, mixed chicken, roasted chicken, red beans, taro, coconut, mix,
-        minh chau, white jade, sa sa, pudding, pudding</string>
-    <string name="caketitle5">Bibica Cake</string>
-    <string name="cakedetail5">BBibica has 2 types of baked goods and cakes, with these products
-        traditional mooncakes like Chinese sausage, roasted chicken, ham, green beans,
-        Green tea lotus seed, coconut milk, taro, mochi</string>
-    <string name="placetitle1">Phố cổ Hà Nội</string>
-    <string name="placedetail1">Phố Cổ có hằng hà sa số những thứ bạn có thể mua về làm quà cho người thân và gia đình:
-        những đồ thủ công..
 
-</string>
-    <string name="placetitle2">Phố cổ Hội An</string>
-    <string name="placedetail2">Khi du lịch Hội An, du khách nên chọn thời điểm khoảng tháng 2 – tháng 4 hàng năm bởi đó là lúc Hội An
-        chiều lòng khách du lịch nhất
-        </string>
-    <string name="placetitle3">Nhà Thờ Đức Bà</string>
-    <string name="placedetail3">Thành phố Hồ Chí Minh nổi tiếng là một thành phố năng
-        động nhiều màu sắc cùng nhiều điểm vui chơi giải trí.
-       </string>
-    <string name="placetitle4">Khui vui chơi giải trí</string>
-    <string name="placedetail4">Khu du lịch tọa lạc trên một vùng đất đồi hình chữ S, rộng 200.000m2, chính giữa có dòng suối với nhiều mạch
-       </string>
-    <string name="placetitle5">Phố đi bộ Nguyễn Huệ</string>
-    <string name="placedetail6">Nếu hiểu một cách đơn giản thì nhiều
-        người vẫn cứ tưởng, Nguyễn Huệ chỉ là một con phố đến để tản bộ,
-        dạo mát ngắm cảnh Sài Gòn. </string>
-    <string name="titlehintfood1">Quán Chay Quan Âm</string>
-    <string name="detailhintfood1"> 137/7 Bình Tiên, quận 6</string>
-    <string name="minutehintfood1">30 minute</string>
-    <string name="titlehintfood2">Sushi Moon</string>
-    <string name="detailhintfood2">60, đường 15 Cư Xá Rada, quận 2</string>
-    <string name="minutehintfood2">22 minute</string>
-    <string name="titlehintfood3">Sườn Cây Nướng  Beer</string>
-    <string name="detailhintfood3">   99 Kinh Dương Vương, quận 5</string>
-    <string name="minutehintfood3">10 minute</string>
-    <string name="titlehintfood4">Gà Nướng Ò Ó O</string>
-    <string name="detailhintfood4">  103 Hậu Giang, quận 10</string>
-    <string name="minutehintfood4">10 minute</string>
-    <string name="titlehintfood5">Ốc 235A</string>
-    <string name="detailhintfood5">235 A Mai Xuân Thưởng, quận 11</string>
-    <string name="minutehintfood5">50 minute</string>
-    <string name="getDriverNearFailed">Hiện tại Tài xế chúng tôi đều đang bận.Vui lòng đặt lại sau.</string>
+    <string name="getDriverNearFailed">We are currently busy with drivers. Please book again later.</string>
     <string name="news">News</string>
-    <string name="increase">+</string>
-    <string name="reduce">-</string>
-    <string name="number_0">0</string>
-    <string name="menu">Menu</string>
+    <string name="increase" translatable="false">+</string>
+    <string name="reduce" translatable="false">-</string>
+    <string name="number_0" translatable="false">0</string>
+    <string name="menu" translatable="false">Menu</string>
 
     <string name="forgot_password">Forgot Password?</string>
     <string name="remmember_me">Remmember me?</string>
@@ -126,6 +76,24 @@
 
     <string name="virify_success">Verify Success</string>
     <string name="virify_failed">Virify failed</string>
+    <string name="car">Car</string>
+    <string name="motorbike">Motorbike</string>
+    <string name="food">Food</string>
+    <string name="gift">Gift</string>
+    <string name="challenge">Challenge</string>
+    <string name="different_types_of_mooncakes">Different Types of Mooncakes</string>
+    <string name="today_eat_what">Today Eat What</string>
+    <string name="explore_categories">Explore Categories</string>
+    <string name="check_out_your_food_rewards">Check out your food rewards</string>
+    <string name="view">View</string>
+    <string name="week_couple_price_splash">Week Couple - Price Splash</string>
+    <string name="see_all">See all</string>
+    <string name="what_s_good_for_breakfast">What\'s Good for Breakfast</string>
+    <string name="start_your_day_right" translatable="false">Start your day right!</string>
+    <string name="order_details">Order Details</string>
+    <string name="delivery_address">Delivery Address</string>
+    <string name="proceed_payment">Order Food</string>
+    <string name="places_with_mid_autum_lanterns">Discover</string>
 
 
 </resources>
