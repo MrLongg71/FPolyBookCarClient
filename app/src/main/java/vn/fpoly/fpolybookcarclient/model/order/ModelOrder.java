@@ -61,12 +61,33 @@ public class ModelOrder {
         };
         dataRoot.addListenerForSingleValueEvent(valueEventListener);
     }
-    public void initSetRatingDriver(double rate, String idDriver, final PresenterOrder presenterOrder){
-        dataRoot.child("Driver").child("Car").child(idDriver).child("rate").setValue(rate).addOnSuccessListener(new OnSuccessListener<Void>() {
+    public void initSetRatingDriver(final String child, double rate, final String idDriver, String idOrder , final PresenterOrder presenterOrder){
+        dataRoot.child(child).child(idDriver).child(idOrder).child("rate").setValue(rate).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+                totalRateDriver(child,idDriver);
                 presenterOrder.resultSetRate(true);
             }
         });
+    }
+    private void totalRateDriver(final String child, final String idDriver){
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               DataSnapshot dataDriver = dataSnapshot.child(child).child(idDriver);
+               double total = 0;
+               for(DataSnapshot value : dataDriver.getChildren()){
+                   total += value.child("rate").getValue(Double.class);
+               }
+               dataRoot.child("Driver").child("Car").child(idDriver).child("rate").setValue(total);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        dataRoot.addListenerForSingleValueEvent(valueEventListener);
     }
 }

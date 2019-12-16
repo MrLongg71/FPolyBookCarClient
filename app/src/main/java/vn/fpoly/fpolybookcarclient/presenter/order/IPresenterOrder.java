@@ -10,7 +10,7 @@ public interface IPresenterOrder {
     void resultDowloadOrderFood(boolean success, OrderFood orderFood, vn.fpoly.fpolybookcarclient.model.objectClass.Driver driver);
     void resultDowloadOrderCar(boolean success, OderCar oderCar, Driver driver);
 
-    void setRateDriver(double rate,String idDriver);
+    void setRateDriver(double rate,String idDriver,String idOrder,String event);
 
     void resultSetRate(boolean success);
 }

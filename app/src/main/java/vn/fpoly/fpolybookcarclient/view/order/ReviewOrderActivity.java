@@ -39,7 +39,6 @@ public class ReviewOrderActivity extends AppCompatActivity implements IViewRevie
         Intent intent = getIntent();
         idOrder = intent.getStringExtra(Constans.REVIEW_ORDER_ID);
         event = intent.getStringExtra(Constans.REVIEW_ORDER_EVENT);
-        Log.d("LONgKUTE", "onReceive: " + idOrder + " - " + event);
 
         txtNameDriverRV = findViewById(R.id.txtNameDriverRV);
         txtLicenseDriverRV = findViewById(R.id.txtLicenseDriverRV);
@@ -55,25 +54,23 @@ public class ReviewOrderActivity extends AppCompatActivity implements IViewRevie
 
     @Override
     public void onSuccessFood(OrderFood orderFood, Driver driver) {
-        Log.d("LONgKUTE", "onSuccessFood: ");
         txtNameDriverRV.setText(driver.getName());
         txtLicenseDriverRV.setText(driver.getLicenseplate());
         txtPlaceComeRV.setText(orderFood.getPlaceNameC());
         txtPlaceGoRV.setText(orderFood.getPlaceNameRes());
         txtPriceRV.setText(orderFood.getPrice() + " VND");
-        onReview(orderFood.getKeyDriver());
+        onReview(orderFood.getKeyDriver(),idOrder);
 
     }
 
     @Override
     public void onSuccessCar(OderCar oderCar, Driver driver) {
-        Log.d("LONgKUTE", "onSuccessCar: ");
         txtNameDriverRV.setText(driver.getName());
         txtLicenseDriverRV.setText(driver.getLicenseplate());
         txtPlaceComeRV.setText(oderCar.getPlacenamecome());
         txtPlaceGoRV.setText(oderCar.getPlacenamego());
         txtPriceRV.setText(oderCar.getPrice() + " VND");
-        onReview(oderCar.getKeydriver());
+        onReview(oderCar.getKeydriver(),idOrder);
     }
 
     @Override
@@ -86,11 +83,11 @@ public class ReviewOrderActivity extends AppCompatActivity implements IViewRevie
         finish();
     }
 
-    private void onReview(final String idDriver){
+    private void onReview(final String idDriver, final String idOrder){
         btnReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenterOrder.setRateDriver(rateRV.getRating(),idDriver);
+                presenterOrder.setRateDriver(rateRV.getRating(),idDriver,idOrder,event);
             }
         });
     }

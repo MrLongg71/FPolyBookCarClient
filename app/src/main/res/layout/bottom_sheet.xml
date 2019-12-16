@@ -77,6 +77,9 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:textSize="15sp"
+                android:textColor="#444"
+                android:layout_marginTop="5dp"
                 android:id="@+id/txtAddressOrderDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
