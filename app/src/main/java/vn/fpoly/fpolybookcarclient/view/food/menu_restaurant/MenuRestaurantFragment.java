@@ -47,6 +47,7 @@ import vn.fpoly.fpolybookcarclient.R;
 import vn.fpoly.fpolybookcarclient.adapter.food.RestaurantMenuFoodAdapter;
 import vn.fpoly.fpolybookcarclient.adapter.food.RestaurantMenuFoodCartItemAdapter;
 import vn.fpoly.fpolybookcarclient.library.CallBackFragment;
+import vn.fpoly.fpolybookcarclient.library.GeocoderAddress;
 import vn.fpoly.fpolybookcarclient.model.objectClass.BillFood;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Driver;
 import vn.fpoly.fpolybookcarclient.model.objectClass.FoodMenu;
@@ -62,7 +63,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, CallbackRestaurantMenuFood, CallbackRestaurantMenuFoodCartItem {
 
     private ImageView imgBackgroundMenuRes;
-    private TextView txtStartMenuRes, txtTimeMenuRes, txtDistanceMenuRes, txtTotalPriceCart,txtDetailRestaurant;
+    private TextView txtStartMenuRes, txtTimeMenuRes, txtDistanceMenuRes, txtTotalPriceCart, txtDetailRestaurant, txtAddressOrderDetails;
     private Button btnBookFoodMenuRes;
     private RecyclerView recyclerviewMenuRestaurant, recyclerItemCartFoodMenuRes;
     private PresenterMenuRes presenterMenuRes;
@@ -73,12 +74,13 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
     private ArrayList<BillFood> billFoodArrayList = new ArrayList<>();
     private BottomSheetBehavior bottomSheetBehavior;
     private int amount = 0;
+    private String address = "";
     private NestedScrollView nestedScrollMenuFoodRes;
     private RestaurantMenuFoodCartItemAdapter restaurantMenuFoodCartItemAdapter;
     private PresenterGoogleMap presenterGoogleMap;
-    private LatLng locationRes,locationCurrent;
+    private LatLng locationRes, locationCurrent;
     private String addresCurrent = "";
-    private  int priceTotal = 0;
+    private int priceTotal = 0;
     private ProgressDialog progressDialog;
     private SearchView searchView;
     private   RestaurantMenuFoodAdapter restaurantMenuFoodAdapter;
@@ -100,7 +102,7 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
         setHasOptionsMenu(true);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setDisplayShowHomeEnabled(true);
-        CallBackFragment.callBackpress(view,getActivity().getSupportFragmentManager());
+        CallBackFragment.callBackpress(view, getActivity().getSupportFragmentManager());
         toolbarMenuRes.setNavigationOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,7 +119,7 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
         btnBookFoodMenuRes = view.findViewById(R.id.btnBookFoodMenuRes);
         recyclerviewMenuRestaurant = view.findViewById(R.id.reycelviewMenuRestaurant);
         nestedScrollMenuFoodRes = view.findViewById(R.id.nestedScrollMenuFoodRes);
-        txtDetailRestaurant     = view.findViewById(R.id.txtDetailRestaurant);
+        txtDetailRestaurant = view.findViewById(R.id.txtDetailRestaurant);
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading");
         presenterMenuRes = new PresenterMenuRes(this);
@@ -127,6 +129,7 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
         initEvent();
         LinearLayout linearLayoutBottomSheet = view.findViewById(R.id.layout_bottom_sheet);
         txtTotalPriceCart = view.findViewById(R.id.txtTotalPriceCart);
+        txtAddressOrderDetails = view.findViewById(R.id.txtAddressOrderDetails);
         bottomSheetBehavior = BottomSheetBehavior.from(linearLayoutBottomSheet);
         recyclerItemCartFoodMenuRes = view.findViewById(R.id.recyclerItemCartFoodMenuRes);
         linearLayoutBottomSheet.setClickable(true);
@@ -154,7 +157,6 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
             addresCurrent = bundle.getString(Constans.KEY_BUNDEL_RESTAURANT_ADDRES_NAME_CURRENT);
             SharedPreferences sharedPreferences = getActivity().getSharedPreferences("toado", 0);
             locationCurrent = new LatLng(Double.parseDouble(sharedPreferences.getString("locationlatitude", "")), Double.parseDouble(sharedPreferences.getString("locationlongitude", "")));
-
         }
 
     }
@@ -249,31 +251,29 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
     }
 
     private void addToCart(FoodMenu foodMenu) {
-            foodMenuListCart.add(foodMenu);
-            if(billFoodArrayList.size() ==0){
-                billFoodArrayList.add(new BillFood("", foodMenu.getKeyfood(), 1));
-            }else {
-                for(BillFood billFood : billFoodArrayList){
-                    if(foodMenu.getKeyfood().equals(billFood.getKeyFood())){
-                        Log.d("LONgKUTE", "addToCart: aa");
-                        billFood.setAmountBuy(billFood.getAmountBuy() + 1);
-                        break;
-                    }else {
-                        Log.d("LONgKUTE", "addToCart: cc");
-
-                        billFoodArrayList.add(new BillFood("", foodMenu.getKeyfood(), 1));
-                    }
+        foodMenuListCart.add(foodMenu);
+        if (billFoodArrayList.size() == 0) {
+            billFoodArrayList.add(new BillFood("", foodMenu.getKeyfood(), 1));
+        } else {
+            for (BillFood billFood : billFoodArrayList) {
+                if (foodMenu.getKeyfood().equals(billFood.getKeyFood())) {
+                    billFood.setAmountBuy(billFood.getAmountBuy() + 1);
+                    break;
+                } else {
+                    billFoodArrayList.add(new BillFood("", foodMenu.getKeyfood(), 1));
                 }
             }
+        }
 
-            setTotalCart();
-            LayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
-            recyclerItemCartFoodMenuRes.setLayoutManager(layoutManager);
+        setTotalCart();
+        LayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
+        recyclerItemCartFoodMenuRes.setLayoutManager(layoutManager);
 
-            restaurantMenuFoodCartItemAdapter = new RestaurantMenuFoodCartItemAdapter(getActivity(), R.layout.custom_item_menu_res_cart, foodMenuListCart, billFoodArrayList, this);
-            recyclerItemCartFoodMenuRes.setAdapter(restaurantMenuFoodCartItemAdapter);
-            restaurantMenuFoodCartItemAdapter.notifyDataSetChanged();
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        restaurantMenuFoodCartItemAdapter = new RestaurantMenuFoodCartItemAdapter(getActivity(), R.layout.custom_item_menu_res_cart, foodMenuListCart, billFoodArrayList, this);
+        recyclerItemCartFoodMenuRes.setAdapter(restaurantMenuFoodCartItemAdapter);
+        restaurantMenuFoodCartItemAdapter.notifyDataSetChanged();
+        txtAddressOrderDetails.setText(addresCurrent);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
     }
 
@@ -328,13 +328,13 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
             @Override
             public void onClick(View view) {
                 progressDialog.show();
-                Intent intent  = new Intent(getActivity(),GoogleMapActivity.class);
+                Intent intent = new Intent(getActivity(), GoogleMapActivity.class);
 
                 Bundle bundle = new Bundle();
                 bundle.putParcelableArrayList(Constans.KEY_ORDERFOOD_BILLLIST, billFoodArrayList);
                 bundle.putParcelable(Constans.KEY_ORDERFOOD_RESTAURANT, restaurant);
-                bundle.putString(Constans.KEY_ORDERFOOD_ADDRES_CURRENT,addresCurrent);
-                bundle.putInt(Constans.KEY_ORDERFOOD_PRICE,priceTotal);
+                bundle.putString(Constans.KEY_ORDERFOOD_ADDRES_CURRENT, addresCurrent);
+                bundle.putInt(Constans.KEY_ORDERFOOD_PRICE, priceTotal);
                 intent.putExtras(bundle);
                 startActivity(intent);
 

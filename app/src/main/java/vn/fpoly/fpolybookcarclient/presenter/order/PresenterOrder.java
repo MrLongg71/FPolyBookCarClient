@@ -18,7 +18,7 @@ public class PresenterOrder implements IPresenterOrder {
 
     @Override
     public void getOrder(String idOrder, String event) {
-        if(event.equals("1")){
+        if(event.equals("2")){
             modelOrder.dowloadOrderFoodReview(idOrder,"OrderFoodClient",this);
         }else {
             modelOrder.dowloadOrderCarReview(idOrder,"OrderCarClient",this);
@@ -45,8 +45,14 @@ public class PresenterOrder implements IPresenterOrder {
     }
 
     @Override
-    public void setRateDriver(double rate, String idDriver) {
-        modelOrder.initSetRatingDriver(rate,idDriver,this);
+    public void setRateDriver(double rate, String idDriver,String idOrder,String event) {
+        if(event.equals("1")){
+            modelOrder.initSetRatingDriver("Order",rate,idDriver,idOrder,this);
+        }else{
+            modelOrder.initSetRatingDriver("OrderFood",rate,idDriver,idOrder,this);
+
+        }
+
     }
 
     @Override
