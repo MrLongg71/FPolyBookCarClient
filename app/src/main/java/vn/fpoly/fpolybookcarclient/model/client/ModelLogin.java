@@ -41,7 +41,7 @@ public class ModelLogin {
 
                         }
                     };
-                    databaseReference.addValueEventListener(valueEventListener);
+                    databaseReference.addListenerForSingleValueEvent(valueEventListener);
                 } else {
                     presenterLogin.resultSignIn(false, task.getException().getMessage());
                 }

@@ -37,7 +37,7 @@
                     android:background="@drawable/custom_promo"
                     android:padding="10dp"
                     android:backgroundTint="@color/fullapp"
-                    android:text="Order Details"
+                    android:text="@string/order_details"
                     android:textColor="#FFFFFF"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -48,7 +48,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:text="0"
                     android:textColor="@color/fullapp"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -73,14 +72,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Delivery Address"
+                android:text="@string/delivery_address"
                 android:textColor="#444"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/txtAddressOrderDetails"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Flat No 404, Skyline Apartments, Vizag - 500576" />
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/btnBookFoodMenuRes"
@@ -91,7 +90,7 @@
                 android:background="@drawable/custom_button_bookcar"
                 android:foreground="?attr/selectableItemBackground"
                 android:padding="10dp"
-                android:text="PROCEED PAYMENT"
+                android:text="@string/proceed_payment"
                 android:textColor="#fff" />
 
         </LinearLayout>

@@ -77,7 +77,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, IVie
         layoutChooseFoodHome.setOnClickListener(this);
         layoutChooseBikeHome.setOnClickListener(this);
         layoutChooseGiftHome.setOnClickListener(this);
-        getToken();
 
         return view;
     }
@@ -142,9 +141,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, IVie
 
         }
     }
-    private void getToken() {
-        getActivity().startService(new Intent(getActivity(), MessagingService.class));
-    }
+
 
     private void creatOptionMenu1() {
         PopupMenu popupMenu = new PopupMenu(getActivity(), txtOverFlowMenuChallenge);

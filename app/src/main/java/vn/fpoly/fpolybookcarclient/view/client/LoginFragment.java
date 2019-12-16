@@ -98,7 +98,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener ,IVi
     }
 
     private void loginClientWithPhone() {
-        startActivity(new Intent(getActivity(), LoginSMSActivity.class));
+//        startActivity(new Intent(getActivity(), LoginSMSActivity.class));
     }
 
 
@@ -175,7 +175,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener ,IVi
     @Override
     public void onSuccess() {
         progressDialog.dismiss();
-        Toasty.success(getActivity(),getActivity().getString(R.string.success),3);
         startActivity(new Intent(getActivity(), HomeActivity.class));
         getActivity().finish();
     }

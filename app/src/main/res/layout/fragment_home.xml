@@ -94,7 +94,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="Car"
+                                    android:text="@string/car"
                                     android:textColor="#000000" />
                             </LinearLayout>
 
@@ -118,7 +118,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="Motorbike"
+                                    android:text="@string/motorbike"
                                     android:textColor="#000000" />
                             </LinearLayout>
 
@@ -142,7 +142,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="Food"
+                                    android:text="@string/food"
                                     android:textColor="#000000" />
                             </LinearLayout>
 
@@ -166,7 +166,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="Gift"
+                                    android:text="@string/gift"
                                     android:textColor="#000000" />
                             </LinearLayout>
 
@@ -192,7 +192,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:padding="10dp"
-                android:text="Challenge"
+                android:text="@string/challenge"
                 android:textColor="#000000" />
 
             <TextView
@@ -241,7 +241,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:padding="10dp"
-                android:text="Different Types of Mooncakes"
+                android:text="@string/different_types_of_mooncakes"
                 android:textColor="#000000" />
 
             <TextView
@@ -298,7 +298,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:padding="10dp"
-                android:text="Places with Mid-Autum Lanterns"
+                android:text="@string/places_with_mid_autum_lanterns"
                 android:textColor="#000000" />
 
 
@@ -408,7 +408,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:text="Today Eat What"
+            android:text="@string/today_eat_what"
             android:textColor="#000000" />
 
         <FrameLayout
