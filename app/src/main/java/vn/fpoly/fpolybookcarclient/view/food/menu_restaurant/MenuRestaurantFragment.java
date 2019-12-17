@@ -55,6 +55,7 @@ import vn.fpoly.fpolybookcarclient.model.objectClass.Restaurant;
 import vn.fpoly.fpolybookcarclient.presenter.food.menu_restaurant.PresenterMenuRes;
 import vn.fpoly.fpolybookcarclient.presenter.maps.PresenterGoogleMap;
 import vn.fpoly.fpolybookcarclient.view.activity.HomeActivity;
+import vn.fpoly.fpolybookcarclient.view.food.food_home.FoodFragment;
 import vn.fpoly.fpolybookcarclient.view.maps.GoogleMapActivity;
 import vn.fpoly.fpolybookcarclient.view.maps.ViewGoogleMap;
 
@@ -147,7 +148,7 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
             toolbarMenuRes.setTitle(restaurant.getName());
             String distance = bundle.getString(Constans.KEY_BUNDEL_RESTAURANT_DISTANCETO);
             assert distance != null;
-            double time = 2.5 * Double.parseDouble(distance);
+            String  time = String.valueOf(2.5 * distance.length());
             txtTimeMenuRes.setText((time + ""));
             txtStartMenuRes.setText(restaurant.getRate() + "");
             txtDistanceMenuRes.setText(distance + " km");
@@ -166,7 +167,6 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
     public void displayListMenuFood(ArrayList<FoodMenu> foodMenulist) {
         LayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         recyclerviewMenuRestaurant.setLayoutManager(layoutManager);
-
          restaurantMenuFoodAdapter = new RestaurantMenuFoodAdapter(getActivity(), R.layout.custom_item_menu_res, foodMenulist, this);
         recyclerviewMenuRestaurant.setAdapter(restaurantMenuFoodAdapter);
         restaurantMenuFoodAdapter.notifyDataSetChanged();
@@ -340,8 +340,12 @@ public class MenuRestaurantFragment extends Fragment implements IViewMenuRes, Ca
 
             }
         });
-
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("LongKhoa", "onResume: ");
+//       getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.conten,new FoodFragment()).commit();
+    }
 }

@@ -24,6 +24,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -73,7 +74,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     private final int REQUESCODE = 1;
     private TextView txtMotoMoney, txtCarMoney, txtDistanceTime, txtNameDriver, txtLicensePlateDriver;
     private CircleImageView imgDriver;
-    private ImageView imgSMSDriver, imgPhoneDriver, imgInfoDriver, imgCancelDriver;
+    private ImageView imgSMSDriver, imgPhoneDriver, imgCancelDriver;
     private RatingBar rateDriver;
     private LocationManager locationManager;
     private LinearLayout layoutChooseLocation,lineInfoDriver;
@@ -101,6 +102,7 @@ public class GoogleMapActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_map);
+        GoogleMapActivity.this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         sharedPreferences = getSharedPreferences("toado", 0);
 
         locationLatitude = sharedPreferences.getString("locationlatitude", "");
@@ -156,7 +158,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
         rateDriver = findViewById(R.id.ratingbarShow);
         imgSMSDriver = findViewById(R.id.imgSMSDriver);
         imgPhoneDriver = findViewById(R.id.imgPhoneDriver);
-        imgInfoDriver = findViewById(R.id.imgInfoDriver);
         imgCancelDriver = findViewById(R.id.imgCancelDriver);
         progressDialog = new ProgressDialog(GoogleMapActivity.this);
         progressDialog.setMessage("Loading");
@@ -262,12 +263,6 @@ public class GoogleMapActivity extends AppCompatActivity implements
                     @Override
                     public void onLocationChanged(Location location) {
 
-//                        locationCurrent = new LatLng(location.getLatitude(), location.getLongitude());
-//                        if(locationCurrent != null){
-//                            progressDialog.dismiss();
-//                            mapFragment.getMapAsync(GoogleMapActivity.this);
-//
-//                        }
                         locationCurrent = new LatLng(location.getLatitude(), location.getLongitude());
                         progressDialog.dismiss();
                         mapFragment.getMapAsync(GoogleMapActivity.this);
@@ -461,25 +456,29 @@ public class GoogleMapActivity extends AppCompatActivity implements
             locationDriverCar = new LatLng(driverNear.getLatitude(), driverNear.getLongitude());
             mapFragment.getMapAsync(this);
             if (isbook) {
-                lineInfoDriver.setFocusable(true);
-                lineInfoDriver.setClickable(true);
+//                lineInfoDriver.setFocusable(true);
+//                lineInfoDriver.setClickable(true);
                 presenterGoogleMap.pushOrderToDriver(driverNear, locationGo, locationCome, placeNameGo, placeNameCome);
 
 
             } else {
                 addressCurrent = GeocoderAddress.getAddress(GoogleMapActivity.this, locationCurrent.latitude, locationCurrent.longitude);
                 presenterGoogleMap.pushOrderFoodToDriver(driverNear, billFoodArrayList, locationCurrent, restaurant, restaurant.getAddress(), addressCurrent, priceOrderFood);
-                imgInfoDriver.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (driverNear != null) {
-                            showInfoDriver(driverNear);
-                        }
-                    }
-                });
+//                imgInfoDriver.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (driverNear != null) {
+//                            showInfoDriver(driverNear);
+//                        }
+//                    }
+//                });
+
                 imgPhoneDriver.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Log.d("aiii1","fff");
+
+                        Toast.makeText(GoogleMapActivity.this, "a", Toast.LENGTH_SHORT).show();
                         if (driverNear != null) {
                             openPhoneCallDriver(driverNear);
                         }

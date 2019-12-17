@@ -12,6 +12,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.ybq.android.spinkit.SpinKitView;
+
 import java.util.ArrayList;
 
 
@@ -28,13 +30,12 @@ public class HistoryFragment extends Fragment implements IVIewHistoryOrder {
     private HistoryCarAdapter historyCarAdapter;
     private HistoryFoodAdapter historyFoodAdapter;
     private FragmentManager fragmentManager;
-
+    private SpinKitView progressOrderFood,progressOrderCar;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activity, container, false);
-        recyclerViewHistoryOrderCar = view.findViewById(R.id.recyclerViewHistoryOrderCar);
-        recyclerViewHistoryOrderFood = view.findViewById(R.id.recyclerViewHistoryOrderFood);
+        initView(view);
         fragmentManager = getActivity().getSupportFragmentManager();
         CallBackFragment.CallbackHome(view,fragmentManager);
         PresenterHistoryOrder presenterHistoryOrder = new PresenterHistoryOrder(this);
@@ -43,10 +44,18 @@ public class HistoryFragment extends Fragment implements IVIewHistoryOrder {
 
         return view;
     }
+    private void initView(View view){
+        recyclerViewHistoryOrderCar = view.findViewById(R.id.recyclerViewHistoryOrderCar);
+        recyclerViewHistoryOrderFood = view.findViewById(R.id.recyclerViewHistoryOrderFood);
+        progressOrderCar             = view.findViewById(R.id.progressbarOrderCar);
+        progressOrderFood               = view.findViewById(R.id.progressbarOrderFood);
+    }
 
     @Override
     public void displayListOrder(ArrayList<OderCar> oderCars, ArrayList<OrderFood> orderFoods) {
         recyclerViewHistoryOrderCar.setHasFixedSize(true);
+        progressOrderFood.setVisibility(View.GONE);
+        progressOrderCar.setVisibility(View.GONE);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false);
         recyclerViewHistoryOrderCar.setLayoutManager(layoutManager);
         historyCarAdapter = new HistoryCarAdapter(getActivity(),R.layout.custom_item_history_order,oderCars);

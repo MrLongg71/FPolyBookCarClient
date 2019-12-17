@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -60,6 +61,7 @@ public class RestaurantMenuFoodCartItemAdapter extends RecyclerView.Adapter<Rest
         holder.txtIncrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
                 cartItem.initIncreasing(position,holder.txtNumberCart);
             }
         });

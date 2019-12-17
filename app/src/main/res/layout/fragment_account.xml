@@ -95,63 +95,6 @@
 
         </View>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:gravity="center">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="HISTORY" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="50"
-                    android:textColor="#FF004F"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="2dp"
-                android:layout_height="40dp"
-                android:background="#ccc">
-
-            </View>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="POINT" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1000"
-                    android:textColor="#FF004F"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-
-        </LinearLayout>
         <Button
             android:id="@+id/btnUpdateAccount"
             android:layout_margin="10dp"

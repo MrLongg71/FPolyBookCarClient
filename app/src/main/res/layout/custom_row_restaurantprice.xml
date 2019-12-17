@@ -113,8 +113,8 @@
                         android:layout_marginLeft="10dp"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:textColor="#FF0018"
                         android:maxLength="30"
+                        android:textColor="#FF0018"
                         android:text="gfdsa"
                         android:textStyle="bold">
 

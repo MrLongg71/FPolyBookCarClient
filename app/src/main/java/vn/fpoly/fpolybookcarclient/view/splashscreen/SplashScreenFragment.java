@@ -53,7 +53,7 @@ public class SplashScreenFragment extends Fragment implements View.OnClickListen
     private void loadFragment(Fragment fragment) {
         if (fragment != null) {
             getFragmentManager().beginTransaction().replace(R.id.frame_client, fragment).addToBackStack(null).commit();
-            getActivity().overridePendingTransition(R.anim.animation_enter, R.anim.fade_in);
+            getActivity().overridePendingTransition(R.anim.animation_enter, R.anim.fadein_transalte);
         }
     }
 

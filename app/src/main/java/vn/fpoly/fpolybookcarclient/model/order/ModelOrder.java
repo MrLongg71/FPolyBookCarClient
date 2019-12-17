@@ -26,7 +26,6 @@ public class ModelOrder {
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d("LongKhoa", "onDataChange: " + idOrder);
                 DataSnapshot dataOrderFood = dataSnapshot.child(child).child(auth.getCurrentUser().getUid()).child(idOrder);
                 OrderFood orderFood = dataOrderFood.getValue(OrderFood.class);
                 DataSnapshot valueDriver = dataSnapshot.child("Driver").child("Car").child(orderFood.getKeyDriver());

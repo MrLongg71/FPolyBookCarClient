@@ -99,6 +99,8 @@
         android:id="@+id/rateRV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize=".5"
         android:layout_gravity="center"
         android:layout_marginTop="10dp" />
 

@@ -94,6 +94,10 @@
     <string name="delivery_address">Delivery Address</string>
     <string name="proceed_payment">Order Food</string>
     <string name="places_with_mid_autum_lanterns">Discover</string>
+    <string name="vngobike">VNGoBike</string>
+    <string name="vngocar">VNGoCar</string>
+    <string name="_4_seats">4 seats</string>
+    <string name="_2_seats">2 seats</string>
 
 
 </resources>

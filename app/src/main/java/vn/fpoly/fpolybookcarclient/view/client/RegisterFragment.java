@@ -17,14 +17,14 @@ import android.widget.ImageView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import vn.fpoly.fpolybookcarclient.library.CallBackFragment;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Client;
 import vn.fpoly.fpolybookcarclient.presenter.client.PresenterRegister;
 import vn.fpoly.fpolybookcarclient.R;
 
 
 public class RegisterFragment extends Fragment implements View.OnClickListener, IViewRegister {
-    private TextInputEditText edtPhone, edtName, edtPassword, edtEmail;
-    private EditText edtcoutry;
+    private EditText edtPhone, edtName, edtPassword, edtEmail;
     private Button btnRegister;
     private ImageView imgBackBtnRegister;
     private PresenterRegister presenterSignUp;
@@ -41,8 +41,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
         initView(view);
+        CallBackFragment.callBackpress(view,getActivity().getSupportFragmentManager());
 
-        edtcoutry.setFocusable(false);
+
         btnRegister.setOnClickListener(this);
 
         return view;
@@ -55,8 +56,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         edtPassword         = view.findViewById(R.id.edtPassRegister);
         edtEmail            = view.findViewById(R.id.edtEmailRegister);
         btnRegister         = view.findViewById(R.id.btnRegister);
-
-        imgBackBtnRegister  = view.findViewById(R.id.imgBackRegister);
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading");
 

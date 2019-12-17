@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -72,6 +74,8 @@ public class RestaurantMenuFoodAdapter extends RecyclerView.Adapter<RestaurantMe
 
             }
         });
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.fadein);
+        holder.layoutItemMenuFoodRes.startAnimation(animation);
     }
 
     @Override

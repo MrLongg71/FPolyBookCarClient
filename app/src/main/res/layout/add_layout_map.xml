@@ -65,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="15dp"
-                        android:src="@drawable/rsz_iconmotomap" />
+                        android:src="@drawable/iconm" />
 
                     <TextView
                         android:id="@+id/txttitleMotoMap"
@@ -74,7 +74,7 @@
 
                         android:layout_marginTop="15dp"
                         android:layout_toRightOf="@+id/imgIconMotoMap"
-                        android:text="GrabCar"
+                        android:text="@string/vngobike"
                         android:textStyle="bold" />
 
                     <TextView
@@ -84,7 +84,7 @@
                         android:layout_below="@+id/txttitleMotoMap"
                         android:layout_marginTop="5dp"
                         android:layout_toRightOf="@+id/imgIconMotoMap"
-                        android:text=" 4 chỗ" />
+                        android:text="@string/_2_seats" />
 
 
 
@@ -115,7 +115,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="15dp"
-                            android:src="@drawable/rsz_iconcarmapp" />
+                            android:src="@drawable/iconc" />
 
                         <TextView
                             android:id="@+id/txttitleCarMap"
@@ -123,7 +123,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
                             android:layout_toRightOf="@+id/imgIconCarMap"
-                            android:text="GrabCar"
+                            android:text="@string/vngocar"
                             android:textStyle="bold" />
 
                         <TextView
@@ -133,7 +133,7 @@
                             android:layout_below="@+id/txttitleCarMap"
                             android:layout_marginTop="5dp"
                             android:layout_toRightOf="@+id/imgIconCarMap"
-                            android:text=" 4 chỗ" />
+                            android:text="@string/_4_seats" />
 
 
                         <TextView

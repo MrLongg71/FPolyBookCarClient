@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:overScrollMode="always"
     android:layout_height="match_parent">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,7 +19,7 @@
             android:fontFamily="serif"
             android:text="My Activity"
             android:textColor="#1c1c1c"
-            android:textSize="45dp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <TextView
@@ -27,7 +28,7 @@
             android:layout_margin="10dp"
             android:gravity="center"
             android:text="See more"
-            android:textColor="#2DB5D7"
+            android:textColor="@color/fullapp"
             android:textSize="15dp"
             android:textStyle="bold" />
 
@@ -50,17 +51,33 @@
                     android:padding="5dp"
                     android:text="@string/order_car"
                     android:textColor="#000000"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:background="#cccc" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewHistoryOrderCar"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewHistoryOrderCar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <com.github.ybq.android.spinkit.SpinKitView
+                        android:id="@+id/progressbarOrderCar"
+                        style="@style/SpinKitView.Wave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        app:SpinKit_Color="@color/tim" />
+                </FrameLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -70,20 +87,39 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:padding="5dp"
                     android:text="@string/order_food"
                     android:textColor="#000000"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:background="#cccc" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewHistoryOrderFood"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewHistoryOrderFood"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" />
+
+                    <com.github.ybq.android.spinkit.SpinKitView
+                        android:id="@+id/progressbarOrderFood"
+                        style="@style/SpinKitView.Wave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        app:SpinKit_Color="@color/tim" />
+                </FrameLayout>
             </LinearLayout>
 
         </LinearLayout>
@@ -91,5 +127,5 @@
 
     </LinearLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>
 

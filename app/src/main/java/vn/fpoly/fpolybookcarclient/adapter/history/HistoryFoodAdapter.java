@@ -4,10 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -41,7 +45,8 @@ public class HistoryFoodAdapter extends RecyclerView.Adapter<HistoryFoodAdapter.
         holder.txtTimeOrder.setText(orderFood.getDate());
         holder.txtPlaceComeOrder.setText(orderFood.getPlaceNameRes());
         holder.txtPriceOrder.setText(orderFood.getPrice()+"");
-
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.fadein_transalte);
+        holder.lineOrder.startAnimation(animation);
     }
 
     @Override
@@ -51,9 +56,11 @@ public class HistoryFoodAdapter extends RecyclerView.Adapter<HistoryFoodAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
+        CardView lineOrder;
         TextView txtTimeOrder,txtPlaceComeOrder,txtPriceOrder;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            lineOrder           = itemView.findViewById(R.id.lineOrder);
 //            imageView       = itemView.findViewById(R.id.imgIconCarHistory);
             txtTimeOrder         = itemView.findViewById(R.id.txtTimeOrder);
             txtPlaceComeOrder       = itemView.findViewById(R.id.txtPlaceComeOrder);

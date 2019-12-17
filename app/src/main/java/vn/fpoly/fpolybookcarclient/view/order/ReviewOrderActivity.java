@@ -6,12 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.developer.kalert.KAlertDialog;
+
 import vn.fpoly.fpolybookcarclient.Constans;
 import vn.fpoly.fpolybookcarclient.R;
+import vn.fpoly.fpolybookcarclient.library.Dialog;
 import vn.fpoly.fpolybookcarclient.model.objectClass.Driver;
 import vn.fpoly.fpolybookcarclient.model.objectClass.OderCar;
 import vn.fpoly.fpolybookcarclient.model.objectClass.OrderFood;
@@ -29,6 +33,7 @@ public class ReviewOrderActivity extends AppCompatActivity implements IViewRevie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_order);
+        ReviewOrderActivity.this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         initView();
         presenterOrder.getOrder(idOrder,event);
 
@@ -88,6 +93,18 @@ public class ReviewOrderActivity extends AppCompatActivity implements IViewRevie
             @Override
             public void onClick(View view) {
                 presenterOrder.setRateDriver(rateRV.getRating(),idDriver,idOrder,event);
+                KAlertDialog pDialog = new KAlertDialog(ReviewOrderActivity.this, KAlertDialog.SUCCESS_TYPE);
+                pDialog .setTitleText("Success!");
+                pDialog .setContentText("Your review has been submitted successfully!");
+                pDialog.setConfirmText("OK");
+                pDialog.setConfirmClickListener(new KAlertDialog.KAlertClickListener() {
+                    @Override
+                    public void onClick(KAlertDialog kAlertDialog) {
+                        finish();
+                    }
+                });
+                pDialog .show();
+
             }
         });
     }
