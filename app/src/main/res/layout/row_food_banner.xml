@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="350dp"
+        android:padding="10dp"
+        android:layout_height="wrap_content"
+       >
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/imgItemFood"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                app:riv_corner_radius="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/rsz_backgroudhome" />
+
+            <TextView
+                android:id="@+id/txttitleFoodItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imgItemFood"
+                android:layout_margin="8dp"
+                android:text="Snowskin mooncake"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/txtDetaiFoodItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txttitleFoodItem"
+                android:layout_margin="8dp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txtBookNow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtDetaiFoodItem"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="Book now"
+                android:textColor="#219BCC"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/lineview"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/txtBookNow"
+                android:layout_margin="8dp"
+                android:background="@android:color/black" />
+
+            <ToggleButton
+                android:id="@+id/toglelikeFood"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/lineview"
+                android:layout_margin="8dp"
+                android:background="@drawable/custom_checklike"
+                android:textOff=""
+                android:textOn="" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+

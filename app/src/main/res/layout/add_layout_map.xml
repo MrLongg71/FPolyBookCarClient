@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card2"
+        app:cardElevation="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/relative1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgIconHintMap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/rsz_1hinticonmap" />
+
+                <TextView
+                    android:id="@+id/txtDistanceTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_toRightOf="@id/imgIconHintMap"
+                    android:text="Bạn sẽ đi 10 km và mất khoảng 10 phút"
+                    android:textColor="#000000"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/txtHintMap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgIconHintMap"
+                    android:layout_margin="10dp"
+                    android:text="Gợi ý dịch vụ"
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
+
+                <RelativeLayout
+                    android:id="@+id/relaLayoutChooseBike"
+                    android:layout_below="@id/txtHintMap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+                    <ImageView
+                        android:id="@+id/imgIconMotoMap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:src="@drawable/iconm" />
+
+                    <TextView
+                        android:id="@+id/txttitleMotoMap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginTop="15dp"
+                        android:layout_toRightOf="@+id/imgIconMotoMap"
+                        android:text="@string/vngobike"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtSeatMotoMap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txttitleMotoMap"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@+id/imgIconMotoMap"
+                        android:text="@string/_2_seats" />
+
+
+
+                    <TextView
+                        android:id="@+id/txtMotoMoney"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="23dp"
+                        android:layout_marginRight="40dp"
+                        android:text="23K "
+                        android:textColor="#f000"
+                        android:textSize="20dp" />
+                </RelativeLayout>
+
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/relaLayoutChooseCar"
+                        android:layout_below="@id/relaLayoutChooseBike"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+
+                            android:id="@+id/imgIconCarMap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:src="@drawable/iconc" />
+
+                        <TextView
+                            android:id="@+id/txttitleCarMap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_toRightOf="@+id/imgIconCarMap"
+                            android:text="@string/vngocar"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtSeatCarMap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txttitleCarMap"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@+id/imgIconCarMap"
+                            android:text="@string/_4_seats" />
+
+
+                        <TextView
+                            android:id="@+id/txtCarMoney"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="23dp"
+                            android:layout_marginRight="40dp"
+                            android:text="23K "
+                            android:textColor="#f000"
+                            android:textSize="20dp" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+            <Button
+                android:id="@+id/btnBook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/custom_button_bookcar"
+                android:text="Book"
+                android:backgroundTint="@color/fullapp"
+                android:textAllCaps="false"
+                android:textColor="#feffff"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

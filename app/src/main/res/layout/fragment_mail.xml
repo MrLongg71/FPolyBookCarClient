@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:id="@+id/txtemailBoxEmail"
+            android:text="Email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_grabage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+<com.baoyz.swipemenulistview.SwipeMenuListView
+    android:layout_width="match_parent"
+    android:id="@+id/swipmenu"
+    android:layout_height="match_parent">
+
+</com.baoyz.swipemenulistview.SwipeMenuListView>
+
+</LinearLayout>

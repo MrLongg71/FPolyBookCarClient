@@ -25,9 +25,52 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
+    // library android
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
+    implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
+        transitive = true
+    }
+    implementation "io.reactivex.rxjava2:rxjava:2.1.16"
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
+    // library firebase
+
+    //** FireBase**//
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
     implementation 'com.google.firebase:firebase-auth:19.0.0'
-    implementation 'com.google.firebase:firebase-analytics:17.0.1'
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+    implementation 'com.google.firebase:firebase-database:19.1.0'
+    implementation 'com.google.firebase:firebase-storage:17.0.0'
+    implementation 'com.firebaseui:firebase-ui-storage:4.3.1'
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
+
+    // library 3st
+    implementation 'com.github.stfalcon:smsverifycatcher:0.3.2'
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    implementation 'com.jcminarro:RoundKornerLayouts:0.4.0'
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    implementation 'com.github.TutorialsAndroid:KAlertDialog:v5.0.19'
+    implementation 'com.github.GrenderG:Toasty:1.4.2'
+    implementation 'com.baoyz.swipemenulistview:library:1.3.0'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+
+
+    //***Google Map API**//
+    implementation 'com.google.maps.android:android-maps-utils:0.5+'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.gms:play-services-places:16.0.0'
+    implementation 'com.google.android.libraries.places:places:1.1.0'
+    implementation 'com.github.tintinscorpion:Dual-color-Polyline-Animation:1.0'
+
+
 }
 apply plugin: 'com.google.gms.google-services'
